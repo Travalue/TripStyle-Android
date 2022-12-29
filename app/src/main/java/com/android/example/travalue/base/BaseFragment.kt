@@ -11,7 +11,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.android.example.travalue.R
 
 abstract class BaseFragment<B: ViewDataBinding> (@LayoutRes private  val layoutResourceId: Int) :
     Fragment() {
@@ -45,7 +47,7 @@ abstract class BaseFragment<B: ViewDataBinding> (@LayoutRes private  val layoutR
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = findNavController()
+//        navController = findNavController()
 
         initStartView()
         initDataBinding()

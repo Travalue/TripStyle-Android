@@ -21,5 +21,7 @@ class TrailerViewPagerAdapter(var trailerCardList: ArrayList<Int>) :
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         holder.trailerCard.setImageResource(trailerCardList[position])
+
+        holder.trailerCard.clipToOutline = true
     }
 }
