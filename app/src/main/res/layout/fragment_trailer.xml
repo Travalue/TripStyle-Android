@@ -8,16 +8,16 @@
 
     <ImageView
         android:id="@+id/logo_white"
-        android:layout_width="365dp"
-        android:layout_height="89dp"
-        android:layout_marginTop="69dp"
+        android:layout_width="343dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/white_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/white_logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_trailer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="37dp"
@@ -28,11 +28,34 @@
         app:layout_constraintTop_toBottomOf="@+id/logo_white" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/hambugerbar"
         android:layout_width="25dp"
         android:layout_height="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/logo_white"
-        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/tv_trailer"
         app:srcCompat="@mipmap/ic_hambugerbar" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.212"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_trailer" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
