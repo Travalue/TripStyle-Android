@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="96dp"
+        android:fontFamily="@font/suit_medium"
+        android:text="닉네임을 입력해주세요"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_info2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="travalue에서 활동할 나만의 닉네임을 만들어주세요."
+        android:textColor="@color/gray"
+        app:layout_constraintStart_toStartOf="@+id/tv_info"
+        app:layout_constraintTop_toBottomOf="@+id/tv_info" />
+
+    <TextView
+        android:id="@+id/tv_info3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/ic_baseline_circle_24"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/suit_regular"
+        android:text="영문/한글/숫자/공백 사용 가능"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/et_nickname"
+        app:layout_constraintTop_toBottomOf="@+id/et_nickname" />
+
+    <TextView
+        android:id="@+id/tv_info4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_baseline_circle_24"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/suit_regular"
+        android:text="특수문자 사용 불가능"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/et_nickname"
+        app:layout_constraintTop_toBottomOf="@+id/tv_info3" />
+
+    <EditText
+        android:id="@+id/et_nickname"
+        android:layout_width="339dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
+        android:ems="10"
+        android:fontFamily="@font/suit_medium"
+        android:inputType="textPersonName"
+        android:paddingStart="20dp"
+        android:text="username"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_info2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_info2" />
+
+    <Button
+        android:id="@+id/btn_check"
+        android:layout_width="61dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/btn_rounded_corner_rectangle_gray"
+        android:text="중복확인"
+        android:textColor="#434343"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_nickname"
+        app:layout_constraintEnd_toEndOf="@+id/et_nickname"
+        app:layout_constraintTop_toTopOf="@+id/et_nickname" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="0dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="312dp"
+        android:background="@drawable/btn_rounded_corner_rectangle_gray2"
+        android:fontFamily="@font/suit_medium"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:textColor="#434343"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_nickname"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_nickname"
+        app:layout_constraintTop_toBottomOf="@+id/tv_info4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
