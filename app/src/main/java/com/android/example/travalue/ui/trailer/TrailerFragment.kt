@@ -17,6 +17,11 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
 
         binding.tpTrailerCard.adapter = TrailerViewPagerAdapter(getCardList()) // 어댑터 생성
         binding.tpTrailerCard.orientation = ViewPager2.ORIENTATION_VERTICAL // 방향을 가로로
+
+        // category 이동
+        binding.hambugerbar.setOnClickListener {
+            navController.navigate(R.id.action_trailerFragment_to_categoryFragment)
+        }
     }
 
     // 뷰 페이저에 들어갈 아이템
