@@ -62,6 +62,9 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
                     if(nickName.isNotEmpty()){
                         binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.black))
                         binding.btnCheck.isEnabled=true
+
+                        //회원가입 버튼 활성화 (추후 중복검사 후 활성화로 변경해야함)
+                        binding.btnRegister.isEnabled=true
                     }else{
                         binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.drakGray))
                         binding.btnCheck.isEnabled=false
@@ -76,5 +79,8 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
         super.initAfterBinding()
 
 
+        binding.btnRegister.setOnClickListener {
+            navController.navigate(R.id.action_registerFragment_to_trailerFragment)
+        }
     }
 }
