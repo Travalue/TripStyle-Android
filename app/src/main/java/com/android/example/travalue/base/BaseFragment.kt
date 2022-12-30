@@ -47,7 +47,7 @@ abstract class BaseFragment<B: ViewDataBinding> (@LayoutRes private  val layoutR
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        navController = findNavController()
+        navController = findNavController()
 
         initStartView()
         initDataBinding()

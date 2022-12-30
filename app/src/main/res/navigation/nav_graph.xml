@@ -7,6 +7,22 @@
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.android.example.travalue.ui.trailer.TrailerFragment"
-        android:label="TrailerFragment" />
+        android:label="TrailerFragment" >
+        <action
+            android:id="@+id/action_trailerFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.android.example.travalue.info.categoryFragment"
+        android:label="categoryFragment" >
+        <action
+            android:id="@+id/action_categoryFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
 
 </navigation>
