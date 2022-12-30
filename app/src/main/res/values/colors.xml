@@ -11,5 +11,6 @@
     <color name="primaryColor">#E3FF16</color>
     <color name="backgroundColor">#FF000000</color>
     <color name="gray">#999999</color>
+    <color name="drakGray">#434343</color>
     <color name="red">#FF5959</color>
 </resources>
