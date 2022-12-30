@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.android.example.travalue.info.categoryFragment"
+        android:name="com.android.example.travalue.info.CategoryFragment"
         android:label="categoryFragment" >
         <action
             android:id="@+id/action_categoryFragment_to_trailerFragment"

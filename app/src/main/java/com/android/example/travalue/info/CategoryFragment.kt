@@ -7,7 +7,7 @@ import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentCategroyBinding
 
-class categoryFragment : BaseFragment<FragmentCategroyBinding>(R.layout.fragment_categroy) {
+class CategoryFragment : BaseFragment<FragmentCategroyBinding>(R.layout.fragment_categroy) {
     val boldFont: Typeface? = context?.let { ResourcesCompat.getFont(it, R.font.suit_bold) }
     val boldExtraLight: Typeface? = context?.let { ResourcesCompat.getFont(it, R.font.suit_extra_light) }
 
