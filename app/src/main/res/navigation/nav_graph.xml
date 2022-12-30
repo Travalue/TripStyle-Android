@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/trailerFragment">
+    app:startDestination="@id/travellerFragment">
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.android.example.travalue.ui.trailer.TrailerFragment"
@@ -23,6 +23,21 @@
             app:destination="@id/trailerFragment"
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_categoryFragment_to_travellerFragment"
+            app:destination="@id/travellerFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/travellerFragment"
+        android:name="com.android.example.travalue.ui.traveller.TravellerFragment"
+        android:label="TravellerFragment" >
+        <action
+            android:id="@+id/action_travellerFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
     </fragment>
 
 </navigation>
