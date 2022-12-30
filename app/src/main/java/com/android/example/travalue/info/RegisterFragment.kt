@@ -80,7 +80,7 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
 
 
         binding.btnRegister.setOnClickListener {
-            navController.navigate(R.id.action_registerFragment_to_trailerFragment)
+            navController.navigate(R.id.action_registerFragment_to_registerOkFragment)
         }
     }
 }

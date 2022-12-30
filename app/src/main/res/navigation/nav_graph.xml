@@ -54,6 +54,17 @@
         <action
             android:id="@+id/action_registerFragment_to_trailerFragment"
             app:destination="@id/trailerFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_registerOkFragment"
+            app:destination="@id/registerOkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerOkFragment"
+        android:name="com.android.example.travalue.info.RegisterOkFragment"
+        android:label="RegisterOkFragment" >
+        <action
+            android:id="@+id/action_registerOkFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment" />
     </fragment>
 
 </navigation>
