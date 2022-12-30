@@ -22,5 +22,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        binding.btnLogin.setOnClickListener {
+            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+        }
     }
 }
