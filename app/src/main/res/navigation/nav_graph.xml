@@ -10,7 +10,9 @@
         android:label="TrailerFragment" >
         <action
             android:id="@+id/action_trailerFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -18,7 +20,9 @@
         android:label="categoryFragment" >
         <action
             android:id="@+id/action_categoryFragment_to_trailerFragment"
-            app:destination="@id/trailerFragment" />
+            app:destination="@id/trailerFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
     </fragment>
 
 </navigation>
