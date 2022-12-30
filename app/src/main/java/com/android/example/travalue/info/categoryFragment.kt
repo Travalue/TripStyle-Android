@@ -30,5 +30,9 @@ class categoryFragment : BaseFragment<FragmentCategroyBinding>(R.layout.fragment
         binding.tvGoTrailer.setOnClickListener {
             navController.navigate(R.id.action_categoryFragment_to_trailerFragment)
         }
+
+        binding.tvGoTraveller.setOnClickListener {
+            navController.navigate(R.id.action_categoryFragment_to_travellerFragment)
+        }
     }
 }
