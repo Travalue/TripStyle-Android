@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/travellerFragment">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.android.example.travalue.ui.trailer.TrailerFragment"
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.android.example.travalue.info.categoryFragment"
+        android:name="com.android.example.travalue.info.CategoryFragment"
         android:label="categoryFragment" >
         <action
             android:id="@+id/action_categoryFragment_to_trailerFragment"
@@ -38,6 +38,33 @@
             app:destination="@id/categoryFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.android.example.travalue.info.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.android.example.travalue.info.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_registerOkFragment"
+            app:destination="@id/registerOkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerOkFragment"
+        android:name="com.android.example.travalue.info.RegisterOkFragment"
+        android:label="RegisterOkFragment" >
+        <action
+            android:id="@+id/action_registerOkFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment" />
     </fragment>
 
 </navigation>

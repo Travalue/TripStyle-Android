@@ -1,6 +1,7 @@
 package com.android.example.travalue.ui.trailer
 
 import androidx.viewpager2.widget.ViewPager2
+import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentTrailerBinding
@@ -10,6 +11,7 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
 
     override fun initStartView() {
         super.initStartView()
+        (activity as MainActivity).setToolbarTitle("none")
     }
 
     override fun initDataBinding() {
