@@ -11,6 +11,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.android.example.travalue.R
 
 abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val layoutResourceId: Int) :
     DialogFragment() {
@@ -42,6 +43,7 @@ abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val 
     ): View? {
         binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // 둥근 모서리 적용
+        dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation
         //dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE) //android version 4.4 이하에서 blue line 생기는거 방지
         return binding.root
     }
