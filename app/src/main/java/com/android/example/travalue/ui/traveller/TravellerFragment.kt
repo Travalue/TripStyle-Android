@@ -5,6 +5,7 @@ import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentTravellerBinding
+import com.android.example.travalue.ui.trailer.TrailerFragmentDirections
 import com.android.example.travalue.ui.trailer.TrailerViewPagerAdapter
 
 class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragment_traveller) {
@@ -18,7 +19,10 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
 
         // category 이동
         binding.hambugerbar.setOnClickListener {
-            navController.navigate(R.id.action_travellerFragment_to_categoryFragment)
+//            navController.navigate(R.id.action_travellerFragment_to_categoryDialogFragment)
+
+            val action = TravellerFragmentDirections.actionTravellerFragmentToCategoryDialogFragment(binding.tvTraveller.text.toString())
+            navController.navigate(action)
         }
     }
 

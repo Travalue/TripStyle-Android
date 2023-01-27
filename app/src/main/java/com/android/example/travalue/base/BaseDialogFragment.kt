@@ -1,6 +1,6 @@
 package com.android.example.travalue.base
-
-import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +9,12 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.android.example.travalue.R
 
-abstract class BaseFragment<B: ViewDataBinding> (@LayoutRes private  val layoutResourceId: Int) :
-    Fragment() {
+abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val layoutResourceId: Int) :
+    DialogFragment() {
 
     // protected abstract val viewModel: VM
     protected lateinit var binding: B
@@ -29,10 +27,13 @@ abstract class BaseFragment<B: ViewDataBinding> (@LayoutRes private  val layoutR
     // * 바인딩 이후에 할 일을 여기에 구현. * 그 외에 설정할 것이 있으면 이곳에서 설정. * 클릭 리스너도 이곳에서 설정.
     protected open fun initAfterBinding() {}
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setHasOptionsMenu(true)
+
+        // false : 화면 밖 터치 혹은 뒤로가기 버튼 누를 시 dismiss 안됨
+        isCancelable = false
     }
 
     override fun onCreateView(
@@ -41,6 +42,9 @@ abstract class BaseFragment<B: ViewDataBinding> (@LayoutRes private  val layoutR
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // 둥근 모서리 적용
+        dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation
+        //dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE) //android version 4.4 이하에서 blue line 생기는거 방지
         return binding.root
     }
 
@@ -53,8 +57,4 @@ abstract class BaseFragment<B: ViewDataBinding> (@LayoutRes private  val layoutR
         initDataBinding()
         initAfterBinding()
     }
-
-
-
-
 }

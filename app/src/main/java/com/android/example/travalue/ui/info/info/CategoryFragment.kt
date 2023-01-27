@@ -1,4 +1,4 @@
-package com.android.example.travalue.info
+package com.android.example.travalue.ui.info.info
 
 import android.annotation.SuppressLint
 import android.graphics.Typeface
@@ -28,13 +28,13 @@ class CategoryFragment : BaseFragment<FragmentCategroyBinding>(R.layout.fragment
     override fun initAfterBinding() {
         super.initAfterBinding()
 
-        // 카테고리 클릭시 이벤트
-        binding.tvGoTrailer.setOnClickListener {
-            navController.navigate(R.id.action_categoryFragment_to_trailerFragment)
-        }
-
-        binding.tvGoTraveller.setOnClickListener {
-            navController.navigate(R.id.action_categoryFragment_to_travellerFragment)
-        }
+//        // 카테고리 클릭시 이벤트
+//        binding.tvGoTrailer.setOnClickListener {
+//            navController.navigate(R.id.action_categoryFragment_to_trailerFragment)
+//        }
+//
+//        binding.tvGoTraveller.setOnClickListener {
+//            navController.navigate(R.id.action_categoryFragment_to_travellerFragment)
+//        }
     }
 }

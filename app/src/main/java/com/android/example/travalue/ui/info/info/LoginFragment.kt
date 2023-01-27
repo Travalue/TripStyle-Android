@@ -1,4 +1,4 @@
-package com.android.example.travalue.info
+package com.android.example.travalue.ui.info.info
 
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R

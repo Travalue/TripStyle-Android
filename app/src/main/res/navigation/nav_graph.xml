@@ -3,45 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/trailerFragment">
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.android.example.travalue.ui.trailer.TrailerFragment"
         android:label="TrailerFragment" >
         <action
-            android:id="@+id/action_trailerFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left" />
-    </fragment>
-    <fragment
-        android:id="@+id/categoryFragment"
-        android:name="com.android.example.travalue.info.CategoryFragment"
-        android:label="categoryFragment" >
-        <action
-            android:id="@+id/action_categoryFragment_to_trailerFragment"
-            app:destination="@id/trailerFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right" />
-        <action
-            android:id="@+id/action_categoryFragment_to_travellerFragment"
-            app:destination="@id/travellerFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right" />
+            android:id="@+id/action_trailerFragment_to_categoryDialogFragment"
+            app:destination="@id/categoryDialogFragment" />
+        <argument
+            android:name="argsString"
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
     <fragment
         android:id="@+id/travellerFragment"
         android:name="com.android.example.travalue.ui.traveller.TravellerFragment"
         android:label="TravellerFragment" >
         <action
-            android:id="@+id/action_travellerFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left" />
+            android:id="@+id/action_travellerFragment_to_categoryDialogFragment"
+            app:destination="@id/categoryDialogFragment" />
+        <argument
+            android:name="argsString"
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.android.example.travalue.info.LoginFragment"
+        android:name="com.android.example.travalue.ui.info.info.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
@@ -49,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.android.example.travalue.info.RegisterFragment"
+        android:name="com.android.example.travalue.ui.info.info.RegisterFragment"
         android:label="RegisterFragment" >
         <action
             android:id="@+id/action_registerFragment_to_trailerFragment"
@@ -60,11 +49,29 @@
     </fragment>
     <fragment
         android:id="@+id/registerOkFragment"
-        android:name="com.android.example.travalue.info.RegisterOkFragment"
+        android:name="com.android.example.travalue.ui.info.info.RegisterOkFragment"
         android:label="RegisterOkFragment" >
         <action
             android:id="@+id/action_registerOkFragment_to_trailerFragment"
             app:destination="@id/trailerFragment" />
+        <action
+            android:id="@+id/action_registerOkFragment_to_categoryDialogFragment"
+            app:destination="@id/categoryDialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/categoryDialogFragment"
+        android:name="com.android.example.travalue.ui.info.info.CategoryDialogFragment"
+        android:label="CategoryDialogFragment" >
+        <action
+            android:id="@+id/action_categoryDialogFragment_to_travellerFragment"
+            app:destination="@id/travellerFragment" />
+        <action
+            android:id="@+id/action_categoryDialogFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment" />
+        <argument
+            android:name="argsString"
+            app:argType="string"
+            android:defaultValue=""/>
+    </dialog>
 
 </navigation>
