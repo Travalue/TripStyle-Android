@@ -32,7 +32,7 @@ abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val 
         setHasOptionsMenu(true)
 
         // false : 화면 밖 터치 혹은 뒤로가기 버튼 누를 시 dismiss 안됨
-        isCancelable = false
+        isCancelable = true
     }
 
     override fun onCreateView(
