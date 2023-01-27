@@ -1,4 +1,4 @@
-package com.android.example.travalue.info
+package com.android.example.travalue.ui.info.info
 
 import android.annotation.SuppressLint
 import android.graphics.Typeface

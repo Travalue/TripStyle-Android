@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.android.example.travalue.info.CategoryFragment"
+        android:name="com.android.example.travalue.ui.info.info.CategoryFragment"
         android:label="categoryFragment" >
         <action
             android:id="@+id/action_categoryFragment_to_trailerFragment"
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.android.example.travalue.info.LoginFragment"
+        android:name="com.android.example.travalue.ui.info.info.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.android.example.travalue.info.RegisterFragment"
+        android:name="com.android.example.travalue.ui.info.info.RegisterFragment"
         android:label="RegisterFragment" >
         <action
             android:id="@+id/action_registerFragment_to_trailerFragment"
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerOkFragment"
-        android:name="com.android.example.travalue.info.RegisterOkFragment"
+        android:name="com.android.example.travalue.ui.info.info.RegisterOkFragment"
         android:label="RegisterOkFragment" >
         <action
             android:id="@+id/action_registerOkFragment_to_trailerFragment"
