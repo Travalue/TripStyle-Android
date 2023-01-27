@@ -1,5 +1,6 @@
 package com.android.example.travalue.ui.trailer
 
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
@@ -8,6 +9,7 @@ import com.android.example.travalue.databinding.FragmentTrailerBinding
 
 class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_trailer) {
     lateinit var viewPager_aespa: ViewPager2
+    val page:String = "trailer"
 
     override fun initStartView() {
         super.initStartView()
@@ -22,8 +24,13 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
 
         // category 이동
         binding.hambugerbar.setOnClickListener {
-            navController.navigate(R.id.action_trailerFragment_to_categoryDialogFragment)
+//            navController.navigate(R.id.action_trailerFragment_to_categoryDialogFragment)
+
+
+            val action = TrailerFragmentDirections.actionTrailerFragmentToCategoryDialogFragment(binding.tvTrailer.text.toString())
+            navController.navigate(action)
         }
+
     }
 
     // 뷰 페이저에 들어갈 아이템

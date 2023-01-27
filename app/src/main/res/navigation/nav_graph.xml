@@ -11,6 +11,10 @@
         <action
             android:id="@+id/action_trailerFragment_to_categoryDialogFragment"
             app:destination="@id/categoryDialogFragment" />
+        <argument
+            android:name="argsString"
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
     <fragment
         android:id="@+id/travellerFragment"
@@ -19,6 +23,10 @@
         <action
             android:id="@+id/action_travellerFragment_to_categoryDialogFragment"
             app:destination="@id/categoryDialogFragment" />
+        <argument
+            android:name="argsString"
+            app:argType="string"
+            android:defaultValue=""/>
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -60,6 +68,10 @@
         <action
             android:id="@+id/action_categoryDialogFragment_to_trailerFragment"
             app:destination="@id/trailerFragment" />
+        <argument
+            android:name="argsString"
+            app:argType="string"
+            android:defaultValue=""/>
     </dialog>
 
 </navigation>
