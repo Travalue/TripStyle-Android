@@ -21,7 +21,7 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
         binding.hambugerbar.setOnClickListener {
 //            navController.navigate(R.id.action_travellerFragment_to_categoryDialogFragment)
 
-            val action = TrailerFragmentDirections.actionTrailerFragmentToCategoryDialogFragment(binding.tvTraveller.text.toString())
+            val action = TravellerFragmentDirections.actionTravellerFragmentToCategoryDialogFragment(binding.tvTraveller.text.toString())
             navController.navigate(action)
         }
     }

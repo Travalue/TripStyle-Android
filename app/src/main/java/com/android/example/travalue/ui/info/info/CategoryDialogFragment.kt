@@ -4,26 +4,39 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
-import android.os.Bundle
-import android.util.Log
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.navArgs
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseDialogFragment
 import com.android.example.travalue.databinding.FragmentCategroyBinding
-import kotlin.math.log
 
 class CategoryDialogFragment  : BaseDialogFragment<FragmentCategroyBinding>(R.layout.fragment_categroy) {
     private val boldFont: Typeface? = context?.let { ResourcesCompat.getFont(it, R.font.suit_bold) }
     private val boldExtraLight: Typeface? = context?.let { ResourcesCompat.getFont(it, R.font.suit_extra_light) }
 
+    val args: CategoryDialogFragmentArgs by navArgs()
 
     override fun initStartView() {
         super.initStartView()
         (activity as MainActivity).setToolbarTitle("none")
+
+        // 현재 페이지별 텍스트 변경
+        when (args.argsString) {
+            "\\ trailer" -> {
+                binding.tvGoTrailer.setTextColor(ContextCompat.getColor(requireContext(), R.color.primaryColor))
+                binding.tvGoTrailer.setTypeface(null, Typeface.BOLD )
+            }
+            "\\ traveller" -> {
+                binding.tvGoTraveller.setTextColor(ContextCompat.getColor(requireContext(), R.color.primaryColor))
+                binding.tvGoTraveller.setTypeface(null, Typeface.BOLD )
+            }
+            else -> println("null")
+        }
+
     }
 
     override fun initDataBinding() {
