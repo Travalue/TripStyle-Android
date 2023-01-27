@@ -22,7 +22,7 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
 
         // category 이동
         binding.hambugerbar.setOnClickListener {
-            navController.navigate(R.id.action_trailerFragment_to_categoryFragment)
+            navController.navigate(R.id.action_trailerFragment_to_categoryDialogFragment)
         }
     }
 

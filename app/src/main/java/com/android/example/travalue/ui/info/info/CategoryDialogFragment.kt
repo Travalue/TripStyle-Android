@@ -31,11 +31,11 @@ class CategoryDialogFragment  : BaseDialogFragment<FragmentCategroyBinding>(R.la
 
         // 카테고리 클릭시 이벤트
         binding.tvGoTrailer.setOnClickListener {
-            navController.navigate(R.id.action_categoryFragment_to_trailerFragment)
+            navController.navigate(R.id.action_categoryDialogFragment_to_trailerFragment)
         }
 
         binding.tvGoTraveller.setOnClickListener {
-            navController.navigate(R.id.action_categoryFragment_to_travellerFragment)
+            navController.navigate(R.id.action_categoryDialogFragment_to_travellerFragment)
         }
     }
 

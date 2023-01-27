@@ -18,7 +18,7 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
 
         // category 이동
         binding.hambugerbar.setOnClickListener {
-            navController.navigate(R.id.action_travellerFragment_to_categoryFragment)
+            navController.navigate(R.id.action_travellerFragment_to_categoryDialogFragment)
         }
     }
 
