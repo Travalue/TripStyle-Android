@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <View
+        android:id="@+id/line5"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_myPage" />
+
+    <View
+        android:id="@+id/line6"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/drakGray"
+        app:layout_constraintEnd_toEndOf="@+id/btn_edit_profile"
+        app:layout_constraintStart_toStartOf="@+id/iv_profile"
+        app:layout_constraintTop_toBottomOf="@+id/tv_intro" />
+
+    <View
+        android:id="@+id/line7"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="@+id/btn_edit_profile"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/iv_profile"
+        app:layout_constraintTop_toBottomOf="@+id/tv_no_destination" />
+
+    <ImageView
+        android:id="@+id/btn_category"
+        android:layout_width="25dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_myPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_myPage"
+        app:srcCompat="@mipmap/ic_hambugerbar" />
+
+    <TextView
+        android:id="@+id/tv_myPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="51dp"
+        android:text="\\ my page"
+        android:textColor="@color/primaryColor"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line5"
+        app:srcCompat="@drawable/img" />
+
+    <TextView
+        android:id="@+id/tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/suit_semi_bold"
+        android:text="angela"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_profile"
+        app:layout_constraintTop_toTopOf="@+id/iv_profile" />
+
+    <TextView
+        android:id="@+id/tv_destination_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/suit_semi_bold"
+        android:text="나의 여행지 리스트"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/line6"
+        app:layout_constraintTop_toBottomOf="@+id/line6" />
+
+    <TextView
+        android:id="@+id/tv_my_travel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/suit_semi_bold"
+        android:text="공유중인 여행지"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/line6"
+        app:layout_constraintTop_toBottomOf="@+id/line7" />
+
+    <TextView
+        android:id="@+id/tv_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/suit_regular"
+        android:text="한 줄 소개를 입력해주세요."
+        app:layout_constraintStart_toStartOf="@+id/tv_nickname"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
+
+    <TextView
+        android:id="@+id/tv_no_destination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/suit_regular"
+        android:text="나의 여행지를 추가해보세요."
+        app:layout_constraintStart_toStartOf="@+id/tv_destination_list"
+        app:layout_constraintTop_toBottomOf="@+id/tv_destination_list" />
+
+    <Button
+        android:id="@+id/btn_edit_profile"
+        android:layout_width="84dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/btn_edit_profile"
+        android:fontFamily="@font/suit_medium"
+        android:text="프로필 편집"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_category"
+        app:layout_constraintTop_toBottomOf="@+id/line5" />
+
+    <ImageView
+        android:id="@+id/btn_destination_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/line6"
+        app:layout_constraintTop_toTopOf="@+id/tv_destination_list"
+        app:srcCompat="@drawable/btn_next" />
+
+    <ImageView
+        android:id="@+id/btn_destination_detail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_my_travel"
+        app:layout_constraintEnd_toEndOf="@+id/line6"
+        app:layout_constraintTop_toTopOf="@+id/tv_my_travel"
+        app:srcCompat="@drawable/btn_next" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/suit_regular"
+        android:text="개"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_my_travel"
+        app:layout_constraintEnd_toStartOf="@+id/btn_destination_detail2"
+        app:layout_constraintTop_toTopOf="@+id/tv_my_travel" />
+
+    <TextView
+        android:id="@+id/tv_travel_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:fontFamily="@font/suit_semi_bold"
+        android:text="8"
+        android:textColor="@color/primaryColor"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_my_travel"
+        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/tv_my_travel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
