@@ -9,7 +9,6 @@ import com.android.example.travalue.R
 class TrailerViewPagerAdapter(var trailerCardList: ArrayList<Int>) :
     RecyclerView.Adapter<TrailerViewPagerAdapter.PagerViewHolder>() {
 
-
     inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
         (LayoutInflater.from(parent.context).inflate(R.layout.trailer_item_view, parent, false)) {
         val trailerCard = itemView.findViewById<ImageView>(R.id.iv_trailer)
@@ -22,6 +21,6 @@ class TrailerViewPagerAdapter(var trailerCardList: ArrayList<Int>) :
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         holder.trailerCard.setImageResource(trailerCardList[position])
 
-        holder.trailerCard.clipToOutline = true
+        //holder.trailerCard.clipToOutline = true
     }
 }
