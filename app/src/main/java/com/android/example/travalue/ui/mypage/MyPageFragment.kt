@@ -21,6 +21,11 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        binding.btnCategory.setOnClickListener {
+            println(binding.tvMyPage.toString())
+            val action = MyPageFragmentDirections.actionMyPageFragmentToCategoryDialogFragment(binding.tvMyPage.text.toString())
+            navController.navigate(action)
+        }
 
     }
 }
