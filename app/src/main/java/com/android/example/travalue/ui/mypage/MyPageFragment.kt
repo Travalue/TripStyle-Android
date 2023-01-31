@@ -3,13 +3,13 @@ package com.android.example.travalue.ui.mypage
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentEditProfileBinding
+import com.android.example.travalue.databinding.FragmentMyPageMainBinding
 
-class EditProfileFragment  : BaseFragment<FragmentEditProfileBinding>(R.layout.fragment_edit_profile) {
+class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragment_my_page_main) {
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("프로필 편집")
+        (activity as MainActivity).setToolbarTitle("none")
     }
 
     override fun initDataBinding() {
