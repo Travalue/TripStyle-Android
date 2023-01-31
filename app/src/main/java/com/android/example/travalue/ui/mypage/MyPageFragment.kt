@@ -22,10 +22,15 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
         super.initAfterBinding()
 
         binding.btnCategory.setOnClickListener {
-            println(binding.tvMyPage.toString())
             val action = MyPageFragmentDirections.actionMyPageFragmentToCategoryDialogFragment(binding.tvMyPage.text.toString())
             navController.navigate(action)
         }
+
+        binding.btnEditProfile.setOnClickListener {
+            navController.navigate(R.id.action_myPageFragment_to_editProfileFragment)
+        }
+
+
 
     }
 }

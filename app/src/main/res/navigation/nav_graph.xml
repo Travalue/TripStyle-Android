@@ -95,6 +95,9 @@
             android:name="argsString"
             app:argType="string"
             android:defaultValue=""/>
+        <action
+            android:id="@+id/action_myPageFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
 
 </navigation>
