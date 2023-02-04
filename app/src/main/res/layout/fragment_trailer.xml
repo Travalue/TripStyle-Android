@@ -35,7 +35,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/logo_white"
         app:layout_constraintTop_toTopOf="@+id/tv_trailer"
-        app:srcCompat="@mipmap/ic_hambugerbar" />
+        app:srcCompat="@drawable/ic_hambugerbar" />
 
     <View
         android:id="@+id/line"

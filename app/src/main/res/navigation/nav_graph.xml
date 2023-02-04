@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/trailerFragment">
+    app:startDestination="@id/myPageFragment">
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.android.example.travalue.ui.trailer.TrailerFragment"
@@ -72,6 +72,32 @@
             android:name="argsString"
             app:argType="string"
             android:defaultValue=""/>
+        <action
+            android:id="@+id/action_categoryDialogFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.android.example.travalue.ui.mypage.EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.android.example.travalue.ui.mypage.MyPageFragment"
+        android:label="MyPageFragment" >
+        <action
+            android:id="@+id/action_myPageFragment_to_categoryDialogFragment"
+            app:destination="@id/categoryDialogFragment" />
+        <argument
+            android:name="argsString"
+            app:argType="string"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_myPageFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
 
 </navigation>
