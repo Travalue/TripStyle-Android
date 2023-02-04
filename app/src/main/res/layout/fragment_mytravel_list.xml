@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <Button
+        android:id="@+id/btn_add_travel"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_add_travel"
+        android:enabled="false"
+        android:fontFamily="@font/suit_medium"
+        android:text="여행지 추가"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_nickname2"
+        app:layout_constraintStart_toStartOf="@+id/tv_add_icon"
+        app:layout_constraintTop_toBottomOf="@+id/et_nickname2" />
+
+    <View
+        android:id="@+id/line11"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="@+id/btn_add_travel"
+        app:layout_constraintStart_toStartOf="@+id/btn_add_travel"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_travel" />
+
+    <TextView
+        android:id="@+id/tv_my_travel_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="추가된 나의 여행지 리스트"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/line11"
+        app:layout_constraintTop_toBottomOf="@+id/line11" />
+
+    <Button
+        android:id="@+id/btn_my_travel"
+        android:layout_width="0dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_add_travel"
+        android:enabled="false"
+        android:fontFamily="@font/suit_medium"
+        android:text="아직 추가된 여행지 리스트가 없어요"
+        android:textAllCaps="false"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_nickname2"
+        app:layout_constraintStart_toStartOf="@+id/tv_add_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_my_travel_list" />
+
+    <EditText
+        android:id="@+id/et_nickname2"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:background="@drawable/edittext_rounded_corner_rectangle"
+        android:ems="10"
+        android:fontFamily="@font/suit_medium"
+        android:hint="여행지를 입력해주세요"
+        android:inputType="textPersonName"
+        android:paddingStart="20dp"
+        android:textColor="@color/drakGray"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_add_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_add_icon"
+        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+    <TextView
+        android:id="@+id/tv_add_travel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="여행지 추가하기"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_add_icon"
+        app:layout_constraintStart_toStartOf="@+id/tv_add_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_travel"
+        app:srcCompat="@drawable/ic_emoji" />
+
+    <TextView
+        android:id="@+id/tv_add_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="아이콘 추가하기"
+        android:textColor="@color/gray"
+        android:textSize="8sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_add_travel"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+</androidx.constraintlayout.widget.ConstraintLayout>
