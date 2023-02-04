@@ -38,7 +38,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="20dp"
-                android:fontFamily="@font/suit_regular"
                 android:text="국내여행은 여수 옆 순천으로!"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -53,10 +52,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
-                android:fontFamily="@font/suit_medium"
                 android:text="우리나라의 숨은 여행 명소, 순천"
                 android:textColor="@color/white"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tv_sub_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -95,15 +94,16 @@
                     android:animateLayoutChanges="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
                         android:layout_weight="1"
-                        android:textSize="16dp"
                         android:text="일정 보기"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
                     <ImageButton
                         android:id="@+id/schedule_button"
