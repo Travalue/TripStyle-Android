@@ -38,8 +38,10 @@ class MainActivity : AppCompatActivity() {
             "none" -> {
                 binding.toolbar.visibility = View.GONE
             }
-            "visible" -> {
+            "visibleComplete" -> {
                 binding.toolbar.visibility = View.VISIBLE
+                binding.tvToolbarName.text = "프로필 편집"
+                binding.tvComplete.visibility = View.VISIBLE
             }
             else -> {
                 binding.toolbar.visibility= View.VISIBLE
