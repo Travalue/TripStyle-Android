@@ -27,7 +27,17 @@
             android:name="argsString"
             app:argType="string"
             android:defaultValue=""/>
+        <action
+            android:id="@+id/action_travellerFragment_to_TrailerSearchFragment"
+            app:destination="@+id/trailerSearchFragment"/> <!-- 임시 -->
     </fragment>
+
+    <fragment
+        android:id="@+id/trailerSearchFragment"
+        android:name="com.android.example.travalue.ui.traveller.TrailerSearchFragment"
+        android:label="TrailerSearchFragment">
+    </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.android.example.travalue.ui.info.info.LoginFragment"
