@@ -98,6 +98,17 @@
         <action
             android:id="@+id/action_myPageFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_myTravelListFragment"
+            app:destination="@id/myTravelListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myTravelListFragment"
+        android:name="com.android.example.travalue.ui.mypage.MyTravelListFragment"
+        android:label="MyTravelListFragment" >
+        <action
+            android:id="@+id/action_myTravelListFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
     </fragment>
 
 </navigation>

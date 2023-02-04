@@ -37,6 +37,10 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
         binding.btnEditProfile.setOnClickListener {
             navController.navigate(R.id.action_myPageFragment_to_editProfileFragment)
         }
+
+        binding.btnToTravelList.setOnClickListener{
+            navController.navigate(R.id.action_myPageFragment_to_myTravelListFragment)
+        }
     }
 
     private fun getCategoryImg(): ArrayList<Int> {

@@ -37,15 +37,22 @@ class MainActivity : AppCompatActivity() {
         when (tag) {
             "none" -> {
                 binding.toolbar.visibility = View.GONE
+                binding.tvComplete.visibility = View.GONE
             }
-            "visibleComplete" -> {
+            "프로필 편집" -> {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.tvToolbarName.text = "프로필 편집"
+                binding.tvComplete.visibility = View.VISIBLE
+            }
+            "나의 여행지 리스트"-> {
+                binding.toolbar.visibility = View.VISIBLE
+                binding.tvToolbarName.text = "나의 여행지 리스트"
                 binding.tvComplete.visibility = View.VISIBLE
             }
             else -> {
                 binding.toolbar.visibility= View.VISIBLE
                 binding.tvToolbarName.text = tag
+                binding.tvComplete.visibility = View.GONE
             }
         }
     }
