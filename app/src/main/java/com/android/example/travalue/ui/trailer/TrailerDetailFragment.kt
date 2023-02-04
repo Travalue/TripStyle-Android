@@ -15,13 +15,15 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
     override fun initStartView() {
         super.initStartView()
         (activity as MainActivity).setToolbarTitle("trailer")
-        //initMapView()
+
+        initMapView()
         animationScheduleView()
-        initScheduleView()
+        clickFavorite()
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
+        initScheduleView()
     }
 
     override fun initAfterBinding() {
@@ -72,6 +74,20 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         binding.rvSchedule.addItemDecoration(adapter.ItemDecorator(-80))
         binding.rvSchedule.adapter = ScheduleAdapter(getScheduleList())
         binding.rvSchedule.layoutManager = LinearLayoutManager(context)
+    }
+
+    // TODO : 추후에 데이터 연결 후 flag 로직 빼기
+    private fun clickFavorite(){
+        var flag = false
+        binding.btnFavorite.setOnClickListener {
+            if(!flag){
+                binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_selected)
+                flag = true
+            }else{
+                binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_fill)
+            }
+
+        }
     }
 
     //mockup data
