@@ -20,7 +20,7 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
     override fun initDataBinding() {
         super.initDataBinding()
 
-        binding.categoryCardList.adapter = TrailerViewPagerAdapter(getCategoryImg()) // 어댑터 생성
+        binding.categoryCardList.adapter = CategoryAdapter(getCategoryImg()) // 어댑터 생성
         val gridLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context,2)
         binding.categoryCardList.layoutManager = gridLayoutManager
     }

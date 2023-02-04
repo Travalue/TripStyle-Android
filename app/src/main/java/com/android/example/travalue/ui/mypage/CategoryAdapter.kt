@@ -3,25 +3,35 @@ package com.android.example.travalue.ui.mypage
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.travalue.R
+import com.android.example.travalue.databinding.CategroyItemViewBinding
 
 class CategoryAdapter(var categoryList: ArrayList<Int>) :
-    RecyclerView.Adapter<CategoryAdapter.PagerViewHolder>() {
+    RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
 
-    inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
-        (LayoutInflater.from(parent.context).inflate(R.layout.categroy_item_view, parent, false)) {
-        val CategoryCard = itemView.findViewById<ImageView>(R.id.iv_category)
+    inner class ViewHolder(itemViewBinding: CategroyItemViewBinding)
+        :RecyclerView.ViewHolder(itemViewBinding.root){
+        var CategoryCard = itemViewBinding.ivCategory
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PagerViewHolder((parent))
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+        return ViewHolder(
+            CategroyItemViewBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+    }
 
     override fun getItemCount(): Int = categoryList.size
 
-    override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.CategoryCard.setImageResource(categoryList[position])
-        holder.CategoryCard.clipToOutline = true
+        holder.CategoryCard.clipToOutline=true
     }
 }

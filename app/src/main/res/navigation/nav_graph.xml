@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/trailerFragment">
+    app:startDestination="@id/myPageFragment">
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.android.example.travalue.ui.trailer.TrailerFragment"
