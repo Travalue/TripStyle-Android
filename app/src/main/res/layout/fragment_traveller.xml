@@ -2,10 +2,21 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundColor">
+        android:background="@color/backgroundColor"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_overseas"
@@ -350,6 +361,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <!--
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="0dp"
@@ -358,7 +370,44 @@
             app:layout_constraintEnd_toEndOf="@+id/line4"
             app:layout_constraintStart_toStartOf="@+id/tv_hot_traveller"
             app:layout_constraintTop_toBottomOf="@+id/tv_hot_traveller"
-            app:srcCompat="@drawable/card_img_example" />
+            app:srcCompat="@drawable/card_img_example"
+            android:visibility="gone" />
+            -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/line4"
+            app:layout_constraintStart_toStartOf="@+id/tv_hot_traveller"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hot_traveller"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/hot_traveller1"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/traveller_main_image_example" />
+
+            <ImageView
+                android:id="@+id/hot_traveller2"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/traveller_main_image_example"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/hot_traveller3"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/traveller_main_image_example"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

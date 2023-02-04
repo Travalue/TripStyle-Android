@@ -1,5 +1,6 @@
 package com.android.example.travalue.ui.traveller
 
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
@@ -16,6 +17,10 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
 
     override fun initDataBinding() {
         super.initDataBinding()
+
+        //recyclerView adapter
+        //binding.hotTraveller.adapter = TravellerRecyclerViewAdapter(context)
+        //binding.hotTraveller.layoutManager = LinearLayoutManager(context)
 
         // category 이동
         binding.hambugerbar.setOnClickListener {
