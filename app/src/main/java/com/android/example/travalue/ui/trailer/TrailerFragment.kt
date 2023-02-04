@@ -1,5 +1,6 @@
 package com.android.example.travalue.ui.trailer
 
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.android.example.travalue.MainActivity
@@ -33,8 +34,18 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
 
     }
 
+    override fun initAfterBinding() {
+        super.initAfterBinding()
+
+    }
+
     private fun initVerticalCardView(data : ArrayList<Int>){
-        binding.tpTrailerCard.adapter = TrailerViewPagerAdapter(data) // 어댑터 생성
+        binding.tpTrailerCard.adapter = TrailerViewPagerAdapter(data,object : onActionListener{
+            override fun onMoveDetailPage(): NavDirections {
+                return TrailerFragmentDirections.actionTrailerFragmentToTrailerDetailFragment()
+            }
+
+        }) // 어댑터 생성
         binding.tpTrailerCard.orientation = ViewPager2.ORIENTATION_VERTICAL // 세로방향
 
         with(binding.tpTrailerCard){
@@ -86,10 +97,5 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
             R.drawable.card_img_example,
             R.drawable.card_img_example,
             R.drawable.card_img_example)
-    }
-
-    override fun initAfterBinding() {
-        super.initAfterBinding()
-
     }
 }
