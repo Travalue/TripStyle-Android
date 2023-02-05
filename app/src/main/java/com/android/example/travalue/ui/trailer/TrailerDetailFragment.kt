@@ -1,16 +1,24 @@
 package com.android.example.travalue.ui.trailer
 
+import android.graphics.Color
+import android.view.Gravity
 import android.view.View
+import android.widget.TextView
+import androidx.annotation.UiThread
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentTrailerDetailBinding
 import com.android.example.travalue.util.ScheduleAdapter
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapFragment
+import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 
-class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layout.fragment_trailer_detail) {
+class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layout.fragment_trailer_detail){
 
     override fun initStartView() {
         super.initStartView()
@@ -37,8 +45,34 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 fm.beginTransaction().add(R.id.map_fragment,it).commit()
             }
 
-        val onMapReadyCallback = OnMapReadyCallback {
 
+        val onMapReadyCallback = OnMapReadyCallback {
+            val markers = mutableListOf<Marker>()
+
+            //TODO : change marker hard code data
+            val mapList = arrayListOf<LatLng>(
+                LatLng(37.5670135, 126.9783740),
+                LatLng(37.5666805, 126.9784147),
+                LatLng(37.568307444233, 126.97675211537),
+            )
+
+            for(i in 0 until mapList.size){
+                val markerTextview = TextView(context)
+                markerTextview.textSize = 9f
+                markerTextview.gravity = Gravity.CENTER_HORIZONTAL
+                markerTextview.setBackgroundResource(R.drawable.ic_baseline_circle_black_24)
+                markerTextview.setTextColor(Color.WHITE)
+                markerTextview.text = (i+1).toString()
+
+                val marker = Marker()
+                marker.position = mapList[i]
+                marker.icon = OverlayImage.fromView(markerTextview)
+                markers.add(marker)
+            }
+
+            markers.forEach { marker ->
+                marker.map = it
+            }
         }
 
         mapFragment.getMapAsync(onMapReadyCallback)
@@ -98,6 +132,4 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
             "순천 국가정원",
             "순천 국가정원")
     }
-
-
 }
