@@ -19,9 +19,9 @@
         android:textAllCaps="false"
         android:textColor="@color/gray"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/et_nickname2"
+        app:layout_constraintEnd_toEndOf="@+id/et_travel"
         app:layout_constraintStart_toStartOf="@+id/tv_add_icon"
-        app:layout_constraintTop_toBottomOf="@+id/et_nickname2" />
+        app:layout_constraintTop_toBottomOf="@+id/et_travel" />
 
     <View
         android:id="@+id/line11"
@@ -56,12 +56,12 @@
         android:textAllCaps="false"
         android:textColor="@color/gray"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/et_nickname2"
+        app:layout_constraintEnd_toEndOf="@+id/et_travel"
         app:layout_constraintStart_toStartOf="@+id/tv_add_icon"
         app:layout_constraintTop_toBottomOf="@+id/tv_my_travel_list" />
 
     <EditText
-        android:id="@+id/et_nickname2"
+        android:id="@+id/et_travel"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -72,7 +72,8 @@
         android:hint="여행지를 입력해주세요"
         android:inputType="textPersonName"
         android:paddingStart="20dp"
-        android:textColor="@color/drakGray"
+        android:textColor="@color/white"
+        android:textColorHint="@color/drakGray"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_add_icon"
         app:layout_constraintEnd_toEndOf="parent"
