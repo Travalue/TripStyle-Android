@@ -15,6 +15,9 @@
             android:name="argsString"
             app:argType="string"
             android:defaultValue=""/>
+        <action
+            android:id="@+id/action_trailerFragment_to_trailerDetailFragment"
+            app:destination="@id/trailerDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/travellerFragment"
@@ -76,6 +79,10 @@
             android:id="@+id/action_categoryDialogFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/trailerDetailFragment"
+        android:name="com.android.example.travalue.ui.trailer.TrailerDetailFragment"
+        android:label="TrailerDetailFragment"/>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.android.example.travalue.ui.mypage.EditProfileFragment"
