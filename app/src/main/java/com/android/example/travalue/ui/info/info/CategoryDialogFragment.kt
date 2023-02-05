@@ -15,9 +15,6 @@ import com.android.example.travalue.base.BaseDialogFragment
 import com.android.example.travalue.databinding.FragmentCategroyBinding
 
 class CategoryDialogFragment  : BaseDialogFragment<FragmentCategroyBinding>(R.layout.fragment_categroy) {
-    private val boldFont: Typeface? = context?.let { ResourcesCompat.getFont(it, R.font.suit_bold) }
-    private val boldExtraLight: Typeface? = context?.let { ResourcesCompat.getFont(it, R.font.suit_extra_light) }
-
     val args: CategoryDialogFragmentArgs by navArgs()
 
     override fun initStartView() {
@@ -33,6 +30,10 @@ class CategoryDialogFragment  : BaseDialogFragment<FragmentCategroyBinding>(R.la
             "\\ traveller" -> {
                 binding.tvGoTraveller.setTextColor(ContextCompat.getColor(requireContext(), R.color.primaryColor))
                 binding.tvGoTraveller.setTypeface(null, Typeface.BOLD )
+            }
+            "\\ my page"->{
+                binding.tvGoMypage.setTextColor(ContextCompat.getColor(requireContext(), R.color.primaryColor))
+                binding.tvGoMypage.setTypeface(null, Typeface.BOLD )
             }
             else -> println("null")
         }
@@ -61,6 +62,10 @@ class CategoryDialogFragment  : BaseDialogFragment<FragmentCategroyBinding>(R.la
 
         binding.tvGoTraveller.setOnClickListener {
             navController.navigate(R.id.action_categoryDialogFragment_to_travellerFragment)
+        }
+
+        binding.tvGoMypage.setOnClickListener {
+            navController.navigate(R.id.action_categoryDialogFragment_to_myPageFragment)
         }
     }
 
