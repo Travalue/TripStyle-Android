@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Travalue</string>
+    <string name="MAP_API_CLIENT_ID">eqdcuc9eti</string>
 </resources>

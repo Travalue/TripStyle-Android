@@ -3,12 +3,13 @@ package com.android.example.travalue.ui.trailer
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.travalue.R
 
-class TrailerViewPagerAdapter(var trailerCardList: ArrayList<Int>) :
+class TrailerViewPagerAdapter(var trailerCardList: ArrayList<Int>,val listener: onActionListener) :
     RecyclerView.Adapter<TrailerViewPagerAdapter.PagerViewHolder>() {
-
 
     inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
         (LayoutInflater.from(parent.context).inflate(R.layout.trailer_item_view, parent, false)) {
@@ -21,7 +22,10 @@ class TrailerViewPagerAdapter(var trailerCardList: ArrayList<Int>) :
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         holder.trailerCard.setImageResource(trailerCardList[position])
-
-        holder.trailerCard.clipToOutline = true
+        holder.trailerCard.setOnClickListener {
+            it.findNavController().navigate(listener.onMoveDetailPage())
+        }
+        //holder.trailerCard.clipToOutline = true
     }
+
 }
