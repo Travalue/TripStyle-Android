@@ -48,12 +48,12 @@
 
                 <ImageView
                     android:id="@+id/iv_asia"
-                    android:layout_width="54dp"
-                    android:layout_height="49dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    app:srcCompat="@mipmap/ic_rectangle_primary" />
+                    app:srcCompat="@drawable/ic_asia" />
 
                 <TextView
                     android:id="@+id/tv_aisa"
@@ -74,11 +74,11 @@
 
                 <ImageView
                     android:id="@+id/iv_europe"
-                    android:layout_width="54dp"
-                    android:layout_height="49dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_rectangle_primary" />
+                    app:srcCompat="@drawable/ic_europe" />
 
                 <TextView
                     android:id="@+id/tv_europe"
@@ -98,11 +98,11 @@
 
                 <ImageView
                     android:id="@+id/iv_america"
-                    android:layout_width="54dp"
-                    android:layout_height="49dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_rectangle_primary" />
+                    app:srcCompat="@drawable/ic_america" />
 
                 <TextView
                     android:id="@+id/tv_america"
@@ -122,11 +122,11 @@
 
                 <ImageView
                     android:id="@+id/iv_africa"
-                    android:layout_width="54dp"
-                    android:layout_height="49dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_rectangle_primary" />
+                    app:srcCompat="@drawable/ic_africa" />
 
                 <TextView
                     android:id="@+id/tv_africa"
@@ -259,12 +259,12 @@
 
                 <ImageView
                     android:id="@+id/iv_seoul"
-                    android:layout_width="54dp"
-                    android:layout_height="49dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    app:srcCompat="@mipmap/ic_seoul" />
+                    android:background="@drawable/ic_seoul2"/>
 
                 <TextView
                     android:id="@+id/tv_seoul"
@@ -285,11 +285,11 @@
 
                 <ImageView
                     android:id="@+id/iv_busan"
-                    android:layout_width="54dp"
-                    android:layout_height="49dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_busan" />
+                    app:srcCompat="@drawable/ic_busan2" />
 
                 <TextView
                     android:id="@+id/tv_busan"
@@ -308,11 +308,11 @@
 
                 <ImageView
                     android:id="@+id/iv_jeju"
-                    android:layout_width="54dp"
-                    android:layout_height="49dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_jeju" />
+                    app:srcCompat="@drawable/ic_jeju2" />
 
                 <TextView
                     android:id="@+id/tv_jeju"
@@ -332,11 +332,11 @@
 
                 <ImageView
                     android:id="@+id/iv_etc"
-                    android:layout_width="54dp"
-                    android:layout_height="49dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_rectangle_primary" />
+                    app:srcCompat="@drawable/ic_other2" />
 
                 <TextView
                     android:id="@+id/tv_etc"
