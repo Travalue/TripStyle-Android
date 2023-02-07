@@ -97,7 +97,7 @@
                 android:layout_marginTop="40dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/line5"
-                app:srcCompat="@drawable/img" />
+                app:srcCompat="@drawable/profile_img" />
 
             <TextView
                 android:id="@+id/tv_nickname"
@@ -198,16 +198,6 @@
                 app:layout_constraintTop_toTopOf="@+id/line15" />
 
             <View
-                android:id="@+id/line14"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="@color/drakGray"
-                app:layout_constraintEnd_toEndOf="@+id/btn_edit_profile"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/iv_profile"
-                tools:layout_editor_absoluteY="44dp" />
-
-            <View
                 android:id="@+id/line12"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
@@ -281,10 +271,9 @@
                 android:id="@+id/btn_destination_detail3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_my_travel"
+                app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="@+id/line6"
-                app:layout_constraintTop_toTopOf="@+id/tv_my_travel"
-                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintTop_toTopOf="@+id/textView2"
                 app:srcCompat="@drawable/btn_next" />
 
             <TextView
@@ -335,7 +324,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/line5" />
 
             <ImageView
-                android:id="@+id/btn_destination_detail"
+                android:id="@+id/btn_to_travel_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="@+id/line6"
