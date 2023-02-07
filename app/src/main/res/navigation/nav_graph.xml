@@ -33,12 +33,30 @@
         <action
             android:id="@+id/action_travellerFragment_to_TrailerSearchFragment"
             app:destination="@+id/trailerSearchFragment"/> <!-- 임시 -->
+        <action
+            android:id="@+id/action_travellerFragment_to_TravellerWriteFragment"
+            app:destination="@+id/travellerWriteFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/trailerSearchFragment"
         android:name="com.android.example.travalue.ui.traveller.TrailerSearchFragment"
         android:label="TrailerSearchFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/travellerWriteFragment"
+        android:name="com.android.example.travalue.ui.traveller.TravellerWriteFragment"
+        android:label="TravellerWriteFragment">
+        <action
+            android:id="@+id/action_travellerWriteFragment_to_TravellerLocationFragment"
+            app:destination="@+id/travellerLocationFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/travellerLocationFragment"
+        android:name="com.android.example.travalue.ui.traveller.TravellerLocationFragment"
+        android:label="TravellerLocationFragment">
     </fragment>
 
     <fragment

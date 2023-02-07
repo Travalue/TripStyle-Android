@@ -5,9 +5,9 @@ import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentTrailerSearchBinding
-import com.android.example.travalue.databinding.FragmentTravellerWriteBinding
+import com.android.example.travalue.databinding.FragmentTravellerLocationBinding
 
-class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.layout.fragment_traveller_write) {
+class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>(R.layout.fragment_traveller_location) {
     override fun initStartView() {
         super.initStartView()
         (activity as MainActivity).setToolbarTitle("visible")
@@ -23,13 +23,6 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 //            val action = TravellerFragmentDirections.actionTravellerFragmentToCategoryDialogFragment(binding.tvTraveller.text.toString())
 //            navController.navigate(action)
 //        }
-
-        binding.tvAddSchedule.setOnClickListener {
-            navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
-        }
-        binding.ivCalendar.setOnClickListener {
-            navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
-        }
     }
 
     override fun initAfterBinding() {

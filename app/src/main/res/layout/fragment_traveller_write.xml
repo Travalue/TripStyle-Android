@@ -38,6 +38,7 @@
             android:paddingBottom="15dp"
             android:textColorHint="@color/drakGray"
             android:textSize="16dp"
+            android:textColor="@color/gray"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             app:layout_constraintEnd_toEndOf="@+id/editTextTitle"

@@ -356,7 +356,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="16dp"
-            android:src="@mipmap/ic_edit"
+            android:src="@drawable/ic_edit2"
             app:backgroundTint="@color/backgroundColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

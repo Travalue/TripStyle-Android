@@ -29,6 +29,10 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
 //            val action = TravellerFragmentDirections.actionTravellerFragmentToCategoryDialogFragment(binding.tvTraveller.text.toString())
 //            navController.navigate(action)
         }
+
+        binding.fab.setOnClickListener {
+            navController.navigate(R.id.action_travellerFragment_to_TravellerWriteFragment)
+        }
     }
 
     override fun initAfterBinding() {
