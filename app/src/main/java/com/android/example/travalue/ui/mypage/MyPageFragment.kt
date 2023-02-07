@@ -38,6 +38,11 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             navController.navigate(R.id.action_myPageFragment_to_editProfileFragment)
         }
 
+        //공유중인 여행지 UI로 이동
+        binding.btnDestinationDetail3.setOnClickListener {
+            navController.navigate(R.id.action_myPageFragment_to_shareTravelFragment)
+        }
+
         binding.btnToTravelList.setOnClickListener{
             navController.navigate(R.id.action_myPageFragment_to_myTravelListFragment)
         }

@@ -40,12 +40,14 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
     }
 
     private fun initVerticalCardView(data : ArrayList<Int>){
-        binding.tpTrailerCard.adapter = TrailerViewPagerAdapter(data,object : onActionListener{
+        val adapter = TrailerViewPagerAdapter(data)
+        adapter.setListener(object : onActionListener{
             override fun onMoveDetailPage(): NavDirections {
                 return TrailerFragmentDirections.actionTrailerFragmentToTrailerDetailFragment()
             }
 
-        }) // 어댑터 생성
+        })
+        binding.tpTrailerCard.adapter = adapter // 어댑터 생성
         binding.tpTrailerCard.orientation = ViewPager2.ORIENTATION_VERTICAL // 세로방향
 
         with(binding.tpTrailerCard){
