@@ -1,10 +1,11 @@
-package com.android.example.travalue
+package com.android.example.travalue.dialog
 
 import android.widget.Toast
+import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseDialogFragment
 import com.android.example.travalue.databinding.DialogCategoryEditBinding
 
-class CategoryEditDialog : BaseDialogFragment<DialogCategoryEditBinding>(R.layout.dialog_category_edit) {
+class CategoryDeleteDialog : BaseDialogFragment<DialogCategoryEditBinding>(R.layout.dialog_category_edit) {
     override fun initStartView() {
         super.initStartView()
         clickDialogEvent()
@@ -26,6 +27,7 @@ class CategoryEditDialog : BaseDialogFragment<DialogCategoryEditBinding>(R.layou
         }
         binding.btnConfirm.setOnClickListener {
             Toast.makeText(requireContext(),"삭제 되었습니다",Toast.LENGTH_SHORT).show()
+            dismiss()
         }
     }
 

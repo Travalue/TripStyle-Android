@@ -1,15 +1,14 @@
 package com.android.example.travalue.ui.mypage
 
-import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
+import com.android.example.travalue.dialog.CategoryDeleteDialog
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentCategoryEditBinding
@@ -22,6 +21,7 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
 
         initMenu()
         initCategorySpinner()
+        clickButtonEvent()
     }
 
     override fun initDataBinding() {
@@ -67,6 +67,13 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
                 //
             }
 
+        }
+    }
+
+    //카테고리 삭제 버튼 이벤트
+    private fun clickButtonEvent(){
+        binding.btnCategoryDelete.setOnClickListener {
+            CategoryDeleteDialog().show(parentFragmentManager,"categoryDelete")
         }
     }
 
