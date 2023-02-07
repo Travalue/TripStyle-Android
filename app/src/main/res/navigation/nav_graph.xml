@@ -82,7 +82,7 @@
     <fragment
         android:id="@+id/trailerDetailFragment"
         android:name="com.android.example.travalue.ui.trailer.TrailerDetailFragment"
-        android:label="TrailerDetailFragment"/>
+        android:label="trailer"/>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.android.example.travalue.ui.mypage.EditProfileFragment"
