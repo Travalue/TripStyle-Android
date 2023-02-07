@@ -2,10 +2,12 @@ package com.android.example.travalue.ui.mypage
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,6 +33,8 @@ class ShareTravelDetailFragment : BaseFragment<FragmentShareTravelDetailBinding>
         (activity as MainActivity).hideToolbar(false)
 
         (activity as MainActivity).binding.tvToolbarName.text = args.type
+        if(args.type != "전체 보기") initMenu()
+
     }
 
     override fun initDataBinding() {
@@ -44,6 +48,26 @@ class ShareTravelDetailFragment : BaseFragment<FragmentShareTravelDetailBinding>
         binding.rvCategoryList.adapter = adapter // 어댑터 생성
         binding.rvCategoryList.layoutManager = LinearLayoutManager(context)
         binding.rvCategoryList.setHasFixedSize(true)
+    }
+
+    private fun initMenu(){
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+                menuInflater.inflate(R.menu.menu_category_edit, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_edit_button -> {
+                        navController.navigate(R.id.action_shareTravelDetailFragment_to_categoryEditFragment)
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun initAfterBinding() {

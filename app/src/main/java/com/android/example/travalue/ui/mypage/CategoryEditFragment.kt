@@ -38,12 +38,12 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 // Add menu items here
-                menuInflater.inflate(R.menu.menu_category_edit, menu)
+                menuInflater.inflate(R.menu.menu_category_detail, menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
-                    R.id.menu_edit_button -> {
+                    R.id.menu_confrim_button -> {
                         Toast.makeText(context,"수정 되었습니다",Toast.LENGTH_SHORT).show()
                         true
                     }
