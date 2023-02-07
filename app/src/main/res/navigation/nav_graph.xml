@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/shareTravelFragment">
+    app:startDestination="@id/myPageFragment">
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.android.example.travalue.ui.trailer.TrailerFragment"
@@ -105,6 +105,9 @@
         <action
             android:id="@+id/action_myPageFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_shareTravelFragment"
+            app:destination="@id/shareTravelFragment" />
     </fragment>
     <fragment
         android:id="@+id/shareTravelFragment"
