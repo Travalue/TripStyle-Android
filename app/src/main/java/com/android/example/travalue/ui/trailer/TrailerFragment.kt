@@ -11,11 +11,11 @@ import kotlin.math.abs
 import kotlin.math.max
 
 class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_trailer) {
-    val page:String = "trailer"
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("none")
+        //(activity as MainActivity).setToolbarTitle("none")
+        (activity as MainActivity).hideToolbar(true)
     }
 
     override fun initDataBinding() {

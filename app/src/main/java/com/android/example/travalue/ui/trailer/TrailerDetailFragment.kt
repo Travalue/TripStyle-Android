@@ -19,10 +19,10 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 
 class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layout.fragment_trailer_detail){
-
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("trailer")
+       // (activity as MainActivity).setToolbarTitle("trailer")
+        (activity as MainActivity).hideToolbar(false)
 
         initMapView()
         animationScheduleView()
