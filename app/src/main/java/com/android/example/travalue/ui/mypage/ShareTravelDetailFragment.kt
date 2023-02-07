@@ -40,11 +40,6 @@ class ShareTravelDetailFragment : BaseFragment<FragmentShareTravelDetailBinding>
     override fun initDataBinding() {
         super.initDataBinding()
         val adapter = TrailerViewPagerAdapter(getCardList())
-        adapter.setListener(object : onActionListener{
-            override fun onMoveDetailPage(): NavDirections {
-                return ShareTravelDetailFragmentDirections.actionShareTravelDetailFragmentToCategoryEditFragment()
-            }
-        })
         binding.rvCategoryList.adapter = adapter // 어댑터 생성
         binding.rvCategoryList.layoutManager = LinearLayoutManager(context)
         binding.rvCategoryList.setHasFixedSize(true)
