@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Travalue</string>
     <string name="MAP_API_CLIENT_ID">eqdcuc9eti</string>
+
+    <string-array name="Category">
+        <item>식도락</item>
+        <item>액티비티</item>
+        <item>휴양</item>
+        <item>패키지</item>
+    </string-array>
 </resources>
