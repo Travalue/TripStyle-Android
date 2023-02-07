@@ -43,6 +43,9 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             navController.navigate(R.id.action_myPageFragment_to_shareTravelFragment)
         }
 
+        binding.btnToTravelList.setOnClickListener{
+            navController.navigate(R.id.action_myPageFragment_to_myTravelListFragment)
+        }
     }
 
     private fun getCategoryImg(): ArrayList<Int> {
