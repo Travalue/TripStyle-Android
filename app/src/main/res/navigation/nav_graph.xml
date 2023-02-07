@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/myPageFragment">
+    app:startDestination="@id/shareTravelFragment">
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.android.example.travalue.ui.trailer.TrailerFragment"
@@ -106,5 +106,29 @@
             android:id="@+id/action_myPageFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/shareTravelFragment"
+        android:name="com.android.example.travalue.ui.mypage.ShareTravelFragment"
+        android:label="공유중인 여행지"
+        tools:layout="@layout/fragment_share_travel" >
+        <action
+            android:id="@+id/action_shareTravelFragment_to_shareTravelDetailFragment"
+            app:destination="@id/shareTravelDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareTravelDetailFragment"
+        android:name="com.android.example.travalue.ui.mypage.ShareTravelDetailFragment"
+        android:label="{type}" >
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_shareTravelDetailFragment_to_categoryEditFragment"
+            app:destination="@id/categoryEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryEditFragment"
+        android:name="com.android.example.travalue.ui.mypage.CategoryEditFragment"
+        android:label="카테고리 수정" />
 
 </navigation>
