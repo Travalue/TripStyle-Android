@@ -10,7 +10,7 @@ import com.android.example.travalue.databinding.FragmentTravellerWriteBinding
 class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.layout.fragment_traveller_write) {
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("visible")
+        (activity as MainActivity).setToolbarTitle("글 작성하기")
     }
 
     override fun initDataBinding() {

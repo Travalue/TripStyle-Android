@@ -10,7 +10,7 @@ import com.android.example.travalue.databinding.FragmentTravellerLocationBinding
 class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>(R.layout.fragment_traveller_location) {
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("visible")
+        (activity as MainActivity).setToolbarTitle("일정/장소 첨부")
     }
 
     override fun initDataBinding() {
