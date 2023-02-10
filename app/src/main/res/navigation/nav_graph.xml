@@ -108,6 +108,7 @@
         <action
             android:id="@+id/action_myPageFragment_to_shareTravelFragment"
             app:destination="@id/shareTravelFragment" />
+        <action
             android:id="@+id/action_myPageFragment_to_myTravelListFragment"
             app:destination="@id/myTravelListFragment" />
     </fragment>
