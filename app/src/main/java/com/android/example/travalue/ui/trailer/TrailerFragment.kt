@@ -63,13 +63,25 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
         val offsetPy = resources.getDimensionPixelOffset(R.dimen.offset)
 
         binding.tpTrailerCard.setPageTransformer { page, position ->
+            val scaleFactor = MIN_SCALE + (1 - MIN_SCALE) * (1 - abs(position))
+
             page.apply {
                 when{
-                    position < -1 -> {
+                    position < -1 -> { // [-Infinity,-1)
                         alpha = 0f
+                        scaleX = scaleFactor
+                        scaleY = scaleFactor
                     }
-                    position <= 1 ->{
-                        val scaleFactor = max(MIN_SCALE, 1 - abs(position))
+                    position <= 0 -> { // [-1,0]
+                        alpha = 1-position
+                        translationY = 1500 * -position
+                        scaleX = scaleFactor
+                        scaleY = scaleFactor
+                    }
+                    position <= 1 ->{ // (0,1]
+                        alpha = 1f
+                        scaleX = scaleFactor
+                        scaleY = 1f
 
                         val viewPager = page.parent.parent as ViewPager2
                         val offset = position * -(2 * offsetPy+pageMarginPy)
@@ -78,14 +90,11 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
                         }else{
                             page.translationX = offset
                         }
-
-                        scaleX = 1f
-                        scaleY = scaleFactor
-                        alpha = (MIN_ALPHA +
-                                (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA)))
                     }
-                    else -> {
+                    else -> { // (1,+Infinity]
                         alpha = 0f
+                        scaleX = scaleFactor
+                        scaleY = 1f
                     }
                 }
             }
