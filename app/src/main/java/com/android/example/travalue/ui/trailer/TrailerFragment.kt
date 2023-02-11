@@ -1,5 +1,7 @@
 package com.android.example.travalue.ui.trailer
 
+import android.util.Log
+import android.view.View
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
@@ -26,8 +28,6 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
 
         // category 이동
         binding.hambugerbar.setOnClickListener {
-//            navController.navigate(R.id.action_trailerFragment_to_categoryDialogFragment)
-
             val action = TrailerFragmentDirections.actionTrailerFragmentToCategoryDialogFragment(binding.tvTrailer.text.toString())
             navController.navigate(action)
         }
@@ -56,49 +56,7 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
             offscreenPageLimit = 1
         }
 
-        val MIN_SCALE = 0.85f //애니메이션 동작 시 최소 크기는 원본의 85% 축소
-        val MIN_ALPHA = 0.5f
-
-        val pageMarginPy = resources.getDimensionPixelOffset(R.dimen.pageMargin)
-        val offsetPy = resources.getDimensionPixelOffset(R.dimen.offset)
-
-        binding.tpTrailerCard.setPageTransformer { page, position ->
-            val scaleFactor = MIN_SCALE + (1 - MIN_SCALE) * (1 - abs(position))
-
-            page.apply {
-                when{
-                    position < -1 -> { // [-Infinity,-1)
-                        alpha = 0f
-                        scaleX = scaleFactor
-                        scaleY = scaleFactor
-                    }
-                    position <= 0 -> { // [-1,0]
-                        alpha = 1-position
-                        translationY = 1500 * -position
-                        scaleX = scaleFactor
-                        scaleY = scaleFactor
-                    }
-                    position <= 1 ->{ // (0,1]
-                        alpha = 1f
-                        scaleX = scaleFactor
-                        scaleY = 1f
-
-                        val viewPager = page.parent.parent as ViewPager2
-                        val offset = position * -(2 * offsetPy+pageMarginPy)
-                        if(viewPager.orientation == ViewPager2.ORIENTATION_VERTICAL){
-                            page.translationY = offset
-                        }else{
-                            page.translationX = offset
-                        }
-                    }
-                    else -> { // (1,+Infinity]
-                        alpha = 0f
-                        scaleX = scaleFactor
-                        scaleY = 1f
-                    }
-                }
-            }
-        }
+        binding.tpTrailerCard.setPageTransformer(SwipeTransformer())
     }
 
     // 뷰 페이저에 들어갈 아이템
@@ -108,5 +66,54 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
             R.drawable.card_img_example,
             R.drawable.card_img_example,
             R.drawable.card_img_example)
+    }
+
+    inner class SwipeTransformer : ViewPager2.PageTransformer{
+        val MIN_SCALE = 0.85f
+        val MIN_ALPHA = 0.5f
+
+        val screenHeight = resources.displayMetrics.heightPixels //폰의 높이를 가져옴
+        val pageMarginPy = resources.getDimensionPixelOffset(R.dimen.pageMargin)
+        val offsetPy = resources.getDimensionPixelOffset(R.dimen.offset)
+        val pageHeight = screenHeight - 2*(offsetPy+pageMarginPy) - offsetPy
+
+        override fun transformPage(page: View, position: Float) {
+            val scaleFactor = MIN_SCALE + (1 - MIN_SCALE) * (1 - abs(position))
+
+            page.apply {
+                when{
+                    position < -1 -> {
+                        alpha = 0f
+                        scaleX = scaleFactor
+                        scaleY = scaleFactor
+                    }
+                    position <= 0 -> {
+                        alpha = (MIN_ALPHA + (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA)))
+                        translationY = pageHeight * -position
+                        scaleX = scaleFactor
+                        scaleY = scaleFactor
+                    }
+                    position <= 1 ->{
+                        alpha = 1f
+                        scaleX = 1f
+                        scaleY = scaleFactor
+
+                        val viewPager = page.parent.parent as ViewPager2
+                        val offset = position * -(2*offsetPy+pageMarginPy)
+                        if(viewPager.orientation == ViewPager2.ORIENTATION_VERTICAL){
+                            page.translationY = offset
+                        }else{
+                            page.translationX = offset
+                        }
+                    }
+                    else -> {
+                        alpha = 0f
+                        scaleX = scaleFactor
+                        scaleY = 1f
+                    }
+                }
+            }
+        }
+
     }
 }
