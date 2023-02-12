@@ -1,17 +1,19 @@
 package com.android.example.travalue.ui.mypage
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.travalue.databinding.PlaceItemViewBinding
 
-class MyTravelListAdapter(var travelList: ArrayList<String>) :
+class MyTravelListAdapter(var travelList: ArrayList<String>, val delete: Boolean) :
     RecyclerView.Adapter<MyTravelListAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(itemViewBinding: PlaceItemViewBinding)
         : RecyclerView.ViewHolder(itemViewBinding.root){
         var placeName = itemViewBinding.tvPlace
+        var deleteBtn = itemViewBinding.btnPlaceDelete
     }
 
     override fun onCreateViewHolder(
@@ -31,5 +33,9 @@ class MyTravelListAdapter(var travelList: ArrayList<String>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.placeName.text = travelList[position]
+
+        if(delete){
+            holder.deleteBtn.visibility=View.VISIBLE
+        }
     }
 }

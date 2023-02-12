@@ -11,20 +11,18 @@ import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentMytravelListBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.fragment_mytravel_list) {
 
-    private var allPlace :ArrayList<String> =  ArrayList()
-    private var placeIcon :ArrayList<String> = ArrayList()
-    private var addPlace :ArrayList<String> = ArrayList()
+    private var allPlace :ArrayList<String> = arrayListOf("미국")
+    private var placeIcon :ArrayList<String> = arrayListOf("🇺🇸")
+    private var addPlace :ArrayList<String> =arrayListOf("미국")
 
     override fun initStartView() {
         super.initStartView()
         (activity as MainActivity).setToolbarTitle("나의 여행지 리스트")
-
-        allPlace.add("미국")
-        placeIcon.add("🇺🇸")
-        addPlace.add("미국")
     }
 
     override fun initDataBinding() {
@@ -37,7 +35,7 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
             binding.btnMyTravel.text="아직 추가된 여행지 리스트가 없어요"
         }
 
-        binding.placeList.adapter = MyTravelListAdapter(addPlace) // 어댑터 생성
+        binding.placeList.adapter = MyTravelListAdapter(addPlace,true) // 어댑터 생성
         val gridLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context,3)
         binding.placeList.layoutManager = gridLayoutManager
 
