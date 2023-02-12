@@ -5,6 +5,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
@@ -27,6 +29,9 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
     override fun initDataBinding() {
         super.initDataBinding()
 
+        binding.placeList.adapter = MyTravelListAdapter(getPlaceList()) // 어댑터 생성
+        val gridLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context,3)
+        binding.placeList.layoutManager = gridLayoutManager
 
     }
 
@@ -35,6 +40,7 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
         super.initAfterBinding()
 
 
+        // editText 입력 감지
         binding.etTravel.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 //                val place = s.toString()
@@ -67,5 +73,14 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
 
             }
         })
+
+        // 여행지 추가 버튼 클릭시
+
+    }
+
+    private fun getPlaceList() : ArrayList<String> {
+        return arrayListOf<String>(
+            "미국"
+        )
     }
 }
