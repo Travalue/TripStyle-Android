@@ -1,12 +1,12 @@
 package com.android.example.travalue.ui.mypage
 
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentLikeListBinding
-import com.android.example.travalue.databinding.FragmentMytravelListBinding
 
 class LikeListFragment : BaseFragment<FragmentLikeListBinding>(R.layout.fragment_like_list) {
 
@@ -18,9 +18,8 @@ class LikeListFragment : BaseFragment<FragmentLikeListBinding>(R.layout.fragment
     override fun initDataBinding() {
         super.initDataBinding()
 
-//        binding.likeList.adapter = CategoryAdapter(getLikeList()) // 어댑터 생성
-        //linearlayout
-        //binding.likeList.layoutManager =
+        binding.likeList.adapter = LikeListAdapter(getLikeList()) // 어댑터 생성
+        binding.likeList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
 
     }
 
@@ -28,5 +27,15 @@ class LikeListFragment : BaseFragment<FragmentLikeListBinding>(R.layout.fragment
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+    }
+
+    private fun getLikeList(): ArrayList<String> {
+        return arrayListOf<String>(
+            "순천 국가정원",
+            "순천 국가정원",
+            "순천 국가정원",
+            "순천 국가정원",
+            "순천 국가정원"
+        )
     }
 }

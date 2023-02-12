@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.travalue.databinding.LikeItemViewBinding
 
-class LikeListAdapter(var likeList: ArrayList<Int>) :
+class LikeListAdapter(var likeList: ArrayList<String>) :
     RecyclerView.Adapter<LikeListAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(itemViewBinding: LikeItemViewBinding)
         : RecyclerView.ViewHolder(itemViewBinding.root){
 
+            var placeName = itemViewBinding.tvPlaceName
     }
 
     override fun onCreateViewHolder(
@@ -30,5 +31,7 @@ class LikeListAdapter(var likeList: ArrayList<Int>) :
     override fun getItemCount(): Int = likeList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        holder.placeName.text=likeList[position]
     }
 }
