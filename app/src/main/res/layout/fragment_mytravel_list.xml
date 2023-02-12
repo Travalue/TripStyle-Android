@@ -64,7 +64,8 @@
         android:id="@+id/et_travel"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
         android:ems="10"
@@ -75,10 +76,9 @@
         android:textColor="@color/white"
         android:textColorHint="@color/drakGray"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_add_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_add_icon"
-        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_travel" />
 
     <TextView
         android:id="@+id/tv_add_travel"
@@ -93,7 +93,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/iv_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -111,6 +111,19 @@
         android:textColor="@color/gray"
         android:textSize="8sp"
         app:layout_constraintStart_toStartOf="@+id/tv_add_travel"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon" />
+
+    <TextView
+        android:id="@+id/tv_place_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🇺🇸"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/et_travel"
+        app:layout_constraintEnd_toStartOf="@+id/et_travel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_travel" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
