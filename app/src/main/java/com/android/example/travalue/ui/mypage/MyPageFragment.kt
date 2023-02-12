@@ -41,6 +41,10 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
         binding.btnToTravelList.setOnClickListener{
             navController.navigate(R.id.action_myPageFragment_to_myTravelListFragment)
         }
+
+        binding.btnToLikeList.setOnClickListener{
+            navController.navigate(R.id.action_myPageFragment_to_likeListFragment)
+        }
     }
 
     private fun getCategoryImg(): ArrayList<Int> {

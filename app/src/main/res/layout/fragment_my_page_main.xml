@@ -259,7 +259,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_place_like_size" />
 
             <ImageView
-                android:id="@+id/btn_destination_detail5"
+                android:id="@+id/btn_to_like_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@+id/textView4"
