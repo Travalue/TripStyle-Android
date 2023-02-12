@@ -59,12 +59,12 @@
                 android:id="@+id/line7"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/gray"
                 app:layout_constraintEnd_toEndOf="@+id/btn_edit_profile"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/iv_profile"
-                app:layout_constraintTop_toBottomOf="@+id/tv_no_destination" />
+                app:layout_constraintTop_toBottomOf="@+id/place_list" />
 
             <ImageView
                 android:id="@+id/btn_category"
@@ -207,17 +207,6 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/iv_profile"
                 app:layout_constraintTop_toBottomOf="@+id/tv_place_like_list" />
-
-            <View
-                android:id="@+id/line10"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="24dp"
-                android:background="@color/gray"
-                app:layout_constraintEnd_toEndOf="@+id/btn_edit_profile"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/iv_profile"
-                app:layout_constraintTop_toBottomOf="@+id/tv_no_destination" />
 
             <TextView
                 android:id="@+id/tv_like_size"
@@ -386,6 +375,16 @@
                 app:layout_constraintHorizontal_bias="0.56"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_my_travel" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/place_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="11dp"
+                app:layout_constraintStart_toStartOf="@+id/tv_destination_list"
+                app:layout_constraintTop_toBottomOf="@+id/tv_destination_list"
+                tools:listitem="@layout/place_item_view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

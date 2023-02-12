@@ -12,17 +12,34 @@ import com.android.example.travalue.ui.trailer.TrailerViewPagerAdapter
 
 class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragment_my_page_main) {
 
+    private var addPlace :ArrayList<String> =arrayListOf("미국")
+
     override fun initStartView() {
         super.initStartView()
         (activity as MainActivity).setToolbarTitle("none")
+
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
 
+        if(addPlace.size > 0){
+            binding.tvNoDestination.text=""
+        }else{
+            binding.tvNoDestination.text="나의 여행지를 추가해보세요."
+        }
+
+
+        // 나의 여행지 리스트 어댑터
+        binding.placeList.adapter = MyTravelListAdapter(addPlace,false) // 어댑터 생성
+        val gridLayoutManager1: RecyclerView.LayoutManager = GridLayoutManager(context,4)
+        binding.placeList.layoutManager = gridLayoutManager1
+
+        // 공유중인 여행지 어댑터
         binding.categoryCardList.adapter = CategoryAdapter(getCategoryImg()) // 어댑터 생성
-        val gridLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context,2)
-        binding.categoryCardList.layoutManager = gridLayoutManager
+        val gridLayoutManager2: RecyclerView.LayoutManager = GridLayoutManager(context,2)
+        binding.categoryCardList.layoutManager = gridLayoutManager2
+
     }
 
 
