@@ -8,8 +8,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.travalue.R
 
-class TrailerViewPagerAdapter(var trailerCardList: ArrayList<Int>,val listener: onActionListener) :
+class TrailerViewPagerAdapter(var trailerCardList: ArrayList<Int>) :
     RecyclerView.Adapter<TrailerViewPagerAdapter.PagerViewHolder>() {
+
+    private var listener : onActionListener? = null
 
     inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
         (LayoutInflater.from(parent.context).inflate(R.layout.trailer_item_view, parent, false)) {
@@ -22,10 +24,16 @@ class TrailerViewPagerAdapter(var trailerCardList: ArrayList<Int>,val listener: 
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         holder.trailerCard.setImageResource(trailerCardList[position])
-        holder.trailerCard.setOnClickListener {
-            it.findNavController().navigate(listener.onMoveDetailPage())
+        if(listener != null){
+            holder.trailerCard.setOnClickListener {
+                it.findNavController().navigate(listener!!.onMoveDetailPage())
+            }
         }
         //holder.trailerCard.clipToOutline = true
+    }
+
+    fun setListener(listener: onActionListener){
+        this.listener = listener
     }
 
 }
