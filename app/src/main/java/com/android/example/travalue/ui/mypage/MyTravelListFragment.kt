@@ -11,12 +11,12 @@ import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentMytravelListBinding
-import java.util.regex.Pattern
 
 class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.fragment_mytravel_list) {
 
     private var allPlace :ArrayList<String> =  ArrayList()
     private var placeIcon :ArrayList<String> = ArrayList()
+    private var addPlace :ArrayList<String> = ArrayList()
 
     override fun initStartView() {
         super.initStartView()
@@ -24,12 +24,20 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
 
         allPlace.add("미국")
         placeIcon.add("🇺🇸")
+        addPlace.add("미국")
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
 
-        binding.placeList.adapter = MyTravelListAdapter(getPlaceList()) // 어댑터 생성
+
+        if(addPlace.size > 0){
+            binding.btnMyTravel.text=""
+        }else{
+            binding.btnMyTravel.text="아직 추가된 여행지 리스트가 없어요"
+        }
+
+        binding.placeList.adapter = MyTravelListAdapter(addPlace) // 어댑터 생성
         val gridLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context,3)
         binding.placeList.layoutManager = gridLayoutManager
 
@@ -75,12 +83,10 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
         })
 
         // 여행지 추가 버튼 클릭시
+        binding.btnAddTravel.setOnClickListener {
+            val place = binding.etTravel.text.toString()
 
+        }
     }
 
-    private fun getPlaceList() : ArrayList<String> {
-        return arrayListOf<String>(
-            "미국"
-        )
-    }
 }

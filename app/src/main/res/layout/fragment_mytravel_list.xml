@@ -130,8 +130,8 @@
         android:id="@+id/place_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="11dp"
         app:layout_constraintStart_toStartOf="@+id/btn_my_travel"
         app:layout_constraintTop_toTopOf="@+id/btn_my_travel"
         tools:listitem="@layout/place_item_view" />
