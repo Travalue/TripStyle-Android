@@ -6,6 +6,12 @@
         android:fontStyle="normal"
         android:fontWeight="600" />
 
+    <!--semiBold-->
+    <font
+        android:font="@font/suit_semi_bold"
+        android:fontStyle="normal"
+        android:fontWeight="550"/>
+
     <!--medium-->
     <font
         android:font="@font/suit_medium"
