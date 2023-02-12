@@ -12,6 +12,7 @@
         android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        tools:listitem="@layout/like_item_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
