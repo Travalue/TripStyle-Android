@@ -139,6 +139,9 @@
         <action
             android:id="@+id/action_myPageFragment_to_myTravelListFragment"
             app:destination="@id/myTravelListFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_likeListFragment"
+            app:destination="@id/likeListFragment" />
     </fragment>
     <fragment
         android:id="@+id/myTravelListFragment"
@@ -146,6 +149,14 @@
         android:label="MyTravelListFragment" >
         <action
             android:id="@+id/action_myTravelListFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/likeListFragment"
+        android:name="com.android.example.travalue.ui.mypage.LikeListFragment"
+        android:label="LikeListFragment" >
+        <action
+            android:id="@+id/action_likeListFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
     </fragment>
     <fragment
