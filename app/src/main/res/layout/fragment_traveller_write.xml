@@ -3,10 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backgroundColor">
+        android:background="@color/backgroundColor"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/editTextTitle"
@@ -17,9 +28,10 @@
             android:ems="10"
             android:hint="제목"
             android:inputType="text"
-            android:paddingBottom="20dp"
+            android:paddingBottom="18dp"
             android:textColorHint="@color/drakGray"
-            android:textSize="22dp"
+            android:textSize="22sp"
+            android:textColor="@color/white"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,9 +47,9 @@
             android:ems="10"
             android:hint="부제목"
             android:inputType="text"
-            android:paddingBottom="15dp"
+            android:paddingBottom="14dp"
             android:textColorHint="@color/drakGray"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textColor="@color/gray"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -62,7 +74,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="15dp"
             android:text="여행 일정 추가"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_calendar"
             app:layout_constraintStart_toEndOf="@+id/iv_calendar"
             app:layout_constraintTop_toBottomOf="@+id/editTextSubtitle" />
@@ -71,18 +83,23 @@
             android:id="@+id/editTextBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:hint="본문을 입력해 주세요."
-            android:textColorHint="@color/drakGray"
-            android:background="@null"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_marginTop="19dp"
-            android:textSize="14dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="50dp"
+            android:background="@null"
+            android:ems="10"
+            android:hint="본문을 입력해 주세요."
+            android:inputType="textMultiLine"
+            android:textColor="@color/white"
+            android:textColorHint="@color/drakGray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/line"
+            app:layout_constraintEnd_toEndOf="@+id/editTextSubtitle"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/editTextSubtitle"
-            app:layout_constraintTop_toBottomOf="@+id/tv_add_schedule" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_add_schedule"
+            app:layout_constraintVertical_bias="0.0" />
 
         <View
             android:id="@+id/line"
@@ -135,5 +152,7 @@
             app:layout_constraintTop_toBottomOf="@+id/line" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </layout>

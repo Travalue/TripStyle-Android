@@ -15,6 +15,17 @@ class TravellerSearchRecyclerViewAdapter(private val viewModel: TravellerSearchV
     RecyclerView.Adapter<TravellerSearchRecyclerViewAdapter.RecyclerViewViewHolder>() {
 
 
+    interface OnItemClickListener{
+        fun onItemClick(pos: Int, city: String, searchText: String)
+    }
+
+    private lateinit var onClickListener: OnItemClickListener
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        Log.e("t","setOnItemClickListener called")
+        this.onClickListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.traveller_search_item_view, parent, false)
 //        val inflater = LayoutInflater.from(parent.context)
@@ -36,6 +47,22 @@ class TravellerSearchRecyclerViewAdapter(private val viewModel: TravellerSearchV
         private val cityImage: ImageView = itemView.findViewById(R.id.city_image)
         private val QueryCityName: TextView = itemView.findViewById(R.id.city_name)
         private val QuerySpecificCityName: TextView = itemView.findViewById(R.id.specific_city_name)
+
+        init{
+            itemView.setOnClickListener {
+                val pos = adapterPosition
+
+                if(pos != RecyclerView.NO_POSITION){
+                    if(onClickListener != null){
+                        cityImage.setOnClickListener {
+                            onClickListener.onItemClick(pos,"","")
+                            println("adapterposition: ${pos}")
+                            println("${QueryCityName.text}")
+                        }
+                    }
+                }
+            }
+        }
 
         fun setContents(pos: Int){
             with(viewModel.domesticCities[pos]){

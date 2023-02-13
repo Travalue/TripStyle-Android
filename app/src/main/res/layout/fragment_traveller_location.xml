@@ -8,38 +8,18 @@
         android:layout_height="match_parent"
         android:background="@color/backgroundColor">
 
-        <EditText
-            android:id="@+id/editTextTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/drakGray"
-            android:ems="10"
-            android:hint="제목"
-            android:inputType="text"
-            android:paddingBottom="20dp"
-            android:textColorHint="@color/drakGray"
-            android:textSize="22dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"/>
-
         <ImageView
             android:id="@+id/iv_search_box"
-            android:layout_width="345dp"
+            android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/edittext_rounded_corner_rectangle"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:background="@drawable/edittext_rounded_corner_rectangle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ic_search"
@@ -71,8 +51,8 @@
             android:textColorHint="@color/gray"
             android:inputType="text"
             android:textSize="12dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="96.49dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="96.49dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="17dp"
             android:background="@null"
@@ -80,6 +60,17 @@
             app:layout_constraintEnd_toStartOf="@+id/ic_search"
             app:layout_constraintStart_toEndOf="@+id/view2"
             app:layout_constraintTop_toTopOf="@+id/iv_search_box" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_search_box"
+            app:layout_constraintStart_toStartOf="@+id/iv_search_box"
+            app:layout_constraintTop_toBottomOf="@+id/iv_search_box"
+            android:visibility="gone"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
