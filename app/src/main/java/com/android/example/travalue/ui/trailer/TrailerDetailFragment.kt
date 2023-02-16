@@ -53,6 +53,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
             val clip = ClipData.newPlainText("url","https://${resources.getString(R.string.DEEP_LINK_DOMAIN)}/${args.postId}")
             clipboard.setPrimaryClip(clip)
             Toast.makeText(context,"URL이 복사되었습니다",Toast.LENGTH_SHORT).show()
+            binding.btnClipLick.setBackgroundResource(R.drawable.ic_link_02)
         }
     }
     private fun initMapView(){
