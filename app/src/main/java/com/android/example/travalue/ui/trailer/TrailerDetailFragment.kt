@@ -1,15 +1,21 @@
 package com.android.example.travalue.ui.trailer
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.graphics.Color
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.UiThread
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentTrailerDetailBinding
+import com.android.example.travalue.ui.mypage.ShareTravelDetailFragmentArgs
 import com.android.example.travalue.util.ScheduleAdapter
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapFragment
@@ -19,6 +25,8 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 
 class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layout.fragment_trailer_detail){
+    val args: TrailerDetailFragmentArgs by navArgs()
+
     override fun initStartView() {
         super.initStartView()
        // (activity as MainActivity).setToolbarTitle("trailer")
@@ -27,6 +35,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         initMapView()
         animationScheduleView()
         clickFavorite()
+        clickClip()
     }
 
     override fun initDataBinding() {
@@ -38,6 +47,14 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         super.initAfterBinding()
     }
 
+    private fun clickClip(){
+        binding.btnClipLick.setOnClickListener {
+            val clipboard = requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("url","https://${resources.getString(R.string.DEEP_LINK_DOMAIN)}/${args.postId}")
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(context,"URL이 복사되었습니다",Toast.LENGTH_SHORT).show()
+        }
+    }
     private fun initMapView(){
         val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?

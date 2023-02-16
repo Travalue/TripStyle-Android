@@ -90,6 +90,7 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
                     position <= 0 -> {
                         alpha = (MIN_ALPHA + (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA)))
                         translationY = pageHeight * -position
+                        Log.d("offset -position 0",(pageHeight * -position).toString())
                         scaleX = scaleFactor
                         scaleY = scaleFactor
                     }
@@ -100,6 +101,7 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
 
                         val viewPager = page.parent.parent as ViewPager2
                         val offset = position * -(2*offsetPy+pageMarginPy)
+                        Log.d("offset -position 1",offset.toString())
                         if(viewPager.orientation == ViewPager2.ORIENTATION_VERTICAL){
                             page.translationY = offset
                         }else{
