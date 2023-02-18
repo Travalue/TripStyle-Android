@@ -2,24 +2,23 @@ package com.android.example.travalue.ui.trailer
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.graphics.Color
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.UiThread
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentTrailerDetailBinding
-import com.android.example.travalue.ui.mypage.ShareTravelDetailFragmentArgs
 import com.android.example.travalue.util.ScheduleAdapter
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
@@ -63,9 +62,30 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
             ?: MapFragment.newInstance().also {
                 fm.beginTransaction().add(R.id.map_fragment,it).commit()
             }
-
+        binding.ivMapTransparent.setOnTouchListener { view, motionEvent ->
+            val action = motionEvent.action
+            when (action) {
+                MotionEvent.ACTION_DOWN -> {
+                    binding.scrollView.requestDisallowInterceptTouchEvent(true)
+                    false
+                }
+                MotionEvent.ACTION_UP -> {
+                    binding.scrollView.requestDisallowInterceptTouchEvent(false)
+                    true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    binding.scrollView.requestDisallowInterceptTouchEvent(true)
+                    false
+                }
+                else -> true
+            }
+        }
 
         val onMapReadyCallback = OnMapReadyCallback {
+            //ui zoom in/out 버튼 없애기
+            it.uiSettings.isZoomControlEnabled = false
+            it.uiSettings.isScaleBarEnabled = false
+
             val markers = mutableListOf<Marker>()
             val polyline = PolylineOverlay()
 
@@ -76,7 +96,6 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 LatLng(37.568307444233, 126.97675211537),
             )
 
-            //TODO : change marker hard code data
             polyline.setPattern(10,5)
             polyline.coords = mapList
 
@@ -101,6 +120,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         }
 
         mapFragment.getMapAsync(onMapReadyCallback)
+
     }
     private fun animationScheduleView(){
         binding.layoutScheduleTitle.setOnClickListener {
