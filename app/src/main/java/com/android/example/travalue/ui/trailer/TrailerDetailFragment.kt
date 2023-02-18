@@ -23,6 +23,7 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.overlay.PolylineOverlay
 
 class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layout.fragment_trailer_detail){
     val args: TrailerDetailFragmentArgs by navArgs()
@@ -66,6 +67,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
 
         val onMapReadyCallback = OnMapReadyCallback {
             val markers = mutableListOf<Marker>()
+            val polyline = PolylineOverlay()
 
             //TODO : change marker hard code data
             val mapList = arrayListOf<LatLng>(
@@ -73,6 +75,10 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 LatLng(37.5666805, 126.9784147),
                 LatLng(37.568307444233, 126.97675211537),
             )
+
+            //TODO : change marker hard code data
+            polyline.setPattern(10,5)
+            polyline.coords = mapList
 
             for(i in 0 until mapList.size){
                 val markerTextview = TextView(context)
@@ -88,6 +94,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 markers.add(marker)
             }
 
+            polyline.map = it
             markers.forEach { marker ->
                 marker.map = it
             }
