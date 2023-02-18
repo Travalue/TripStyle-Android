@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Travalue</string>
     <string name="MAP_API_CLIENT_ID">eqdcuc9eti</string>
+    <string name="DEEP_LINK_DOMAIN">guide.trailer.com</string>
 
     <string-array name="Category">
         <item>식도락</item>

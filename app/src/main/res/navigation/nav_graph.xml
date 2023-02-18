@@ -82,7 +82,16 @@
     <fragment
         android:id="@+id/trailerDetailFragment"
         android:name="com.android.example.travalue.ui.trailer.TrailerDetailFragment"
-        android:label="trailer"/>
+        android:label="trailer">
+
+        <deepLink app:uri="https://guide.trailer.com/{postId}"
+            app:action="android.intent.action.MY_ACTION"
+            android:autoVerify="true"/>
+        <argument
+            android:name="postId"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.android.example.travalue.ui.mypage.EditProfileFragment"
