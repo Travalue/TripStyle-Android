@@ -102,7 +102,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
             for(i in 0 until mapList.size){
                 val markerTextview = TextView(context)
                 markerTextview.textSize = 9f
-                markerTextview.gravity = Gravity.CENTER_HORIZONTAL
+                markerTextview.gravity = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
                 markerTextview.setBackgroundResource(R.drawable.ic_baseline_circle_black_24)
                 markerTextview.setTextColor(Color.WHITE)
                 markerTextview.text = (i+1).toString()
