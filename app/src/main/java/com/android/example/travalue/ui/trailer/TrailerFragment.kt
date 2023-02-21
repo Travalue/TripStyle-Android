@@ -2,8 +2,10 @@ package com.android.example.travalue.ui.trailer
 
 import android.util.Log
 import android.view.View
+import androidx.core.view.get
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
@@ -75,6 +77,7 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
         val screenHeight = resources.displayMetrics.heightPixels //폰의 높이를 가져옴
         val pageMarginPy = resources.getDimensionPixelOffset(R.dimen.pageMargin)
         val offsetPy = resources.getDimensionPixelOffset(R.dimen.offset)
+        val itemHeight = resources.getDimensionPixelOffset(R.dimen.pageHeight)
         val pageHeight = screenHeight - 2*(offsetPy+pageMarginPy) - offsetPy
 
         override fun transformPage(page: View, position: Float) {
@@ -98,13 +101,8 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
                         scaleX = 1f
                         scaleY = scaleFactor
 
-                        val viewPager = page.parent.parent as ViewPager2
-                        val offset = position * -(2*offsetPy+pageMarginPy)
-                        if(viewPager.orientation == ViewPager2.ORIENTATION_VERTICAL){
-                            page.translationY = offset
-                        }else{
-                            page.translationX = offset
-                        }
+                        val offset = binding.tpTrailerCard.height - itemHeight - (2*offsetPy)
+                        page.translationY = offset * -position
                     }
                     else -> {
                         alpha = 0f

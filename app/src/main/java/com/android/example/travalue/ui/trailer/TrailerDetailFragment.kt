@@ -1,10 +1,16 @@
 package com.android.example.travalue.ui.trailer
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.graphics.Color
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
-import androidx.annotation.UiThread
+import android.widget.Toast
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
@@ -13,12 +19,14 @@ import com.android.example.travalue.databinding.FragmentTrailerDetailBinding
 import com.android.example.travalue.util.ScheduleAdapter
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.overlay.PolylineOverlay
 
 class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layout.fragment_trailer_detail){
+    val args: TrailerDetailFragmentArgs by navArgs()
+
     override fun initStartView() {
         super.initStartView()
        // (activity as MainActivity).setToolbarTitle("trailer")
@@ -27,6 +35,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         initMapView()
         animationScheduleView()
         clickFavorite()
+        clickClip()
     }
 
     override fun initDataBinding() {
@@ -38,16 +47,47 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         super.initAfterBinding()
     }
 
+    private fun clickClip(){
+        binding.btnClipLick.setOnClickListener {
+            val clipboard = requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("url","https://${resources.getString(R.string.DEEP_LINK_DOMAIN)}/${args.postId}")
+            clipboard.setPrimaryClip(clip)
+            Toast.makeText(context,"URL이 복사되었습니다",Toast.LENGTH_SHORT).show()
+            binding.btnClipLick.setBackgroundResource(R.drawable.ic_link_02)
+        }
+    }
     private fun initMapView(){
         val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?
             ?: MapFragment.newInstance().also {
                 fm.beginTransaction().add(R.id.map_fragment,it).commit()
             }
-
+        binding.ivMapTransparent.setOnTouchListener { view, motionEvent ->
+            val action = motionEvent.action
+            when (action) {
+                MotionEvent.ACTION_DOWN -> {
+                    binding.scrollView.requestDisallowInterceptTouchEvent(true)
+                    false
+                }
+                MotionEvent.ACTION_UP -> {
+                    binding.scrollView.requestDisallowInterceptTouchEvent(false)
+                    true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    binding.scrollView.requestDisallowInterceptTouchEvent(true)
+                    false
+                }
+                else -> true
+            }
+        }
 
         val onMapReadyCallback = OnMapReadyCallback {
+            //ui zoom in/out 버튼 없애기
+            it.uiSettings.isZoomControlEnabled = false
+            it.uiSettings.isScaleBarEnabled = false
+
             val markers = mutableListOf<Marker>()
+            val polyline = PolylineOverlay()
 
             //TODO : change marker hard code data
             val mapList = arrayListOf<LatLng>(
@@ -56,10 +96,13 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 LatLng(37.568307444233, 126.97675211537),
             )
 
+            polyline.setPattern(10,5)
+            polyline.coords = mapList
+
             for(i in 0 until mapList.size){
                 val markerTextview = TextView(context)
                 markerTextview.textSize = 9f
-                markerTextview.gravity = Gravity.CENTER_HORIZONTAL
+                markerTextview.gravity = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
                 markerTextview.setBackgroundResource(R.drawable.ic_baseline_circle_black_24)
                 markerTextview.setTextColor(Color.WHITE)
                 markerTextview.text = (i+1).toString()
@@ -70,12 +113,14 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 markers.add(marker)
             }
 
+            polyline.map = it
             markers.forEach { marker ->
                 marker.map = it
             }
         }
 
         mapFragment.getMapAsync(onMapReadyCallback)
+
     }
     private fun animationScheduleView(){
         binding.layoutScheduleTitle.setOnClickListener {
