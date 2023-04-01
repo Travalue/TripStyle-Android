@@ -10,8 +10,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
@@ -41,12 +43,28 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
     override fun initDataBinding() {
         super.initDataBinding()
         initScheduleView()
+        initData()
     }
 
     override fun initAfterBinding() {
         super.initAfterBinding()
     }
 
+    private fun initData(){
+        val list = arrayListOf<TrailerDetail>()
+        list.add(TrailerDetail("dfksljdfksjdkf",R.drawable.card_img_example))
+        list.add(TrailerDetail("dfksljdfksjdkf",R.drawable.card_img_example))
+        list.add(TrailerDetail("dfksljdfksjdkf",R.drawable.card_img_example))
+        list.add(TrailerDetail("dfksljdfksjdkf",R.drawable.card_img_example))
+
+        val adapter = TrailerDetailRecyclerViewAdapter(list)
+        binding.rvScheduleDetail.adapter = adapter // 어댑터 생성
+
+        with(binding.rvScheduleDetail){
+            clipToPadding = false
+            clipChildren = false
+        }
+    }
     private fun clickClip(){
         binding.btnClipLick.setOnClickListener {
             val clipboard = requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
