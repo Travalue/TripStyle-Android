@@ -44,8 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="460dp"
             android:background="@drawable/card_img_example"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="42dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editTextTitle"
@@ -56,7 +56,8 @@
             android:inputType="textPersonName"
             android:layout_marginTop="360dp"
             android:layout_marginStart="16dp"
-            android:text="제목을 입력해주세요"
+            android:hint="제목을 입력해주세요"
+            android:textColorHint="@color/white"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +70,8 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:layout_marginTop="10dp"
-            android:text="부제목을 입력해주세요"
+            android:hint="부제목을 입력해주세요"
+            android:textColorHint="@color/white"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/editTextTitle"
             app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />

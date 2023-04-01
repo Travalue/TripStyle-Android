@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,6 +17,7 @@ import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentTravellerWriteBinding
+import com.bumptech.glide.Glide
 
 class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.layout.fragment_traveller_write) {
 
@@ -31,13 +31,14 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         const val PARAM_KEY_IMAGE = "image"
     }
 
-    private val imageResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+    private val imageResultMultiple = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result ->
         if(result.resultCode == Activity.RESULT_OK){
             result?.data?.let { it ->
                 if (it.clipData != null) {   // 사진 여러장 선택
                     val count = it.clipData!!.itemCount
                     if (count > PHOTO_MAX_LENGTH) {
+                        // 아래 toast를 다른 표시 방법으로 변경할 것
                         Toast.makeText(context, "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_SHORT)
                             .show()
                         return@registerForActivityResult
@@ -52,9 +53,35 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                     list.add(imageUri)
                 }
 
-                refreshData() // viewpager 새로고침
-                hideButton() // 갤러리에서 사진을 한번이라도 불러오고 나면 viewpager 위치에 있는 button과 textview 숨기기
+                refreshViewPager() // viewpager 새로고침
+                hideButton() // 갤러리에서 사진을 한번이라도 불러오고 나면 viewpager 위치에 있는 imageview(버튼 이미지)와 textview 숨기기
 
+
+            }
+        }
+    }
+
+    private val imageResultSingle = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result ->
+        if(result.resultCode == Activity.RESULT_OK){
+            result?.data?.let { it ->
+                if (it.clipData != null) {   // 사진 여러장 선택
+                    val count = it.clipData!!.itemCount
+                    if (count > 1) {
+                        // 아래 toast를 다른 표시 방법으로 변경할 것
+                        Toast.makeText(context, "사진은 1장만 선택 가능합니다.", Toast.LENGTH_SHORT)
+                            .show()
+                        return@registerForActivityResult
+                    }
+
+                    for (i in 0 until count) {
+                        val imageUri = getRealPathFromURI(it.clipData!!.getItemAt(i).uri)
+                        refreshBackgroundImage(imageUri) // 배경이미지 새로고침
+                    }
+                } else {    // 사진 1장 선택
+                    val imageUri = getRealPathFromURI(it.data!!)
+                    refreshBackgroundImage(imageUri) // 배경이미지 새로고침
+                }
 
             }
         }
@@ -63,8 +90,6 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     override fun initStartView() {
         super.initStartView()
         (activity as MainActivity).setToolbarTitle("글 작성하기")
-
-//        val adapter = ViewPagerAdapter(list,context)
 
         binding.bodyImage.adapter = adapter
         binding.bodyImage.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -88,31 +113,16 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
         }
 
+        binding.buttonBackgroundPhoto.setOnClickListener {
+            // 갤러리에서 배경사진 1장 선택하여 배경사진칸에 넣음
+            selectGallery(false)
+        }
+
         binding.buttonPhotoUnselected.setOnClickListener {
-            list.clear()
-
-            val readPermission = ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
-            val writePermission = ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
-            if(readPermission == PackageManager.PERMISSION_DENIED || writePermission == PackageManager.PERMISSION_DENIED){
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ),
-                    REQ_GALLERY
-                )
-            }else{
-                var intent = Intent(Intent.ACTION_PICK)
-                intent.type = "image/*"
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true)
-                imageResult.launch(intent)
-
-            }
+            // 갤러리에서 사진 여러장 선택하여 viewPager에 넣음
+            selectGallery(true)
         }
 
-        binding.tvPhotoUnselected1.setOnClickListener {
-            refreshData()
-        }
     }
 
     override fun initAfterBinding() {
@@ -134,7 +144,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         return result
     }
 
-    fun refreshData(){
+    fun refreshViewPager(){
         binding.bodyImage.adapter?.notifyDataSetChanged()
     }
 
@@ -144,9 +154,41 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         binding.tvPhotoUnselected2.visibility = View.INVISIBLE
     }
 
-//    private fun setAdapater(list:ArrayList<String>){
-//        val adapter = context?.let { ViewPagerAdapter(list, it) }
-//        binding.bodyImage.adapter = adapter
-//        binding.bodyImage.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-//    }
+    fun refreshBackgroundImage(imageUri: String){
+        context?.let {
+            Glide.with(it).load(imageUri)
+                .centerCrop()
+                .into(binding.ivBackground)
+        }
+    }
+
+
+    fun selectGallery(isMultiple: Boolean){
+        list.clear()
+
+        val readPermission = ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+        val writePermission = ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        if(readPermission == PackageManager.PERMISSION_DENIED || writePermission == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ),
+                REQ_GALLERY
+            )
+        }else{
+            if(isMultiple == true){ // 사진 여러장 선택
+                var intent = Intent(Intent.ACTION_PICK)
+                intent.type = "image/*"
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true)
+                imageResultMultiple.launch(intent)
+            }
+            else{ // 사진 1장만 선택
+                var intent = Intent(Intent.ACTION_PICK)
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*")
+                imageResultSingle.launch(intent)
+            }
+        }
+    }
+
 }
