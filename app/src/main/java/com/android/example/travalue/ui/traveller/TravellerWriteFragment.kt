@@ -7,7 +7,9 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -91,8 +93,8 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         super.initStartView()
         (activity as MainActivity).setToolbarTitle("글 작성하기")
 
-        binding.bodyImage.adapter = adapter
-        binding.bodyImage.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.bodyImageViewPager.adapter = adapter
+        binding.bodyImageViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
     }
 
     override fun initDataBinding() {
@@ -113,14 +115,28 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
         }
 
-        binding.buttonBackgroundPhoto.setOnClickListener {
+        binding.buttonBackgroundImage.setOnClickListener {
             // 갤러리에서 배경사진 1장 선택하여 배경사진칸에 넣음
             selectGallery(false)
         }
 
-        binding.buttonPhotoUnselected.setOnClickListener {
+        binding.buttonBodyImageUnselected.setOnClickListener {
             // 갤러리에서 사진 여러장 선택하여 viewPager에 넣음
             selectGallery(true)
+        }
+
+        binding.buttonBodyAdd.setOnClickListener {
+            val addView = LayoutInflater.from(context).inflate(R.layout.fragment_traveller_sub_editor,null,false)
+            val newViewPager = addView.findViewById<ViewPager2>(R.id.bodyImageViewPager)
+            newViewPager.adapter = adapter
+            newViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+            val buttonBodyImageUnselected = addView.findViewById<ImageButton>(R.id.buttonBodyImageUnselected)
+            buttonBodyImageUnselected.setOnClickListener {
+
+            }
+
+            binding.container.addView(addView)
         }
 
     }
@@ -145,7 +161,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     }
 
     fun refreshViewPager(){
-        binding.bodyImage.adapter?.notifyDataSetChanged()
+        binding.bodyImageViewPager.adapter?.notifyDataSetChanged()
     }
 
     fun hideButton(){

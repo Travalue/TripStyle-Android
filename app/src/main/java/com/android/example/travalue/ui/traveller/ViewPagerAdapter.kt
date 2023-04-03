@@ -12,9 +12,18 @@ import com.bumptech.glide.Glide
 class ViewPagerAdapter(var list: ArrayList<String>,val context: Context?) :
     RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PagerViewHolder((parent))
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PagerViewHolder((parent))
 
-    override fun getItemCount(): Int = list.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):PagerViewHolder{
+        return PagerViewHolder((parent))
+    }
+
+    override fun getItemCount(): Int{
+        val tempList = ArrayList<String>()
+        tempList.addAll(list)
+
+        return tempList.size
+    }
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         // glide로 처리
