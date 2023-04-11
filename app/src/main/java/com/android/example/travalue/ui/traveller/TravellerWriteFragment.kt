@@ -25,7 +25,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
     private var list = ArrayList<String>() // post image 넘어오는 array
 
-    private val adapter = ViewPagerAdapter(list,context)
+//    private val adapter = ViewPagerAdapter(list,context)
 
     companion object{
         const val PHOTO_MAX_LENGTH = 10
@@ -93,6 +93,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         super.initStartView()
         (activity as MainActivity).setToolbarTitle("글 작성하기")
 
+        val adapter = ViewPagerAdapter(list,context)
         binding.bodyImageViewPager.adapter = adapter
         binding.bodyImageViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
     }
@@ -126,14 +127,19 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         }
 
         binding.buttonBodyAdd.setOnClickListener {
+            list.clear()
             val addView = LayoutInflater.from(context).inflate(R.layout.fragment_traveller_sub_editor,null,false)
             val newViewPager = addView.findViewById<ViewPager2>(R.id.bodyImageViewPager)
-            newViewPager.adapter = adapter
+            //어댑터 이렇게 붙였더니 맨위에 본문 사진 넣으면 밑에 컨테이너에 딸린 애들도 사진이 같이 들어감
+//            newViewPager.adapter = adapter
+            var newList = ArrayList<String>() // post image 넘어오는 array
+            val newAdapter = ViewPagerAdapter(newList,context)
+            newViewPager.adapter = newAdapter
             newViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
             val buttonBodyImageUnselected = addView.findViewById<ImageButton>(R.id.buttonBodyImageUnselected)
             buttonBodyImageUnselected.setOnClickListener {
-
+                //사진넣는부분 작성
             }
 
             binding.container.addView(addView)
