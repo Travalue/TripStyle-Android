@@ -12,8 +12,6 @@ import com.bumptech.glide.Glide
 class ViewPagerAdapter(var list: ArrayList<String>,val context: Context?) :
     RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
 
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PagerViewHolder((parent))
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):PagerViewHolder{
         return PagerViewHolder((parent))
     }
@@ -26,10 +24,7 @@ class ViewPagerAdapter(var list: ArrayList<String>,val context: Context?) :
     }
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        // glide로 처리
-//        holder.postImage.setImageResource(list[position])
         holder.setContents(position)
-        Log.e("","onBindViewHolder arrived, current pos: ${position}")
     }
 
     inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder

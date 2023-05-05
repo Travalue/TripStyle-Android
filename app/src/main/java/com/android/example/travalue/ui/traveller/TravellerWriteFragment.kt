@@ -18,19 +18,30 @@ import androidx.viewpager2.widget.ViewPager2
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
+import com.android.example.travalue.databinding.FragmentTravellerSubEditorBinding
 import com.android.example.travalue.databinding.FragmentTravellerWriteBinding
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.layout.fragment_traveller_write) {
 
     private var list = ArrayList<String>() // post image 넘어오는 array
+
+    private lateinit var binding2: FragmentTravellerSubEditorBinding
 
 //    private val adapter = ViewPagerAdapter(list,context)
 
     companion object{
         const val PHOTO_MAX_LENGTH = 10
         const val REQ_GALLERY = 1
-        const val PARAM_KEY_IMAGE = "image"
+
+        var flag = 0
+        // 본문에 사진 추가할 때
+        // 0 -> outer view (최상단 본문 사진)
+        // 1 -> inner view (그 밑 본문 사진)
     }
 
     private val imageResultMultiple = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -57,7 +68,6 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
                 refreshViewPager() // viewpager 새로고침
                 hideButton() // 갤러리에서 사진을 한번이라도 불러오고 나면 viewpager 위치에 있는 imageview(버튼 이미지)와 textview 숨기기
-
 
             }
         }
@@ -101,14 +111,6 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     override fun initDataBinding() {
         super.initDataBinding()
 
-        // category 이동
-//        binding.hambugerbar.setOnClickListener {
-//            navController.navigate(R.id.action_travellerFragment_to_categoryDialogFragment)
-
-//            val action = TravellerFragmentDirections.actionTravellerFragmentToCategoryDialogFragment(binding.tvTraveller.text.toString())
-//            navController.navigate(action)
-//        }
-
         binding.tvAddSchedule.setOnClickListener {
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
         }
@@ -123,26 +125,30 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
         binding.buttonBodyImageUnselected.setOnClickListener {
             // 갤러리에서 사진 여러장 선택하여 viewPager에 넣음
+            flag = 0
             selectGallery(true)
         }
 
         binding.buttonBodyAdd.setOnClickListener {
             list.clear()
-            val addView = LayoutInflater.from(context).inflate(R.layout.fragment_traveller_sub_editor,null,false)
-            val newViewPager = addView.findViewById<ViewPager2>(R.id.bodyImageViewPager)
-            //어댑터 이렇게 붙였더니 맨위에 본문 사진 넣으면 밑에 컨테이너에 딸린 애들도 사진이 같이 들어감
-//            newViewPager.adapter = adapter
-            var newList = ArrayList<String>() // post image 넘어오는 array
-            val newAdapter = ViewPagerAdapter(newList,context)
-            newViewPager.adapter = newAdapter
-            newViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//            val addView = LayoutInflater.from(context).inflate(R.layout.fragment_traveller_sub_editor,null,false)
+//            val newViewPager = addView.findViewById<ViewPager2>(R.id.bodyImageViewPager)
 
-            val buttonBodyImageUnselected = addView.findViewById<ImageButton>(R.id.buttonBodyImageUnselected)
-            buttonBodyImageUnselected.setOnClickListener {
-                //사진넣는부분 작성
+            //binding으로 다시, 얘가 위에 addView 대체
+            binding2 = FragmentTravellerSubEditorBinding.inflate(LayoutInflater.from(context))
+
+
+            val newAdapter = ViewPagerAdapter(list,context)
+            binding2.bodyImageViewPager.adapter = newAdapter
+            binding2.bodyImageViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+            binding2.buttonBodyImageUnselected.setOnClickListener {
+                flag = 1
+                selectGallery(true)
             }
 
-            binding.container.addView(addView)
+//            binding.container.addView(addView)
+            binding.container.addView(binding2.root)
         }
 
     }
@@ -167,13 +173,23 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     }
 
     fun refreshViewPager(){
-        binding.bodyImageViewPager.adapter?.notifyDataSetChanged()
+        if(flag == 0)
+            binding.bodyImageViewPager.adapter?.notifyDataSetChanged()
+        else
+            binding2.bodyImageViewPager.adapter?.notifyDataSetChanged()
     }
 
     fun hideButton(){
-        binding.ivPhotoUnselected.visibility = View.INVISIBLE
-        binding.tvPhotoUnselected1.visibility = View.INVISIBLE
-        binding.tvPhotoUnselected2.visibility = View.INVISIBLE
+        if(flag == 0) {
+            binding.ivPhotoUnselected.visibility = View.INVISIBLE
+            binding.tvPhotoUnselected1.visibility = View.INVISIBLE
+            binding.tvPhotoUnselected2.visibility = View.INVISIBLE
+        }
+        else{
+            binding2.ivPhotoUnselected.visibility = View.INVISIBLE
+            binding2.tvPhotoUnselected1.visibility = View.INVISIBLE
+            binding2.tvPhotoUnselected2.visibility = View.INVISIBLE
+        }
     }
 
     fun refreshBackgroundImage(imageUri: String){
