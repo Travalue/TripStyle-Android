@@ -22,7 +22,6 @@ class TravellerSearchRecyclerViewAdapter2(private val viewModel: TravellerSearch
     private lateinit var onClickListener: OnItemClickListener
 
     fun setOnItemClickListener(listener: OnItemClickListener){
-        Log.e("t","setOnItemClickListener called")
         this.onClickListener = listener
     }
 
@@ -35,7 +34,6 @@ class TravellerSearchRecyclerViewAdapter2(private val viewModel: TravellerSearch
     }
 
     override fun onBindViewHolder(holder: RecyclerViewViewHolder, position: Int) {
-        Log.e("t","onBindViewHolder call count: ${position}")
         holder.setContents(position)
     }
 
