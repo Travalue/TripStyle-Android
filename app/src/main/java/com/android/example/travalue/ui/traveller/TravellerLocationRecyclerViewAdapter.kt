@@ -49,10 +49,12 @@ class TravellerLocationRecyclerViewAdapter(val context: Context?):
         private val trailerLocationAddButton = itemView.findViewById<Button>(R.id.btn_add)
 
         fun setContents(pos: Int){
-            trailerLocationName.text = list[pos].title.replace(Regex("<\\/?(?!b\\b)\\w+\\b[^>]*>"), "")
+            var item = list[pos]
+            item.title = list[pos].title.replace(Regex("<\\/?(b|B)>"), "")
+            trailerLocationName.text = item.title
             trailerLocationAddButton.setOnClickListener {
                 var tm128 = Tm128(list[pos].mapx.toDouble(),list[pos].mapy.toDouble())
-                var item = list[pos]
+
                 item.mapx = tm128.toLatLng().longitude.toString()
                 item.mapy = tm128.toLatLng().latitude.toString()
 

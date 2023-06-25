@@ -56,10 +56,17 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
         //recyclerview
         if(!binding.rvSelected.isVisible){
             binding.rvSelected.visibility = View.VISIBLE
-            selectAdapter = TravellerLocationSelectedRecyclerViewAdapter(context)
+            selectAdapter = TravellerLocationSelectedRecyclerViewAdapter(context,object :onRemovedLocationListener{
+                override fun removeLocation(id: Int) {
+                    selectedList.removeAt(id)
+                    selectAdapter.notifyDataSetChanged()
+                    if(selectedList.size == 0) binding.rvSelected.visibility = View.GONE
+                }
+            })
             binding.rvSelected.adapter = selectAdapter
             binding.rvSelected.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
+
         selectedList.add(itemData)
         selectAdapter.setData(selectedList)
         selectAdapter.notifyDataSetChanged()

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.example.travalue.R
 import com.android.example.travalue.network.res.ItemData
 
-class TravellerLocationSelectedRecyclerViewAdapter(val context: Context?):
+class TravellerLocationSelectedRecyclerViewAdapter(val context: Context?,val listener: onRemovedLocationListener):
     RecyclerView.Adapter<TravellerLocationSelectedRecyclerViewAdapter.RecyclerViewViewHolder>() {
 
     private var list = arrayListOf<ItemData>()
@@ -42,9 +42,12 @@ class TravellerLocationSelectedRecyclerViewAdapter(val context: Context?):
         fun setContents(pos: Int){
             selectedName.text = list[pos].title
             deleteButton.setOnClickListener {
-                list.removeAt(pos)
-                notifyDataSetChanged()
+                listener.removeLocation(pos)
             }
         }
     }
+}
+
+interface onRemovedLocationListener{
+    fun removeLocation(id:Int)
 }
