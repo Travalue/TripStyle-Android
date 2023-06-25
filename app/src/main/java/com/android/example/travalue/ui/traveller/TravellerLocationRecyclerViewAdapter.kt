@@ -1,18 +1,31 @@
 package com.android.example.travalue.ui.traveller
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.NavDirections
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.travalue.R
+import com.android.example.travalue.network.res.ItemData
 
-// TOOD : 추 후에 item type 변경
-class TravellerLocationRecyclerViewAdapter(val context: Context?,val list : List<String>):
+class TravellerLocationRecyclerViewAdapter(val context: Context?):
     RecyclerView.Adapter<TravellerLocationRecyclerViewAdapter.RecyclerViewViewHolder>() {
+
+    private var list = arrayListOf<ItemData>() // TOOD : 추 후에 item type 변경
+    private lateinit var listener : onSelectedLocationListener
+
+    fun setData(data: ArrayList<ItemData>){
+        this.list = data
+    }
+
+    fun setListener(listener: onSelectedLocationListener){
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.location_item_view,
@@ -34,10 +47,14 @@ class TravellerLocationRecyclerViewAdapter(val context: Context?,val list : List
         private val trailerLocationAddButton = itemView.findViewById<Button>(R.id.btn_add)
 
         fun setContents(pos: Int){
-            trailerLocationName.text = list[pos]
+            trailerLocationName.text = list[pos].title.replace(Regex("<\\/?(?!b\\b)\\w+\\b[^>]*>"), "")
             trailerLocationAddButton.setOnClickListener {
-                print("$pos 클릭 확인")
+
             }
         }
     }
+}
+
+interface onSelectedLocationListener {
+    fun selectLocation(id:Int)
 }
