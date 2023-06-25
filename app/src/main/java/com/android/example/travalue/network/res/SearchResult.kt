@@ -17,5 +17,5 @@ data class ItemData(
     var mapy: String,
     val roadAddress: String,
     val telephone: String,
-    val title: String
+    var title: String
 )

@@ -17,6 +17,8 @@ interface MapService {
     )
     @GET("/v1/search/local")
     fun getMapSerachResult(
-        @Query("query") locationName:String) : Call<SearchResult>
+        @Query("query") locationName:String,
+        @Query("display") count:String ="5"
+    ) : Call<SearchResult>
 
 }
