@@ -1,12 +1,12 @@
 package com.android.example.travalue.ui.traveller
 
 import android.util.Log
-import androidx.recyclerview.widget.GridLayoutManager
+import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
 import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentTrailerSearchBinding
 import com.android.example.travalue.databinding.FragmentTravellerLocationBinding
 import com.android.example.travalue.network.MapClient
 import com.android.example.travalue.network.MapService
@@ -18,8 +18,10 @@ import retrofit2.Response
 
 class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>(R.layout.fragment_traveller_location) {
 
-    var result = emptyList<String>()
     lateinit var adapter : TravellerLocationRecyclerViewAdapter
+    lateinit var selectAdapter : TravellerLocationSelectedRecyclerViewAdapter
+
+    var selectedList = arrayListOf<ItemData>()
 
     override fun initStartView() {
         super.initStartView()
@@ -32,9 +34,8 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
         //장소 리스트 adapter
         adapter = TravellerLocationRecyclerViewAdapter(context)
         adapter.setListener(object :onSelectedLocationListener{
-            override fun selectLocation(id: Int) {
-                // 선택한 주소의 x,y 값 api call
-
+            override fun selectLocation(itemData: ItemData) {
+                addRecyclerviewData(itemData)
             }
         })
         binding.rvLocationList.adapter = adapter
@@ -43,23 +44,39 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
 
     override fun initAfterBinding() {
         super.initAfterBinding()
-        getLocationList("제주 국제공항")
+
+        binding.icSearch.setOnClickListener {
+            val query = binding.editTextPlaceName.text.toString()
+            getLocationList(query)
+        }
+
     }
 
+    fun addRecyclerviewData(itemData: ItemData){
+        //recyclerview
+        if(!binding.rvSelected.isVisible){
+            binding.rvSelected.visibility = View.VISIBLE
+            selectAdapter = TravellerLocationSelectedRecyclerViewAdapter(context)
+            binding.rvSelected.adapter = selectAdapter
+            binding.rvSelected.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
+        selectedList.add(itemData)
+        selectAdapter.setData(selectedList)
+        selectAdapter.notifyDataSetChanged()
+
+    }
     fun getLocationList(query : String){
         val service = MapClient.locationRetrofit?.create(MapService::class.java)
-            service?.getMapSerachResult(query)?.enqueue(object : Callback<SearchResult>{
-                override fun onResponse(call: Call<SearchResult>, response: Response<SearchResult>) {
-                    val items = response.body()?.items
-                    adapter.setData(items as ArrayList<ItemData>)
-                    adapter.notifyDataSetChanged()
-                }
+        service?.getMapSerachResult(query)?.enqueue(object : Callback<SearchResult>{
+            override fun onResponse(call: Call<SearchResult>, response: Response<SearchResult>) {
+                val items = response.body()?.items
+                adapter.setData(items as ArrayList<ItemData>)
+                adapter.notifyDataSetChanged()
+            }
 
-                override fun onFailure(call: Call<SearchResult>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-            })
-
-
+            override fun onFailure(call: Call<SearchResult>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }

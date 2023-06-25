@@ -12,6 +12,8 @@ import androidx.navigation.NavDirections
 import androidx.recyclerview.widget.RecyclerView
 import com.android.example.travalue.R
 import com.android.example.travalue.network.res.ItemData
+import com.naver.maps.geometry.Tm128
+import com.naver.maps.map.NaverMap
 
 class TravellerLocationRecyclerViewAdapter(val context: Context?):
     RecyclerView.Adapter<TravellerLocationRecyclerViewAdapter.RecyclerViewViewHolder>() {
@@ -49,12 +51,17 @@ class TravellerLocationRecyclerViewAdapter(val context: Context?):
         fun setContents(pos: Int){
             trailerLocationName.text = list[pos].title.replace(Regex("<\\/?(?!b\\b)\\w+\\b[^>]*>"), "")
             trailerLocationAddButton.setOnClickListener {
+                var tm128 = Tm128(list[pos].mapx.toDouble(),list[pos].mapy.toDouble())
+                var item = list[pos]
+                item.mapx = tm128.toLatLng().longitude.toString()
+                item.mapy = tm128.toLatLng().latitude.toString()
 
+                listener.selectLocation(item)
             }
         }
     }
 }
 
 interface onSelectedLocationListener {
-    fun selectLocation(id:Int)
+    fun selectLocation(item:ItemData)
 }
