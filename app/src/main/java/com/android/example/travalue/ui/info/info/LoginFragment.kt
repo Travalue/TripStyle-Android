@@ -1,27 +1,26 @@
 package com.android.example.travalue.ui.info.info
 
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
-import android.util.Base64
 import android.util.Log
-import androidx.browser.customtabs.CustomTabsClient.getPackageName
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
+import com.android.example.travalue.apiManager.LoginApiManager
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentLoginBinding
+import com.android.example.travalue.model.LoginRequestModel
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
-import java.security.MessageDigest
 
 import com.kakao.sdk.common.util.Utility
-import java.security.NoSuchAlgorithmException
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
+
+    val apiManager = LoginApiManager.getInstance(context)
+
 
     // 이메일 로그인 콜백
     private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -85,7 +84,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                                         // 로그인 성공 부분
                                         else if (token != null) {
                                             Log.i("mihye", "로그인 성공 ${token.accessToken}")
-                                            print("토큰 : " + token.accessToken)
                                         }
                                     }
                                 }
@@ -104,7 +102,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                                 Log.e("mihye", "사용자 정보 요청 실패 $error")
                             } else if (user != null) {
                                 Log.i("mihye", "사용자 정보 요청 성공 : $user")
-                                println("이메일 주소 : " + user.kakaoAccount?.email)
+                                UserApiClient.instance.me { user, error ->
+                                    if (error != null) {
+                                        Log.e("mihye", "사용자 정보 요청 실패 $error")
+                                    } else if (user != null) {
+                                        Log.i("mihye", "사용자 정보 요청 성공 : $user")
+                                        val loginRequestModel = LoginRequestModel(user.id, user.kakaoAccount?.email,
+                                            user.kakaoAccount?.profile?.profileImageUrl, "KAKAO" )
+                                        apiManager?.loginRequest(loginRequestModel)
+                                        Log.i("mihye", "사용자 정보 서버 전송 성공 : $loginRequestModel")
+                                    }
+                                }
+
                             }
                         }
                     }
@@ -133,17 +142,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                             // 로그인 성공 부분
                             else if (token != null) {
                                 Log.i("mihye", "로그인 성공 ${token.accessToken}")
-                                // 토큰 정보 보기
-                                UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
+                                UserApiClient.instance.me { user, error ->
                                     if (error != null) {
-                                        Log.e("mihye", "토큰 정보 보기 실패", error)
-                                    }
-                                    else if (tokenInfo != null) {
-                                        Log.i("mihye", "토큰 정보 보기 성공" +
-                                                "\n회원번호: ${tokenInfo.id}" +
-                                                "\n만료시간: ${tokenInfo.expiresIn} 초")
+                                        Log.e("mihye", "사용자 정보 요청 실패 $error")
+                                    } else if (user != null) {
+                                        Log.i("mihye", "사용자 정보 요청 성공 : $user")
+                                        val loginRequestModel = LoginRequestModel(user.id, user.kakaoAccount?.email,
+                                            user.kakaoAccount?.profile?.profileImageUrl, "KAKAO" )
+                                        apiManager?.loginRequest(loginRequestModel)
+                                        Log.i("mihye", "사용자 정보 서버 전송 성공 : $loginRequestModel")
                                     }
                                 }
+
                             }
                         }
                     }
