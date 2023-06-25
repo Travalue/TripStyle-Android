@@ -9,4 +9,7 @@
         <item>휴양</item>
         <item>패키지</item>
     </string-array>
+
+    <string name="kakao_native_key">kakao226b85a748a6910b4b76afd77b670ee0</string>
+    <string name="native_key">226b85a748a6910b4b76afd77b670ee0</string>
 </resources>
