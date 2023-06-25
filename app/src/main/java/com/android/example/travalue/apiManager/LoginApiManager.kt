@@ -30,7 +30,7 @@ class LoginApiManager {
 
     init {
         retrofit = Retrofit.Builder()
-            .baseUrl("http://13.125.137.16:8080")
+            .baseUrl("http://13.125.137.16:8080/v1/auth/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
