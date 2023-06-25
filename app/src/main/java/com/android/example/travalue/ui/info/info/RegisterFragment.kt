@@ -7,12 +7,16 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import com.android.example.travalue.MainActivity
 import com.android.example.travalue.R
+import com.android.example.travalue.apiManager.LoginApiManager
+import com.android.example.travalue.apiManager.UserApiManager
 import com.android.example.travalue.base.BaseFragment
 import com.android.example.travalue.databinding.FragmentRegisterBinding
 import java.util.regex.Pattern
 
 
 class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
+
+    val apiManager = UserApiManager.getInstance(context)
 
     override fun initStartView() {
         super.initStartView()
@@ -81,6 +85,10 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
 
         binding.btnRegister.setOnClickListener {
             navController.navigate(R.id.action_registerFragment_to_registerOkFragment)
+        }
+
+        binding.btnCheck.setOnClickListener {
+            apiManager?.checkNickname("string")
         }
     }
 }

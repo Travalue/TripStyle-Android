@@ -75,7 +75,6 @@ dependencies {
     //naver Map API
     implementation 'com.naver.maps:map-sdk:3.16.1'
 
-
     // Kakao Login
     implementation 'com.kakao.sdk:v2-user:2.14.0'
 
