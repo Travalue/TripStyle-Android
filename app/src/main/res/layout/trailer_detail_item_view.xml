@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_detail_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="16dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/card_img_example" />
+
+    <TextView
+        android:id="@+id/tv_detail_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="5dp"
+        android:text="안녕하세요 트레일러 에디터 젤라입니다! 저는 고등학교 졸업을 하자마자 친구들과 순천으로 여행을 갔었는데요, 다들 순천 옆 여수만 잘 아시고 순천에 대해서는 잘 모르시더라고요! 그래서 우리나라의 숨은 명소인 순천에 대해서 오늘 소개해드리고자 합니다 :)" />
+
+</LinearLayout>
