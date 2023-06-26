@@ -3,7 +3,7 @@ package com.tripstyle.tripstyle.ui.mypage
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.travalue.databinding.CategroyItemViewBinding
+import com.tripstyle.tripstyle.databinding.CategroyItemViewBinding
 
 class CategoryAdapter(var categoryList: ArrayList<Int>) :
     RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {

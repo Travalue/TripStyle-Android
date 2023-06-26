@@ -1,9 +1,9 @@
 package com.tripstyle.tripstyle.ui.mypage
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentLikeListBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentLikeListBinding
 import com.tripstyle.tripstyle.MainActivity
 
 class LikeListFragment : BaseFragment<FragmentLikeListBinding>(R.layout.fragment_like_list) {

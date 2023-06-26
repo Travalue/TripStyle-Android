@@ -2,8 +2,8 @@ package com.tripstyle.tripstyle.apiManager
 
 import android.content.Context
 import android.util.Log
-import com.android.example.travalue.model.NicknameRequestModel
-import com.android.example.travalue.model.NicknameResponseModel
+import com.tripstyle.tripstyle.model.NicknameRequestModel
+import com.tripstyle.tripstyle.model.NicknameResponseModel
 import com.tripstyle.tripstyle.api.UserService
 import retrofit2.Call
 import retrofit2.Callback

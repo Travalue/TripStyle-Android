@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.travalue.databinding.PlaceItemViewBinding
+import com.tripstyle.tripstyle.databinding.PlaceItemViewBinding
 
 class MyTravelListAdapter(var travelList: ArrayList<String>, val delete: Boolean) :
     RecyclerView.Adapter<MyTravelListAdapter.ViewHolder>() {

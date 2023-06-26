@@ -1,7 +1,7 @@
 package com.tripstyle.tripstyle.api
 
-import com.android.example.travalue.model.NicknameRequestModel
-import com.android.example.travalue.model.NicknameResponseModel
+import com.tripstyle.tripstyle.model.NicknameRequestModel
+import com.tripstyle.tripstyle.model.NicknameResponseModel
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

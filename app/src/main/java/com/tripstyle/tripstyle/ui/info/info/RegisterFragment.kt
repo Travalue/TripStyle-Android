@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.content.ContextCompat
-import com.android.example.travalue.R
-import com.android.example.travalue.apiManager.UserApiManager
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentRegisterBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.apiManager.UserApiManager
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentRegisterBinding
 import com.tripstyle.tripstyle.MainActivity
 import java.util.regex.Pattern
 

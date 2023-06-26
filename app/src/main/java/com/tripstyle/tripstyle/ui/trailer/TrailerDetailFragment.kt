@@ -11,10 +11,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentTrailerDetailBinding
-import com.android.example.travalue.util.ScheduleAdapter
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentTrailerDetailBinding
+import com.tripstyle.tripstyle.util.ScheduleAdapter
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.OnMapReadyCallback

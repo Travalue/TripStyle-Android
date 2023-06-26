@@ -1,8 +1,8 @@
 package com.tripstyle.tripstyle.ui.traveller
 
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentTravellerWriteDumpedBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentTravellerWriteDumpedBinding
 import com.tripstyle.tripstyle.MainActivity
 
 class TravellerWriteFragmentDUMPED : BaseFragment<FragmentTravellerWriteDumpedBinding>(R.layout.fragment_traveller_write_dumped) {

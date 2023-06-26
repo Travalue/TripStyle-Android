@@ -8,6 +8,6 @@ class GlobalApplication : Application() {
         super.onCreate()
         // 다른 초기화 코드들
 
-        KakaoSdk.init(this, getString(com.android.example.travalue.R.string.native_key))
+        KakaoSdk.init(this, getString(R.string.native_key))
     }
 }

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.travalue.R
+import com.tripstyle.tripstyle.R
 
 class TrailerDetailRecyclerViewAdapter(var dataList: ArrayList<TrailerDetail>) :
     RecyclerView.Adapter<TrailerDetailRecyclerViewAdapter.PagerViewHolder>() {

@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.content.ContextCompat
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentEditProfileBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentEditProfileBinding
 import com.tripstyle.tripstyle.MainActivity
 import java.util.regex.Pattern
 

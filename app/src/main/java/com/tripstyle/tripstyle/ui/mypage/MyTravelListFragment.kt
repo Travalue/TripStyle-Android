@@ -7,9 +7,9 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentMytravelListBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentMytravelListBinding
 import com.tripstyle.tripstyle.MainActivity
 import java.util.*
 import kotlin.collections.ArrayList

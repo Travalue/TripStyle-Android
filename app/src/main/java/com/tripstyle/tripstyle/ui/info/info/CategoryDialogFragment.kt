@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.navArgs
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseDialogFragment
-import com.android.example.travalue.databinding.FragmentCategroyBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseDialogFragment
+import com.tripstyle.tripstyle.databinding.FragmentCategroyBinding
 import com.tripstyle.tripstyle.MainActivity
 
 class CategoryDialogFragment  : BaseDialogFragment<FragmentCategroyBinding>(R.layout.fragment_categroy) {

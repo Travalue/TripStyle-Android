@@ -2,9 +2,9 @@ package com.tripstyle.tripstyle.ui.mypage
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentMyPageMainBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentMyPageMainBinding
 import com.tripstyle.tripstyle.MainActivity
 
 

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.travalue.R
+import com.tripstyle.tripstyle.R
 import com.bumptech.glide.Glide
 
 class ViewPagerAdapter(var list: ArrayList<String>,val context: Context?) :

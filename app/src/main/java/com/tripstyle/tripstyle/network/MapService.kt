@@ -1,7 +1,7 @@
 package com.tripstyle.tripstyle.network
 
-import com.android.example.travalue.BuildConfig
-import com.android.example.travalue.network.res.SearchResult
+import com.tripstyle.tripstyle.BuildConfig
+import com.tripstyle.tripstyle.network.res.SearchResult
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

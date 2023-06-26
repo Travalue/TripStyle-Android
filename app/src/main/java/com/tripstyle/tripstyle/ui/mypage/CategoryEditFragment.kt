@@ -8,10 +8,10 @@ import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
-import com.android.example.travalue.dialog.CategoryDeleteDialog
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentCategoryEditBinding
+import com.tripstyle.tripstyle.dialog.CategoryDeleteDialog
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentCategoryEditBinding
 
 
 class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout.fragment_category_edit) {

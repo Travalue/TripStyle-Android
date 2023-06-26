@@ -2,8 +2,8 @@ package com.tripstyle.tripstyle.apiManager
 
 import android.content.Context
 import android.util.Log
-import com.android.example.travalue.model.LoginRequestModel
-import com.android.example.travalue.model.LoginResponseModel
+import com.tripstyle.tripstyle.model.LoginRequestModel
+import com.tripstyle.tripstyle.model.LoginResponseModel
 import com.tripstyle.tripstyle.api.LoginService
 import retrofit2.Call
 import retrofit2.Callback

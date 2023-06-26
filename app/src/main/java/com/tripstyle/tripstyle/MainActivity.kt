@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.android.example.travalue.databinding.ActivityMainBinding
+import com.tripstyle.tripstyle.databinding.ActivityMainBinding
 import com.kakao.sdk.common.util.Utility
 
 
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         // 뒤로가기 버튼
         ab.setDisplayHomeAsUpEnabled(true)
         //왼쪽 버튼 아이콘 변경
-        supportActionBar!!.setHomeAsUpIndicator(com.android.example.travalue.R.drawable.btn_before)
+        supportActionBar!!.setHomeAsUpIndicator(com.tripstyle.tripstyle.R.drawable.btn_before)
     }
 
     fun setToolbarTitle(tag: String){
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 binding.tvToolbarName.text = "일정/장소 첨부"
                 binding.tvComplete.visibility = View.GONE
                 binding.tvRegister.visibility = View.VISIBLE
-                supportActionBar!!.setHomeAsUpIndicator(com.android.example.travalue.R.drawable.text_cancel) // 임시
+                supportActionBar!!.setHomeAsUpIndicator(com.tripstyle.tripstyle.R.drawable.text_cancel) // 임시
             }
             else -> {
                 binding.toolbar.visibility= View.VISIBLE
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val navHostFragment =
-            supportFragmentManager.findFragmentById(com.android.example.travalue.R.id.fragmentContainerView) as NavHostFragment
+            supportFragmentManager.findFragmentById(com.tripstyle.tripstyle.R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         navController.addOnDestinationChangedListener{ _,_,_ ->
             // nav_graph xml 파일의 각 fragment의 label을 가져와서 보여줌

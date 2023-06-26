@@ -3,7 +3,7 @@ package com.tripstyle.tripstyle.ui.mypage
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.travalue.databinding.LikeItemViewBinding
+import com.tripstyle.tripstyle.databinding.LikeItemViewBinding
 
 class LikeListAdapter(var likeList: ArrayList<String>) :
     RecyclerView.Adapter<LikeListAdapter.ViewHolder>() {

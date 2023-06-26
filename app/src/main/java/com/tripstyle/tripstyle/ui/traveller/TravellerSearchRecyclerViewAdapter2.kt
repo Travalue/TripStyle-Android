@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.travalue.R
+import com.tripstyle.tripstyle.R
 import com.bumptech.glide.Glide
 
 class TravellerSearchRecyclerViewAdapter2(private val viewModel: TravellerSearchViewModel, val context: Context?):

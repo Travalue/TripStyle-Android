@@ -1,9 +1,9 @@
 package com.tripstyle.tripstyle.dialog
 
 import android.widget.Toast
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseDialogFragment
-import com.android.example.travalue.databinding.DialogCategoryEditBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseDialogFragment
+import com.tripstyle.tripstyle.databinding.DialogCategoryEditBinding
 
 class CategoryDeleteDialog : BaseDialogFragment<DialogCategoryEditBinding>(R.layout.dialog_category_edit) {
     override fun initStartView() {

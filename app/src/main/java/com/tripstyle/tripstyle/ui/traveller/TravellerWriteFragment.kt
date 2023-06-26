@@ -14,10 +14,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentTravellerSubEditorBinding
-import com.android.example.travalue.databinding.FragmentTravellerWriteBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentTravellerSubEditorBinding
+import com.tripstyle.tripstyle.databinding.FragmentTravellerWriteBinding
 import com.bumptech.glide.Glide
 import com.tripstyle.tripstyle.MainActivity
 import kotlinx.coroutines.launch

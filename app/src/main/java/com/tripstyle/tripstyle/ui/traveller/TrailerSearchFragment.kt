@@ -1,9 +1,9 @@
 package com.tripstyle.tripstyle.ui.traveller
 
 import androidx.recyclerview.widget.GridLayoutManager
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentTrailerSearchBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentTrailerSearchBinding
 import com.tripstyle.tripstyle.MainActivity
 
 class TrailerSearchFragment : BaseFragment<FragmentTrailerSearchBinding>(R.layout.fragment_trailer_search) {

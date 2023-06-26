@@ -3,9 +3,9 @@ package com.tripstyle.tripstyle.ui.trailer
 import android.view.View
 import androidx.navigation.NavDirections
 import androidx.viewpager2.widget.ViewPager2
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentTrailerBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentTrailerBinding
 import com.tripstyle.tripstyle.MainActivity
 import kotlin.math.abs
 

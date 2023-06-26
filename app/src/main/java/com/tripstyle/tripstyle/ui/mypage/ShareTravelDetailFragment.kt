@@ -6,10 +6,10 @@ import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentShareTravelDetailBinding
-import com.android.example.travalue.ui.trailer.TrailerViewPagerAdapter
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentShareTravelDetailBinding
+import com.tripstyle.tripstyle.ui.trailer.TrailerViewPagerAdapter
 import com.tripstyle.tripstyle.MainActivity
 
 

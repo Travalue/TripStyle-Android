@@ -1,8 +1,8 @@
 package com.tripstyle.tripstyle.ui.info.info
 
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentRegisterOkBinding
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentRegisterOkBinding
 import com.tripstyle.tripstyle.MainActivity
 
 class RegisterOkFragment : BaseFragment<FragmentRegisterOkBinding>(R.layout.fragment_register_ok) {

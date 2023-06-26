@@ -1,10 +1,10 @@
 package com.tripstyle.tripstyle.ui.info.info
 
 import android.util.Log
-import com.android.example.travalue.R
-import com.android.example.travalue.base.BaseFragment
-import com.android.example.travalue.databinding.FragmentLoginBinding
-import com.android.example.travalue.model.LoginRequestModel
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.databinding.FragmentLoginBinding
+import com.tripstyle.tripstyle.model.LoginRequestModel
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError

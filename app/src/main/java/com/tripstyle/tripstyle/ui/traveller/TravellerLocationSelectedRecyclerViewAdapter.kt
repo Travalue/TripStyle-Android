@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.travalue.R
-import com.android.example.travalue.network.res.ItemData
+import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.network.res.ItemData
 
 class TravellerLocationSelectedRecyclerViewAdapter(val context: Context?,val listener: onRemovedLocationListener):
     RecyclerView.Adapter<TravellerLocationSelectedRecyclerViewAdapter.RecyclerViewViewHolder>() {
