@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/trailerFragment"
-        android:name="com.android.example.travalue.ui.trailer.TrailerFragment"
+        android:name="com.tripstyle.tripstyle.ui.trailer.TrailerFragment"
         android:label="TrailerFragment" >
         <action
             android:id="@+id/action_trailerFragment_to_categoryDialogFragment"
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/travellerFragment"
-        android:name="com.android.example.travalue.ui.traveller.TravellerFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerFragment"
         android:label="TravellerFragment" >
         <action
             android:id="@+id/action_travellerFragment_to_categoryDialogFragment"
@@ -41,13 +41,13 @@
 
     <fragment
         android:id="@+id/trailerSearchFragment"
-        android:name="com.android.example.travalue.ui.traveller.TrailerSearchFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TrailerSearchFragment"
         android:label="TrailerSearchFragment">
     </fragment>
 
     <fragment
         android:id="@+id/travellerWriteFragment"
-        android:name="com.android.example.travalue.ui.traveller.TravellerWriteFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerWriteFragment"
         android:label="TravellerWriteFragment">
         <action
             android:id="@+id/action_travellerWriteFragment_to_TravellerLocationFragment"
@@ -56,13 +56,13 @@
 
     <fragment
         android:id="@+id/travellerLocationFragment"
-        android:name="com.android.example.travalue.ui.traveller.TravellerLocationFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerLocationFragment"
         android:label="TravellerLocationFragment">
     </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.android.example.travalue.ui.info.info.LoginFragment"
+        android:name="com.tripstyle.tripstyle.ui.info.info.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.android.example.travalue.ui.info.info.RegisterFragment"
+        android:name="com.tripstyle.tripstyle.ui.info.info.RegisterFragment"
         android:label="RegisterFragment" >
         <action
             android:id="@+id/action_registerFragment_to_trailerFragment"
@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerOkFragment"
-        android:name="com.android.example.travalue.ui.info.info.RegisterOkFragment"
+        android:name="com.tripstyle.tripstyle.ui.info.info.RegisterOkFragment"
         android:label="RegisterOkFragment" >
         <action
             android:id="@+id/action_registerOkFragment_to_trailerFragment"
@@ -92,7 +92,7 @@
     </fragment>
     <dialog
         android:id="@+id/categoryDialogFragment"
-        android:name="com.android.example.travalue.ui.info.info.CategoryDialogFragment"
+        android:name="com.tripstyle.tripstyle.ui.info.info.CategoryDialogFragment"
         android:label="CategoryDialogFragment" >
         <action
             android:id="@+id/action_categoryDialogFragment_to_travellerFragment"
@@ -110,7 +110,7 @@
     </dialog>
     <fragment
         android:id="@+id/trailerDetailFragment"
-        android:name="com.android.example.travalue.ui.trailer.TrailerDetailFragment"
+        android:name="com.tripstyle.tripstyle.ui.trailer.TrailerDetailFragment"
         android:label="trailer">
 
         <deepLink app:uri="https://guide.trailer.com/{postId}"
@@ -123,7 +123,7 @@
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.android.example.travalue.ui.mypage.EditProfileFragment"
+        android:name="com.tripstyle.tripstyle.ui.mypage.EditProfileFragment"
         android:label="EditProfileFragment" >
         <action
             android:id="@+id/action_editProfileFragment_to_myPageFragment"
@@ -131,7 +131,7 @@
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="com.android.example.travalue.ui.mypage.MyPageFragment"
+        android:name="com.tripstyle.tripstyle.ui.mypage.MyPageFragment"
         android:label="MyPageFragment" >
         <action
             android:id="@+id/action_myPageFragment_to_categoryDialogFragment"
@@ -155,7 +155,7 @@
     </fragment>
     <fragment
         android:id="@+id/myTravelListFragment"
-        android:name="com.android.example.travalue.ui.mypage.MyTravelListFragment"
+        android:name="com.tripstyle.tripstyle.ui.mypage.MyTravelListFragment"
         android:label="MyTravelListFragment" >
         <action
             android:id="@+id/action_myTravelListFragment_to_myPageFragment"
@@ -163,7 +163,7 @@
     </fragment>
     <fragment
         android:id="@+id/likeListFragment"
-        android:name="com.android.example.travalue.ui.mypage.LikeListFragment"
+        android:name="com.tripstyle.tripstyle.ui.mypage.LikeListFragment"
         android:label="LikeListFragment" >
         <action
             android:id="@+id/action_likeListFragment_to_myPageFragment"
@@ -171,7 +171,7 @@
     </fragment>
     <fragment
         android:id="@+id/shareTravelFragment"
-        android:name="com.android.example.travalue.ui.mypage.ShareTravelFragment"
+        android:name="com.tripstyle.tripstyle.ui.mypage.ShareTravelFragment"
         android:label="공유중인 여행지"
         tools:layout="@layout/fragment_share_travel" >
         <action
@@ -180,7 +180,7 @@
     </fragment>
     <fragment
         android:id="@+id/shareTravelDetailFragment"
-        android:name="com.android.example.travalue.ui.mypage.ShareTravelDetailFragment"
+        android:name="com.tripstyle.tripstyle.ui.mypage.ShareTravelDetailFragment"
         android:label="{type}" >
         <argument
             android:name="type"
@@ -191,7 +191,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoryEditFragment"
-        android:name="com.android.example.travalue.ui.mypage.CategoryEditFragment"
+        android:name="com.tripstyle.tripstyle.ui.mypage.CategoryEditFragment"
         android:label="카테고리 수정" />
 
 </navigation>
