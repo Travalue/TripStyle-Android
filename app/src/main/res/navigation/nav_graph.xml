@@ -55,6 +55,24 @@
     </fragment>
 
     <fragment
+        android:id="@+id/categoryOptionFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerCategoryOptionFragment"
+        android:label="카테고리 옵션" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryOptionSubjectFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerCategoryOptionSubjectFragment"
+        android:label="카테고리 옵션 주제" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryOptionSubjectSelectFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerCategoryOptionSubjectSelectFragment"
+        android:label="카테고리 옵션 주제 선택" >
+    </fragment>
+
+    <fragment
         android:id="@+id/travellerLocationFragment"
         android:name="com.tripstyle.tripstyle.ui.traveller.TravellerLocationFragment"
         android:label="TravellerLocationFragment">
