@@ -1,5 +1,6 @@
 package com.tripstyle.tripstyle.ui.trailer
 
+import android.util.Log
 import android.view.View
 import androidx.navigation.NavDirections
 import androidx.viewpager2.widget.ViewPager2
@@ -7,9 +8,18 @@ import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentTrailerBinding
 import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.model.TrailerItem
+import com.tripstyle.tripstyle.model.TrailerResponseModel
+import com.tripstyle.tripstyle.network.AppClient
+import com.tripstyle.tripstyle.network.TravelService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.math.abs
 
 class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_trailer) {
+
+    lateinit var adapter : TrailerViewPagerAdapter
 
     override fun initStartView() {
         super.initStartView()
@@ -21,7 +31,7 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
         super.initDataBinding()
 
         //세로 viewpager 생성
-        initVerticalCardView(getCardList())
+        initVerticalCardView()
 
         // category 이동
         binding.hambugerbar.setOnClickListener {
@@ -34,15 +44,36 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        requestTrailerList()
     }
 
-    private fun initVerticalCardView(data : ArrayList<Int>){
-        val adapter = TrailerViewPagerAdapter(data)
+    private fun requestTrailerList(){
+        val service = AppClient.retrofit?.create(TravelService::class.java)
+
+        service?.getTrailerList()?.enqueue(object : Callback<TrailerResponseModel>{
+            override fun onResponse(
+                call: Call<TrailerResponseModel>,
+                response: Response<TrailerResponseModel>
+            ) {
+                val trailerList = response.body()?.data
+                Log.d("data",trailerList.toString())
+                adapter.setData(trailerList as ArrayList<TrailerItem>)
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<TrailerResponseModel>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun initVerticalCardView(){
+        adapter = TrailerViewPagerAdapter(requireContext())
         adapter.setListener(object : onActionListener {
             override fun onMoveDetailPage(): NavDirections {
                 return TrailerFragmentDirections.actionTrailerFragmentToTrailerDetailFragment()
             }
-
         })
         binding.tpTrailerCard.adapter = adapter // 어댑터 생성
         binding.tpTrailerCard.orientation = ViewPager2.ORIENTATION_VERTICAL // 세로방향
