@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface TravelService {
 
     //Trailer 전체조회
-    @GET("/v1/search/local")
+    @GET("/post/trailer")
     fun getTrailerList() : Call<TrailerResponseModel>
 }
