@@ -2,62 +2,63 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/backgroundColor">
 
-    <ImageView
-        android:id="@+id/logo_white"
-        android:layout_width="343dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/white_logo"
-        app:layout_constraintBottom_toTopOf="@+id/tv_trailer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray">
 
-    <TextView
-        android:id="@+id/tv_trailer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="\\ trailer"
-        android:textColor="@color/primaryColor"
-        android:textSize="24dp"
-        app:layout_constraintStart_toStartOf="@+id/logo_white"
-        app:layout_constraintTop_toBottomOf="@+id/logo_white" />
+        <ImageView
+            android:id="@+id/logo_white"
+            android:layout_width="343dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/white_logo"
+            app:layout_constraintBottom_toTopOf="@+id/tv_trailer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/hambugerbar"
-        android:layout_width="25dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/logo_white"
-        app:layout_constraintTop_toTopOf="@+id/tv_trailer"
-        app:srcCompat="@drawable/ic_hambugerbar" />
+        <TextView
+            android:id="@+id/tv_trailer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="\\ trailer"
+            android:textColor="@color/primaryColor"
+            android:textSize="24dp"
+            app:layout_constraintStart_toStartOf="@+id/logo_white"
+            app:layout_constraintTop_toBottomOf="@+id/logo_white" />
 
-    <View
-        android:id="@+id/line"
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.212"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_trailer" />
+        <ImageView
+            android:id="@+id/hambugerbar"
+            android:layout_width="25dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/logo_white"
+            app:layout_constraintTop_toTopOf="@+id/tv_trailer"
+            app:srcCompat="@drawable/ic_hambugerbar" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/tp_trailerCard"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line" />
+        <View
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.212"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_trailer" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/tp_trailerCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
