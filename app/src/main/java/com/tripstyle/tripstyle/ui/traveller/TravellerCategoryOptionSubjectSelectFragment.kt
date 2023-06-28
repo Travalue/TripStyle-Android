@@ -2,10 +2,10 @@ package com.tripstyle.tripstyle.ui.traveller
 
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
-import com.tripstyle.tripstyle.databinding.FragmentTravellerLocationBinding
 import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.databinding.FragmentTravellerCategoryOptionSubjectSelectBinding
 
-class TravellerCategoryOptionSubjectSelectFragment : BaseFragment<FragmentTravellerLocationBinding>(R.layout.fragment_traveller_category_option_subject_select) {
+class TravellerCategoryOptionSubjectSelectFragment : BaseFragment<FragmentTravellerCategoryOptionSubjectSelectBinding>(R.layout.fragment_traveller_category_option_subject_select) {
 
     override fun initStartView() {
         super.initStartView()

@@ -147,6 +147,10 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             binding.container.addView(binding2.root)
         }
 
+        binding.ivBackground.setOnClickListener {
+            navController.navigate(R.id.action_travellerWriteFragment_to_categoryOptionFragment)
+        }
+
     }
 
     override fun initAfterBinding() {
