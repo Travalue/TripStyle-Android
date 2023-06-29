@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentTravellerLocationBinding
-import com.tripstyle.tripstyle.network.MapClient
+import com.tripstyle.tripstyle.network.AppClient
 import com.tripstyle.tripstyle.network.MapService
-import com.tripstyle.tripstyle.network.res.ItemData
-import com.tripstyle.tripstyle.network.res.SearchResult
+
 import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.model.ItemData
+import com.tripstyle.tripstyle.model.SearchResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -73,7 +74,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
 
     }
     fun getLocationList(query : String){
-        val service = MapClient.locationRetrofit?.create(MapService::class.java)
+        val service = AppClient.locationRetrofit?.create(MapService::class.java)
         service?.getMapSerachResult(query)?.enqueue(object : Callback<SearchResult>{
             override fun onResponse(call: Call<SearchResult>, response: Response<SearchResult>) {
                 val items = response.body()?.items

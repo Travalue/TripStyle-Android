@@ -8,8 +8,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.R
-import com.tripstyle.tripstyle.network.res.ItemData
 import com.naver.maps.geometry.Tm128
+import com.tripstyle.tripstyle.model.ItemData
 
 class TravellerLocationRecyclerViewAdapter(val context: Context?):
     RecyclerView.Adapter<TravellerLocationRecyclerViewAdapter.RecyclerViewViewHolder>() {

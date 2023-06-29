@@ -1,4 +1,4 @@
-package com.tripstyle.tripstyle.network.res
+package com.tripstyle.tripstyle.model
 
 data class SearchResult(
     val display: Int,
