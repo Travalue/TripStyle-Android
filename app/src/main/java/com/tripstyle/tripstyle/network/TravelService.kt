@@ -1,9 +1,11 @@
 package com.tripstyle.tripstyle.network
 
+import com.tripstyle.tripstyle.BuildConfig
 import com.tripstyle.tripstyle.model.TrailerResponseModel
 import com.tripstyle.tripstyle.model.TravelDetailResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Path
 
 interface TravelService {
@@ -13,6 +15,7 @@ interface TravelService {
     fun getTrailerList() : Call<TrailerResponseModel>
 
     // Trailer, Travler 상세조회
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
     @GET("/post/{id}")
     fun getTravelPost(@Path("id")id:Int) : Call<TravelDetailResponse>
 
