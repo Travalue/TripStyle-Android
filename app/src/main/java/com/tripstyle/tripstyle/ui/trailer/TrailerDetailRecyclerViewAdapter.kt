@@ -1,13 +1,16 @@
 package com.tripstyle.tripstyle.ui.trailer
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.model.Content
 
-class TrailerDetailRecyclerViewAdapter(var dataList: ArrayList<TrailerDetail>) :
+class TrailerDetailRecyclerViewAdapter(val context: Context, var dataList: List<Content>) :
     RecyclerView.Adapter<TrailerDetailRecyclerViewAdapter.PagerViewHolder>() {
 
     inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
@@ -21,8 +24,8 @@ class TrailerDetailRecyclerViewAdapter(var dataList: ArrayList<TrailerDetail>) :
     override fun getItemCount(): Int = dataList.size
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.detailImage.setImageResource(dataList[position].img)
-        holder.detailText.setText(dataList[position].text)
+        Glide.with(context).load(dataList[position].imageURL).into(holder.detailImage)
+        holder.detailText.setText(dataList[position].content)
     }
 }
 

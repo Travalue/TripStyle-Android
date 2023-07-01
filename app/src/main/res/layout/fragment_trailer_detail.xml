@@ -22,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/iv_main_image"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="430dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/card_img_example"
                 app:layout_constraintEnd_toEndOf="parent"
