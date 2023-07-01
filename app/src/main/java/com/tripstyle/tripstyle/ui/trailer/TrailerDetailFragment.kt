@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentTrailerDetailBinding
@@ -109,6 +110,11 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
             "패키지" -> Glide.with(this).load(R.drawable.ic_category_package).into(binding.ivCategory)
             "휴양" -> Glide.with(this).load(R.drawable.ic_category_refresh).into(binding.ivCategory)
         }
+
+        //writer 영역
+        binding.tvWriter.text = detailResponse.writer.nickname
+        binding.tvDescription.text = detailResponse.writer?.description?.toString()
+        Glide.with(this).load(detailResponse.writer.profileImageURL).apply(RequestOptions().circleCrop()).into(binding.ivUserProfile)
     }
 
     private fun clickClip(){
