@@ -67,7 +67,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 response: Response<TravelDetailResponse>
             ) {
                 detailResponse = response.body()?.data!!
-                Log.d("data",detailResponse.toString())
+
                 initView()
                 initMapView()
             }
@@ -101,6 +101,13 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         with(binding.rvScheduleDetail){
             clipToPadding = false
             clipChildren = false
+        }
+
+        when(detailResponse?.subject){
+            "식도락" -> Glide.with(this).load(R.drawable.ic_category_food).into(binding.ivCategory)
+            "액티비티" -> Glide.with(this).load(R.drawable.ic_category_activity).into(binding.ivCategory)
+            "패키지" -> Glide.with(this).load(R.drawable.ic_category_package).into(binding.ivCategory)
+            "휴양" -> Glide.with(this).load(R.drawable.ic_category_refresh).into(binding.ivCategory)
         }
     }
 
