@@ -7,37 +7,49 @@ import com.tripstyle.tripstyle.model.TravellerWriteResult
 class TravellerWriteViewModel: ViewModel() {
     val bodyItem = ArrayList<TravellerWriteResult>()
     val bodyItemListData = MutableLiveData<ArrayList<TravellerWriteResult>>()
+    private val editTextContents = mutableMapOf<Int, String>()
 
     init {
         addBodyItem()
     }
 
-    fun addBodyItem(){
-        bodyItem.add(TravellerWriteResult(ArrayList(),""))
-        bodyItemListData.value = bodyItem
-    }
-
-    fun updateBodyItem(pos: Int, item: TravellerWriteResult){
-        val updatedItem = TravellerWriteResult(ArrayList(item.images), item.text)
-        bodyItem[pos] = updatedItem
-        bodyItemListData.value = bodyItem
-    }
-
-    fun updateImageItem(pos: Int, item: ArrayList<String>){
-        val updatedItem = TravellerWriteResult(ArrayList(item),bodyItem[pos].text)
-        bodyItem[pos] = updatedItem
-        bodyItemListData.value = bodyItem
-    }
-
-    fun updateTextItem(item: MutableList<String>){
-        for(i in 0 until bodyItem.size){
-            val updatedItem = TravellerWriteResult(ArrayList(bodyItem[i].images),item[i])
-            bodyItem[i] = updatedItem
-            bodyItemListData.value = bodyItem
+    fun addBodyItem() {
+        // EditText 받아오기
+        for ((id, content) in editTextContents) {
+            if (id < bodyItem.size) {
+                bodyItem[id].text = content
+            } else {
+                // 에러
+            }
         }
 
-        printBodyItem()
+        // 빈 아이템 추가
+        bodyItem.add(TravellerWriteResult(ArrayList(), ""))
+        bodyItemListData.value = bodyItem
     }
+
+    fun updateBodyItem(pos: Int, item: TravellerWriteResult) {
+        // EditText 받아오기
+        for ((id, content) in editTextContents) {
+            if (id < bodyItem.size) {
+                bodyItem[id].text = content
+            } else {
+                // 에러
+            }
+        }
+
+        // 이미지 update
+        val updatedItem = TravellerWriteResult(ArrayList(item.images), bodyItem[pos].text)
+        bodyItem[pos] = updatedItem
+        bodyItemListData.value = bodyItem
+
+//        printBodyItem()
+    }
+
+    fun updateBodyTextItem(id: Int, item: String) {
+        editTextContents[id] = item
+    }
+
 
     fun deleteBodyItem(){
         bodyItem.clear()

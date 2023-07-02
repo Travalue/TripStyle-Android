@@ -20,7 +20,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -85,6 +84,13 @@ class TravellerWriteBodyRecyclerViewAdapter(private val viewModel: TravellerWrit
         holder.setContents(position)
     }
 
+    override fun onViewRecycled(holder: RecyclerViewViewHolder) {
+        holder.editText.removeTextChangedListener(holder.textWatcher)
+        holder.textWatcher = null
+        super.onViewRecycled(holder)
+    }
+
+
     override fun getItemCount(): Int {
         // 본문 세트 수
         return viewModel.bodyItem.size
@@ -92,11 +98,13 @@ class TravellerWriteBodyRecyclerViewAdapter(private val viewModel: TravellerWrit
 
     inner class RecyclerViewViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val viewPager: ViewPager2 = itemView.findViewById(R.id.bodyImageViewPager)
-        private val editText: EditText = itemView.findViewById(R.id.editTextBody)
+        val editText: EditText = itemView.findViewById(R.id.editTextBody)
         private val buttonBodyImageUnselected: ImageButton = itemView.findViewById(R.id.buttonBodyImageUnselected)
         private val ivPhotoUnselected: ImageView = itemView.findViewById(R.id.iv_photo_unselected)
         private val tvPhotoUnselected1: TextView = itemView.findViewById(R.id.tv_photo_unselected1)
         private val tvPhotoUnselected2: TextView = itemView.findViewById(R.id.tv_photo_unselected2)
+
+        var textWatcher: TextWatcher? = null
 
         fun setContents(pos: Int){
             with(viewModel.bodyItem[pos]){
@@ -107,16 +115,20 @@ class TravellerWriteBodyRecyclerViewAdapter(private val viewModel: TravellerWrit
 
                 editText.setText(text)
 
-                // edittext 변경 있을 때 text에 글 내용 받아옴
-                editText.addTextChangedListener(object : TextWatcher {
+                editText.removeTextChangedListener(textWatcher)
+
+                textWatcher = object : TextWatcher {
                     override fun afterTextChanged(s: Editable?) {
                         // text 저장
+                        viewModel.updateBodyTextItem(pos, s.toString())
                     }
 
                     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
 
                     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-                })
+                }
+
+                editText.addTextChangedListener(textWatcher)
 
             }
 
@@ -168,7 +180,6 @@ class TravellerWriteBodyRecyclerViewAdapter(private val viewModel: TravellerWrit
     }
 
     private fun updateViewModelAndViewPager() {
-        // 이미지만 업데이트
         viewModel.updateBodyItem(currentPos,TravellerWriteResult(list,""))
         notifyItemChanged(currentPos)
     }
