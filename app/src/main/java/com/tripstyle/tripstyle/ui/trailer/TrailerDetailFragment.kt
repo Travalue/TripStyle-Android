@@ -115,6 +115,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         binding.tvWriter.text = detailResponse.writer.nickname
         binding.tvDescription.text = detailResponse.writer?.description?.toString()
         Glide.with(this).load(detailResponse.writer.profileImageURL).apply(RequestOptions().circleCrop()).into(binding.ivUserProfile)
+        binding.tvWriteCnt.text = "30"
     }
 
     private fun clickClip(){

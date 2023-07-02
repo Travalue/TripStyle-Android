@@ -25,7 +25,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="430dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/card_img_example"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -162,11 +161,26 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="12dp"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="30dp"
                         android:text="For My Better Trip!"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_writer" />
+
+                    <TextView
+                        android:id="@+id/tv_write_ls"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="작성한 여행지"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_write_cnt"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
                     <ImageView
                         android:id="@+id/iv_user_profile"
@@ -179,6 +193,19 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_baseline_circle_gray_24" />
+
+                    <TextView
+                        android:id="@+id/tv_write_cnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="30"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_write_ls"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
