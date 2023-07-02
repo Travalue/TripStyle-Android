@@ -7,6 +7,7 @@ import com.tripstyle.tripstyle.databinding.FragmentLoginBinding
 import com.tripstyle.tripstyle.model.LoginRequestModel
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.common.model.KakaoSdkError
@@ -38,6 +39,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         (activity as MainActivity).setToolbarTitle("none")
 
 
+        context?.let { KakaoSdk.init(it, getString(R.string.native_key)) }
         val keyHash = context?.let { Utility.getKeyHash(it) }
         Log.i("mihye","keyHash ${keyHash}")
     }
