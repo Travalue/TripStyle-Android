@@ -35,6 +35,7 @@ import retrofit2.Response
 class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layout.fragment_trailer_detail){
     private lateinit var detailResponse : Data
     val args: TrailerDetailFragmentArgs by navArgs()
+    val service = AppClient.retrofit?.create(TravelService::class.java)
 
     override fun initStartView() {
         super.initStartView()
@@ -54,14 +55,12 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
     override fun initAfterBinding() {
         super.initAfterBinding()
 
-        clickFavorite()
+        initFavorite()
         clickClip()
     }
 
     // 네트워크 요청
     private fun requestTravelPost(id:Int){
-        val service = AppClient.retrofit?.create(TravelService::class.java)
-
         service?.getTravelPost(id)?.enqueue(object : Callback<TravelDetailResponse>{
             override fun onResponse(
                 call: Call<TravelDetailResponse>,
@@ -116,6 +115,11 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         binding.tvDescription.text = detailResponse.writer?.description?.toString()
         Glide.with(this).load(detailResponse.writer.profileImageURL).apply(RequestOptions().circleCrop()).into(binding.ivUserProfile)
         binding.tvWriteCnt.text = "30"
+
+        //좋아요
+        if(detailResponse.statistics.liked){
+            binding.btnFavorite.setImageResource(R.drawable.ic_heart_fill)
+        }
     }
 
     private fun clickClip(){
@@ -226,15 +230,47 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         }
     }
 
-    // TODO : 추후에 데이터 연결 후 flag 로직 빼기
-    private fun clickFavorite(){
+    private fun initFavorite(){
         var flag = false
         binding.btnFavorite.setOnClickListener {
             if(!flag){
-                binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_selected)
-                flag = true
+                service?.getLikePost(args.postId)?.enqueue(object : Callback<BaseResponseModel>{
+                    override fun onResponse(
+                        call: Call<BaseResponseModel>,
+                        response: Response<BaseResponseModel>
+                    ) {
+                        if(response.body()?.code == 201){
+                            binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_selected)
+                            flag = true
+                        }else{
+                            Toast.makeText(context,response.body()?.message.toString(),Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BaseResponseModel>, t: Throwable) {
+                        Toast.makeText(context,t.message,Toast.LENGTH_SHORT).show()
+                    }
+
+                })
             }else{
-                binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_fill)
+                service?.getUnlikePost(args.postId)?.enqueue(object : Callback<BaseResponseModel>{
+                    override fun onResponse(
+                        call: Call<BaseResponseModel>,
+                        response: Response<BaseResponseModel>
+                    ) {
+                        if(response.body()?.code == 200){
+                            binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_fill)
+                            flag = true
+                        }else{
+                            Toast.makeText(context,response.body()?.message.toString(),Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BaseResponseModel>, t: Throwable) {
+                        Toast.makeText(context,t.message,Toast.LENGTH_SHORT).show()
+                    }
+
+                })
             }
 
         }
