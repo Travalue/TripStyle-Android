@@ -19,4 +19,14 @@ interface TravelService {
     @GET("/post/{id}")
     fun getTravelPost(@Path("id")id:Int) : Call<TravelDetailResponse>
 
+    //게시물 좋아요
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
+    @GET("/post/{postId}/like")
+    fun getLikePost(@Path("postId")id:Int) : Call<TravelDetailResponse>
+
+    //게시물 좋아요
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
+    @GET("/post/{postId}/unlike")
+    fun getUnlikePost(@Path("postId")id:Int) : Call<TravelDetailResponse>
+
 }
