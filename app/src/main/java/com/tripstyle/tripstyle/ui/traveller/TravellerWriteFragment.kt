@@ -7,12 +7,15 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
@@ -20,11 +23,14 @@ import com.tripstyle.tripstyle.databinding.FragmentTravellerSubEditorBinding
 import com.tripstyle.tripstyle.databinding.FragmentTravellerWriteBinding
 import com.bumptech.glide.Glide
 import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.model.TravellerWriteResult
 import kotlinx.coroutines.launch
 
 class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.layout.fragment_traveller_write) {
 
     private var list = ArrayList<String>() // post image 넘어오는 array
+
+    private val viewModel by viewModels<TravellerWriteViewModel>()
 
     private lateinit var binding2: FragmentTravellerSubEditorBinding
 
@@ -40,34 +46,34 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         // 1 -> inner view (그 밑 본문 사진)
     }
 
-    private val imageResultMultiple = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            result ->
-        if(result.resultCode == Activity.RESULT_OK){
-            result?.data?.let { it ->
-                if (it.clipData != null) {   // 사진 여러장 선택
-                    val count = it.clipData!!.itemCount
-                    if (count > PHOTO_MAX_LENGTH) {
-                        // 아래 toast를 다른 표시 방법으로 변경할 것
-                        Toast.makeText(context, "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_SHORT)
-                            .show()
-                        return@registerForActivityResult
-                    }
-
-                    for (i in 0 until count) {
-                        val imageUri = getRealPathFromURI(it.clipData!!.getItemAt(i).uri)
-                        list.add(imageUri)
-                    }
-                } else {    // 사진 1장 선택
-                    val imageUri = getRealPathFromURI(it.data!!)
-                    list.add(imageUri)
-                }
-
-                refreshViewPager() // viewpager 새로고침
-                hideButton() // 갤러리에서 사진을 한번이라도 불러오고 나면 viewpager 위치에 있는 imageview(버튼 이미지)와 textview 숨기기
-
-            }
-        }
-    }
+//    private val imageResultMultiple = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+//            result ->
+//        if(result.resultCode == Activity.RESULT_OK){
+//            result?.data?.let { it ->
+//                if (it.clipData != null) {   // 사진 여러장 선택
+//                    val count = it.clipData!!.itemCount
+//                    if (count > PHOTO_MAX_LENGTH) {
+//                        // 아래 toast를 다른 표시 방법으로 변경할 것
+//                        Toast.makeText(context, "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_SHORT)
+//                            .show()
+//                        return@registerForActivityResult
+//                    }
+//
+//                    for (i in 0 until count) {
+//                        val imageUri = getRealPathFromURI(it.clipData!!.getItemAt(i).uri)
+//                        list.add(imageUri)
+//                    }
+//                } else {    // 사진 1장 선택
+//                    val imageUri = getRealPathFromURI(it.data!!)
+//                    list.add(imageUri)
+//                }
+//
+//                refreshViewPager() // viewpager 새로고침
+//                hideButton() // 갤러리에서 사진을 한번이라도 불러오고 나면 viewpager 위치에 있는 imageview(버튼 이미지)와 textview 숨기기
+//
+//            }
+//        }
+//    }
 
     private val imageResultSingle = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result ->
@@ -99,13 +105,22 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         super.initStartView()
         (activity as MainActivity).setToolbarTitle("글 작성하기")
 
-        val adapter = ViewPagerAdapter(list,context)
-        binding.bodyImageViewPager.adapter = adapter
-        binding.bodyImageViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        val adapter = TravellerWriteBodyRecyclerViewAdapter(viewModel,context,this)
+        binding.bodyRecyclerView.adapter = adapter
+        binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
+
+
+//        val adapter = ViewPagerAdapter(list,context)
+//        binding.bodyImageViewPager.adapter = adapter
+//        binding.bodyImageViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
+
+        viewModel.bodyItemListData.observe(viewLifecycleOwner){
+            binding.bodyRecyclerView.adapter?.notifyDataSetChanged()
+        }
 
         binding.tvAddSchedule.setOnClickListener {
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
@@ -119,32 +134,37 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             selectGallery(false)
         }
 
-        binding.buttonBodyImageUnselected.setOnClickListener {
-            // 갤러리에서 사진 여러장 선택하여 viewPager에 넣음
-            flag = 0
-            selectGallery(true)
-        }
+//        binding.buttonBodyImageUnselected.setOnClickListener {
+//            // 갤러리에서 사진 여러장 선택하여 viewPager에 넣음
+//            flag = 0
+//            selectGallery(true)
+//        }
 
         binding.buttonBodyAdd.setOnClickListener {
-            list.clear()
-//            val addView = LayoutInflater.from(context).inflate(R.layout.fragment_traveller_sub_editor,null,false)
-//            val newViewPager = addView.findViewById<ViewPager2>(R.id.bodyImageViewPager)
+            viewModel.addBodyItem()
+//            list.clear()
+////            val addView = LayoutInflater.from(context).inflate(R.layout.fragment_traveller_sub_editor,null,false)
+////            val newViewPager = addView.findViewById<ViewPager2>(R.id.bodyImageViewPager)
+//
+//            //binding으로 다시, 얘가 위에 addView 대체
+//            binding2 = FragmentTravellerSubEditorBinding.inflate(LayoutInflater.from(context))
+//
+//
+//            val newAdapter = ViewPagerAdapter(list,context)
+//            binding2.bodyImageViewPager.adapter = newAdapter
+//            binding2.bodyImageViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//
+//            binding2.buttonBodyImageUnselected.setOnClickListener {
+//                flag = 1
+//                selectGallery(true)
+//            }
+//
+////            binding.container.addView(addView)
+//            binding.container.addView(binding2.root)
+        }
 
-            //binding으로 다시, 얘가 위에 addView 대체
-            binding2 = FragmentTravellerSubEditorBinding.inflate(LayoutInflater.from(context))
-
-
-            val newAdapter = ViewPagerAdapter(list,context)
-            binding2.bodyImageViewPager.adapter = newAdapter
-            binding2.bodyImageViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
-            binding2.buttonBodyImageUnselected.setOnClickListener {
-                flag = 1
-                selectGallery(true)
-            }
-
-//            binding.container.addView(addView)
-            binding.container.addView(binding2.root)
+        binding.ivBackground.setOnClickListener {
+            navController.navigate(R.id.action_travellerWriteFragment_to_categoryOptionFragment)
         }
 
     }
@@ -168,25 +188,25 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         return result
     }
 
-    fun refreshViewPager(){
-        if(flag == 0)
-            binding.bodyImageViewPager.adapter?.notifyDataSetChanged()
-        else
-            binding2.bodyImageViewPager.adapter?.notifyDataSetChanged()
-    }
+//    fun refreshViewPager(){
+//        if(flag == 0)
+//            binding.bodyImageViewPager.adapter?.notifyDataSetChanged()
+//        else
+//            binding2.bodyImageViewPager.adapter?.notifyDataSetChanged()
+//    }
 
-    fun hideButton(){
-        if(flag == 0) {
-            binding.ivPhotoUnselected.visibility = View.INVISIBLE
-            binding.tvPhotoUnselected1.visibility = View.INVISIBLE
-            binding.tvPhotoUnselected2.visibility = View.INVISIBLE
-        }
-        else{
-            binding2.ivPhotoUnselected.visibility = View.INVISIBLE
-            binding2.tvPhotoUnselected1.visibility = View.INVISIBLE
-            binding2.tvPhotoUnselected2.visibility = View.INVISIBLE
-        }
-    }
+//    fun hideButton(){
+//        if(flag == 0) {
+//            binding.ivPhotoUnselected.visibility = View.INVISIBLE
+//            binding.tvPhotoUnselected1.visibility = View.INVISIBLE
+//            binding.tvPhotoUnselected2.visibility = View.INVISIBLE
+//        }
+//        else{
+//            binding2.ivPhotoUnselected.visibility = View.INVISIBLE
+//            binding2.tvPhotoUnselected1.visibility = View.INVISIBLE
+//            binding2.tvPhotoUnselected2.visibility = View.INVISIBLE
+//        }
+//    }
 
     fun refreshBackgroundImage(imageUri: String){
         context?.let {
@@ -212,10 +232,10 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             )
         }else{
             if(isMultiple == true){ // 사진 여러장 선택
-                var intent = Intent(Intent.ACTION_PICK)
-                intent.type = "image/*"
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true)
-                imageResultMultiple.launch(intent)
+//                var intent = Intent(Intent.ACTION_PICK)
+//                intent.type = "image/*"
+//                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true)
+//                imageResultMultiple.launch(intent)
             }
             else{ // 사진 1장만 선택
                 var intent = Intent(Intent.ACTION_PICK)

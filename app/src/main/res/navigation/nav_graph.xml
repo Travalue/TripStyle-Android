@@ -52,6 +52,33 @@
         <action
             android:id="@+id/action_travellerWriteFragment_to_TravellerLocationFragment"
             app:destination="@+id/travellerLocationFragment"/>
+        <action
+            android:id="@+id/action_travellerWriteFragment_to_categoryOptionFragment"
+            app:destination="@+id/categoryOptionFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryOptionFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerCategoryOptionFragment"
+        android:label="카테고리 옵션" >
+        <action
+            android:id="@+id/action_categoryOptionFragment_to_categoryOptionSubjectFragment"
+            app:destination="@+id/categoryOptionSubjectFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryOptionSubjectFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerCategoryOptionSubjectFragment"
+        android:label="카테고리 옵션 주제" >
+        <action
+            android:id="@+id/action_categoryOptionSubjectFragment_to_categoryOptionSubjectSelectFragment"
+            app:destination="@+id/categoryOptionSubjectSelectFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryOptionSubjectSelectFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerCategoryOptionSubjectSelectFragment"
+        android:label="카테고리 옵션 주제 선택" >
     </fragment>
 
     <fragment
