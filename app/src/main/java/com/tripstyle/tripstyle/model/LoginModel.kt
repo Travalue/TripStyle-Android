@@ -6,3 +6,8 @@ data class LoginRequestModel(
     val profileImage:String?,
     val socialType:String
 )
+
+data class LoginResponseModel(
+    val token:String,
+    val userId:Long
+)
