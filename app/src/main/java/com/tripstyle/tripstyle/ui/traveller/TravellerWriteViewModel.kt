@@ -9,6 +9,9 @@ class TravellerWriteViewModel: ViewModel() {
     val bodyItemListData = MutableLiveData<ArrayList<TravellerWriteResult>>()
     private val editTextContents = mutableMapOf<Int, String>()
 
+    private var categorySubject = ""
+    var categorySubjectLiveData = MutableLiveData<String>()
+
     init {
         addBodyItem()
     }
@@ -64,5 +67,13 @@ class TravellerWriteViewModel: ViewModel() {
             println("current image count: ${it.images.size}")
             println("current text: ${it.text}")
         }
+    }
+
+
+
+    // 카테고리 주제 저장하는
+    fun updateCategorySubject(text: String){
+        categorySubject = text
+        categorySubjectLiveData.value = categorySubject
     }
 }
