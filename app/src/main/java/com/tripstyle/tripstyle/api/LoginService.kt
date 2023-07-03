@@ -9,7 +9,7 @@ import retrofit2.http.POST
 interface LoginService {
 
 
-    @POST("login")
+    @POST("v1/auth/login")
     fun loginRequest(@Body loginRequestData: LoginRequestModel): Call<LoginResponseModel>
 
 }
