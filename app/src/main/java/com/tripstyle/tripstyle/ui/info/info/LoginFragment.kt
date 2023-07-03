@@ -1,10 +1,11 @@
 package com.tripstyle.tripstyle.ui.info.info
 
 import android.util.Log
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentLoginBinding
-import com.tripstyle.tripstyle.model.LoginRequestModel
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
@@ -15,13 +16,16 @@ import com.kakao.sdk.user.UserApiClient
 
 import com.kakao.sdk.common.util.Utility
 import com.tripstyle.tripstyle.MainActivity
-import com.tripstyle.tripstyle.apiManager.LoginApiManager
+import com.tripstyle.tripstyle.model.LoginRequestModel
+import com.tripstyle.tripstyle.viewmodel.LoginViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
-    val apiManager = LoginApiManager.getInstance(context)
-
+    private val loginViewModel : LoginViewModel by viewModels()
 
     // 이메일 로그인 콜백
     private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -109,10 +113,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                                         Log.e("mihye", "사용자 정보 요청 실패 $error")
                                     } else if (user != null) {
                                         Log.i("mihye", "사용자 정보 요청 성공 : $user")
+
+                                        // 서버 통신
                                         val loginRequestModel = LoginRequestModel(user.id, user.kakaoAccount?.email,
                                             user.kakaoAccount?.profile?.profileImageUrl, "KAKAO" )
-                                        apiManager?.loginRequest(loginRequestModel)
+                                        CoroutineScope(Dispatchers.IO).launch {
+                                            loginViewModel.loginRequest(loginRequestModel)
+                                        }
+
                                         Log.i("mihye", "사용자 정보 서버 전송 성공 : $loginRequestModel")
+                                        Log.i("mihye", "viewmodel : ${loginViewModel.loginResponseLiveData.value}")
                                     }
                                 }
 
@@ -149,10 +159,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                                         Log.e("mihye", "사용자 정보 요청 실패 $error")
                                     } else if (user != null) {
                                         Log.i("mihye", "사용자 정보 요청 성공 : $user")
+
+                                        // 서버 통신
                                         val loginRequestModel = LoginRequestModel(user.id, user.kakaoAccount?.email,
                                             user.kakaoAccount?.profile?.profileImageUrl, "KAKAO" )
-                                        apiManager?.loginRequest(loginRequestModel)
+                                        CoroutineScope(Dispatchers.IO).launch {
+                                            loginViewModel.loginRequest(loginRequestModel)
+                                        }
+
                                         Log.i("mihye", "사용자 정보 서버 전송 성공 : $loginRequestModel")
+                                        Log.i("mihye", "viewmodel : ${loginViewModel.loginResponseLiveData.value}")
                                     }
                                 }
 
