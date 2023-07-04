@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
@@ -83,7 +84,10 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
     private fun initView(){
         binding.tvMainTitle.text = detailResponse.title
         binding.tvSubTitle.text = detailResponse.subTitle
+        // 이미지 dim 처리
         Glide.with(this).load(detailResponse?.thumbnail).into(binding.ivMainImage)
+        binding.ivMainImage.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
+
         binding.tvViews.text = "${detailResponse.statistics.viewCount} views"
         binding.tvFavoriteCnt.text = "${detailResponse.statistics.likeCount}"
 
