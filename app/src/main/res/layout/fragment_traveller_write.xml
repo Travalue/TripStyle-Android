@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -76,95 +76,81 @@
             app:layout_constraintStart_toStartOf="@+id/editTextTitle"
             app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/bodyImageViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="328dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/gray03"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_add_schedule"/>
+<!--        <androidx.viewpager2.widget.ViewPager2-->
+<!--            android:id="@+id/bodyImageViewPager"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="328dp"-->
+<!--            android:layout_marginLeft="16dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginRight="16dp"-->
+<!--            android:background="@color/gray03"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_add_schedule"/>-->
 
 
-        <!--
-        <ImageView
-            android:id="@+id/iv_body"
-            android:layout_width="match_parent"
-            android:layout_height="379dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/gray03"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_add_schedule" />
-            -->
 
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_photo_unselected"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/ic_photo_unselected"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/bodyImageViewPager"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/bodyImageViewPager"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/bodyImageViewPager"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/bodyImageViewPager"-->
+<!--            app:layout_constraintVertical_bias="0.4" />-->
 
-        <ImageView
-            android:id="@+id/iv_photo_unselected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_photo_unselected"
-            app:layout_constraintBottom_toBottomOf="@+id/bodyImageViewPager"
-            app:layout_constraintEnd_toEndOf="@+id/bodyImageViewPager"
-            app:layout_constraintStart_toStartOf="@+id/bodyImageViewPager"
-            app:layout_constraintTop_toTopOf="@+id/bodyImageViewPager"
-            app:layout_constraintVertical_bias="0.4" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/buttonBodyImageUnselected"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:background="@null"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/bodyImageViewPager"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/bodyImageViewPager"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/bodyImageViewPager"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/bodyImageViewPager"-->
+<!--            app:layout_constraintVertical_bias="0.4" />-->
 
-        <ImageButton
-            android:id="@+id/buttonBodyImageUnselected"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/bodyImageViewPager"
-            app:layout_constraintEnd_toEndOf="@+id/bodyImageViewPager"
-            app:layout_constraintStart_toStartOf="@+id/bodyImageViewPager"
-            app:layout_constraintTop_toTopOf="@+id/bodyImageViewPager"
-            app:layout_constraintVertical_bias="0.4" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_photo_unselected1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:text="클릭 시 사진이 추가됩니다."-->
+<!--            android:textSize="14sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/buttonBodyImageUnselected"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/buttonBodyImageUnselected"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/buttonBodyImageUnselected" />-->
 
-        <TextView
-            android:id="@+id/tv_photo_unselected1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="클릭 시 사진이 추가됩니다."
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/buttonBodyImageUnselected"
-            app:layout_constraintStart_toStartOf="@+id/buttonBodyImageUnselected"
-            app:layout_constraintTop_toBottomOf="@+id/buttonBodyImageUnselected" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_photo_unselected2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="(사진을 추가하지 않아도 글 입력이 가능해요!)"-->
+<!--            android:textSize="10sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/tv_photo_unselected1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/tv_photo_unselected1"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_photo_unselected1" />-->
 
-        <TextView
-            android:id="@+id/tv_photo_unselected2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(사진을 추가하지 않아도 글 입력이 가능해요!)"
-            android:textSize="10sp"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/tv_photo_unselected1"
-            app:layout_constraintStart_toStartOf="@+id/tv_photo_unselected1"
-            app:layout_constraintTop_toBottomOf="@+id/tv_photo_unselected1" />
-
-        <EditText
-            android:id="@+id/editTextBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="본문을 입력해 주세요."
-            android:textColorHint="@color/gray"
-            android:textSize="14sp"
-            android:background="@null"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            app:layout_constraintEnd_toEndOf="@+id/bodyImageViewPager"
-            app:layout_constraintStart_toStartOf="@+id/bodyImageViewPager"
-            app:layout_constraintTop_toBottomOf="@+id/bodyImageViewPager" />
+<!--        <EditText-->
+<!--            android:id="@+id/editTextBody"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:hint="본문을 입력해 주세요."-->
+<!--            android:textColorHint="@color/gray"-->
+<!--            android:textSize="14sp"-->
+<!--            android:background="@null"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="textMultiLine"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/bodyImageViewPager"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/bodyImageViewPager"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/bodyImageViewPager" />-->
 
         <ImageButton
             android:id="@+id/buttonBackgroundImage"
@@ -176,15 +162,22 @@
             app:layout_constraintEnd_toEndOf="@+id/iv_background"
             app:layout_constraintTop_toTopOf="@+id/iv_background" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bodyRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_add_schedule"/>
+
         <ImageButton
             android:id="@+id/buttonBodyAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
             android:background="@drawable/ic_body_write_add"
-            app:layout_constraintStart_toStartOf="@+id/buttonBodyImageUnselected"
-            app:layout_constraintEnd_toEndOf="@+id/buttonBodyImageUnselected"
-            app:layout_constraintTop_toBottomOf="@+id/container" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bodyRecyclerView" />
 
         <TextView
             android:id="@+id/tv_body_add1"
@@ -211,17 +204,9 @@
             app:layout_constraintStart_toStartOf="@+id/tv_body_add1"
             app:layout_constraintTop_toBottomOf="@+id/tv_body_add1" />
 
-        <LinearLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="@+id/editTextBody"
-            app:layout_constraintTop_toBottomOf="@+id/editTextBody">
-        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>
