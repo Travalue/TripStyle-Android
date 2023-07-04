@@ -25,8 +25,6 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
 
     override fun initStartView() {
         super.initStartView()
-        //(activity as MainActivity).setToolbarTitle("none")
-        (activity as MainActivity).hideToolbar(true)
     }
 
     override fun initDataBinding() {
@@ -34,12 +32,6 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
 
         //세로 viewpager 생성
         initVerticalCardView()
-
-        // category 이동
-        binding.hambugerbar.setOnClickListener {
-            val action = TrailerFragmentDirections.actionTrailerFragmentToCategoryDialogFragment(binding.tvTrailer.text.toString())
-            navController.navigate(action)
-        }
 
     }
 
