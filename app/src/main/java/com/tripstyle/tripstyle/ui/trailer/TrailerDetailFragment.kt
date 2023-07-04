@@ -181,7 +181,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 val markerTextview = TextView(context)
                 markerTextview.textSize = 9f
                 markerTextview.gravity = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
-                markerTextview.setBackgroundResource(R.drawable.ic_baseline_circle_black_24)
+                markerTextview.setBackgroundResource(R.drawable.primary_color_round)
                 markerTextview.setTextColor(Color.WHITE)
                 markerTextview.text = (i+1).toString()
 
@@ -215,7 +215,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 binding.layoutScheduleDetail.visibility = View.GONE
                 binding.scheduleButton.animate().apply {
                     duration = 300
-                    rotation(0f)
+                    rotation(180f)
                 }
             }else{
                 val viewHeight = binding.layoutScheduleDetail.height
@@ -224,10 +224,10 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 binding.layoutScheduleDetail.visibility = View.VISIBLE
                 binding.scheduleButton.animate().apply {
                     duration = 300
-                    rotation(180f)
+                    rotation(0f)
                 }
                 binding.scrollView.post {
-                    binding.scrollView.smoothScrollTo(0,scrollY+viewHeight)
+                   // binding.scrollView.smoothScrollTo(0,scrollY+viewHeight)
                 }
 
             }
