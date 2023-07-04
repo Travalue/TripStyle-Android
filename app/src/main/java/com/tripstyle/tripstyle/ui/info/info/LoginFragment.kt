@@ -3,6 +3,7 @@ package com.tripstyle.tripstyle.ui.info.info
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentLoginBinding
@@ -17,15 +18,18 @@ import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.common.util.Utility
 import com.tripstyle.tripstyle.MainActivity
 import com.tripstyle.tripstyle.model.LoginRequestModel
-import com.tripstyle.tripstyle.viewmodel.LoginViewModel
+import com.tripstyle.tripstyle.model.LoginResponseModel
+import com.tripstyle.tripstyle.network.AppClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.http.Body
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
-
-    private val loginViewModel : LoginViewModel by viewModels()
 
     // 이메일 로그인 콜백
     private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -34,6 +38,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         } else if (token != null) {
             Log.i("mihye", "로그인 성공 ${token.accessToken}")
         }
+    }
+
+    private fun login(@Body loginRequestData: LoginRequestModel){
+        val resultData: Call<LoginResponseModel> = AppClient.loginService.loginRequest(loginRequestData)
+        resultData.enqueue(object : Callback<LoginResponseModel> {
+            override fun onResponse(
+                call: Call<LoginResponseModel>,
+                response: Response<LoginResponseModel>
+            ) {
+                if (response.isSuccessful) {
+                    val result: LoginResponseModel = response.body()!!
+                    Log.d("[loignRequest]", "서버응답 : $result")
+                } else {
+                    Log.d("[loignRequest]", "실패코드_${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponseModel>, t: Throwable) {
+                t.printStackTrace()
+                Log.d("[loignRequest]","통신 실패")
+            }
+        })
     }
 
 
@@ -115,14 +141,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                                         Log.i("mihye", "사용자 정보 요청 성공 : $user")
 
                                         // 서버 통신
-                                        val loginRequestModel = LoginRequestModel(user.id, user.kakaoAccount?.email,
-                                            user.kakaoAccount?.profile?.profileImageUrl, "KAKAO" )
-                                        CoroutineScope(Dispatchers.IO).launch {
-                                            loginViewModel.loginRequest(loginRequestModel)
-                                        }
 
-                                        Log.i("mihye", "사용자 정보 서버 전송 성공 : $loginRequestModel")
-                                        Log.i("mihye", "viewmodel : ${loginViewModel.loginResponseLiveData.value}")
                                     }
                                 }
 
@@ -161,14 +180,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                                         Log.i("mihye", "사용자 정보 요청 성공 : $user")
 
                                         // 서버 통신
-                                        val loginRequestModel = LoginRequestModel(user.id, user.kakaoAccount?.email,
-                                            user.kakaoAccount?.profile?.profileImageUrl, "KAKAO" )
-                                        CoroutineScope(Dispatchers.IO).launch {
-                                            loginViewModel.loginRequest(loginRequestModel)
-                                        }
 
-                                        Log.i("mihye", "사용자 정보 서버 전송 성공 : $loginRequestModel")
-                                        Log.i("mihye", "viewmodel : ${loginViewModel.loginResponseLiveData.value}")
+
                                     }
                                 }
 
