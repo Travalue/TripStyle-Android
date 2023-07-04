@@ -34,7 +34,6 @@
                 android:text="Feed"
                 android:textColor="@color/white"
                 android:textSize="22sp"
-                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.375"
                 app:layout_constraintStart_toStartOf="parent"

@@ -44,39 +44,27 @@ class MainActivity : AppCompatActivity() {
         when (tag) {
             "none" -> {
                 binding.toolbar.visibility = View.GONE
-//                binding.tvComplete.visibility = View.GONE
-//                binding.tvRegister.visibility = View.GONE
             }
             "프로필 편집" -> {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.tvToolbarName.text = "프로필 편집"
-//                binding.tvComplete.visibility = View.VISIBLE
-//                binding.tvRegister.visibility = View.GONE
             }
             "나의 여행지 리스트"-> {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.tvToolbarName.text = "나의 여행지 리스트"
-//                binding.tvComplete.visibility = View.VISIBLE
-//                binding.tvRegister.visibility = View.GONE
             }
             "글 작성하기" -> {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.tvToolbarName.text = "글 작성하기"
-//                binding.tvComplete.visibility = View.GONE
-//                binding.tvRegister.visibility = View.VISIBLE
             }
             "일정/장소 첨부" -> {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.tvToolbarName.text = "일정/장소 첨부"
-//                binding.tvComplete.visibility = View.GONE
-//                binding.tvRegister.visibility = View.VISIBLE
                 supportActionBar!!.setHomeAsUpIndicator(com.tripstyle.tripstyle.R.drawable.text_cancel) // 임시
             }
             else -> {
                 binding.toolbar.visibility= View.VISIBLE
                 binding.tvToolbarName.text = tag
-//                binding.tvComplete.visibility = View.GONE
-//                binding.tvRegister.visibility = View.GONE
             }
         }
     }
