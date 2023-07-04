@@ -138,7 +138,7 @@
     <fragment
         android:id="@+id/trailerDetailFragment"
         android:name="com.tripstyle.tripstyle.ui.trailer.TrailerDetailFragment"
-        android:label="trailer">
+        android:label="@string/post">
 
         <deepLink app:uri="https://guide.trailer.com/{postId}"
             app:action="android.intent.action.MY_ACTION"
