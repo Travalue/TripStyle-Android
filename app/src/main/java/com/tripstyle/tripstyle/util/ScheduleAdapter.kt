@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.model.Schedule
 
-class ScheduleAdapter(private val dataSet: ArrayList<String>) : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
+class ScheduleAdapter(private val dataSet: ArrayList<Schedule>) : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val tv_number :TextView
@@ -35,7 +36,8 @@ class ScheduleAdapter(private val dataSet: ArrayList<String>) : RecyclerView.Ada
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if(position == dataSet.size-1) holder.line.visibility = View.INVISIBLE
         holder.tv_number.text = (position+1).toString()
-        holder.tv_schedule_name.text = dataSet[position]
+        holder.tv_schedule_name.text = dataSet[position].name
+        holder.tv_schedule_address.text = dataSet[position].address
     }
 
     inner class ItemDecorator(val topSpace:Int) : RecyclerView.ItemDecoration() {

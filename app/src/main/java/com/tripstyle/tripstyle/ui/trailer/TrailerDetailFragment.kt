@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.graphics.Color
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -11,6 +12,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentTrailerDetailBinding
@@ -22,46 +25,103 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PolylineOverlay
 import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.model.*
+import com.tripstyle.tripstyle.network.AppClient
+import com.tripstyle.tripstyle.network.TravelService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layout.fragment_trailer_detail){
+    private lateinit var detailResponse : Data
     val args: TrailerDetailFragmentArgs by navArgs()
+    val service = AppClient.retrofit?.create(TravelService::class.java)
 
     override fun initStartView() {
         super.initStartView()
        // (activity as MainActivity).setToolbarTitle("trailer")
         (activity as MainActivity).hideToolbar(false)
 
-        initMapView()
-        animationScheduleView()
-        clickFavorite()
-        clickClip()
+        // API 조회
+        requestTravelPost(args.postId)
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
-        initScheduleView()
-        initData()
+
+        animationScheduleView()
     }
 
     override fun initAfterBinding() {
         super.initAfterBinding()
+
+        initFavorite()
+        clickClip()
     }
 
-    private fun initData(){
-        val list = arrayListOf<TrailerDetail>()
-        list.add(TrailerDetail("dfksljdfksjdkf",R.drawable.card_img_example))
-        list.add(TrailerDetail("dfksljdfksjdkf",R.drawable.card_img_example))
-        list.add(TrailerDetail("dfksljdfksjdkf",R.drawable.card_img_example))
-        list.add(TrailerDetail("dfksljdfksjdkf",R.drawable.card_img_example))
+    // 네트워크 요청
+    private fun requestTravelPost(id:Int){
+        service?.getTravelPost(id)?.enqueue(object : Callback<TravelDetailResponse>{
+            override fun onResponse(
+                call: Call<TravelDetailResponse>,
+                response: Response<TravelDetailResponse>
+            ) {
+                detailResponse = response.body()?.data!!
 
-        val adapter = TrailerDetailRecyclerViewAdapter(list)
-        binding.rvScheduleDetail.adapter = adapter // 어댑터 생성
+                initView()
+                initMapView()
+            }
+
+            override fun onFailure(call: Call<TravelDetailResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    // 초기화
+    private fun initView(){
+        binding.tvMainTitle.text = detailResponse.title
+        binding.tvSubTitle.text = detailResponse.subTitle
+        Glide.with(this).load(detailResponse?.thumbnail).into(binding.ivMainImage)
+        binding.tvViews.text = "${detailResponse.statistics.viewCount} views"
+        binding.tvFavoriteCnt.text = "${detailResponse.statistics.likeCount}"
+
+        // 일정 adapter
+        val adapter = ScheduleAdapter(detailResponse.schedules as ArrayList<Schedule>)
+
+        binding.rvSchedule.addItemDecoration(adapter.ItemDecorator(-80))
+        binding.rvSchedule.adapter = adapter
+        binding.rvSchedule.layoutManager = LinearLayoutManager(context)
+
+        // 컨텐츠 adapter
+        val detailAdpater = TrailerDetailRecyclerViewAdapter(requireContext(), detailResponse.contents)
+        binding.rvScheduleDetail.adapter = detailAdpater // 어댑터 생성
 
         with(binding.rvScheduleDetail){
             clipToPadding = false
             clipChildren = false
         }
+
+        when(detailResponse?.subject){
+            "식도락" -> Glide.with(this).load(R.drawable.ic_category_food).into(binding.ivCategory)
+            "액티비티" -> Glide.with(this).load(R.drawable.ic_category_activity).into(binding.ivCategory)
+            "패키지" -> Glide.with(this).load(R.drawable.ic_category_package).into(binding.ivCategory)
+            "휴양" -> Glide.with(this).load(R.drawable.ic_category_refresh).into(binding.ivCategory)
+        }
+
+        //writer 영역
+        binding.tvWriter.text = detailResponse.writer.nickname
+        binding.tvDescription.text = detailResponse.writer?.description?.toString()
+        Glide.with(this).load(detailResponse.writer.profileImageURL).apply(RequestOptions().circleCrop()).into(binding.ivUserProfile)
+        binding.tvWriteCnt.text = "30"
+
+        //좋아요
+        if(detailResponse.statistics.liked){
+            binding.btnFavorite.setImageResource(R.drawable.ic_heart_fill)
+        }
     }
+
     private fun clickClip(){
         binding.btnClipLick.setOnClickListener {
             val clipboard = requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
@@ -71,6 +131,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
             binding.btnClipLick.setBackgroundResource(R.drawable.ic_link_02)
         }
     }
+
     private fun initMapView(){
         val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?
@@ -105,14 +166,12 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
             val polyline = PolylineOverlay()
 
             //TODO : change marker hard code data
-            val mapList = arrayListOf<LatLng>(
-                LatLng(37.5670135, 126.9783740),
-                LatLng(37.5666805, 126.9784147),
-                LatLng(37.568307444233, 126.97675211537),
-            )
+            val mapList = getMapData()
 
             polyline.setPattern(10,5)
-            polyline.coords = mapList
+            if(mapList.size >2){
+                polyline.coords = mapList
+            }
 
             for(i in 0 until mapList.size){
                 val markerTextview = TextView(context)
@@ -137,6 +196,15 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         mapFragment.getMapAsync(onMapReadyCallback)
 
     }
+
+    private fun getMapData() : ArrayList<LatLng>{
+        var makerList = arrayListOf<LatLng>()
+        detailResponse.schedules.map {
+            makerList.add(LatLng(it.latitude,it.longitude))
+        }
+        return makerList
+    }
+
     private fun animationScheduleView(){
         binding.layoutScheduleTitle.setOnClickListener {
             if(binding.layoutScheduleDetail.visibility == View.VISIBLE){
@@ -162,34 +230,50 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         }
     }
 
-    private fun initScheduleView(){
-        val adapter = ScheduleAdapter(getScheduleList())
-
-        binding.rvSchedule.addItemDecoration(adapter.ItemDecorator(-80))
-        binding.rvSchedule.adapter = ScheduleAdapter(getScheduleList())
-        binding.rvSchedule.layoutManager = LinearLayoutManager(context)
-    }
-
-    // TODO : 추후에 데이터 연결 후 flag 로직 빼기
-    private fun clickFavorite(){
+    private fun initFavorite(){
         var flag = false
         binding.btnFavorite.setOnClickListener {
             if(!flag){
-                binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_selected)
-                flag = true
+                service?.getLikePost(args.postId)?.enqueue(object : Callback<BaseResponseModel>{
+                    override fun onResponse(
+                        call: Call<BaseResponseModel>,
+                        response: Response<BaseResponseModel>
+                    ) {
+                        if(response.body()?.code == 201){
+                            binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_selected)
+                            flag = true
+                        }else{
+                            Toast.makeText(context,response.body()?.message.toString(),Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BaseResponseModel>, t: Throwable) {
+                        Toast.makeText(context,t.message,Toast.LENGTH_SHORT).show()
+                    }
+
+                })
             }else{
-                binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_fill)
+                service?.getUnlikePost(args.postId)?.enqueue(object : Callback<BaseResponseModel>{
+                    override fun onResponse(
+                        call: Call<BaseResponseModel>,
+                        response: Response<BaseResponseModel>
+                    ) {
+                        if(response.body()?.code == 200){
+                            binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_fill)
+                            flag = true
+                        }else{
+                            Toast.makeText(context,response.body()?.message.toString(),Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BaseResponseModel>, t: Throwable) {
+                        Toast.makeText(context,t.message,Toast.LENGTH_SHORT).show()
+                    }
+
+                })
             }
 
         }
     }
 
-    //mockup data
-    private fun getScheduleList(): ArrayList<String> {
-        return arrayListOf(
-            "순천 국가정원",
-            "순천 국가정원",
-            "순천 국가정원",
-            "순천 국가정원")
-    }
 }

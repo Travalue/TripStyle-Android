@@ -145,8 +145,7 @@
             android:autoVerify="true"/>
         <argument
             android:name="postId"
-            app:argType="integer"
-            android:defaultValue="1" />
+            app:argType="integer"/>
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
