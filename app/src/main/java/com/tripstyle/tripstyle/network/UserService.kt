@@ -1,4 +1,4 @@
-package com.tripstyle.tripstyle.api
+package com.tripstyle.tripstyle.network
 
 import com.tripstyle.tripstyle.model.NicknameRequestModel
 import com.tripstyle.tripstyle.model.NicknameResponseModel
@@ -10,10 +10,10 @@ import retrofit2.http.Query
 
 interface UserService {
 
-    @GET("check")
+    @GET("/v1/user/check")
     fun checkNickname(@Query("nickname") nickname: String): Call<NicknameResponseModel>
 
-    @POST("nickname")
+    @POST("/v1/user/nickname")
     fun postNickname(@Body nicknameRequestModel: NicknameRequestModel, @Body userId: Long )
 
 }
