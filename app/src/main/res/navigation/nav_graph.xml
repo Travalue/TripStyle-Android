@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/trailerFragment">
 
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.tripstyle.tripstyle.ui.trailer.TrailerFragment"
-        android:label="TrailerFragment" >
+        android:label="@string/feed" >
         <action
             android:id="@+id/action_trailerFragment_to_categoryDialogFragment"
             app:destination="@id/categoryDialogFragment" />
