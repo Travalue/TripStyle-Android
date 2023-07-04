@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Travalue" parent="@style/Theme.AppCompat.NoActionBar">
+    <style name="Theme.Travalue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/backgroundColor</item>
         <item name="colorPrimaryVariant">@color/backgroundColor</item>
@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/blue_1635FF</item>
         <!-- Customize your theme here. -->
 
         <!-- font -->
