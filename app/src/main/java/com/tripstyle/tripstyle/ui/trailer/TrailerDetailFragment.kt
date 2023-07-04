@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
@@ -83,7 +84,10 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
     private fun initView(){
         binding.tvMainTitle.text = detailResponse.title
         binding.tvSubTitle.text = detailResponse.subTitle
+        // 이미지 dim 처리
         Glide.with(this).load(detailResponse?.thumbnail).into(binding.ivMainImage)
+        binding.ivMainImage.setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
+
         binding.tvViews.text = "${detailResponse.statistics.viewCount} views"
         binding.tvFavoriteCnt.text = "${detailResponse.statistics.likeCount}"
 
@@ -177,7 +181,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 val markerTextview = TextView(context)
                 markerTextview.textSize = 9f
                 markerTextview.gravity = Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
-                markerTextview.setBackgroundResource(R.drawable.ic_baseline_circle_black_24)
+                markerTextview.setBackgroundResource(R.drawable.primary_color_round)
                 markerTextview.setTextColor(Color.WHITE)
                 markerTextview.text = (i+1).toString()
 
@@ -211,7 +215,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 binding.layoutScheduleDetail.visibility = View.GONE
                 binding.scheduleButton.animate().apply {
                     duration = 300
-                    rotation(0f)
+                    rotation(180f)
                 }
             }else{
                 val viewHeight = binding.layoutScheduleDetail.height
@@ -220,10 +224,10 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 binding.layoutScheduleDetail.visibility = View.VISIBLE
                 binding.scheduleButton.animate().apply {
                     duration = 300
-                    rotation(180f)
+                    rotation(0f)
                 }
                 binding.scrollView.post {
-                    binding.scrollView.smoothScrollTo(0,scrollY+viewHeight)
+                   // binding.scrollView.smoothScrollTo(0,scrollY+viewHeight)
                 }
 
             }
