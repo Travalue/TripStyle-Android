@@ -46,7 +46,7 @@ class TrailerViewPagerAdapter(private val context: Context) :
 
         if(listener != null){
             holder.trailerCard.setOnClickListener {
-                it.findNavController().navigate(listener!!.onMoveDetailPage())
+                it.findNavController().navigate(listener!!.onMoveDetailPage(item?.trailerId!!))
             }
         }
         //holder.trailerCard.clipToOutline = true

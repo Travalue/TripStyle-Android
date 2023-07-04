@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registerFragment">
+    app:startDestination="@id/trailerFragment">
 
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.tripstyle.tripstyle.ui.trailer.TrailerFragment"
-        android:label="TrailerFragment" >
+        android:label="@string/feed" >
         <action
             android:id="@+id/action_trailerFragment_to_categoryDialogFragment"
             app:destination="@id/categoryDialogFragment" />
@@ -52,6 +52,33 @@
         <action
             android:id="@+id/action_travellerWriteFragment_to_TravellerLocationFragment"
             app:destination="@+id/travellerLocationFragment"/>
+        <action
+            android:id="@+id/action_travellerWriteFragment_to_categoryOptionFragment"
+            app:destination="@+id/categoryOptionFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryOptionFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerCategoryOptionFragment"
+        android:label="카테고리 옵션" >
+        <action
+            android:id="@+id/action_categoryOptionFragment_to_categoryOptionSubjectFragment"
+            app:destination="@+id/categoryOptionSubjectFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryOptionSubjectFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerCategoryOptionSubjectFragment"
+        android:label="카테고리 옵션 주제" >
+        <action
+            android:id="@+id/action_categoryOptionSubjectFragment_to_categoryOptionSubjectSelectFragment"
+            app:destination="@+id/categoryOptionSubjectSelectFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryOptionSubjectSelectFragment"
+        android:name="com.tripstyle.tripstyle.ui.traveller.TravellerCategoryOptionSubjectSelectFragment"
+        android:label="카테고리 옵션 주제 선택" >
     </fragment>
 
     <fragment
@@ -111,15 +138,14 @@
     <fragment
         android:id="@+id/trailerDetailFragment"
         android:name="com.tripstyle.tripstyle.ui.trailer.TrailerDetailFragment"
-        android:label="trailer">
+        android:label="@string/post">
 
         <deepLink app:uri="https://guide.trailer.com/{postId}"
             app:action="android.intent.action.MY_ACTION"
             android:autoVerify="true"/>
         <argument
             android:name="postId"
-            app:argType="integer"
-            android:defaultValue="1" />
+            app:argType="integer"/>
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"

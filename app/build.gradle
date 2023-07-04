@@ -36,6 +36,7 @@ android {
 
             buildConfigField("String", "LOCATION_CLIENT_ID", "" + localProperties['LOCATION_CLIENT_ID'] + "")
             buildConfigField("String", "LOCATION_CLIENT_SECRET", "" + localProperties['LOCATION_CLIENT_SECRET'] + "")
+            buildConfigField("String", "TOKEN", "" + localProperties['TOKEN'] + "")
         }
 
         release {

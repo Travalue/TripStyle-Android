@@ -3,6 +3,7 @@ package com.tripstyle.tripstyle.ui.trailer
 import android.util.Log
 import android.view.View
 import androidx.navigation.NavDirections
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
@@ -20,11 +21,10 @@ import kotlin.math.abs
 class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_trailer) {
 
     lateinit var adapter : TrailerViewPagerAdapter
+    private val args by navArgs<TrailerFragmentArgs>()
 
     override fun initStartView() {
         super.initStartView()
-        //(activity as MainActivity).setToolbarTitle("none")
-        (activity as MainActivity).hideToolbar(true)
     }
 
     override fun initDataBinding() {
@@ -32,12 +32,6 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
 
         //세로 viewpager 생성
         initVerticalCardView()
-
-        // category 이동
-        binding.hambugerbar.setOnClickListener {
-            val action = TrailerFragmentDirections.actionTrailerFragmentToCategoryDialogFragment(binding.tvTrailer.text.toString())
-            navController.navigate(action)
-        }
 
     }
 
@@ -71,8 +65,8 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
     private fun initVerticalCardView(){
         adapter = TrailerViewPagerAdapter(requireContext())
         adapter.setListener(object : onActionListener {
-            override fun onMoveDetailPage(): NavDirections {
-                return TrailerFragmentDirections.actionTrailerFragmentToTrailerDetailFragment()
+            override fun onMoveDetailPage(id:Int): NavDirections {
+                return TrailerFragmentDirections.actionTrailerFragmentToTrailerDetailFragment(id)
             }
         })
         binding.tpTrailerCard.adapter = adapter // 어댑터 생성
@@ -85,15 +79,6 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
         }
 
         binding.tpTrailerCard.setPageTransformer(SwipeTransformer())
-    }
-
-    // 뷰 페이저에 들어갈 아이템
-    private fun getCardList(): ArrayList<Int> {
-        return arrayListOf<Int>(
-            R.drawable.card_img_example,
-            R.drawable.card_img_example,
-            R.drawable.card_img_example,
-            R.drawable.card_img_example)
     }
 
     inner class SwipeTransformer : ViewPager2.PageTransformer{

@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.tripstyle.tripstyle.databinding.ActivityMainBinding
 import com.kakao.sdk.common.util.Utility
 
@@ -22,8 +23,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        //setToolbar()
 
         migrateToolbarNavigation()
 
@@ -45,39 +44,27 @@ class MainActivity : AppCompatActivity() {
         when (tag) {
             "none" -> {
                 binding.toolbar.visibility = View.GONE
-                binding.tvComplete.visibility = View.GONE
-                binding.tvRegister.visibility = View.GONE
             }
             "프로필 편집" -> {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.tvToolbarName.text = "프로필 편집"
-                binding.tvComplete.visibility = View.VISIBLE
-                binding.tvRegister.visibility = View.GONE
             }
             "나의 여행지 리스트"-> {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.tvToolbarName.text = "나의 여행지 리스트"
-                binding.tvComplete.visibility = View.VISIBLE
-                binding.tvRegister.visibility = View.GONE
             }
             "글 작성하기" -> {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.tvToolbarName.text = "글 작성하기"
-                binding.tvComplete.visibility = View.GONE
-                binding.tvRegister.visibility = View.VISIBLE
             }
             "일정/장소 첨부" -> {
                 binding.toolbar.visibility = View.VISIBLE
                 binding.tvToolbarName.text = "일정/장소 첨부"
-                binding.tvComplete.visibility = View.GONE
-                binding.tvRegister.visibility = View.VISIBLE
                 supportActionBar!!.setHomeAsUpIndicator(com.tripstyle.tripstyle.R.drawable.text_cancel) // 임시
             }
             else -> {
                 binding.toolbar.visibility= View.VISIBLE
                 binding.tvToolbarName.text = tag
-                binding.tvComplete.visibility = View.GONE
-                binding.tvRegister.visibility = View.GONE
             }
         }
     }
@@ -95,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         }
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
+        binding.bottomNav.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
