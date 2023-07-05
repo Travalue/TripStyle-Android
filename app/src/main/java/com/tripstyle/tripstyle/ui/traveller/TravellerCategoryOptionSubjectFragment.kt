@@ -96,7 +96,6 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
             var intent = Intent(Intent.ACTION_PICK)
             intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*")
             imageResultSingle.launch(intent)
-
         }
     }
 
@@ -106,6 +105,7 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
                 .centerCrop()
                 .into(binding.ivCategoryCover)
         }
+        // 텍스트뷰 숨기기
         binding.tvCategoryCoverImageAdd.visibility = View.INVISIBLE
     }
 
