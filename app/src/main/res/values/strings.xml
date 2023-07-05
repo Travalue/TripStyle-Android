@@ -10,6 +10,12 @@
         <item>패키지</item>
     </string-array>
 
+    <string name="feed">Feed</string>
+    <string name="explore">Explore</string>
+    <string name="mypage">My page</string>
+    <string name="post">게시물</string>
+    <string name="schedule">일정 보기</string>
+
     <string name="kakao_native_key">kakao226b85a748a6910b4b76afd77b670ee0</string>
     <string name="native_key">226b85a748a6910b4b76afd77b670ee0</string>
 </resources>

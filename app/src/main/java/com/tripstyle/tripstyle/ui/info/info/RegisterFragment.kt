@@ -1,20 +1,26 @@
 package com.tripstyle.tripstyle.ui.info.info
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.tripstyle.tripstyle.R
-import com.tripstyle.tripstyle.apiManager.UserApiManager
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentRegisterBinding
 import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.model.NicknameRequestModel
+import com.tripstyle.tripstyle.model.NicknameResponseModel
+import com.tripstyle.tripstyle.network.AppClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 
 class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_register) {
-
-    val apiManager = UserApiManager.getInstance(context)
 
     override fun initStartView() {
         super.initStartView()
@@ -65,8 +71,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
                         binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.black))
                         binding.btnCheck.isEnabled=true
 
-                        //회원가입 버튼 활성화 (추후 중복검사 후 활성화로 변경해야함)
-                        binding.btnRegister.isEnabled=true
                     }else{
                         binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.drakGray))
                         binding.btnCheck.isEnabled=false
@@ -77,16 +81,68 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
         })
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun initAfterBinding() {
         super.initAfterBinding()
 
 
         binding.btnRegister.setOnClickListener {
-            navController.navigate(R.id.action_registerFragment_to_registerOkFragment)
+            val nicknameRequestModel = NicknameRequestModel(binding.etNickname.toString())
+            val resultData: Call<Void> = AppClient.userService.postNickname("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE2ODYwMzc0MTksImV4cCI6MTcxNzU3MzQxOX0.g7B5CNPCoENBpYopVvoHY3GhP6sL8-xC4j3aFkmWOPs",nicknameRequestModel)
+            resultData.enqueue(object : Callback<Void> {
+                override fun onResponse(
+                    call: Call<Void>,
+                    response: Response<Void>
+                ) {
+                    if (response.isSuccessful) {
+                        navController.navigate(R.id.action_registerFragment_to_registerOkFragment)
+                        Log.d("[postNickname]", "로그인성공_${response.code()}")
+                    } else {
+                        Log.d("[postNickname]", "실패코드_${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.d("[postNickname]","통신 실패")
+                }
+            })
         }
 
         binding.btnCheck.setOnClickListener {
-            apiManager?.checkNickname("string")
+            val nickname = binding.etNickname.text.toString()
+            val resultData: Call<NicknameResponseModel> = AppClient.userService.checkNickname(nickname)
+            resultData.enqueue(object : Callback<NicknameResponseModel> {
+                override fun onResponse(
+                    call: Call<NicknameResponseModel>,
+                    response: Response<NicknameResponseModel>
+                ) {
+                    if (response.isSuccessful) {
+                        val result: NicknameResponseModel = response.body()!!
+                        if(result.isDuplicate == false){
+                            Log.d("[checkNickname]", "서버응답 : $result")
+                            //회원가입 버튼 활성화 (추후 중복검사 후 활성화로 변경해야함)
+                            binding.btnRegister.isEnabled=true
+                            binding.tvIsDupliate.visibility = View.VISIBLE
+                            binding.tvIsDupliate.text = "사용 가능한 별명입니다."
+                            binding.tvIsDupliate.setTextColor(Color.parseColor("#E3FF16"))
+                        }else{
+                            Log.d("[checkNickname]", "서버응답 : $result")
+                            binding.btnRegister.isEnabled=false
+                            binding.tvIsDupliate.visibility = View.VISIBLE
+                            binding.tvIsDupliate.text = "사용 불가능한 별명입니다."
+                            binding.tvIsDupliate.setTextColor(Color.RED)
+                        }
+                    } else {
+                        Log.d("[checkNickname]", "실패코드_${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<NicknameResponseModel>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.d("[checkNickname]","통신 실패")
+                }
+            })
         }
     }
 }

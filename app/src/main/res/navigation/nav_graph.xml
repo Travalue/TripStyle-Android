@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/trailerFragment">
 
     <fragment
         android:id="@+id/trailerFragment"
         android:name="com.tripstyle.tripstyle.ui.trailer.TrailerFragment"
-        android:label="TrailerFragment" >
+        android:label="@string/feed" >
         <action
             android:id="@+id/action_trailerFragment_to_categoryDialogFragment"
             app:destination="@id/categoryDialogFragment" />
@@ -138,15 +138,14 @@
     <fragment
         android:id="@+id/trailerDetailFragment"
         android:name="com.tripstyle.tripstyle.ui.trailer.TrailerDetailFragment"
-        android:label="trailer">
+        android:label="@string/post">
 
         <deepLink app:uri="https://guide.trailer.com/{postId}"
             app:action="android.intent.action.MY_ACTION"
             android:autoVerify="true"/>
         <argument
             android:name="postId"
-            app:argType="integer"
-            android:defaultValue="1" />
+            app:argType="integer"/>
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"

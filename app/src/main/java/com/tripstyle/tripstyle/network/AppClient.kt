@@ -20,4 +20,7 @@ object AppClient {
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
+    val loginService: LoginService = retrofit.create(LoginService::class.java)
+    val userService: UserService = retrofit.create(UserService::class.java)
+
 }
