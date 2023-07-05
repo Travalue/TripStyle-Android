@@ -16,7 +16,7 @@
             android:layout_marginTop="60dp"
             android:text="카테고리"
             android:textSize="16sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black_100"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="@+id/tv_just_category_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_just_category_text"/>
 
         <TextView
@@ -62,7 +63,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="@+id/tv_just_all_text"
+            app:layout_constraintStart_toStartOf="@+id/line1"
+            app:layout_constraintEnd_toEndOf="@+id/line1"
             app:layout_constraintTop_toBottomOf="@+id/tv_just_all_text"/>
 
         <TextView
@@ -84,7 +86,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="@+id/tv_category_add"
+            app:layout_constraintStart_toStartOf="@+id/line2"
+            app:layout_constraintEnd_toEndOf="@+id/line2"
             app:layout_constraintTop_toBottomOf="@+id/tv_category_add"/>
 
         <TextView
@@ -92,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="공개 설정"
-            android:textColor="@color/white"
+            android:textColor="@color/black_100"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="30dp"
@@ -114,7 +117,7 @@
             android:id="@+id/tv_open_status_private"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="어떤 사람도 이 글을 볼 수 없습니다"
+            android:text="다른 사람이 이 글을 볼 수 없습니다"
             android:textSize="12sp"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_just_open_status_text"
@@ -124,16 +127,19 @@
 
 
         <RadioGroup
+            android:id="@+id/radioGroupOpenStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@+id/tv_just_open_status_text"
+            app:layout_constraintStart_toStartOf="@+id/line3"
+            app:layout_constraintEnd_toEndOf="@+id/line3"
             app:layout_constraintTop_toBottomOf="@+id/tv_just_open_status_text" >
 
             <RadioButton
+                android:checked="true"
                 android:id="@+id/button_public"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
@@ -160,19 +166,17 @@
 
 
 
-        <Button
+        <ImageButton
             android:id="@+id/button_traveller_add"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/btn_add_travel"
-            android:text="트레블러 등록"
-            android:textColor="@color/black"
-            android:textSize="16sp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:background="@drawable/btn_add_travel2"
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_just_open_status_text" />
+            app:layout_constraintStart_toStartOf="@+id/radioGroupOpenStatus"
+            app:layout_constraintEnd_toEndOf="@+id/radioGroupOpenStatus"/>
 
 
 
