@@ -29,6 +29,7 @@
             android:inputType="textPersonName"
             android:background="@drawable/edittext_corner_rectangle"
             android:hint="한/영 10자 이내로 입력해주세요."
+            android:maxLength="10"
             android:textColorHint="@color/gray"
             android:textSize="14sp"
             android:textColor="@color/black_100"
