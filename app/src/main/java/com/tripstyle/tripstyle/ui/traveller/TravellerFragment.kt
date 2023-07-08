@@ -150,12 +150,12 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
 
 
 
-        // category 이동
-        binding.hambugerbar.setOnClickListener{
-//            navController.navigate(R.id.action_travellerFragment_to_categoryDialogFragment)
-            val action = TravellerFragmentDirections.actionTravellerFragmentToCategoryDialogFragment(binding.tvTraveller.text.toString())
-            navController.navigate(action)
-        }
+//        // category 이동
+//        binding.hambugerbar.setOnClickListener{
+////            navController.navigate(R.id.action_travellerFragment_to_categoryDialogFragment)
+//            val action = TravellerFragmentDirections.actionTravellerFragmentToCategoryDialogFragment(binding.tvTraveller.text.toString())
+//            navController.navigate(action)
+//        }
 
 
         /*

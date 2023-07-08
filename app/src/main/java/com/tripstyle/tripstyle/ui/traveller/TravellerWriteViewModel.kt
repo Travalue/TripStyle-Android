@@ -2,12 +2,19 @@ package com.tripstyle.tripstyle.ui.traveller
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tripstyle.tripstyle.model.Schedule
 import com.tripstyle.tripstyle.model.TravellerWriteResult
 
 class TravellerWriteViewModel: ViewModel() {
     val bodyItem = ArrayList<TravellerWriteResult>()
     val bodyItemListData = MutableLiveData<ArrayList<TravellerWriteResult>>()
     private val editTextContents = mutableMapOf<Int, String>()
+
+    val scheduleItem = ArrayList<Schedule>()
+    val scheduleItemListData = MutableLiveData<ArrayList<Schedule>>()
+
+    private var categorySubject = ""
+    var categorySubjectLiveData = MutableLiveData<String>()
 
     init {
         addBodyItem()
@@ -64,5 +71,25 @@ class TravellerWriteViewModel: ViewModel() {
             println("current image count: ${it.images.size}")
             println("current text: ${it.text}")
         }
+    }
+
+
+
+    // 카테고리 주제 저장하는
+    fun updateCategorySubject(text: String){
+        categorySubject = text
+        categorySubjectLiveData.value = categorySubject
+    }
+
+
+    // 지도 및 일정 관련
+    fun addScheduleItem(item: Schedule){
+        scheduleItem.add(item)
+        scheduleItemListData.value = scheduleItem
+    }
+
+    fun deleteScheduleItem(){
+        scheduleItem.clear()
+        scheduleItemListData.value = scheduleItem
     }
 }
