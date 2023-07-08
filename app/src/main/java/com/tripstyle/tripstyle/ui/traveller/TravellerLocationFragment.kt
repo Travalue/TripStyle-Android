@@ -2,15 +2,16 @@ package com.tripstyle.tripstyle.ui.traveller
 
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentTravellerLocationBinding
 import com.tripstyle.tripstyle.network.AppClient
 import com.tripstyle.tripstyle.network.MapService
-
 import com.tripstyle.tripstyle.MainActivity
 import com.tripstyle.tripstyle.model.ItemData
+import com.tripstyle.tripstyle.model.Schedule
 import com.tripstyle.tripstyle.model.SearchResult
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,11 +22,14 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
     lateinit var adapter : TravellerLocationRecyclerViewAdapter
     lateinit var selectAdapter : TravellerLocationSelectedRecyclerViewAdapter
 
+    private val viewModel by activityViewModels<TravellerWriteViewModel>()
+
     var selectedList = arrayListOf<ItemData>()
 
     override fun initStartView() {
         super.initStartView()
         (activity as MainActivity).setToolbarTitle("일정/장소 첨부")
+        viewModel.deleteScheduleItem()
     }
 
     override fun initDataBinding() {
@@ -69,6 +73,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
         }
 
         selectedList.add(itemData)
+        viewModel.addScheduleItem(Schedule(itemData.address,itemData.mapy.toDouble(),itemData.mapx.toDouble(),itemData.title))
         selectAdapter.setData(selectedList)
         selectAdapter.notifyDataSetChanged()
 
