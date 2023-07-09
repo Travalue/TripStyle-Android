@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.R
-import com.tripstyle.tripstyle.model.Schedule
+import com.tripstyle.tripstyle.data.model.dto.Schedule
 
 class ScheduleAdapter(private val dataSet: ArrayList<Schedule>) : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
 

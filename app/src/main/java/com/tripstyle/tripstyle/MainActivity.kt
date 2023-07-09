@@ -28,18 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setToolbar(){
-        val toolbar = binding.toolbar
-        setSupportActionBar(toolbar)
-        val ab = supportActionBar!!
-        // Toolbar에 표시되는 제목의 표시 유무를 설정. false로 해야 custom한 툴바의 이름이 화면에 보인다.
-        ab.setDisplayShowTitleEnabled(false)
-        // 뒤로가기 버튼
-        ab.setDisplayHomeAsUpEnabled(true)
-        //왼쪽 버튼 아이콘 변경
-        supportActionBar!!.setHomeAsUpIndicator(com.tripstyle.tripstyle.R.drawable.btn_before)
-    }
-
     fun setToolbarTitle(tag: String){
         when (tag) {
             "none" -> {
