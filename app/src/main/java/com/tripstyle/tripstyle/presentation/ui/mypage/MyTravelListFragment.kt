@@ -22,7 +22,6 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("나의 여행지 리스트")
     }
 
     override fun initDataBinding() {

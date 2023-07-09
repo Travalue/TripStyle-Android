@@ -20,6 +20,7 @@
         <item name="android:radioButtonStyle">@style/customRadioButtonFontStyle</item>
         <item name="android:checkboxStyle">@style/customCheckboxFontStyle</item>
         <item name="android:toolbarStyle">@style/customToolbarFontStyle</item>
+
     </style>
 
     <!-- Splash theme. -->
@@ -36,4 +37,5 @@
         // Set the theme of the Activity that directly follows your splash screen.
         <item name="postSplashScreenTheme">@style/Theme.Travalue</item>  # Required.
     </style>
+
 </resources>

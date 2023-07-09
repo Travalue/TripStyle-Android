@@ -24,7 +24,8 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("register")
+        (activity as MainActivity).hideBottomNav(true)
+        (activity as MainActivity).hideToolbar(true)
     }
 
     override fun initDataBinding() {
