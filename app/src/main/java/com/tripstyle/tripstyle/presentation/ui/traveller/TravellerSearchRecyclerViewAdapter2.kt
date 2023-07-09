@@ -76,7 +76,7 @@ class TravellerSearchRecyclerViewAdapter2(private val viewModel: TravellerSearch
                     else -> Glide.with(itemView).load(R.drawable.ic_other3).into(cityImage)
                 }
                 QueryCityName.text = cities
-                QuerySpecificCityName.text = specificCities
+                QuerySpecificCityName.text = "해외 여행지"
             }
 
         }
