@@ -60,8 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemIconSize="17dp"
+        app:itemIconTint="@drawable/menu_selected_color"
         app:labelVisibilityMode="labeled"
-        app:itemIconTint="@color/gray_959595"
         app:itemTextColor="@color/gray_959595"
         app:menu="@menu/menu_bottom_nav" />
 
