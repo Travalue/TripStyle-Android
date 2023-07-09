@@ -172,7 +172,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    android:background="@drawable/ic_seoul2"/>
+                    android:background="@drawable/ic_seoul3"/>
 
                 <TextView
                     android:id="@+id/tv_seoul"
@@ -199,7 +199,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_busan2" />
+                    app:srcCompat="@drawable/ic_busan3" />
 
                 <TextView
                     android:id="@+id/tv_busan"
@@ -225,7 +225,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_jeju2" />
+                    app:srcCompat="@drawable/ic_jeju3" />
 
                 <TextView
                     android:id="@+id/tv_jeju"
@@ -251,7 +251,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_other2" />
+                    app:srcCompat="@drawable/ic_other3" />
 
                 <TextView
                     android:id="@+id/tv_etc"
@@ -268,17 +268,29 @@
         </LinearLayout>
 
 
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lightgray"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"/>
+
             <TextView
                 android:id="@+id/tv_overseas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="111dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:text="해외 여행지 대륙별 보기"
                 android:textColor="@color/black_100"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_domestic" />
+                app:layout_constraintTop_toBottomOf="@+id/line1" />
 
 
 
@@ -307,7 +319,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    app:srcCompat="@drawable/ic_asia" />
+                    app:srcCompat="@drawable/ic_asia3" />
 
                 <TextView
                     android:id="@+id/tv_aisa"
@@ -334,7 +346,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_europe" />
+                    app:srcCompat="@drawable/ic_europe3" />
 
                 <TextView
                     android:id="@+id/tv_europe"
@@ -360,7 +372,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_america" />
+                    app:srcCompat="@drawable/ic_america3" />
 
                 <TextView
                     android:id="@+id/tv_america"
@@ -386,7 +398,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_africa" />
+                    app:srcCompat="@drawable/ic_africa3" />
 
                 <TextView
                     android:id="@+id/tv_africa"
