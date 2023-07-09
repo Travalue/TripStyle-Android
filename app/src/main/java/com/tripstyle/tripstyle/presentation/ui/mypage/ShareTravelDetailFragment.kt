@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentShareTravelDetailBinding
-import com.tripstyle.tripstyle.ui.trailer.TrailerViewPagerAdapter
 import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.presentation.ui.trailer.TrailerViewPagerAdapter
 
 
 class ShareTravelDetailFragment : BaseFragment<FragmentShareTravelDetailBinding>(R.layout.fragment_share_travel_detail) {
