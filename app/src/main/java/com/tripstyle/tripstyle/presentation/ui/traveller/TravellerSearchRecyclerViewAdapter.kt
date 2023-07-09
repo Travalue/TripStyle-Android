@@ -65,10 +65,10 @@ class TravellerSearchRecyclerViewAdapter(private val viewModel: TravellerSearchV
             with(viewModel.domesticCities[pos]){
                 //세팅
                 when(cities) {
-                    "서울" -> Glide.with(itemView).load(R.drawable.ic_seoul2).into(cityImage)
-                    "부산" -> Glide.with(itemView).load(R.drawable.ic_busan2).into(cityImage)
-                    "제주" -> Glide.with(itemView).load(R.drawable.ic_jeju2).into(cityImage)
-                    else -> Glide.with(itemView).load(R.drawable.profile_img).into(cityImage)
+                    "서울" -> Glide.with(itemView).load(R.drawable.ic_seoul3).into(cityImage)
+                    "부산" -> Glide.with(itemView).load(R.drawable.ic_busan3).into(cityImage)
+                    "제주" -> Glide.with(itemView).load(R.drawable.ic_jeju3).into(cityImage)
+                    else -> Glide.with(itemView).load(R.drawable.ic_other3).into(cityImage)
                 }
                 QueryCityName.text = cities
                 QuerySpecificCityName.text = specificCities
