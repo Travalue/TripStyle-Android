@@ -8,7 +8,7 @@ import com.tripstyle.tripstyle.MainActivity
 class TravellerWriteFragmentDUMPED : BaseFragment<FragmentTravellerWriteDumpedBinding>(R.layout.fragment_traveller_write_dumped) {
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("글 작성하기")
+//        (activity as MainActivity).setToolbarTitle("글 작성하기")
     }
 
     override fun initDataBinding() {

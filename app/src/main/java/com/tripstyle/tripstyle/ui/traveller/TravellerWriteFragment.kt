@@ -68,7 +68,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("글 작성하기")
+//        (activity as MainActivity).setToolbarTitle("글 작성하기")
 
         val adapter = TravellerWriteBodyRecyclerViewAdapter(viewModel,context,this)
         binding.bodyRecyclerView.adapter = adapter

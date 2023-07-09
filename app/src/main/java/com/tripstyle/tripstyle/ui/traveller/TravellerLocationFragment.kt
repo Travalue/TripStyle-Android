@@ -28,7 +28,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("일정/장소 첨부")
+//        (activity as MainActivity).setToolbarTitle("일정/장소 첨부")
         viewModel.deleteScheduleItem()
     }
 

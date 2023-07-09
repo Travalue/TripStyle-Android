@@ -9,7 +9,7 @@ import com.tripstyle.tripstyle.MainActivity
 class TrailerSearchFragment : BaseFragment<FragmentTrailerSearchBinding>(R.layout.fragment_trailer_search) {
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("visible")
+//        (activity as MainActivity).setToolbarTitle("visible")
 
 
         //recyclerView adapter
