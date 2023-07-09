@@ -13,7 +13,7 @@ class TravellerCategoryOptionSubjectSelectFragment : BaseFragment<FragmentTravel
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("")
+//        (activity as MainActivity).setToolbarTitle("")
     }
 
     override fun initDataBinding() {

@@ -17,7 +17,7 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("none")
+//        (activity as MainActivity).setToolbarTitle("none")
 
 
         val adapter1 = TravellerSearchRecyclerViewAdapter(viewModel, context)
