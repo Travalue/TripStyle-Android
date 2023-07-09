@@ -92,6 +92,7 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
                     viewModel.deleteOverseasCities()
 
                     binding.contraint2.visibility=View.GONE
+                    binding.fab.visibility=View.GONE
 
                     domesticCityList.forEach{
                         if(it.contains(text)) {
@@ -127,6 +128,7 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
                     binding.recyclerView2.visibility= View.GONE
 
                     binding.contraint2.visibility=View.VISIBLE
+                    binding.fab.visibility=View.VISIBLE
                 }
 
                 if(viewModel.domesticCities.isEmpty()){
