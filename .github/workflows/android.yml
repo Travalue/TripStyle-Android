@@ -24,3 +24,22 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Access SERVER_API
+      env:
+        APOD_API_KEY: ${{ secrets.SERVER_API }}
+      run: echo SERVER_API=\"$SERVER_API\" > ./local.properties
+    - name: Access LOCATION_CLIENT_ID
+      env:
+        APOD_API_KEY: ${{ secrets.LOCATION_CLIENT_ID }}
+      run: echo LOCATION_CLIENT_ID=\"$LOCATION_CLIENT_ID\" > ./local.properties
+    - name: Access LOCATION_CLIENT_SECRET
+      env:
+        APOD_API_KEY: ${{ secrets.LOCATION_CLIENT_SECRET }}
+      run: echo LOCATION_CLIENT_SECRET=\"$LOCATION_CLIENT_SECRET\" > ./local.properties
+    - name: Access TOKEN
+      env:
+        APOD_API_KEY: ${{ secrets.SECRET_TOKEN }}
+      run: echo TOKEN=\"$TOKEN\" > ./local.properties
+    
+
+
