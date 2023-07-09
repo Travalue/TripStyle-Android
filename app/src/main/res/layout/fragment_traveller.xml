@@ -272,7 +272,7 @@
                 android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lightgray"
+                android:background="@color/gray_E9E9E9"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="15dp"
@@ -418,22 +418,17 @@
         <View
             android:id="@+id/line4"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="241dp"
-            android:layout_marginRight="20dp"
-            android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/tv_domestic"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_domestic"
-            app:layout_constraintTop_toBottomOf="@+id/tv_domestic" />
+            android:layout_height="8dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/gray_EDEDED"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 
             <TextView
                 android:id="@+id/tv_hot_traveller"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="지금 핫한 트레블러"
