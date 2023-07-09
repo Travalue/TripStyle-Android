@@ -59,21 +59,21 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
                     binding.tvInfo4.setTextColor(ContextCompat.getColor(context!!, R.color.red))
                     binding.etNickname.setBackgroundResource(R.drawable.edittext_rounded_corner_rectangle_red)
 
-                    binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.drakGray))
+                    binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
                     binding.btnCheck.isEnabled=false
                 }else{
                     // 특수문자 비포함 시
                     binding.tvInfo4.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_circle_gray_24,0,0,0)
-                    binding.tvInfo4.setTextColor(ContextCompat.getColor(context!!, R.color.gray))
+                    binding.tvInfo4.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
                     binding.etNickname.setBackgroundResource(R.drawable.edittext_rounded_corner_rectangle)
 
                     // 중복확인 버튼 활성화
                     if(nickName.isNotEmpty()){
-                        binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.black))
+                        binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.white))
                         binding.btnCheck.isEnabled=true
 
                     }else{
-                        binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.drakGray))
+                        binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
                         binding.btnCheck.isEnabled=false
                     }
 
@@ -86,6 +86,9 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        binding.btnBack.setOnClickListener {
+            navController.navigate(R.id.action_registerFragment_to_loginFragment)
+        }
 
         binding.btnRegister.setOnClickListener {
             val nicknameRequestModel = NicknameRequestModel(binding.etNickname.toString())
@@ -122,14 +125,18 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
                         val result: NicknameResponseModel = response.body()!!
                         if(result.isDuplicate == false){
                             Log.d("[checkNickname]", "서버응답 : $result")
-                            //회원가입 버튼 활성화 (추후 중복검사 후 활성화로 변경해야함)
+                            //회원가입 버튼 활성화
                             binding.btnRegister.isEnabled=true
+                            binding.btnRegister.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+
                             binding.tvIsDupliate.visibility = View.VISIBLE
                             binding.tvIsDupliate.text = "사용 가능한 별명입니다."
-                            binding.tvIsDupliate.setTextColor(Color.parseColor("#E3FF16"))
+                            binding.tvIsDupliate.setTextColor(R.color.primaryColor)
                         }else{
                             Log.d("[checkNickname]", "서버응답 : $result")
                             binding.btnRegister.isEnabled=false
+                            binding.btnRegister.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
+
                             binding.tvIsDupliate.visibility = View.VISIBLE
                             binding.tvIsDupliate.text = "사용 불가능한 별명입니다."
                             binding.tvIsDupliate.setTextColor(Color.RED)
