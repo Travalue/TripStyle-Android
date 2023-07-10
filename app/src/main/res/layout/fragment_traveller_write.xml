@@ -138,16 +138,26 @@
                     android:layout_weight="1"
                     android:text="@string/schedule"
                     android:textColor="@color/gray_454545"
-                    android:textSize="14sp" />
+                    android:textSize="13sp" />
 
-                <ImageButton
-                    android:id="@+id/schedule_button"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@color/transparent"
-                    android:src="@drawable/ic_btn_before" />
+<!--                <ImageButton-->
+<!--                    android:id="@+id/schedule_button"-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:background="@color/transparent"-->
+<!--                    android:src="@drawable/ic_btn_before" />-->
+
+                <TextView
+                    android:id="@+id/tv_schedule_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="편집"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="13sp"/>
+
             </LinearLayout>
 
             <LinearLayout
