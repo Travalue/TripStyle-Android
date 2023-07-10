@@ -85,6 +85,16 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
                 val items = response.body()?.items
                 adapter.setData(items as ArrayList<ItemData>)
                 adapter.notifyDataSetChanged()
+
+                if (items.isEmpty()){
+                    binding.tvNoResult1.visibility = View.VISIBLE
+                    binding.tvNoResult2.visibility = View.VISIBLE
+                }
+                else{
+                    binding.tvNoResult1.visibility = View.INVISIBLE
+                    binding.tvNoResult2.visibility = View.INVISIBLE
+                }
+
             }
 
             override fun onFailure(call: Call<SearchResult>, t: Throwable) {
