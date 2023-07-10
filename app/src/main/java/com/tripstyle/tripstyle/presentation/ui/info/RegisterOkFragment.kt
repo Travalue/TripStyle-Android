@@ -9,7 +9,8 @@ class RegisterOkFragment : BaseFragment<FragmentRegisterOkBinding>(R.layout.frag
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("none")
+        (activity as MainActivity).hideBottomNav(true)
+        (activity as MainActivity).hideToolbar(true)
     }
 
     override fun initDataBinding() {

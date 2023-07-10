@@ -14,7 +14,6 @@ class EditProfileFragment  : BaseFragment<FragmentEditProfileBinding>(R.layout.f
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("프로필 편집")
     }
 
     override fun initDataBinding() {
