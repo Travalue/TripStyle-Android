@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+        <ImageView
+            android:id="@+id/alertview"
+            android:background="@drawable/dialog_background_white"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_width="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_warning1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="저장하지 않고 나가시겠습니까?"
+            android:textColor="@color/black_161616"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="@+id/alertview"
+            app:layout_constraintStart_toStartOf="@+id/alertview"
+            app:layout_constraintEnd_toEndOf="@+id/alertview">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_warning2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="뒤로가기 시, 작성중인 글은 저장되지 않습니다."
+            android:textColor="@color/gray_959595"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_warning1"
+            app:layout_constraintStart_toStartOf="@+id/alertview"
+            app:layout_constraintEnd_toEndOf="@+id/alertview">
+        </TextView>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="@+id/alertview">
+
+            <TextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_dialog_cancel"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="취소"
+                android:textSize="14sp"
+                android:textColor="@color/gray_454545"/>
+
+            <TextView
+                android:id="@+id/btn_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_dialog_confirm"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="확인"
+                android:textSize="14sp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
