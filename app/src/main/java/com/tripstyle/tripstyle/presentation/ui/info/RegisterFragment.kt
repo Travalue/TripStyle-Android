@@ -86,33 +86,13 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        // 뒤로가기 버튼 클릭
         binding.btnBack.setOnClickListener {
             navController.navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
-        binding.btnRegister.setOnClickListener {
-            val nicknameRequestModel = NicknameRequestModel(binding.etNickname.toString())
-            val resultData: Call<Void> = AppClient.userService.postNickname("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE2ODYwMzc0MTksImV4cCI6MTcxNzU3MzQxOX0.g7B5CNPCoENBpYopVvoHY3GhP6sL8-xC4j3aFkmWOPs",nicknameRequestModel)
-            resultData.enqueue(object : Callback<Void> {
-                override fun onResponse(
-                    call: Call<Void>,
-                    response: Response<Void>
-                ) {
-                    if (response.isSuccessful) {
-                        navController.navigate(R.id.action_registerFragment_to_registerOkFragment)
-                        Log.d("[postNickname]", "로그인성공_${response.code()}")
-                    } else {
-                        Log.d("[postNickname]", "실패코드_${response.code()}")
-                    }
-                }
 
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    t.printStackTrace()
-                    Log.d("[postNickname]","통신 실패")
-                }
-            })
-        }
-
+        // 중복확인 버튼 클릭
         binding.btnCheck.setOnClickListener {
             val nickname = binding.etNickname.text.toString()
             val resultData: Call<NicknameResponseModel> = AppClient.userService.checkNickname(nickname)
@@ -149,6 +129,30 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
                 override fun onFailure(call: Call<NicknameResponseModel>, t: Throwable) {
                     t.printStackTrace()
                     Log.d("[checkNickname]","통신 실패")
+                }
+            })
+        }
+
+        // 회원가입 버튼 클릭
+        binding.btnRegister.setOnClickListener {
+            val nicknameRequestModel = NicknameRequestModel(binding.etNickname.toString())
+            val resultData: Call<Void> = AppClient.userService.postNickname(nicknameRequestModel)
+            resultData.enqueue(object : Callback<Void> {
+                override fun onResponse(
+                    call: Call<Void>,
+                    response: Response<Void>
+                ) {
+                    if (response.isSuccessful) {
+                        navController.navigate(R.id.action_registerFragment_to_registerOkFragment)
+                        Log.d("[postNickname]", "로그인성공_${response.code()}")
+                    } else {
+                        Log.d("[postNickname]", "실패코드_${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.d("[postNickname]","통신 실패")
                 }
             })
         }
