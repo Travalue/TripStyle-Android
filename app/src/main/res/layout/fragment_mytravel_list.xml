@@ -5,9 +5,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/backgroundColor">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_travel"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -17,7 +17,8 @@
         android:fontFamily="@font/suit_medium"
         android:text="여행지 추가"
         android:textAllCaps="false"
-        android:textColor="@color/gray"
+        android:gravity="center"
+        android:textColor="@color/gray_959595"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/et_travel"
         app:layout_constraintStart_toStartOf="@+id/tv_add_icon"
@@ -26,45 +27,30 @@
     <View
         android:id="@+id/line11"
         android:layout_width="0dp"
-        android:layout_height="1dp"
+        android:layout_height="8dp"
         android:layout_marginTop="30dp"
-        android:background="@color/gray"
-        app:layout_constraintEnd_toEndOf="@+id/btn_add_travel"
-        app:layout_constraintStart_toStartOf="@+id/btn_add_travel"
+        android:background="@color/gray_EDEDED"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_add_travel" />
 
     <TextView
         android:id="@+id/tv_my_travel_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="추가된 나의 여행지 리스트"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/line11"
-        app:layout_constraintTop_toBottomOf="@+id/line11" />
-
-    <Button
-        android:id="@+id/btn_my_travel"
-        android:layout_width="0dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/btn_add_travel"
-        android:enabled="false"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/suit_medium"
-        android:text="아직 추가된 여행지 리스트가 없어요"
-        android:textAllCaps="false"
-        android:textColor="@color/gray"
+        android:text="추가된 나의 여행지 리스트"
+        android:textColor="@color/gray_454545"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/et_travel"
-        app:layout_constraintStart_toStartOf="@+id/tv_add_icon"
-        app:layout_constraintTop_toBottomOf="@+id/tv_my_travel_list" />
+        app:layout_constraintStart_toStartOf="@+id/btn_add_travel"
+        app:layout_constraintTop_toBottomOf="@+id/line11" />
 
     <EditText
         android:id="@+id/et_travel"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
@@ -73,11 +59,11 @@
         android:hint="여행지를 입력해주세요"
         android:inputType="textPersonName"
         android:paddingStart="20dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/drakGray"
+        android:textColor="@color/gray_161616"
+        android:textColorHint="@color/gray_959595"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_add_icon"
         app:layout_constraintTop_toBottomOf="@+id/tv_add_travel" />
 
     <TextView
@@ -85,17 +71,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/suit_medium"
         android:text="여행지 추가하기"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/gray_454545"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginTop="22dp"
         app:layout_constraintEnd_toEndOf="@+id/tv_add_icon"
         app:layout_constraintStart_toStartOf="@+id/tv_add_icon"
@@ -107,9 +94,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:text="아이콘 추가하기"
-        android:textColor="@color/gray"
-        android:textSize="8sp"
+        android:text="아이콘 추가"
+        android:textColor="@color/gray_959595"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/tv_add_travel"
         app:layout_constraintTop_toBottomOf="@+id/iv_icon" />
 
@@ -117,12 +104,12 @@
         android:id="@+id/tv_place_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:text="🇺🇸"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/et_travel"
-        app:layout_constraintEnd_toStartOf="@+id/et_travel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/et_travel" />
 
@@ -130,10 +117,22 @@
         android:id="@+id/place_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="11dp"
-        app:layout_constraintStart_toStartOf="@+id/btn_my_travel"
-        app:layout_constraintTop_toTopOf="@+id/btn_my_travel"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_my_travel_list"
+        app:layout_constraintTop_toBottomOf="@+id/tv_my_travel_list"
         tools:listitem="@layout/place_item_view" />
+
+    <TextView
+        android:id="@+id/tv_no_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/suit_regular"
+        android:text="아직 추가된 여행지 리스트가 없어요"
+        android:textColor="@color/gray_959595"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_my_travel_list" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

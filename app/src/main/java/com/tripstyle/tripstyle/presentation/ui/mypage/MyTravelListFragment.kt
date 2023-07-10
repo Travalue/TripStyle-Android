@@ -28,12 +28,6 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
         super.initDataBinding()
 
 
-        if(addPlace.size > 0){
-            binding.btnMyTravel.text=""
-        }else{
-            binding.btnMyTravel.text="아직 추가된 여행지 리스트가 없어요"
-        }
-
         binding.placeList.adapter = MyTravelListAdapter(addPlace,true) // 어댑터 생성
         val gridLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context,3)
         binding.placeList.layoutManager = gridLayoutManager
@@ -63,17 +57,17 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
                 // 저장된 여행지를 입력했을때
                 if(allPlace.contains(place)){
                     binding.btnAddTravel.isEnabled=true
-                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.black))
-                    binding.ivIcon.visibility = View.GONE
-                    binding.tvAddIcon.visibility=View.GONE
+                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+                    binding.ivIcon.visibility = View.INVISIBLE
+                    binding.tvAddIcon.visibility=View.INVISIBLE
                     binding.tvPlaceIcon.text = placeIcon[0]
                     binding.tvPlaceIcon.visibility=View.VISIBLE
                 }else{
                     binding.btnAddTravel.isEnabled=false
-                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.gray))
+                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
                     binding.ivIcon.visibility = View.VISIBLE
                     binding.tvAddIcon.visibility=View.VISIBLE
-                    binding.tvPlaceIcon.visibility=View.GONE
+                    binding.tvPlaceIcon.visibility=View.INVISIBLE
                 }
 
             }

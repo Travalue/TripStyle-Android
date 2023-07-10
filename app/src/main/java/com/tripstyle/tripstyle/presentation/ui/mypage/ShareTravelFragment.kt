@@ -43,7 +43,7 @@ class ShareTravelFragment : BaseFragment<FragmentShareTravelBinding>(R.layout.fr
             R.drawable.ex_img1,
             R.drawable.ex_img1,
             R.drawable.ex_img1,
-            R.drawable.ex_img1)
+            R.drawable.img_add_category)
     }
 
 }
