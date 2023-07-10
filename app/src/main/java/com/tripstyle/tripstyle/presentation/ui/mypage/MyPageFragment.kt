@@ -43,11 +43,6 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
     override fun initAfterBinding() {
         super.initAfterBinding()
 
-        binding.btnCategory.setOnClickListener {
-            val action = MyPageFragmentDirections.actionMyPageFragmentToCategoryDialogFragment(binding.tvMyPage.text.toString())
-            navController.navigate(action)
-        }
-
         binding.btnEditProfile.setOnClickListener {
             navController.navigate(R.id.action_myPageFragment_to_editProfileFragment)
         }
@@ -71,7 +66,7 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             R.drawable.ex_img1,
             R.drawable.ex_img1,
             R.drawable.ex_img1,
-            R.drawable.ex_img1)
+            R.drawable.img_add_category)
     }
 
 }

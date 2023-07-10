@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/trailerFragment">
+    app:startDestination="@id/myPageFragment">
 
     <fragment
         android:id="@+id/trailerFragment"
@@ -153,7 +153,7 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.mypage.EditProfileFragment"
-        android:label="EditProfileFragment" >
+        android:label="프로필 편집" >
         <action
             android:id="@+id/action_editProfileFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
@@ -161,7 +161,7 @@
     <fragment
         android:id="@+id/myPageFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.mypage.MyPageFragment"
-        android:label="MyPageFragment" >
+        android:label="My page" >
         <action
             android:id="@+id/action_myPageFragment_to_categoryDialogFragment"
             app:destination="@id/categoryDialogFragment" />
@@ -185,7 +185,7 @@
     <fragment
         android:id="@+id/myTravelListFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.mypage.MyTravelListFragment"
-        android:label="MyTravelListFragment" >
+        android:label="나의 여행지 리스트" >
         <action
             android:id="@+id/action_myTravelListFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
@@ -193,7 +193,7 @@
     <fragment
         android:id="@+id/likeListFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.mypage.LikeListFragment"
-        android:label="LikeListFragment" >
+        android:label="장소 좋아용 목록" >
         <action
             android:id="@+id/action_likeListFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />

@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_other3" />
+        app:srcCompat="@drawable/default_profile_img" />
 
     <LinearLayout
         android:layout_width="wrap_content"
