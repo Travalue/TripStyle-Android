@@ -25,6 +25,7 @@ import retrofit2.http.Body
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
+
     // 이메일 로그인 콜백
     private val mCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
@@ -60,7 +61,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("none")
+        (activity as MainActivity).hideBottomNav(true)
+        (activity as MainActivity).hideToolbar(true)
 
 
         context?.let { KakaoSdk.init(it, getString(R.string.native_key)) }

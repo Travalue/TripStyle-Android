@@ -14,7 +14,6 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("none")
 
     }
 

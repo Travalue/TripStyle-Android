@@ -24,7 +24,8 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
 
     override fun initStartView() {
         super.initStartView()
-        (activity as MainActivity).setToolbarTitle("register")
+        (activity as MainActivity).hideBottomNav(true)
+        (activity as MainActivity).hideToolbar(true)
     }
 
     override fun initDataBinding() {
@@ -58,21 +59,21 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
                     binding.tvInfo4.setTextColor(ContextCompat.getColor(context!!, R.color.red))
                     binding.etNickname.setBackgroundResource(R.drawable.edittext_rounded_corner_rectangle_red)
 
-                    binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.drakGray))
+                    binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
                     binding.btnCheck.isEnabled=false
                 }else{
                     // 특수문자 비포함 시
                     binding.tvInfo4.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_circle_gray_24,0,0,0)
-                    binding.tvInfo4.setTextColor(ContextCompat.getColor(context!!, R.color.gray))
+                    binding.tvInfo4.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
                     binding.etNickname.setBackgroundResource(R.drawable.edittext_rounded_corner_rectangle)
 
                     // 중복확인 버튼 활성화
                     if(nickName.isNotEmpty()){
-                        binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.black))
+                        binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.white))
                         binding.btnCheck.isEnabled=true
 
                     }else{
-                        binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.drakGray))
+                        binding.btnCheck.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
                         binding.btnCheck.isEnabled=false
                     }
 
@@ -85,10 +86,57 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        // 뒤로가기 버튼 클릭
+        binding.btnBack.setOnClickListener {
+            navController.navigate(R.id.action_registerFragment_to_loginFragment)
+        }
 
+
+        // 중복확인 버튼 클릭
+        binding.btnCheck.setOnClickListener {
+            val nickname = binding.etNickname.text.toString()
+            val resultData: Call<NicknameResponseModel> = AppClient.userService.checkNickname(nickname)
+            resultData.enqueue(object : Callback<NicknameResponseModel> {
+                override fun onResponse(
+                    call: Call<NicknameResponseModel>,
+                    response: Response<NicknameResponseModel>
+                ) {
+                    if (response.isSuccessful) {
+                        val result: NicknameResponseModel = response.body()!!
+                        if(result.isDuplicate == false){
+                            Log.d("[checkNickname]", "서버응답 : $result")
+                            //회원가입 버튼 활성화
+                            binding.btnRegister.isEnabled=true
+                            binding.btnRegister.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+
+                            binding.tvIsDupliate.visibility = View.VISIBLE
+                            binding.tvIsDupliate.text = "사용 가능한 별명입니다."
+                            binding.tvIsDupliate.setTextColor(R.color.primaryColor)
+                        }else{
+                            Log.d("[checkNickname]", "서버응답 : $result")
+                            binding.btnRegister.isEnabled=false
+                            binding.btnRegister.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
+
+                            binding.tvIsDupliate.visibility = View.VISIBLE
+                            binding.tvIsDupliate.text = "사용 불가능한 별명입니다."
+                            binding.tvIsDupliate.setTextColor(Color.RED)
+                        }
+                    } else {
+                        Log.d("[checkNickname]", "실패코드_${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<NicknameResponseModel>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.d("[checkNickname]","통신 실패")
+                }
+            })
+        }
+
+        // 회원가입 버튼 클릭
         binding.btnRegister.setOnClickListener {
             val nicknameRequestModel = NicknameRequestModel(binding.etNickname.toString())
-            val resultData: Call<Void> = AppClient.userService.postNickname("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE2ODYwMzc0MTksImV4cCI6MTcxNzU3MzQxOX0.g7B5CNPCoENBpYopVvoHY3GhP6sL8-xC4j3aFkmWOPs",nicknameRequestModel)
+            val resultData: Call<Void> = AppClient.userService.postNickname(nicknameRequestModel)
             resultData.enqueue(object : Callback<Void> {
                 override fun onResponse(
                     call: Call<Void>,
@@ -105,42 +153,6 @@ class RegisterFragment: BaseFragment<FragmentRegisterBinding>(R.layout.fragment_
                 override fun onFailure(call: Call<Void>, t: Throwable) {
                     t.printStackTrace()
                     Log.d("[postNickname]","통신 실패")
-                }
-            })
-        }
-
-        binding.btnCheck.setOnClickListener {
-            val nickname = binding.etNickname.text.toString()
-            val resultData: Call<NicknameResponseModel> = AppClient.userService.checkNickname(nickname)
-            resultData.enqueue(object : Callback<NicknameResponseModel> {
-                override fun onResponse(
-                    call: Call<NicknameResponseModel>,
-                    response: Response<NicknameResponseModel>
-                ) {
-                    if (response.isSuccessful) {
-                        val result: NicknameResponseModel = response.body()!!
-                        if(result.isDuplicate == false){
-                            Log.d("[checkNickname]", "서버응답 : $result")
-                            //회원가입 버튼 활성화 (추후 중복검사 후 활성화로 변경해야함)
-                            binding.btnRegister.isEnabled=true
-                            binding.tvIsDupliate.visibility = View.VISIBLE
-                            binding.tvIsDupliate.text = "사용 가능한 별명입니다."
-                            binding.tvIsDupliate.setTextColor(Color.parseColor("#E3FF16"))
-                        }else{
-                            Log.d("[checkNickname]", "서버응답 : $result")
-                            binding.btnRegister.isEnabled=false
-                            binding.tvIsDupliate.visibility = View.VISIBLE
-                            binding.tvIsDupliate.text = "사용 불가능한 별명입니다."
-                            binding.tvIsDupliate.setTextColor(Color.RED)
-                        }
-                    } else {
-                        Log.d("[checkNickname]", "실패코드_${response.code()}")
-                    }
-                }
-
-                override fun onFailure(call: Call<NicknameResponseModel>, t: Throwable) {
-                    t.printStackTrace()
-                    Log.d("[checkNickname]","통신 실패")
                 }
             })
         }
