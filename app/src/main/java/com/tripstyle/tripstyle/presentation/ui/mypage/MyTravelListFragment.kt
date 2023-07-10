@@ -57,17 +57,17 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
                 // 저장된 여행지를 입력했을때
                 if(allPlace.contains(place)){
                     binding.btnAddTravel.isEnabled=true
-                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.black))
-                    binding.ivIcon.visibility = View.GONE
-                    binding.tvAddIcon.visibility=View.GONE
+                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+                    binding.ivIcon.visibility = View.INVISIBLE
+                    binding.tvAddIcon.visibility=View.INVISIBLE
                     binding.tvPlaceIcon.text = placeIcon[0]
                     binding.tvPlaceIcon.visibility=View.VISIBLE
                 }else{
                     binding.btnAddTravel.isEnabled=false
-                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.gray))
+                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
                     binding.ivIcon.visibility = View.VISIBLE
                     binding.tvAddIcon.visibility=View.VISIBLE
-                    binding.tvPlaceIcon.visibility=View.GONE
+                    binding.tvPlaceIcon.visibility=View.INVISIBLE
                 }
 
             }
