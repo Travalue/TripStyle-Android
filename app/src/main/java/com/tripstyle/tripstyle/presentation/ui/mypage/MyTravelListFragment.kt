@@ -28,12 +28,6 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
         super.initDataBinding()
 
 
-        if(addPlace.size > 0){
-            binding.btnMyTravel.text=""
-        }else{
-            binding.btnMyTravel.text="아직 추가된 여행지 리스트가 없어요"
-        }
-
         binding.placeList.adapter = MyTravelListAdapter(addPlace,true) // 어댑터 생성
         val gridLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context,3)
         binding.placeList.layoutManager = gridLayoutManager

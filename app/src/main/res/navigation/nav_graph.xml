@@ -185,7 +185,7 @@
     <fragment
         android:id="@+id/myTravelListFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.mypage.MyTravelListFragment"
-        android:label="MyTravelListFragment" >
+        android:label="나의 여행지 리스트" >
         <action
             android:id="@+id/action_myTravelListFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
