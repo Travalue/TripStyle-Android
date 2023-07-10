@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/trailerFragment">
+    app:startDestination="@id/myPageFragment">
 
     <fragment
         android:id="@+id/trailerFragment"
@@ -161,7 +161,7 @@
     <fragment
         android:id="@+id/myPageFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.mypage.MyPageFragment"
-        android:label="MyPageFragment" >
+        android:label="My page" >
         <action
             android:id="@+id/action_myPageFragment_to_categoryDialogFragment"
             app:destination="@id/categoryDialogFragment" />

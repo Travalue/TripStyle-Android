@@ -73,7 +73,7 @@ class TravellerSearchRecyclerViewAdapter2(private val viewModel: TravellerSearch
                     "유럽" -> Glide.with(itemView).load(R.drawable.ic_europe).into(cityImage)
                     "아메리카" -> Glide.with(itemView).load(R.drawable.ic_america).into(cityImage)
                     "아프리카" -> Glide.with(itemView).load(R.drawable.ic_africa).into(cityImage)
-                    else -> Glide.with(itemView).load(R.drawable.profile_img).into(cityImage)
+                    else -> Glide.with(itemView).load(R.drawable.default_profile_img).into(cityImage)
                 }
                 QueryCityName.text = cities
                 QuerySpecificCityName.text = specificCities

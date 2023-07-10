@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_place_pos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_place_name"
-        app:srcCompat="@drawable/profile_img" />
+        app:srcCompat="@drawable/default_profile_img" />
 
     <TextView
         android:id="@+id/tv_place_name"
