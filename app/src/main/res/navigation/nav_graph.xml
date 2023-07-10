@@ -193,7 +193,7 @@
     <fragment
         android:id="@+id/likeListFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.mypage.LikeListFragment"
-        android:label="LikeListFragment" >
+        android:label="장소 좋아용 목록" >
         <action
             android:id="@+id/action_likeListFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />

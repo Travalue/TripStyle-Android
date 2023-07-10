@@ -66,7 +66,7 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             R.drawable.ex_img1,
             R.drawable.ex_img1,
             R.drawable.ex_img1,
-            R.drawable.ex_img1)
+            R.drawable.img_add_category)
     }
 
 }
