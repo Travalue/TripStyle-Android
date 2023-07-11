@@ -86,4 +86,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun setTitle(text:String){
+        binding.tvToolbarName.text = text
+    }
+
 }

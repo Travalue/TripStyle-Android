@@ -1,5 +1,6 @@
 package com.tripstyle.tripstyle.presentation.ui.mypage
 
+import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.core.view.MenuHost
@@ -33,6 +34,9 @@ class ShareTravelDetailFragment : BaseFragment<FragmentShareTravelDetailBinding>
 
     override fun initStartView() {
         super.initStartView()
+
+        val mainActivity = activity as MainActivity
+        mainActivity.setTitle(args.type)
         if(args.type != "전체 보기") initMenu()
     }
 
