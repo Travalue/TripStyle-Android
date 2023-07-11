@@ -2,6 +2,7 @@ package com.tripstyle.tripstyle.data.source.remote
 
 import com.tripstyle.tripstyle.BuildConfig
 import com.tripstyle.tripstyle.data.model.dto.BaseResponseModel
+import com.tripstyle.tripstyle.data.model.dto.ShareTravellerResponse
 import com.tripstyle.tripstyle.data.model.dto.TrailerResponseModel
 import com.tripstyle.tripstyle.data.model.dto.TravelDetailResponse
 import retrofit2.Call
@@ -35,7 +36,7 @@ interface TravelService {
     // 공유중인 traveller 전체조회
     @Headers("Authorization: ${BuildConfig.TOKEN}")
     @GET("/post/traveller/share/{userId}")
-    fun getTravellerShare(@Path("postId")id:Int) : Call<BaseResponseModel>
+    fun getTravellerShare(@Path("postId")id:Int) : Call<ShareTravellerResponse>
 
 
 }
