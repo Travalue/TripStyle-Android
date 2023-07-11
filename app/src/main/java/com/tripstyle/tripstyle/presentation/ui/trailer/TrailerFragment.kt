@@ -55,7 +55,7 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
             }
 
             override fun onFailure(call: Call<TrailerResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
 
         })
