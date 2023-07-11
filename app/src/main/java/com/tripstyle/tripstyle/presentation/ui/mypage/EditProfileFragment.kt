@@ -28,13 +28,6 @@ class EditProfileFragment  : BaseFragment<FragmentEditProfileBinding>(R.layout.f
             if (it.resultCode == Activity.RESULT_OK && it.data?.data != null) { //갤러리 캡쳐 결과값
                 val selectedImageUri = it?.data?.data!!
                 binding.ivProfileImg.setImageURI(selectedImageUri)
-//                uploadPhoto(selectedImageUri, mSuccessHandler = {
-////                            Toast.makeText(context, "게시글 업로드 성공", Toast.LENGTH_SHORT).show()
-//                },
-//                    mErrorHandler = {
-////                            Toast.makeText(context, "게시글 업로드에 실패했습니다", Toast.LENGTH_SHORT).show()
-//                    })
-
             }
         }
 

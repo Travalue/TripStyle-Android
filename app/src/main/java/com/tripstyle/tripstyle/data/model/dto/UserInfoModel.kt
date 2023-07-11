@@ -1,0 +1,22 @@
+package com.tripstyle.tripstyle.data.model.dto
+
+
+data class UserInfoModel(
+    val isMe : Boolean,
+    val nickname: String,
+    val profileImg : String,
+    val description: String,
+    val travelCount: Int,
+    val travelList : ArrayList<Data>,
+    val sharedTravelCount: Int,
+    val sharedTravel : ArrayList<SharedTravelData>,
+    val travelLikeCount: Int
+)
+
+data class SharedTravelData(
+    val categoryId : Int,
+    val title: String,
+    val subject: String,
+    val thumbnail:String,
+    val count: Int
+)

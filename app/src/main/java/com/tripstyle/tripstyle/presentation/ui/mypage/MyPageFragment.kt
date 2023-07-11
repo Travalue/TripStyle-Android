@@ -1,11 +1,20 @@
 package com.tripstyle.tripstyle.presentation.ui.mypage
 
+import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentMyPageMainBinding
 import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.data.model.dto.LoginResponseModel
+import com.tripstyle.tripstyle.data.model.dto.TravelDetailResponse
+import com.tripstyle.tripstyle.data.model.dto.UserInfoModel
+import com.tripstyle.tripstyle.data.source.remote.UserService
+import com.tripstyle.tripstyle.di.AppClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragment_my_page_main) {
@@ -15,6 +24,50 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
     override fun initStartView() {
         super.initStartView()
 
+        val resultData: Call<UserInfoModel> = AppClient.userService.getUserInfo(1,1,1)
+        resultData.enqueue(object : Callback<UserInfoModel> {
+            override fun onResponse(
+                call: Call<UserInfoModel>,
+                response: Response<UserInfoModel>
+            ) {
+                if (response.isSuccessful) {
+                    val result: UserInfoModel = response.body()!!
+                    Log.d("[getUserInfo]", "코드-${response.code()}")
+                    Log.d("[getUserInfo]", "메시지-${response.message()}")
+                    Log.d("[getUserInfo]", "서버응답 : $result")
+                } else {
+                    Log.d("[getUserInfo]", "실패코드_${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<UserInfoModel>, t: Throwable) {
+                t.printStackTrace()
+                Log.d("[getUserInfo]","통신 실패")
+            }
+        })
+
+        AppClient.userService.getUserInfo(1,1,1)
+            .enqueue(object : Callback<UserInfoModel>{
+            override fun onResponse(
+                call: Call<UserInfoModel>,
+                response: Response<UserInfoModel>
+            ) {
+                if (response.isSuccessful) {
+                    val result: UserInfoModel = response.body()!!
+                    Log.d("[getUserInfo]", "코드-${response.code()}")
+                    Log.d("[getUserInfo]", "메시지-${response.message()}")
+                    Log.d("[getUserInfo]", "서버응답 : $result")
+                } else {
+                    Log.d("[getUserInfo]", "실패코드_${response.code()}")
+                }
+            }
+
+                override fun onFailure(call: Call<UserInfoModel>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.d("[getUserInfo]","통신 실패")
+                }
+
+            })
     }
 
     override fun initDataBinding() {

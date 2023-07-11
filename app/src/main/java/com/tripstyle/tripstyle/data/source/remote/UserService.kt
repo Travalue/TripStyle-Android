@@ -3,6 +3,7 @@ package com.tripstyle.tripstyle.data.source.remote
 import com.tripstyle.tripstyle.BuildConfig
 import com.tripstyle.tripstyle.data.model.dto.NicknameRequestModel
 import com.tripstyle.tripstyle.data.model.dto.NicknameResponseModel
+import com.tripstyle.tripstyle.data.model.dto.UserInfoModel
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -15,4 +16,7 @@ interface UserService {
     @PUT("/v1/user/nickname")
     fun postNickname(@Body nicknameRequestModel: NicknameRequestModel): Call<Void>
 
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
+    @GET("/v1/user/{pageOwnerId}")
+    fun getUserInfo(@Path("pageOwnerId") pageOwnerId:Int, @Query("pageOwnerUserId") pageOwnerUserId: Int, @Query("userId") userId: Int) : Call<UserInfoModel>
 }
