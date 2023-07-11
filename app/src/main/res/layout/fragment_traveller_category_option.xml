@@ -16,7 +16,7 @@
             android:layout_marginTop="60dp"
             android:text="카테고리"
             android:textSize="16sp"
-            android:textColor="@color/black_100"
+            android:textColor="@color/gray_454545"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,10 +25,10 @@
             android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/drakGray"
+            android:background="@color/gray_E9E9E9"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_just_category_text"/>
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="전체"
-            android:textColor="@color/gray"
+            android:textColor="@color/gray_959595"
             android:textSize="15sp"
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="@+id/tv_just_category_text"
@@ -49,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:textSize="15sp"
             android:layout_marginStart="10dp"
             android:textColor="@color/primaryColor"
             app:layout_constraintBottom_toBottomOf="@+id/tv_just_all_text"
@@ -59,7 +60,7 @@
             android:id="@+id/line2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/drakGray"
+            android:background="@color/gray_E9E9E9"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
@@ -71,7 +72,7 @@
             android:id="@+id/tv_category_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="카테고리 추가"
+            android:text="카테고리 추가하기"
             android:textSize="15sp"
             android:textColor="@color/primaryColor"
             android:layout_marginTop="20dp"
@@ -81,21 +82,19 @@
         <View
             android:id="@+id/line3"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/gray"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="8dp"
             android:layout_marginTop="30dp"
+            android:background="@color/gray_EDEDED"
             app:layout_constraintStart_toStartOf="@+id/line2"
             app:layout_constraintEnd_toEndOf="@+id/line2"
-            app:layout_constraintTop_toBottomOf="@+id/tv_category_add"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_category_add" />
 
         <TextView
             android:id="@+id/tv_just_open_status_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="공개 설정"
-            android:textColor="@color/black_100"
+            android:textColor="@color/gray_454545"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="30dp"
@@ -107,7 +106,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="모든 사람이 이 글을 볼 수 있습니다"
-            android:textSize="12sp"
+            android:textColor="@color/gray_959595"
+            android:textSize="13sp"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_just_open_status_text"
             app:layout_constraintStart_toEndOf="@+id/tv_just_open_status_text"
@@ -118,7 +118,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="다른 사람이 이 글을 볼 수 없습니다"
-            android:textSize="12sp"
+            android:textSize="13sp"
+            android:textColor="@color/gray_959595"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_just_open_status_text"
             app:layout_constraintStart_toEndOf="@+id/tv_just_open_status_text"
@@ -139,26 +140,27 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_just_open_status_text" >
 
             <RadioButton
-                android:checked="true"
                 android:id="@+id/button_public"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="44dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector_traveller_category_open_status"
-                android:textColor="@drawable/selector_traveller_category_open_status_text"
                 android:button="@null"
-                android:text="전체"
-                android:textAlignment="center"
+                android:checked="true"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="전체 공개"
+                android:textColor="@drawable/selector_traveller_category_open_status_text"
                 android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/button_private"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="44dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector_traveller_category_open_status"
                 android:textColor="@drawable/selector_traveller_category_open_status_text"
                 android:button="@null"
+                android:gravity="center_horizontal|center_vertical"
                 android:text="비공개"
                 android:textAlignment="center"
                 android:textSize="12sp" />
@@ -166,17 +168,33 @@
 
 
 
-        <ImageButton
-            android:id="@+id/button_traveller_add"
+<!--        <ImageButton-->
+<!--            android:id="@+id/button_traveller_add"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginEnd="20dp"-->
+<!--            android:background="@drawable/btn_add_travel2"-->
+<!--            android:layout_marginBottom="30dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/radioGroupOpenStatus"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/radioGroupOpenStatus"/>-->
+
+        <TextView
+            android:id="@+id/btn_traveller_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/btn_add_travel3"
+            android:text="게시물 등록"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="center_horizontal|center_vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/btn_add_travel2"
             android:layout_marginBottom="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/radioGroupOpenStatus"
-            app:layout_constraintEnd_toEndOf="@+id/radioGroupOpenStatus"/>
+            app:layout_constraintBottom_toBottomOf="parent">
+        </TextView>
+
 
 
 
