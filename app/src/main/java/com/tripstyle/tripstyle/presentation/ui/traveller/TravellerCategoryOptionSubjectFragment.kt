@@ -105,8 +105,8 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
                 .centerCrop()
                 .into(binding.ivCategoryCover)
         }
-        // 텍스트뷰 숨기기
-        binding.tvCategoryCoverImageAdd.visibility = View.INVISIBLE
+//        // 텍스트뷰 숨기기
+//        binding.tvCategoryCoverImageAdd.visibility = View.INVISIBLE
     }
 
     private fun getRealPathFromURI(uri: Uri): String{
