@@ -69,10 +69,10 @@ class TravellerSearchRecyclerViewAdapter2(private val viewModel: TravellerSearch
             with(viewModel.overseasCities[pos]){
                 //세팅
                 when(cities) {
-                    "아시아" -> Glide.with(itemView).load(R.drawable.ic_asia).into(cityImage)
-                    "유럽" -> Glide.with(itemView).load(R.drawable.ic_europe).into(cityImage)
-                    "아메리카" -> Glide.with(itemView).load(R.drawable.ic_america).into(cityImage)
-                    "아프리카" -> Glide.with(itemView).load(R.drawable.ic_africa).into(cityImage)
+                    "아시아" -> Glide.with(itemView).load(R.drawable.ic_asia3).into(cityImage)
+                    "유럽" -> Glide.with(itemView).load(R.drawable.ic_europe3).into(cityImage)
+                    "아메리카" -> Glide.with(itemView).load(R.drawable.ic_america3).into(cityImage)
+                    "아프리카" -> Glide.with(itemView).load(R.drawable.ic_africa3).into(cityImage)
                     else -> Glide.with(itemView).load(R.drawable.default_profile_img).into(cityImage)
                 }
                 QueryCityName.text = cities
