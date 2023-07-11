@@ -32,4 +32,10 @@ interface TravelService {
     @DELETE("/post/{postId}/unlike")
     fun getUnlikePost(@Path("postId")id:Int) : Call<BaseResponseModel>
 
+    // 공유중인 traveller 전체조회
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
+    @GET("/post/traveller/share/{userId}")
+    fun getTravellerShare(@Path("postId")id:Int) : Call<BaseResponseModel>
+
+
 }
