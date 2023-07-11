@@ -28,13 +28,14 @@
                 android:button="@null"
                 android:drawableRight="@drawable/selector_traveller_category_subject_select"
                 android:text="식도락"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/gray_959595"/>
 
             <View
                 android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/drakGray"
+                android:background="@color/gray_E9E9E9"
                 app:layout_constraintEnd_toEndOf="@+id/button_epicurism"
                 app:layout_constraintStart_toStartOf="@+id/button_epicurism"
                 app:layout_constraintTop_toBottomOf="@+id/button_epicurism" />
@@ -47,13 +48,14 @@
                 android:button="@null"
                 android:drawableRight="@drawable/selector_traveller_category_subject_select"
                 android:text="액티비티"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/gray_959595"/>
 
             <View
                 android:id="@+id/line2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/drakGray"
+                android:background="@color/gray_E9E9E9"
                 app:layout_constraintEnd_toEndOf="@+id/button_activity"
                 app:layout_constraintStart_toStartOf="@+id/button_activity"
                 app:layout_constraintTop_toBottomOf="@+id/button_activity" />
@@ -66,13 +68,14 @@
                 android:button="@null"
                 android:drawableRight="@drawable/selector_traveller_category_subject_select"
                 android:text="휴양"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/gray_959595"/>
 
             <View
                 android:id="@+id/line3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/drakGray"
+                android:background="@color/gray_E9E9E9"
                 app:layout_constraintEnd_toEndOf="@+id/button_rest"
                 app:layout_constraintStart_toStartOf="@+id/button_rest"
                 app:layout_constraintTop_toBottomOf="@+id/button_rest" />
@@ -85,14 +88,15 @@
                 android:button="@null"
                 android:drawableRight="@drawable/selector_traveller_category_subject_select"
                 android:text="패키지"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="@color/gray_959595"/>
 
 
             <View
                 android:id="@+id/line4"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/drakGray"
+                android:background="@color/gray_E9E9E9"
                 app:layout_constraintEnd_toEndOf="@+id/button_package"
                 app:layout_constraintStart_toStartOf="@+id/button_package"
                 app:layout_constraintTop_toBottomOf="@+id/button_package" />
