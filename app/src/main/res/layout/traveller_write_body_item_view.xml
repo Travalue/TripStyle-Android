@@ -14,7 +14,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="16dp"
-        android:background="@color/gray03" />
+        android:background="@color/gray_E4E4E4" />
 
 
     <ImageView
@@ -46,9 +46,9 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonBodyImageUnselected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="클릭 시 사진이 추가됩니다."
-        android:textColor="@color/white"
+        android:textColor="@color/gray_959595"
         android:textSize="14sp" />
 
     <TextView
@@ -59,8 +59,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="(사진을 추가하지 않아도 글 입력이 가능해요!)"
-        android:textColor="@color/white"
-        android:textSize="10sp" />
+        android:textColor="@color/gray_959595"
+        android:textSize="12sp" />
 
     <EditText
         android:id="@+id/editTextBody"

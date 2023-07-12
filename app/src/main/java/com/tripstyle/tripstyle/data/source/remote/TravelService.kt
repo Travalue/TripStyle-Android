@@ -1,5 +1,6 @@
 package com.tripstyle.tripstyle.data.source.remote
 
+
 import com.tripstyle.tripstyle.BuildConfig
 import com.tripstyle.tripstyle.data.model.dto.BaseResponseModel
 import com.tripstyle.tripstyle.data.model.dto.TrailerResponse

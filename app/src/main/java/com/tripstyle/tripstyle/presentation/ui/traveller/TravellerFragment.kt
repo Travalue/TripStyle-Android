@@ -86,18 +86,22 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
                 val text = binding.etSearch.text
 
                 binding.tvNoResult.visibility=View.GONE
+                binding.tvNoResult2.visibility=View.GONE
 
                 if(text.isNotEmpty()){
                     viewModel.deleteDomesticCities()
                     viewModel.deleteOverseasCities()
 
                     binding.contraint2.visibility=View.GONE
+                    binding.fab.visibility=View.GONE
+
+                    binding.line3.visibility = View.VISIBLE
 
                     domesticCityList.forEach{
                         if(it.contains(text)) {
                             viewModel.addDomesticCities(Item(it,it))
 
-                            binding.tvDomesticSearch.visibility=View.VISIBLE
+//                            binding.tvDomesticSearch.visibility=View.VISIBLE
                             binding.recyclerView.visibility= View.VISIBLE
                         }
                     }
@@ -106,37 +110,41 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
                         if(it.contains(text)) {
                             viewModel.addOverseasCities(Item(it,it))
 
-                            binding.tvOverseasSearch.visibility=View.VISIBLE
+//                            binding.tvOverseasSearch.visibility=View.VISIBLE
                             binding.recyclerView2.visibility= View.VISIBLE
                         }
                     }
 
                     if(viewModel.domesticCities.isEmpty() && viewModel.overseasCities.isEmpty()){
                         binding.tvNoResult.visibility=View.VISIBLE
+                        binding.tvNoResult2.visibility=View.VISIBLE
                     }
                 }
                 else{
 
 
                     viewModel.deleteDomesticCities()
-                    binding.tvDomesticSearch.visibility=View.GONE
-                    binding.recyclerView.visibility= View.GONE
+//                    binding.tvDomesticSearch.visibility=View.GONE
+                    binding.recyclerView.visibility= View.INVISIBLE
 
                     viewModel.deleteOverseasCities()
-                    binding.tvOverseasSearch.visibility=View.GONE
-                    binding.recyclerView2.visibility= View.GONE
+//                    binding.tvOverseasSearch.visibility=View.GONE
+                    binding.recyclerView2.visibility= View.INVISIBLE
+
+                    binding.line3.visibility=View.INVISIBLE
 
                     binding.contraint2.visibility=View.VISIBLE
+                    binding.fab.visibility=View.VISIBLE
                 }
 
                 if(viewModel.domesticCities.isEmpty()){
-                    binding.tvDomesticSearch.visibility=View.GONE
-                    binding.recyclerView.visibility= View.GONE
+//                    binding.tvDomesticSearch.visibility=View.GONE
+                    binding.recyclerView.visibility= View.INVISIBLE
 
                 }
                 if(viewModel.overseasCities.isEmpty()){
-                    binding.tvOverseasSearch.visibility=View.GONE
-                    binding.recyclerView2.visibility= View.GONE
+//                    binding.tvOverseasSearch.visibility=View.GONE
+                    binding.recyclerView2.visibility= View.INVISIBLE
 
                 }
 

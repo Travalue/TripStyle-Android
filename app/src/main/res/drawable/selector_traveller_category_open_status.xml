@@ -5,5 +5,9 @@
             <solid android:color="@color/primaryColor" />
         </shape>
     </item>
-    <item android:state_checked="false" android:drawable="@drawable/edittext_corner_rectangle" />
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/gray_E4E4E4" />
+        </shape>
+    </item>
 </selector>

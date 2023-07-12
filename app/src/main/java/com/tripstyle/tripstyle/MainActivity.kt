@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val splashScreen = installSplashScreen()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -90,4 +94,11 @@ class MainActivity : AppCompatActivity() {
         binding.tvToolbarName.text = text
     }
 
+    fun hideBottomNav(state: Boolean){
+        if(state){
+            binding.bottomNav.visibility = View.GONE
+        }else{
+            binding.bottomNav.visibility = View.VISIBLE
+        }
+    }
 }

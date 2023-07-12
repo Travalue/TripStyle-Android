@@ -29,7 +29,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/iv_search_box"
             app:layout_constraintEnd_toEndOf="@+id/iv_search_box"
             app:layout_constraintTop_toTopOf="@+id/iv_search_box"
-            app:srcCompat="@drawable/ic_baseline_search_24" />
+            app:srcCompat="@drawable/ic_search" />
 
         <View
             android:id="@+id/view2"
@@ -45,36 +45,39 @@
 
         <EditText
             android:id="@+id/editTextPlaceName"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="장소명을 입력하세요."
-            android:textColorHint="@color/gray"
+            android:hint="장소명 입력하기"
+            android:textColorHint="@color/gray04"
+            android:textColor="@color/black_161616"
             android:inputType="text"
-            android:textSize="12dp"
+            android:textSize="15sp"
             android:layout_marginStart="15dp"
-            android:layout_marginEnd="96.49dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="17dp"
             android:background="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_search_box"
-            app:layout_constraintEnd_toStartOf="@+id/ic_search"
             app:layout_constraintStart_toEndOf="@+id/view2"
-            app:layout_constraintTop_toTopOf="@+id/iv_search_box" />
+            app:layout_constraintTop_toTopOf="@+id/iv_search_box"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_search_box" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_selected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="27dp"
             android:orientation="horizontal"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/rv_location_list"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="@+id/iv_search_box"
             app:layout_constraintStart_toStartOf="@+id/iv_search_box"
             app:layout_constraintTop_toBottomOf="@+id/iv_search_box" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/gray_EDEDED"
+            app:layout_constraintTop_toBottomOf="@+id/rv_selected" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_location_list"
@@ -87,9 +90,34 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_selected" />
+            app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+        <TextView
+            android:id="@+id/tv_no_result1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="검색 결과가 없습니다."
+            android:textSize="15sp"
+            android:textColor="@color/gray_454545"
+            android:layout_marginTop="35dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line2"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/tv_no_result2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다른 장소명을 검색해 보세요!"
+            android:textSize="15sp"
+            android:textColor="@color/gray_454545"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_no_result1"
+            android:visibility="invisible"/>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+   없</androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
