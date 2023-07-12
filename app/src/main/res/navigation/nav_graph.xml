@@ -210,7 +210,7 @@
     <fragment
         android:id="@+id/shareTravelDetailFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.mypage.ShareTravelDetailFragment"
-        android:label="{type}" >
+        android:label="${type}" >
         <argument
             android:name="type"
             app:argType="string" />

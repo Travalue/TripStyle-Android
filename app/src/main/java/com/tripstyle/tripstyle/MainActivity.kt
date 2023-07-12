@@ -90,6 +90,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun setTitle(text:String){
+        binding.tvToolbarName.text = text
+    }
+
     fun hideBottomNav(state: Boolean){
         if(state){
             binding.bottomNav.visibility = View.GONE

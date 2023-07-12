@@ -1,6 +1,6 @@
 package com.tripstyle.tripstyle.data.model.dto
 
-data class TrailerResponseModel(
+data class TrailerResponse(
     val code: Int,
     val message: String,
     val data: List<TrailerItem>
