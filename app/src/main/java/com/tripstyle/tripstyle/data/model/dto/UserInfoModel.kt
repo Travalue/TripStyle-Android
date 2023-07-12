@@ -1,10 +1,18 @@
 package com.tripstyle.tripstyle.data.model.dto
 
+import android.net.Uri
+import java.net.URL
+
+data class UserPageResponse(
+    val code: Int,
+    val message: String,
+    val data: UserInfoModel
+)
 
 data class UserInfoModel(
     val isMe : Boolean,
     val nickname: String,
-    val profileImg : String,
+    val profileImage : String,
     val description: String,
     val travelCount: Int,
     val travelList : ArrayList<Data>,

@@ -1,8 +1,15 @@
 package com.tripstyle.tripstyle.presentation.ui.mypage
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
+import android.os.AsyncTask
 import android.util.Log
+import com.bumptech.glide.request.transition.Transition
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentMyPageMainBinding
@@ -10,11 +17,15 @@ import com.tripstyle.tripstyle.MainActivity
 import com.tripstyle.tripstyle.data.model.dto.LoginResponseModel
 import com.tripstyle.tripstyle.data.model.dto.TravelDetailResponse
 import com.tripstyle.tripstyle.data.model.dto.UserInfoModel
+import com.tripstyle.tripstyle.data.model.dto.UserPageResponse
 import com.tripstyle.tripstyle.data.source.remote.UserService
 import com.tripstyle.tripstyle.di.AppClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragment_my_page_main) {
@@ -24,50 +35,47 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
     override fun initStartView() {
         super.initStartView()
 
-        val resultData: Call<UserInfoModel> = AppClient.userService.getUserInfo(1,1,1)
-        resultData.enqueue(object : Callback<UserInfoModel> {
+        val resultData: Call<UserPageResponse> = AppClient.userService.getUserInfo(1,1,1)
+        resultData.enqueue(object : Callback<UserPageResponse> {
             override fun onResponse(
-                call: Call<UserInfoModel>,
-                response: Response<UserInfoModel>
+                call: Call<UserPageResponse>,
+                response: Response<UserPageResponse>
             ) {
                 if (response.isSuccessful) {
-                    val result: UserInfoModel = response.body()!!
-                    Log.d("[getUserInfo]", "코드-${response.code()}")
-                    Log.d("[getUserInfo]", "메시지-${response.message()}")
-                    Log.d("[getUserInfo]", "서버응답 : $result")
+                    val result: UserPageResponse = response.body()!!
+                    val user = result.data
+
+                    context?.let {
+                        Glide.with(this@MyPageFragment)
+                            .asBitmap()
+                            .load(user.profileImage)
+                            .into(object : CustomTarget<Bitmap>() {
+                                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                    binding.ivProfile.setImageBitmap(resource) // 다운로드한 이미지를 ImageView에 설정합니다.
+                                }
+
+                                override fun onLoadCleared(placeholder: Drawable?) {
+                                    // 이미지 로딩이 취소되었을 때 수행할 작업을 여기에 작성합니다.
+                                }
+                            })
+                    }
+
+//                    binding.tvNickname.text = user.nickname
+//                    if (user.description != null) {
+//                        binding.tvIntro.text = user.description
+//                    }
+
                 } else {
                     Log.d("[getUserInfo]", "실패코드_${response.code()}")
                 }
             }
 
-            override fun onFailure(call: Call<UserInfoModel>, t: Throwable) {
+            override fun onFailure(call: Call<UserPageResponse>, t: Throwable) {
                 t.printStackTrace()
                 Log.d("[getUserInfo]","통신 실패")
             }
         })
 
-        AppClient.userService.getUserInfo(1,1,1)
-            .enqueue(object : Callback<UserInfoModel>{
-            override fun onResponse(
-                call: Call<UserInfoModel>,
-                response: Response<UserInfoModel>
-            ) {
-                if (response.isSuccessful) {
-                    val result: UserInfoModel = response.body()!!
-                    Log.d("[getUserInfo]", "코드-${response.code()}")
-                    Log.d("[getUserInfo]", "메시지-${response.message()}")
-                    Log.d("[getUserInfo]", "서버응답 : $result")
-                } else {
-                    Log.d("[getUserInfo]", "실패코드_${response.code()}")
-                }
-            }
-
-                override fun onFailure(call: Call<UserInfoModel>, t: Throwable) {
-                    t.printStackTrace()
-                    Log.d("[getUserInfo]","통신 실패")
-                }
-
-            })
     }
 
     override fun initDataBinding() {
@@ -112,6 +120,8 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
         binding.btnToLikeList.setOnClickListener{
             navController.navigate(R.id.action_myPageFragment_to_likeListFragment)
         }
+
+
     }
 
     private fun getCategoryImg(): ArrayList<Int> {
@@ -121,5 +131,6 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             R.drawable.ex_img1,
             R.drawable.img_add_category)
     }
+
 
 }

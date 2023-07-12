@@ -4,6 +4,7 @@ import com.tripstyle.tripstyle.BuildConfig
 import com.tripstyle.tripstyle.data.model.dto.NicknameRequestModel
 import com.tripstyle.tripstyle.data.model.dto.NicknameResponseModel
 import com.tripstyle.tripstyle.data.model.dto.UserInfoModel
+import com.tripstyle.tripstyle.data.model.dto.UserPageResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -18,5 +19,5 @@ interface UserService {
 
     @Headers("Authorization: ${BuildConfig.TOKEN}")
     @GET("/v1/user/{pageOwnerId}")
-    fun getUserInfo(@Path("pageOwnerId") pageOwnerId:Int, @Query("pageOwnerUserId") pageOwnerUserId: Int, @Query("userId") userId: Int) : Call<UserInfoModel>
+    fun getUserInfo(@Path("pageOwnerId") pageOwnerId:Int, @Query("pageOwnerUserId") pageOwnerUserId: Int, @Query("userId") userId: Int) : Call<UserPageResponse>
 }
