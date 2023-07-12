@@ -22,6 +22,7 @@ import com.tripstyle.tripstyle.di.AppClient
 import com.tripstyle.tripstyle.presentation.ui.trailer.TrailerFragmentDirections
 import com.tripstyle.tripstyle.presentation.ui.trailer.TrailerViewPagerAdapter
 import com.tripstyle.tripstyle.presentation.ui.trailer.onActionListener
+import com.tripstyle.tripstyle.util.Constant
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,7 +48,7 @@ class ShareTravelDetailFragment : BaseFragment<FragmentShareTravelDetailBinding>
     }
 
     private fun initRecyclerView(){
-        adapter = TrailerViewPagerAdapter(requireContext())
+        adapter = TrailerViewPagerAdapter(requireContext(),Constant.TYPE_RECYCLER)
         binding.rvCategoryList.adapter = adapter // 어댑터 생성
         binding.rvCategoryList.layoutManager = LinearLayoutManager(context)
         binding.rvCategoryList.setHasFixedSize(true)

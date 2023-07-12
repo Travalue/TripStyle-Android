@@ -12,6 +12,7 @@ import com.tripstyle.tripstyle.data.model.dto.TrailerItem
 import com.tripstyle.tripstyle.data.model.dto.TrailerResponse
 import com.tripstyle.tripstyle.di.AppClient
 import com.tripstyle.tripstyle.data.source.remote.TravelService
+import com.tripstyle.tripstyle.util.Constant
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,7 +63,7 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
     }
 
     private fun initVerticalCardView(){
-        adapter = TrailerViewPagerAdapter(requireContext())
+        adapter = TrailerViewPagerAdapter(requireContext(),Constant.TYPE_PAGER)
         adapter.setListener(object : onActionListener {
             override fun onMoveDetailPage(id:Int): NavDirections {
                 return TrailerFragmentDirections.actionTrailerFragmentToTrailerDetailFragment(id)

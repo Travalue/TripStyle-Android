@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.data.model.dto.TrailerItem
+import com.tripstyle.tripstyle.util.Constant
 
-class TrailerViewPagerAdapter(private val context: Context) :
+class TrailerViewPagerAdapter(private val context: Context,val type:Int) :
     RecyclerView.Adapter<TrailerViewPagerAdapter.PagerViewHolder>() {
 
     private var listener : onActionListener? = null
@@ -25,8 +26,35 @@ class TrailerViewPagerAdapter(private val context: Context) :
         val trailerBadge = itemView.findViewById<ImageView>(R.id.iv_category)
 
     }
+//
+//    inner class RecyclerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
+//        (LayoutInflater.from(parent.context).inflate(R.layout.share_item_view, parent, false)) {
+//        val trailerCard = itemView.findViewById<ImageView>(R.id.iv_trailer)
+//        val trailerTitle = itemView.findViewById<TextView>(R.id.tv_main_title)
+//        val trailerSubtitle = itemView.findViewById<TextView>(R.id.tv_subtitle)
+//        val trailerBadge = itemView.findViewById<ImageView>(R.id.iv_category)
+//
+//    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PagerViewHolder((parent))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : PagerViewHolder {
+        return when (type) {
+            Constant.TYPE_PAGER -> {
+                val pagerViewHolder = PagerViewHolder(parent)
+                val layoutParams = pagerViewHolder.itemView.layoutParams
+                layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+                pagerViewHolder.itemView.layoutParams = layoutParams
+                pagerViewHolder
+            }
+            Constant.TYPE_RECYCLER -> {
+                val recycleViewHolder = PagerViewHolder(parent)
+                val layoutParams = recycleViewHolder.itemView.layoutParams
+                layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                recycleViewHolder.itemView.layoutParams = layoutParams
+                recycleViewHolder
+            }
+            else -> throw IllegalArgumentException("Invalid view type")
+        }
+    }
 
     override fun getItemCount(): Int = trailerCardList?.size!!
 
