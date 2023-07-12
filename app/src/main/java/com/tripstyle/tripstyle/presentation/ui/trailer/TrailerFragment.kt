@@ -9,9 +9,10 @@ import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentTrailerBinding
 import com.tripstyle.tripstyle.data.model.dto.TrailerItem
-import com.tripstyle.tripstyle.data.model.dto.TrailerResponseModel
+import com.tripstyle.tripstyle.data.model.dto.TrailerResponse
 import com.tripstyle.tripstyle.di.AppClient
 import com.tripstyle.tripstyle.data.source.remote.TravelService
+import com.tripstyle.tripstyle.util.Constant
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,10 +44,10 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
     private fun requestTrailerList(){
         val service = AppClient.retrofit?.create(TravelService::class.java)
 
-        service?.getTrailerList()?.enqueue(object : Callback<TrailerResponseModel>{
+        service?.getTrailerList()?.enqueue(object : Callback<TrailerResponse>{
             override fun onResponse(
-                call: Call<TrailerResponseModel>,
-                response: Response<TrailerResponseModel>
+                call: Call<TrailerResponse>,
+                response: Response<TrailerResponse>
             ) {
                 val trailerList = response.body()?.data
                 Log.d("data",trailerList.toString())
@@ -54,15 +55,15 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
                 adapter.notifyDataSetChanged()
             }
 
-            override fun onFailure(call: Call<TrailerResponseModel>, t: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<TrailerResponse>, t: Throwable) {
+
             }
 
         })
     }
 
     private fun initVerticalCardView(){
-        adapter = TrailerViewPagerAdapter(requireContext())
+        adapter = TrailerViewPagerAdapter(requireContext(),Constant.TYPE_PAGER)
         adapter.setListener(object : onActionListener {
             override fun onMoveDetailPage(id:Int): NavDirections {
                 return TrailerFragmentDirections.actionTrailerFragmentToTrailerDetailFragment(id)
