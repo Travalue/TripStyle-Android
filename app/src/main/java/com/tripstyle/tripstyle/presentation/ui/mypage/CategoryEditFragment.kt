@@ -21,6 +21,7 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
 
         initMenu()
         initCategorySpinner()
+        initLocationSpinner()
         clickButtonEvent()
     }
 
@@ -55,10 +56,27 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
 
     //spinner data setup
     private fun initCategorySpinner(){
-        val data = resources.getStringArray(R.array.Category)
+        val data = resources.getStringArray(R.array.subject_category)
         val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,data)
-        binding.spinner.adapter = adapter
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.spinnerSubject.adapter = adapter
+        binding.spinnerSubject.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, v: View?, position: Int, id: Long) {
+                Log.d("selected item",data[position])
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //
+            }
+
+        }
+    }
+
+    //spinner data setup
+    private fun initLocationSpinner(){
+        val data = resources.getStringArray(R.array.location_category)
+        val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,data)
+        binding.spinnerLocation.adapter = adapter
+        binding.spinnerLocation.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, v: View?, position: Int, id: Long) {
                 Log.d("selected item",data[position])
             }
