@@ -3,11 +3,22 @@
     <string name="MAP_API_CLIENT_ID">eqdcuc9eti</string>
     <string name="DEEP_LINK_DOMAIN">guide.trailer.com</string>
 
-    <string-array name="Category">
+    <string-array name="subject_category">
         <item>식도락</item>
         <item>액티비티</item>
         <item>휴양</item>
         <item>패키지</item>
+    </string-array>
+
+    <string-array name="location_category">
+        <item>아시아</item>
+        <item>유럽</item>
+        <item>아메리카</item>
+        <item>아프리카</item>
+        <item>서울</item>
+        <item>부산</item>
+        <item>제주</item>
+        <item>그 외 지역</item>
     </string-array>
 
     <string name="feed">Feed</string>
@@ -15,7 +26,11 @@
     <string name="mypage">My page</string>
     <string name="post">게시물</string>
     <string name="schedule">일정 보기</string>
-    <string name="view_all">전체 보기</string>
+    <string name="view_all">전체보기</string>
+    <string name="category_name">카테고리 이름</string>
+    <string name="subject_type">주제 분류</string>
+    <string name="location_type">장소 분류</string>
+    <string name="category_dialog_delete">카테고리를 삭제하시겠습니까?</string>
 
     <string name="kakao_native_key">kakao226b85a748a6910b4b76afd77b670ee0</string>
     <string name="native_key">226b85a748a6910b4b76afd77b670ee0</string>
