@@ -17,8 +17,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.tripstyle.tripstyle.dialog.CategoryDeleteDialog
+import com.tripstyle.tripstyle.dialog.CategoryDialog
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.data.model.dto.BaseResponseModel
@@ -26,6 +27,8 @@ import com.tripstyle.tripstyle.data.model.dto.CategoryUpdateRequest
 import com.tripstyle.tripstyle.data.source.remote.CategoryService
 import com.tripstyle.tripstyle.databinding.FragmentCategoryEditBinding
 import com.tripstyle.tripstyle.di.AppClient
+import com.tripstyle.tripstyle.dialog.onDialogListener
+import com.tripstyle.tripstyle.util.Constant
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -73,6 +76,7 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
                 return when (menuItem.itemId) {
                     R.id.menu_confrim_button -> {
                         requestUpdateCategory(1,binding.etCategory.text.toString(),subjectCategory,locationCategory)
+                        findNavController().navigate(R.id.action_categoryEditFragment_to_shareTravelFragment)
                         true
                     }
                     else -> false
@@ -149,17 +153,26 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
     }
 
 
+    //카테고리 삭제 API 호출
+    private fun requestDeleteCategory(){
+
+    }
+
     //카테고리 삭제 버튼 이벤트
     private fun clickButtonEvent(){
         binding.btnCategoryDelete.setOnClickListener {
-            CategoryDeleteDialog().show(parentFragmentManager,"categoryDelete")
+            val title = getString(R.string.category_dialog_delete)
+            val content = getString(R.string.category_dialog_delete_content)
+            val dialog = CategoryDialog(title,content)
+            dialog.setActionListener(object : onDialogListener{
+                override fun onConfirmAction() {
+                    requestDeleteCategory()
+                    findNavController().navigate(R.id.action_categoryEditFragment_to_shareTravelFragment)
+                }
+            })
+            dialog.show(parentFragmentManager,"categoryDelete")
         }
     }
-
-    companion object{
-        const val REQ_GALLERY = 1
-    }
-
 
     private val imageResultSingle = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result ->
@@ -201,7 +214,7 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
             ),
-                REQ_GALLERY
+                Constant.REQ_GALLERY
             )
         }else{
             var intent = Intent(Intent.ACTION_PICK)
