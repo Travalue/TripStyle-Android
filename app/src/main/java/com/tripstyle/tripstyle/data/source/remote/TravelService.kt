@@ -3,6 +3,7 @@ package com.tripstyle.tripstyle.data.source.remote
 
 import com.tripstyle.tripstyle.BuildConfig
 import com.tripstyle.tripstyle.data.model.dto.BaseResponseModel
+import com.tripstyle.tripstyle.data.model.dto.HotTravellerResponse
 import com.tripstyle.tripstyle.data.model.dto.TrailerResponse
 import com.tripstyle.tripstyle.data.model.dto.TravelDetailResponse
 import retrofit2.Call
@@ -38,5 +39,9 @@ interface TravelService {
     @GET("/post/traveller/share/{userId}")
     fun getTravellerShare(@Path("userId")id:Int) : Call<TrailerResponse>
 
+
+    // 지금 핫한 트레블러 조회
+    @GET("/post/traveller/hot")
+    fun getHotTravellerList() : Call<HotTravellerResponse>
 
 }
