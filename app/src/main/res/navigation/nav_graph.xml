@@ -122,7 +122,7 @@
     </fragment>
     <dialog
         android:id="@+id/categoryDialogFragment"
-        android:name="com.tripstyle.tripstyle.presentation.ui.info.info.CategoryDialogFragment"
+        android:name="com.tripstyle.tripstyle.dialog.CategoryDeleteDialog"
         android:label="CategoryDialogFragment" >
         <action
             android:id="@+id/action_categoryDialogFragment_to_travellerFragment"
@@ -221,6 +221,10 @@
     <fragment
         android:id="@+id/categoryEditFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.mypage.CategoryEditFragment"
-        android:label="카테고리 수정" />
+        android:label="카테고리 수정" >
+        <action
+            android:id="@+id/action_categoryEditFragment_to_shareTravelDetailFragment"
+            app:destination="@id/shareTravelDetailFragment" />
+    </fragment>
 
 </navigation>
