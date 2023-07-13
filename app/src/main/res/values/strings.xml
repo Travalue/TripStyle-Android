@@ -31,6 +31,7 @@
     <string name="subject_type">주제 분류</string>
     <string name="location_type">장소 분류</string>
     <string name="category_dialog_delete">카테고리를 삭제하시겠습니까?</string>
+    <string name="category_dialog_delete_content">카테고리 내 게시물은 전체보기에 남아있어요!</string>
 
     <string name="kakao_native_key">kakao226b85a748a6910b4b76afd77b670ee0</string>
     <string name="native_key">226b85a748a6910b4b76afd77b670ee0</string>
