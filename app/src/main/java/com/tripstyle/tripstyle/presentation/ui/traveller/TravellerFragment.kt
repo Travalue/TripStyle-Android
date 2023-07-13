@@ -8,18 +8,28 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.data.model.dto.HotTravellerItem
 import com.tripstyle.tripstyle.databinding.FragmentTravellerBinding
-import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.data.model.dto.HotTravellerResponse
+import com.tripstyle.tripstyle.data.source.remote.TravelService
+import com.tripstyle.tripstyle.di.AppClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragment_traveller) {
     private val viewModel by viewModels<TravellerSearchViewModel>()
+    lateinit var hotTravellerAdapter : TravellerHotRecyclerViewAdapter
 
 
     override fun initStartView() {
         super.initStartView()
 //        (activity as MainActivity).setToolbarTitle("none")
 
+        // 지금 핫한 트레블러 adapter
+        hotTravellerAdapter = TravellerHotRecyclerViewAdapter(context)
 
+        // 검색 adapter
         val adapter1 = TravellerSearchRecyclerViewAdapter(viewModel, context)
         val adapter2 = TravellerSearchRecyclerViewAdapter2(viewModel, context)
 
@@ -38,12 +48,17 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
             }
         })
 
-        //recyclerView adapter
+        // 검색쪽 recyclerView adapter
         binding.recyclerView.adapter = adapter1
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
         binding.recyclerView2.adapter = adapter2
         binding.recyclerView2.layoutManager = LinearLayoutManager(context)
+
+
+        // 지금 핫한 트레블러 adapter
+        binding.rvHotTraveller.adapter = hotTravellerAdapter
+        binding.rvHotTraveller.layoutManager = LinearLayoutManager(context)
 
     }
 
@@ -189,7 +204,28 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
     override fun initAfterBinding() {
         super.initAfterBinding()
 
-
+        requestHotTravellerList()
     }
+
+    private fun requestHotTravellerList(){
+        val service = AppClient.retrofit?.create(TravelService::class.java)
+
+        service?.getHotTravellerList()?.enqueue(object : Callback<HotTravellerResponse> {
+            override fun onResponse(
+                call: Call<HotTravellerResponse>,
+                response: Response<HotTravellerResponse>
+            ) {
+                val hotTravellerList = response.body()?.data
+//                Log.e("HotTravellerData","Hot Traveller Data: ${hotTravellerList.toString()}")
+                hotTravellerAdapter.setData(hotTravellerList as ArrayList<HotTravellerItem>)
+                hotTravellerAdapter.notifyDataSetChanged()
+            }
+
+            override fun onFailure(call: Call<HotTravellerResponse>, t: Throwable) {
+                Log.e("HotTravellerData","requestHotTravellerList API CALL FAILED")
+            }
+        })
+    }
+
 
 }
