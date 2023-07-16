@@ -1,5 +1,6 @@
 package com.tripstyle.tripstyle.presentation.ui.traveller
 
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -37,14 +38,20 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
         adapter1.setOnItemClickListener(object:
             TravellerSearchRecyclerViewAdapter.OnItemClickListener {
             override fun onItemClick(pos: Int,city: String, searchText: String) {
-                navController.navigate(R.id.action_travellerFragment_to_TrailerSearchFragment)
+                //parameter에 있는 searchText는 활용 못함
+                //여기서 검색 결과 화면으로 검색어만 넘겨주고, 검색 결과 화면에서 검색 수행
+                val bundle = Bundle()
+                bundle.putString("searchText",binding.etSearch.toString())
+                navController.navigate(R.id.action_travellerFragment_to_TrailerSearchFragment,bundle)
             }
         })
 
         adapter2.setOnItemClickListener(object:
             TravellerSearchRecyclerViewAdapter2.OnItemClickListener {
             override fun onItemClick(pos: Int,city: String, searchText: String) {
-                navController.navigate(R.id.action_travellerFragment_to_TrailerSearchFragment)
+                val bundle = Bundle()
+                bundle.putString("searchText",binding.etSearch.toString())
+                navController.navigate(R.id.action_travellerFragment_to_TrailerSearchFragment,bundle)
             }
         })
 
@@ -200,6 +207,5 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
             }
         })
     }
-
 
 }
