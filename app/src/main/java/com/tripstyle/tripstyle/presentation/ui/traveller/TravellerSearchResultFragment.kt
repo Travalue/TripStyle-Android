@@ -14,13 +14,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResultBinding>(R.layout.fragment_traveller_search_result) {
-    lateinit var travellerSearchResultAdapter : TrailerSearchRecyclerViewAdapter
+    lateinit var travellerSearchResultAdapter : TravellerSearchResultRecyclerViewAdapter
     override fun initStartView() {
         super.initStartView()
 //        (activity as MainActivity).setToolbarTitle("visible")
 
         //recyclerView adapter
-        travellerSearchResultAdapter = TrailerSearchRecyclerViewAdapter(context)
+        travellerSearchResultAdapter = TravellerSearchResultRecyclerViewAdapter(context)
 
         binding.trailerSearchResult.adapter = travellerSearchResultAdapter
         binding.trailerSearchResult.layoutManager = GridLayoutManager(context,3)
