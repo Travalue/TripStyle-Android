@@ -1,19 +1,28 @@
 package com.tripstyle.tripstyle.presentation.ui.traveller
 
+import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.data.model.dto.TravellerSearchResponse
+import com.tripstyle.tripstyle.data.model.dto.TravellerSearchResult
+import com.tripstyle.tripstyle.data.source.remote.TravelService
 import com.tripstyle.tripstyle.databinding.FragmentTrailerSearchBinding
-import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.di.AppClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TrailerSearchFragment : BaseFragment<FragmentTrailerSearchBinding>(R.layout.fragment_trailer_search) {
+    lateinit var travellerSearchResultAdapter : TrailerSearchRecyclerViewAdapter
     override fun initStartView() {
         super.initStartView()
 //        (activity as MainActivity).setToolbarTitle("visible")
 
-
         //recyclerView adapter
-        binding.trailerSearchResult.adapter = TrailerSearchRecyclerViewAdapter(context)
+        travellerSearchResultAdapter = TrailerSearchRecyclerViewAdapter(context)
+
+        binding.trailerSearchResult.adapter = travellerSearchResultAdapter
         binding.trailerSearchResult.layoutManager = GridLayoutManager(context,3)
     }
 
@@ -24,16 +33,40 @@ class TrailerSearchFragment : BaseFragment<FragmentTrailerSearchBinding>(R.layou
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        val bundle = arguments
+        if (bundle != null) {
+            val searchText = bundle.getString("searchText", "")
+            if(!searchText.isNullOrBlank()){
+                searchTraveller(searchText)
+            }
+        }
     }
 
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        (activity as MainActivity).setToolbarTitle("visible")
-//        return super.onCreateView(inflater, container, savedInstanceState)
-//    }
+
+
+    private fun searchTraveller(keyword: String) {
+        val service = AppClient.retrofit?.create(TravelService::class.java)
+
+        service?.searchTraveller(keyword)?.enqueue(object : Callback<TravellerSearchResponse> {
+            override fun onResponse(
+                call: Call<TravellerSearchResponse>,
+                response: Response<TravellerSearchResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val searchTravellerResults = response.body()?.data
+
+                    travellerSearchResultAdapter.setData(searchTravellerResults as ArrayList<TravellerSearchResult>)
+                    travellerSearchResultAdapter.notifyDataSetChanged()
+                } else {
+                    Log.e("Server error","Server error, CODE: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<TravellerSearchResponse>, t: Throwable) {
+                Log.e("Network error","Server connect failed")
+            }
+        })
+    }
 
 
 }

@@ -1,22 +1,26 @@
 package com.tripstyle.tripstyle.presentation.ui.traveller
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tripstyle.tripstyle.R
+import com.tripstyle.tripstyle.data.model.dto.TravellerSearchResult
 
 class TrailerSearchRecyclerViewAdapter(val context: Context?):
     RecyclerView.Adapter<TrailerSearchRecyclerViewAdapter.RecyclerViewViewHolder>() {
 
+    private var list : ArrayList<TravellerSearchResult>? = arrayListOf()
+    private val screenWidth: Int = Resources.getSystem().displayMetrics.widthPixels
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.trailer_search_item_view,
             parent, false)
-//        val inflater = LayoutInflater.from(parent.context)
-//        val binding = ItemViewBinding.inflate(inflater,parent,false)
+
         return RecyclerViewViewHolder(itemView)
     }
 
@@ -25,26 +29,29 @@ class TrailerSearchRecyclerViewAdapter(val context: Context?):
     }
 
     override fun getItemCount(): Int {
-        // '#제주도여행' 검색결과(사진)에 표시될 item 개수
-        return 20
+        // 검색결과(썸네일)에 표시될 item 개수
+        return list?.size ?: 0
     }
 
     inner class RecyclerViewViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val trailerSearchResult: ImageView = itemView.findViewById(R.id.trailer_search_image)
+        private val imageViewSize = screenWidth / 3
 
-        fun setContents(pos: Int){
-            with(pos){
-                //세팅
-                trailerSearchResult.setImageResource(R.drawable.trailer_search_sample_image)
-            }
+        fun setContents(pos: Int) {
+            // 이미지뷰 정사각형으로
+            trailerSearchResult.layoutParams.width = imageViewSize
+            trailerSearchResult.layoutParams.height = imageViewSize
 
-            /*
+            // 세팅
+            Glide.with(itemView)
+                .load(list!![pos].thumbnail)
+                .into(trailerSearchResult)
 
-            trailerSearchResult.setOnClickListener {
-                이런식으로 clickListener가 여기 있어야 하지만 이게 이제 MVVM 쓰면 xml로 들어가는거
-            }
 
-            */
         }
+    }
+
+    fun setData(list:ArrayList<TravellerSearchResult>){
+        this.list = list
     }
 }
