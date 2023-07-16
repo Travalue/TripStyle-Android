@@ -97,7 +97,6 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
             }
 
             override fun afterTextChanged(s: Editable?) {
-                Log.e("t","afterTextChanged called")
                 val text = binding.etSearch.text
 
                 binding.tvNoResult.visibility=View.GONE
@@ -169,34 +168,9 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
         })
 
 
-
-
-
-
-//        // category 이동
-//        binding.hambugerbar.setOnClickListener{
-////            navController.navigate(R.id.action_travellerFragment_to_categoryDialogFragment)
-//            val action = TravellerFragmentDirections.actionTravellerFragmentToCategoryDialogFragment(binding.tvTraveller.text.toString())
-//            navController.navigate(action)
-//        }
-
-
-        /*
-
-        // 임시
-        binding.ivJeju.setOnClickListener {
-            navController.navigate(R.id.action_travellerFragment_to_TrailerSearchFragment)
-        }
-
-         */
-
         binding.fab.setOnClickListener {
             navController.navigate(R.id.action_travellerFragment_to_TravellerWriteFragment)
         }
-
-
-
-
 
 
     }
@@ -222,7 +196,7 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
             }
 
             override fun onFailure(call: Call<HotTravellerResponse>, t: Throwable) {
-                Log.e("HotTravellerData","requestHotTravellerList API CALL FAILED")
+                Log.e("HotTravellerResponse","requestHotTravellerList API CALL FAILED")
             }
         })
     }
