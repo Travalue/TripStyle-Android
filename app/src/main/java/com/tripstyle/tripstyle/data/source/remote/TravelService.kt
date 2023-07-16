@@ -51,4 +51,8 @@ interface TravelService {
         @Part("userId") userId: RequestBody
     ): Call<CategoryAddResponse>
 
+    // 트레블러 검색
+    @GET("/post/traveller/search")
+    fun searchTraveller(@Query("keyword") keyword: String): Call<TravellerSearchResponse>
+
 }
