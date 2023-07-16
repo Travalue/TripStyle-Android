@@ -42,7 +42,7 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
                 //여기서 검색 결과 화면으로 검색어만 넘겨주고, 검색 결과 화면에서 검색 수행
                 val bundle = Bundle()
                 bundle.putString("searchText",binding.etSearch.toString())
-                navController.navigate(R.id.action_travellerFragment_to_TrailerSearchFragment,bundle)
+                navController.navigate(R.id.action_travellerFragment_to_travellerSearchResultFragment,bundle)
             }
         })
 
@@ -51,7 +51,7 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
             override fun onItemClick(pos: Int,city: String, searchText: String) {
                 val bundle = Bundle()
                 bundle.putString("searchText",binding.etSearch.toString())
-                navController.navigate(R.id.action_travellerFragment_to_TrailerSearchFragment,bundle)
+                navController.navigate(R.id.action_travellerFragment_to_travellerSearchResultFragment,bundle)
             }
         })
 

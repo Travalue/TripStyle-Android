@@ -7,13 +7,13 @@ import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.data.model.dto.TravellerSearchResponse
 import com.tripstyle.tripstyle.data.model.dto.TravellerSearchResult
 import com.tripstyle.tripstyle.data.source.remote.TravelService
-import com.tripstyle.tripstyle.databinding.FragmentTrailerSearchBinding
+import com.tripstyle.tripstyle.databinding.FragmentTravellerSearchResultBinding
 import com.tripstyle.tripstyle.di.AppClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TrailerSearchFragment : BaseFragment<FragmentTrailerSearchBinding>(R.layout.fragment_trailer_search) {
+class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResultBinding>(R.layout.fragment_traveller_search_result) {
     lateinit var travellerSearchResultAdapter : TrailerSearchRecyclerViewAdapter
     override fun initStartView() {
         super.initStartView()

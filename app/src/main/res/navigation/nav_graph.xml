@@ -32,17 +32,17 @@
             app:argType="string"
             android:defaultValue=""/>
         <action
-            android:id="@+id/action_travellerFragment_to_TrailerSearchFragment"
-            app:destination="@+id/trailerSearchFragment"/> <!-- 임시 -->
+            android:id="@+id/action_travellerFragment_to_travellerSearchResultFragment"
+            app:destination="@+id/travellerSearchResultFragment"/>
         <action
             android:id="@+id/action_travellerFragment_to_TravellerWriteFragment"
             app:destination="@+id/travellerWriteFragment"/>
     </fragment>
 
     <fragment
-        android:id="@+id/trailerSearchFragment"
-        android:name="com.tripstyle.tripstyle.presentation.ui.traveller.TrailerSearchFragment"
-        android:label="TrailerSearchFragment">
+        android:id="@+id/travellerSearchResultFragment"
+        android:name="com.tripstyle.tripstyle.presentation.ui.traveller.TravellerSearchResultFragment"
+        android:label="트레블러 검색 결과">
     </fragment>
 
     <fragment
