@@ -19,6 +19,7 @@ import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.tripstyle.tripstyle.dialog.CategoryDialog
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
@@ -75,6 +76,7 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.menu_confrim_button -> {
+                        checkInput()
                         requestUpdateCategory(1,binding.etCategory.text.toString(),subjectCategory,locationCategory)
                         findNavController().navigate(R.id.action_categoryEditFragment_to_shareTravelFragment)
                         true
@@ -85,10 +87,20 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
+    private fun checkInput() {
+        if(binding.etCategory.text.isEmpty()){
+            showAlert("카테고리 이름을 입력하세요.")
+        }
+    }
+
+    private fun showAlert(msg:String){
+        view?.let { Snackbar.make(it, msg, Snackbar.LENGTH_SHORT).show() };
+    }
+
     //spinner data setup
     private fun initCategorySpinner(){
         val data = resources.getStringArray(R.array.subject_category)
-        val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,data)
+        val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item,data)
         binding.spinnerSubject.adapter = adapter
         binding.spinnerSubject.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, v: View?, position: Int, id: Long) {
@@ -96,7 +108,7 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                //
+
             }
 
         }
@@ -105,7 +117,7 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
     //spinner data setup
     private fun initLocationSpinner(){
         val data = resources.getStringArray(R.array.location_category)
-        val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,data)
+        val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_dropdown_item,data)
         binding.spinnerLocation.adapter = adapter
         binding.spinnerLocation.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, v: View?, position: Int, id: Long) {
@@ -113,7 +125,6 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                //
             }
 
         }
@@ -137,7 +148,7 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
                 response: Response<BaseResponseModel>
             ) {
                 if(response.body()?.code==201){
-                    Log.d("response",response.body().toString())
+                    showAlert("수정이 완료되었습니다")
                 }else{
                     Toast.makeText(requireContext(),"카테고리 수정에 오류가 발생했습니다",Toast.LENGTH_SHORT).show()
                     Log.d("response",response.body().toString())
@@ -154,8 +165,27 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
 
 
     //카테고리 삭제 API 호출
-    private fun requestDeleteCategory(){
+    private fun requestDeleteCategory(categoryId:Int){
+        val service = AppClient.retrofit?.create(CategoryService::class.java)
+        service?.deleteCategory(categoryId)?.enqueue(object : Callback<BaseResponseModel> {
+            override fun onResponse(
+                call: Call<BaseResponseModel>,
+                response: Response<BaseResponseModel>
+            ) {
+                if(response.body()?.code==201){
+                    showAlert("삭제가 완료되었습니다")
+                }else{
+                    Toast.makeText(requireContext(),"카테고리 수정에 오류가 발생했습니다",Toast.LENGTH_SHORT).show()
+                    Log.d("response",response.body().toString())
+                }
 
+            }
+
+            override fun onFailure(call: Call<BaseResponseModel>, t: Throwable) {
+                Log.d("data","네트워크 연결 실패 : ${t}")
+            }
+
+        })
     }
 
     //카테고리 삭제 버튼 이벤트
@@ -166,7 +196,7 @@ class CategoryEditFragment :  BaseFragment<FragmentCategoryEditBinding>(R.layout
             val dialog = CategoryDialog(title,content)
             dialog.setActionListener(object : onDialogListener{
                 override fun onConfirmAction() {
-                    requestDeleteCategory()
+                    requestDeleteCategory(1)
                     findNavController().navigate(R.id.action_categoryEditFragment_to_shareTravelFragment)
                 }
             })
