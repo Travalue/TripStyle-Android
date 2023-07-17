@@ -124,14 +124,6 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
             selectGallery()
         }
 
-        // (임시) 카테고리 추가 버튼
-        // TODO: 툴바로 바꿀 것
-        binding.btnAddCategory.setOnClickListener {
-            Log.e("", "add button clicked")
-            requestAddCategory()
-            navController.popBackStack()
-        }
-
     }
 
     override fun initAfterBinding() {
@@ -247,6 +239,8 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
                     when (menuItem.itemId) {
                         R.id.menu_traveller_btn_add -> {
                             Log.e("","Category Add Button Clicked")
+                            requestAddCategory()
+                            navController.popBackStack()
                         }
                     }
                 }
