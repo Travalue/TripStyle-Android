@@ -9,11 +9,19 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import com.bumptech.glide.Glide
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
@@ -33,6 +41,8 @@ import retrofit2.Response
 class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCategoryOptionSubjectBinding>(R.layout.fragment_traveller_category_option_subject) {
 
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
+
+    private lateinit var menuTextView: TextView
 
     var isImageUploaded = false
     var categoryCoverImageUri = ""
@@ -72,6 +82,7 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
     override fun initStartView() {
         super.initStartView()
 //        (activity as MainActivity).setToolbarTitle("")
+        initMenu()
     }
 
     override fun initDataBinding() {
@@ -210,6 +221,36 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
             }
         })
 
+    }
+
+    private fun initMenu(){
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_traveller_add, menu)
+
+                // TextView 스타일 변경
+                val menuItem = menu.findItem(R.id.menu_traveller_btn_add)
+                val actionView = LayoutInflater.from(context).inflate(R.layout.traveller_menu_style, null)
+                menuTextView = actionView.findViewById<TextView>(R.id.tv_menu_text_style_false)
+
+                menuTextView.text = menuItem.title
+                menuItem.actionView = actionView
+
+                menuTextView.setOnClickListener {
+                    when (menuItem.itemId) {
+                        R.id.menu_traveller_btn_add -> {
+                            Log.e("","Category Add Button Clicked")
+                        }
+                    }
+                }
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return false
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
 }
