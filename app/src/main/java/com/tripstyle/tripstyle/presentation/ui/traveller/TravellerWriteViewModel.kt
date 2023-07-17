@@ -57,6 +57,10 @@ class TravellerWriteViewModel: ViewModel() {
         editTextContents[id] = item
     }
 
+    fun isBodyTextExist() : Boolean{
+        return editTextContents.isNotEmpty()
+    }
+
 
     fun deleteBodyItem(){
         bodyItem.clear()
