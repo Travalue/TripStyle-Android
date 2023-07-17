@@ -305,7 +305,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                 // TextView 스타일 변경
                 val menuItem = menu.findItem(R.id.menu_btn_register)
                 val actionView = LayoutInflater.from(context).inflate(R.layout.traveller_menu_style, null)
-                menuTextView = actionView.findViewById<TextView>(R.id.tv_menu_text_style_true)
+                menuTextView = actionView.findViewById<TextView>(R.id.tv_menu_text_style_false)
 
                 menuTextView.text = menuItem.title
                 menuItem.actionView = actionView
