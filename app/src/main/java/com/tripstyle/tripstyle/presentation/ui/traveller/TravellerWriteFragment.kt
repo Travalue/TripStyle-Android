@@ -300,10 +300,10 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_write_register, menu)
+                menuInflater.inflate(R.menu.menu_traveller_register, menu)
 
                 // TextView 스타일 변경
-                val menuItem = menu.findItem(R.id.menu_btn_register)
+                val menuItem = menu.findItem(R.id.menu_traveller_btn_register)
                 val actionView = LayoutInflater.from(context).inflate(R.layout.traveller_menu_style, null)
                 menuTextView = actionView.findViewById<TextView>(R.id.tv_menu_text_style_false)
 
@@ -312,7 +312,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
                 menuTextView.setOnClickListener {
                     when (menuItem.itemId) {
-                        R.id.menu_btn_register -> {
+                        R.id.menu_traveller_btn_register -> {
                             Log.e("","Register Button Clicked")
                         }
                     }

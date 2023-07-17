@@ -115,10 +115,10 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
 
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_write_schedule_add, menu)
+                menuInflater.inflate(R.menu.menu_traveller_add, menu)
 
                 // TextView 스타일 변경
-                val menuItem = menu.findItem(R.id.menu_btn_schedule_add)
+                val menuItem = menu.findItem(R.id.menu_traveller_btn_add)
                 val actionView = LayoutInflater.from(context).inflate(R.layout.traveller_menu_style, null)
                 menuTextView = actionView.findViewById<TextView>(R.id.tv_menu_text_style_false)
 
@@ -127,7 +127,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
 
                 menuTextView.setOnClickListener {
                     when (menuItem.itemId) {
-                        R.id.menu_btn_schedule_add -> {
+                        R.id.menu_traveller_btn_add -> {
                             Log.e("","Schedule Add Button Clicked")
                         }
                     }
