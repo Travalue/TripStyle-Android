@@ -7,15 +7,19 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import android.view.Gravity
-import android.view.MotionEvent
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
@@ -27,13 +31,16 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PolylineOverlay
-import com.tripstyle.tripstyle.MainActivity
 import com.tripstyle.tripstyle.util.ScheduleAdapter
 
 class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.layout.fragment_traveller_write) {
 
     private var list = ArrayList<String>() // post image 넘어오는 array
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
+
+    private lateinit var menuTextView: TextView
+    private var isBackgroundImageUploaded = false
+
 
     companion object{
         const val REQ_GALLERY = 1
@@ -74,6 +81,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         binding.bodyRecyclerView.adapter = adapter
         binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        initMenu()
         initView()
         initMapView()
 
@@ -81,6 +89,22 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
     override fun initDataBinding() {
         super.initDataBinding()
+
+        // 등록 버튼 활성화 관련
+        val textWatcher: TextWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                checkFields()
+            }
+        }
+
+        binding.editTextTitle.addTextChangedListener(textWatcher)
+        binding.editTextSubtitle.addTextChangedListener(textWatcher)
 
         viewModel.bodyItemListData.observe(viewLifecycleOwner){
             binding.bodyRecyclerView.adapter?.notifyDataSetChanged()
@@ -140,6 +164,8 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                 .centerCrop()
                 .into(binding.ivBackground)
         }
+        isBackgroundImageUploaded = true
+        checkFields(true)
     }
 
 
@@ -265,6 +291,75 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         return makerList
     }
 
+
+
+    /* 메뉴 관련 */
+
+    private fun initMenu(){
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_write_register, menu)
+
+                // TextView 스타일 변경
+                val menuItem = menu.findItem(R.id.menu_btn_register)
+                val actionView = LayoutInflater.from(context).inflate(R.layout.traveller_menu_style, null)
+                menuTextView = actionView.findViewById<TextView>(R.id.tv_menu_text_style_true)
+
+                menuTextView.text = menuItem.title
+                menuItem.actionView = actionView
+
+                menuTextView.setOnClickListener {
+                    when (menuItem.itemId) {
+                        R.id.menu_btn_register -> {
+                            Log.e("","Register Button Clicked")
+                        }
+                    }
+                }
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return false
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun setMenuTextViewEnabled(enabled: Boolean) {
+        if (enabled) {
+            // 메뉴(등록) 활성화
+            menuTextView.isEnabled = true
+            menuTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        } else {
+            // 비활성화
+            menuTextView.isEnabled = false
+            menuTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_959595))
+        }
+    }
+
+    // 필요한 필드값들이 채워졌는지 확인하고 메뉴 활성화/비활성화
+    private fun checkFields(isBackgroundImageUploadedNow: Boolean = false) {
+        if (isBackgroundImageUploadedNow) {
+            if (
+                binding.editTextTitle.text.trim().isNotEmpty() &&
+                binding.editTextSubtitle.text.trim().isNotEmpty() &&
+                viewModel.isBodyTextExist() // 본문에 글자 하나라도 있으면
+            )
+                setMenuTextViewEnabled(true)
+            else
+                setMenuTextViewEnabled(false)
+        } else {
+            if (
+                binding.editTextTitle.text.trim().isNotEmpty() &&
+                binding.editTextSubtitle.text.trim().isNotEmpty() &&
+                viewModel.isBodyTextExist() &&
+                isBackgroundImageUploaded
+            )
+                setMenuTextViewEnabled(true)
+            else
+                setMenuTextViewEnabled(false)
+        }
+    }
 
 
 }
