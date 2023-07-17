@@ -1,15 +1,19 @@
 package com.tripstyle.tripstyle.presentation.ui.traveller
 
-import android.view.View
+import android.util.Log
+import android.view.*
+import android.widget.TextView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentTravellerLocationBinding
 import com.tripstyle.tripstyle.di.AppClient
 import com.tripstyle.tripstyle.data.source.remote.MapService
-import com.tripstyle.tripstyle.MainActivity
 import com.tripstyle.tripstyle.data.model.dto.ItemData
 import com.tripstyle.tripstyle.data.model.dto.Schedule
 import com.tripstyle.tripstyle.data.model.dto.SearchResult
@@ -24,12 +28,15 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
 
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
 
+    private lateinit var menuTextView: TextView
+
     var selectedList = arrayListOf<ItemData>()
 
     override fun initStartView() {
         super.initStartView()
 //        (activity as MainActivity).setToolbarTitle("일정/장소 첨부")
         viewModel.deleteScheduleItem()
+        initMenu()
     }
 
     override fun initDataBinding() {
@@ -78,7 +85,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
         selectAdapter.notifyDataSetChanged()
 
     }
-    fun getLocationList(query : String){
+    private fun getLocationList(query : String){
         val service = AppClient.locationRetrofit?.create(MapService::class.java)
         service?.getMapSerachResult(query)?.enqueue(object : Callback<SearchResult>{
             override fun onResponse(call: Call<SearchResult>, response: Response<SearchResult>) {
@@ -101,5 +108,35 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    private fun initMenu(){
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_write_schedule_add, menu)
+
+                // TextView 스타일 변경
+                val menuItem = menu.findItem(R.id.menu_btn_schedule_add)
+                val actionView = LayoutInflater.from(context).inflate(R.layout.traveller_menu_style, null)
+                menuTextView = actionView.findViewById<TextView>(R.id.tv_menu_text_style_false)
+
+                menuTextView.text = menuItem.title
+                menuItem.actionView = actionView
+
+                menuTextView.setOnClickListener {
+                    when (menuItem.itemId) {
+                        R.id.menu_btn_schedule_add -> {
+                            Log.e("","Schedule Add Button Clicked")
+                        }
+                    }
+                }
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return false
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 }
