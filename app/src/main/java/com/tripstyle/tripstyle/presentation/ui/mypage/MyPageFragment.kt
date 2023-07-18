@@ -5,11 +5,16 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.util.Log
+import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.request.transition.Transition
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
+import com.kakao.sdk.user.model.User
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentMyPageMainBinding
@@ -30,10 +35,12 @@ import java.net.URL
 
 class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragment_my_page_main) {
 
-    private var addPlace :ArrayList<String> =arrayListOf("미국")
+    private lateinit var userViewModel : UserViewModel
 
     override fun initStartView() {
         super.initStartView()
+
+        userViewModel = (context as MainActivity).getUserViewModel()
 
         val resultData: Call<UserPageResponse> = AppClient.userService.getUserInfo(1,1,1)
         resultData.enqueue(object : Callback<UserPageResponse> {
@@ -43,12 +50,12 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             ) {
                 if (response.isSuccessful) {
                     val result: UserPageResponse = response.body()!!
-                    val user = result.data
+                    userViewModel.setUserInfo(result.data)
 
                     context?.let {
                         Glide.with(this@MyPageFragment)
                             .asBitmap()
-                            .load(user.profileImage)
+                            .load(result.data.profileImage)
                             .into(object : CustomTarget<Bitmap>() {
                                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                                     binding.ivProfile.setImageBitmap(resource) // 다운로드한 이미지를 ImageView에 설정합니다.
@@ -60,11 +67,13 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
                             })
                     }
 
-                    binding.tvNickname.text = user.nickname
-                    if (user.description != null) {
-                        binding.tvIntro.text = user.description
+                    binding.tvNickname.text = result.data.nickname
+                    if(userViewModel.getDescription() != null)
+                        binding.tvIntro.text = result.data.description
+                    binding.placeList.adapter = MyTravelListAdapter(result.data.travelList,false) // 어댑터 생성
+                    if(result.data.travelList.isEmpty()){
+                        binding.tvNoDestination.visibility = View.VISIBLE
                     }
-
                 } else {
                     Log.d("[getUserInfo]", "실패코드_${response.code()}")
                 }
@@ -76,20 +85,15 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             }
         })
 
+
+
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
 
-        if(addPlace.size > 0){
-            binding.tvNoDestination.text=""
-        }else{
-            binding.tvNoDestination.text="나의 여행지를 추가해보세요."
-        }
-
 
         // 나의 여행지 리스트 어댑터
-        binding.placeList.adapter = MyTravelListAdapter(addPlace,false) // 어댑터 생성
         val gridLayoutManager1: RecyclerView.LayoutManager = GridLayoutManager(context,4)
         binding.placeList.layoutManager = gridLayoutManager1
 
@@ -123,6 +127,7 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
 
 
     }
+
 
     private fun getCategoryImg(): ArrayList<Int> {
         return arrayListOf<Int>(

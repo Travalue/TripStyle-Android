@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tripstyle.tripstyle.data.model.dto.MyTripModel
 import com.tripstyle.tripstyle.data.model.dto.UserInfoModel
 import com.tripstyle.tripstyle.data.model.dto.UserPageResponse
 import com.tripstyle.tripstyle.di.AppClient
@@ -29,7 +30,7 @@ class UserViewModel : ViewModel() {
         return userInfo.value!!.nickname
     }
 
-    fun getTravelList():ArrayList<ArrayList<String>>{
+    fun getTravelList():ArrayList<MyTripModel>{
         return userInfo.value!!.travelList
     }
 
