@@ -60,10 +60,10 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
                             })
                     }
 
-//                    binding.tvNickname.text = user.nickname
-//                    if (user.description != null) {
-//                        binding.tvIntro.text = user.description
-//                    }
+                    binding.tvNickname.text = user.nickname
+                    if (user.description != null) {
+                        binding.tvIntro.text = user.description
+                    }
 
                 } else {
                     Log.d("[getUserInfo]", "실패코드_${response.code()}")

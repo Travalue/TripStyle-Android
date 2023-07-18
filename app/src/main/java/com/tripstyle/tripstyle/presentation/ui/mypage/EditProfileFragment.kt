@@ -14,7 +14,7 @@ import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentEditProfileBinding
 import com.tripstyle.tripstyle.MainActivity
-import com.tripstyle.tripstyle.data.model.dto.NicknameResponseModel
+import com.tripstyle.tripstyle.data.model.dto.*
 import com.tripstyle.tripstyle.di.AppClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -137,5 +137,30 @@ class EditProfileFragment  : BaseFragment<FragmentEditProfileBinding>(R.layout.f
             })
         }
 
+        // 수정버튼
+        binding.btnUpdate.setOnClickListener {
+            val newUserProfile  = UpdateUserProfileRequestModel(binding.etEditedNickname.text.toString(),binding.etEditDescription.text.toString())
+
+            val resultData: Call<UpdateUserProfileResponseModel> = AppClient.userService.updateMypage(newUserProfile)
+            resultData.enqueue(object : Callback<UpdateUserProfileResponseModel> {
+                override fun onResponse(
+                    call: Call<UpdateUserProfileResponseModel>,
+                    response: Response<UpdateUserProfileResponseModel>
+                ) {
+                    if (response.isSuccessful) {
+                        val result: UpdateUserProfileResponseModel = response.body()!!
+                        Log.d("[updateProfile]", result.toString())
+
+                    } else {
+                        Log.d("[updateProfile]", "실패코드_${response.code()}")
+                    }
+                }
+                override fun onFailure(call: Call<UpdateUserProfileResponseModel>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.d("[updateProfile]","통신 실패")
+                }
+            })
+
+        }
     }
 }
