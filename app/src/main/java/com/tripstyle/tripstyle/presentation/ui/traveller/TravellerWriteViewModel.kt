@@ -67,7 +67,10 @@ class TravellerWriteViewModel: ViewModel() {
     }
 
     fun isBodyTextExist() : Boolean{
-        return editTextContents.isNotEmpty()
+        editTextContents.forEach{
+            return it.value.isNotBlank() // 하나라도 있으면
+        }
+        return false
     }
 
 
