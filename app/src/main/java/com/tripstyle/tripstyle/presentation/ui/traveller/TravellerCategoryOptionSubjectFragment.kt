@@ -44,11 +44,7 @@ import retrofit2.Response
 class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCategoryOptionSubjectBinding>(R.layout.fragment_traveller_category_option_subject) {
 
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
-
     private lateinit var menuTextView: TextView
-
-    var isImageUploaded = false
-    var categoryCoverImageUri = ""
 
     companion object {
         const val REQ_GALLERY = 1
@@ -69,13 +65,11 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
 
                         for (i in 0 until count) {
                             val imageUri = getRealPathFromURI(it.clipData!!.getItemAt(i).uri)
-                            refreshCategoryCoverImage(imageUri) // 카테고리 커버 이미지 변경
-                            categoryCoverImageUri = imageUri
+                            viewModel.updateCategoryCoverImage(imageUri)
                         }
                     } else {    // 사진 1장 선택
                         val imageUri = getRealPathFromURI(it.data!!)
-                        refreshCategoryCoverImage(imageUri) // 카테고리 커버 이미지 변경
-                        categoryCoverImageUri = imageUri
+                        viewModel.updateCategoryCoverImage(imageUri)
                     }
 
                 }
@@ -84,7 +78,7 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
 
     override fun initStartView() {
         super.initStartView()
-//        (activity as MainActivity).setToolbarTitle("")
+
         initMenu()
     }
 
@@ -117,6 +111,14 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
             if (!it.isNullOrBlank()) {
                 binding.tvSubjectCategorySelected.text = it
                 checkFields()
+            }
+        }
+
+        // 카테고리 커버 이미지
+        viewModel.categoryCoverImageLiveData.observe(viewLifecycleOwner){
+            if(!it.isNullOrBlank()){
+                refreshCategoryCoverImage(it)
+                checkFields(true)
             }
         }
 
@@ -163,8 +165,6 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
                 .centerCrop()
                 .into(binding.ivCategoryCover)
         }
-        isImageUploaded = true
-        checkFields(true)
     }
 
     private fun getRealPathFromURI(uri: Uri): String {
@@ -194,7 +194,7 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
         }
     }
 
-    // 카테고리 추가하기 전 모든 필드값이 채워졌는지 확인하고 버튼 활성화
+    // 카테고리 추가하기 전 모든 필드값이 채워졌는지 확인하고 버튼 활성화/비활성화
     fun checkFields(isImageUploadedNow: Boolean = false) {
         lifecycleScope.launch(Dispatchers.Main) {
             if (isImageUploadedNow) {
@@ -211,7 +211,7 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
                     binding.editTextCategoryName.text.trim().isNotEmpty() &&
                     binding.editTextRegion.text.trim().isNotEmpty() &&
                     binding.tvSubjectCategorySelected.text.trim().isNotEmpty() &&
-                    isImageUploaded
+                    viewModel.isCategoryCoverImageUploaded()
                 )
                     setMenuTextViewEnabled(true)
                 else
@@ -238,7 +238,6 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
                 menuTextView.setOnClickListener {
                     when (menuItem.itemId) {
                         R.id.menu_traveller_btn_add -> {
-                            Log.e("","Category Add Button Clicked")
                             requestAddCategory()
                             navController.popBackStack()
                         }
@@ -258,7 +257,13 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
     /* API CALL */
 
     private fun requestAddCategory() {
-        val file = File(categoryCoverImageUri)
+
+        val file : File
+        if(viewModel.isCategoryCoverImageUploaded())
+            file = File(viewModel.categoryCoverImageLiveData.value!!)
+        else
+            return
+
         val thumbnail =
             MultipartBody.Part.createFormData("thumbnail", file.name, file.asRequestBody())
         val subject = binding.tvSubjectCategorySelected.text.toString()
