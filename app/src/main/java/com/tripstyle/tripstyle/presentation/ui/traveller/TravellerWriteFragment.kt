@@ -136,6 +136,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
         binding.buttonBodyAdd.setOnClickListener {
             viewModel.addBodyItem()
+            checkFields()
         }
 
 //        binding.ivBackground.setOnClickListener {
