@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -70,7 +71,6 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 response: Response<TravelDetailResponse>
             ) {
                 detailResponse = response.body()?.data!!
-
                 initView()
                 initMapView()
             }

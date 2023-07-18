@@ -4,7 +4,9 @@ import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -13,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tripstyle.tripstyle.databinding.ActivityMainBinding
 import com.kakao.sdk.common.util.Utility
+import com.tripstyle.tripstyle.presentation.ui.mypage.EditProfileFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -61,25 +64,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun migrateToolbarNavigation(){
+    private fun migrateToolbarNavigation() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(com.tripstyle.tripstyle.R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-        navController.addOnDestinationChangedListener{ _,_,_ ->
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        navController.addOnDestinationChangedListener{ controller ,destination,arguments ->
             // nav_graph xml 파일의 각 fragment의 label을 가져와서 보여줌
             binding.tvToolbarName.text = navController.currentDestination?.label
+
         }
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
 
     //toolbar visible 설정하는 함수
     fun hideToolbar(state:Boolean){
