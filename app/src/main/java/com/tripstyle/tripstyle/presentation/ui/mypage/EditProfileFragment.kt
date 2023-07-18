@@ -7,15 +7,29 @@ import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.Toast
+import android.widget.Toolbar
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.findNavController
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentEditProfileBinding
 import com.tripstyle.tripstyle.MainActivity
 import com.tripstyle.tripstyle.data.model.dto.*
+import com.tripstyle.tripstyle.databinding.DialogExitConfirmBinding
 import com.tripstyle.tripstyle.di.AppClient
+import com.tripstyle.tripstyle.dialog.ProfilePopupDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +37,7 @@ import java.util.regex.Pattern
 
 class EditProfileFragment  : BaseFragment<FragmentEditProfileBinding>(R.layout.fragment_edit_profile) {
 
+    private var editComplete = false
     private val requestActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK && it.data?.data != null) { //갤러리 캡쳐 결과값
@@ -31,12 +46,34 @@ class EditProfileFragment  : BaseFragment<FragmentEditProfileBinding>(R.layout.f
             }
         }
 
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_profile_edit, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.confirm_button -> {
+                // Save profile changes.
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    override fun onPrepareOptionsMenu(menu: Menu){
+        super.onPrepareOptionsMenu(menu)
+        val item = menu.findItem(R.id.confirm_button)
+        item.isEnabled = editComplete
+    }
+
     override fun initStartView() {
         super.initStartView()
+
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
+
     }
 
 
@@ -110,13 +147,17 @@ class EditProfileFragment  : BaseFragment<FragmentEditProfileBinding>(R.layout.f
                 ) {
                     if (response.isSuccessful) {
                         val result: NicknameResponseModel = response.body()!!
-                        if(result.isDuplicate == false){
+                        if(result.isDuplicate == false) {
                             Log.d("[mypage-checkNickname]", "서버응답 : $result")
                             //수정 버튼 활성화
+                            editComplete = true
+                            requireActivity().invalidateOptionsMenu()
 
                             binding.tvCheckNickname.visibility = View.VISIBLE
                             binding.tvCheckNickname.text = "사용 가능한 별명입니다."
                             binding.tvCheckNickname.setTextColor(R.color.primaryColor)
+
+
                         }else{
                             Log.d("[mypage-checkNickname]", "서버응답 : $result")
                             //수정 버튼 비활성화
@@ -163,4 +204,6 @@ class EditProfileFragment  : BaseFragment<FragmentEditProfileBinding>(R.layout.f
 
         }
     }
+
+
 }
