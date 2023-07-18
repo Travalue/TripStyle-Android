@@ -16,6 +16,9 @@ class TravellerWriteViewModel: ViewModel() {
     private var categorySubject = ""
     var categorySubjectLiveData = MutableLiveData<String>()
 
+    private var categoryCoverImage = ""
+    var categoryCoverImageLiveData = MutableLiveData<String>()
+
     init {
         addBodyItem()
     }
@@ -79,11 +82,22 @@ class TravellerWriteViewModel: ViewModel() {
 
 
 
-    // 카테고리 주제 저장하는
+    // 카테고리 주제 관련
     fun updateCategorySubject(text: String){
         categorySubject = text
         categorySubjectLiveData.value = categorySubject
     }
+
+    // 카테고리 커버 사진 관련
+    fun updateCategoryCoverImage(imageUri: String){
+        categoryCoverImage = imageUri
+        categoryCoverImageLiveData.value = categoryCoverImage
+    }
+
+    fun isCategoryCoverImageUploaded():Boolean {
+        return categoryCoverImage.isNotBlank()
+    }
+
 
 
     // 지도 및 일정 관련
