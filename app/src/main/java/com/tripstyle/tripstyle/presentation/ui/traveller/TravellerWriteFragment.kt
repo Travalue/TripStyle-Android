@@ -138,9 +138,9 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             viewModel.addBodyItem()
         }
 
-        binding.ivBackground.setOnClickListener {
-            navController.navigate(R.id.action_travellerWriteFragment_to_categoryOptionFragment)
-        }
+//        binding.ivBackground.setOnClickListener {
+//            navController.navigate(R.id.action_travellerWriteFragment_to_categoryOptionFragment)
+//        }
 
     }
 
@@ -307,7 +307,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                 menuTextView.setOnClickListener {
                     when (menuItem.itemId) {
                         R.id.menu_traveller_btn_register -> {
-                            Log.e("","Register Button Clicked")
+                            navController.navigate(R.id.action_travellerWriteFragment_to_categoryOptionFragment)
                         }
                     }
                 }
