@@ -20,6 +20,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
@@ -32,6 +33,8 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PolylineOverlay
 import com.tripstyle.tripstyle.util.ScheduleAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.layout.fragment_traveller_write) {
 
@@ -339,25 +342,27 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
     // 필요한 필드값들이 채워졌는지 확인하고 메뉴 활성화/비활성화
     private fun checkFields(isBackgroundImageUploadedNow: Boolean = false) {
-        if (isBackgroundImageUploadedNow) {
-            if (
-                binding.editTextTitle.text.trim().isNotEmpty() &&
-                binding.editTextSubtitle.text.trim().isNotEmpty() &&
-                viewModel.isBodyTextExist() // 본문에 글자 하나라도 있으면
-            )
-                setMenuTextViewEnabled(true)
-            else
-                setMenuTextViewEnabled(false)
-        } else {
-            if (
-                binding.editTextTitle.text.trim().isNotEmpty() &&
-                binding.editTextSubtitle.text.trim().isNotEmpty() &&
-                viewModel.isBodyTextExist() &&
-                isBackgroundImageUploaded
-            )
-                setMenuTextViewEnabled(true)
-            else
-                setMenuTextViewEnabled(false)
+        lifecycleScope.launch(Dispatchers.Main) {
+            if (isBackgroundImageUploadedNow) {
+                if (
+                    binding.editTextTitle.text.trim().isNotEmpty() &&
+                    binding.editTextSubtitle.text.trim().isNotEmpty() &&
+                    viewModel.isBodyTextExist() // 본문에 글자 하나라도 있으면
+                )
+                    setMenuTextViewEnabled(true)
+                else
+                    setMenuTextViewEnabled(false)
+            } else {
+                if (
+                    binding.editTextTitle.text.trim().isNotEmpty() &&
+                    binding.editTextSubtitle.text.trim().isNotEmpty() &&
+                    viewModel.isBodyTextExist() &&
+                    isBackgroundImageUploaded
+                )
+                    setMenuTextViewEnabled(true)
+                else
+                    setMenuTextViewEnabled(false)
+            }
         }
     }
 
