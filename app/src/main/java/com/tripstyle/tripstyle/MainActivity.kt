@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,9 +17,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.tripstyle.tripstyle.databinding.ActivityMainBinding
 import com.kakao.sdk.common.util.Utility
 import com.tripstyle.tripstyle.presentation.ui.mypage.EditProfileFragment
+import com.tripstyle.tripstyle.presentation.ui.mypage.UserViewModel
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var userViewModel: UserViewModel
+
     lateinit var binding: ActivityMainBinding
 
     lateinit var navController : NavController
@@ -32,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         migrateToolbarNavigation()
+
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
     }
 
@@ -106,5 +112,9 @@ class MainActivity : AppCompatActivity() {
         }else{
             binding.bottomNav.visibility = View.VISIBLE
         }
+    }
+
+    fun getUserViewModel(): UserViewModel {
+        return userViewModel
     }
 }
