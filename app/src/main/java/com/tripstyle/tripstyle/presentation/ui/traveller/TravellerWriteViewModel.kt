@@ -13,11 +13,17 @@ class TravellerWriteViewModel: ViewModel() {
     val scheduleItem = ArrayList<Schedule>()
     val scheduleItemListData = MutableLiveData<ArrayList<Schedule>>()
 
+    private var mainBackgroundImage = ""
+    var mainBackgroundImageLiveData = MutableLiveData<String>()
+
     private var categorySubject = ""
     var categorySubjectLiveData = MutableLiveData<String>()
 
     private var categoryCoverImage = ""
     var categoryCoverImageLiveData = MutableLiveData<String>()
+
+
+    /* 본문(사진-글, 사진-글 ...) 관련 */
 
     init {
         addBodyItem()
@@ -81,6 +87,18 @@ class TravellerWriteViewModel: ViewModel() {
     }
 
 
+    /* 배경 사진(메인) 관련 */
+
+    fun updateMainBackgroundImage(imageUri: String){
+        mainBackgroundImage = imageUri
+        mainBackgroundImageLiveData.value = mainBackgroundImage
+    }
+
+    fun isMainBackgroundImageUploaded():Boolean {
+        return mainBackgroundImage.isNotBlank()
+    }
+
+
 
     // 카테고리 주제 관련
     fun updateCategorySubject(text: String){
@@ -97,7 +115,6 @@ class TravellerWriteViewModel: ViewModel() {
     fun isCategoryCoverImageUploaded():Boolean {
         return categoryCoverImage.isNotBlank()
     }
-
 
 
     // 지도 및 일정 관련
