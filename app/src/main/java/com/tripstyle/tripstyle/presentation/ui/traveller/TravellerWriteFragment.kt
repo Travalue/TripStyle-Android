@@ -42,13 +42,10 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
 
     private lateinit var menuTextView: TextView
-    private var isBackgroundImageUploaded = false
-
 
     companion object{
         const val REQ_GALLERY = 1
     }
-
 
     private val imageResultSingle = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result ->
@@ -65,11 +62,11 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
                     for (i in 0 until count) {
                         val imageUri = getRealPathFromURI(it.clipData!!.getItemAt(i).uri)
-                        refreshBackgroundImage(imageUri) // 배경이미지 새로고침
+                        viewModel.updateMainBackgroundImage(imageUri)
                     }
                 } else {    // 사진 1장 선택
                     val imageUri = getRealPathFromURI(it.data!!)
-                    refreshBackgroundImage(imageUri) // 배경이미지 새로고침
+                    viewModel.updateMainBackgroundImage(imageUri)
                 }
 
             }
@@ -78,7 +75,6 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
     override fun initStartView() {
         super.initStartView()
-//        (activity as MainActivity).setToolbarTitle("글 작성하기")
 
         val adapter = TravellerWriteBodyRecyclerViewAdapter(viewModel,context,this)
         binding.bodyRecyclerView.adapter = adapter
@@ -111,6 +107,11 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
         viewModel.bodyItemListData.observe(viewLifecycleOwner){
             binding.bodyRecyclerView.adapter?.notifyDataSetChanged()
+        }
+
+        viewModel.mainBackgroundImageLiveData.observe(viewLifecycleOwner){
+            refreshBackgroundImage(it)
+            checkFields(true)
         }
 
         viewModel.scheduleItemListData.observe(viewLifecycleOwner){
@@ -167,8 +168,6 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                 .centerCrop()
                 .into(binding.ivBackground)
         }
-        isBackgroundImageUploaded = true
-        checkFields(true)
     }
 
 
@@ -197,15 +196,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
 
 
-    /*
-
-
-
-    여기 아래부터 지도 및 일정 관련
-
-
-
-     */
+    /*  지도 및 일정 관련  */
 
 
 
@@ -296,7 +287,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
 
 
-    /* 메뉴 관련 */
+    /* 툴바 메뉴 관련 */
 
     private fun initMenu(){
         val menuHost: MenuHost = requireActivity()
@@ -357,7 +348,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                     binding.editTextTitle.text.trim().isNotEmpty() &&
                     binding.editTextSubtitle.text.trim().isNotEmpty() &&
                     viewModel.isBodyTextExist() &&
-                    isBackgroundImageUploaded
+                    viewModel.isMainBackgroundImageUploaded()
                 )
                     setMenuTextViewEnabled(true)
                 else
