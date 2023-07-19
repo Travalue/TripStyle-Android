@@ -68,9 +68,12 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
                 response: Response<CategoryReadResponse>
             ) {
                 if (response.isSuccessful) {
-                    val categoryList = response.body()?.data
+                    val categoryList = response.body()?.data as ArrayList<CategoryItem>
 
-                    travellerCategoryAdapter.setData(categoryList as ArrayList<CategoryItem>)
+                    // 전체 게시글 수 update
+                    binding.tvAllCount.text = categoryList.sumOf{it.travellerCount}.toString()
+
+                    travellerCategoryAdapter.setData(categoryList)
                     travellerCategoryAdapter.notifyDataSetChanged()
                 } else {
                     Log.e("CategoryReadResponse", "Server error, CODE: ${response.code()}")
