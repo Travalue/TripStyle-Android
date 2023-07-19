@@ -14,6 +14,7 @@ import com.tripstyle.tripstyle.di.AppClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.roundToInt
 
 class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOptionBinding>(R.layout.fragment_traveller_category_option) {
 
@@ -80,6 +81,9 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
                     // 전체 게시글 수 update
                     binding.tvAllCount.text = categoryList.sumOf{it.travellerCount}.toString()
 
+                    // 카테고리 목록(RecyclerView) 크기 재조정
+                    resizeCategoryList(categoryList)
+
                     travellerCategoryAdapter.setData(categoryList)
                     travellerCategoryAdapter.notifyDataSetChanged()
                 } else {
@@ -91,6 +95,22 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
                 Log.e("CategoryReadResponse", "requestCategoryList API CALL FAILED")
             }
         })
+    }
+
+    private fun resizeCategoryList(list: ArrayList<CategoryItem>){
+        val layoutParams = binding.rvCategoryList.layoutParams
+        when(list.size){
+            0 -> layoutParams.height = dpToPx(0)
+            1 -> layoutParams.height = dpToPx(60)
+            2 -> layoutParams.height = dpToPx(120)
+            else -> layoutParams.height = dpToPx(180)
+        }
+        binding.rvCategoryList.layoutParams = layoutParams
+    }
+
+    private fun dpToPx(dp: Int): Int {
+        val density = resources.displayMetrics.density
+        return (dp * density).roundToInt()
     }
 
 }
