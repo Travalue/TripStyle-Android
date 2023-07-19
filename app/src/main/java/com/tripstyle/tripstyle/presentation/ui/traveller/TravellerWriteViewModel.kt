@@ -23,6 +23,10 @@ class TravellerWriteViewModel: ViewModel() {
     var categoryCoverImageLiveData = MutableLiveData<String>()
 
 
+    // 어떤 카테고리가 체크됐는지 확인하는 용도
+    val categoryCheckBox = MutableLiveData<Int>()
+
+
     /* 본문(사진-글, 사진-글 ...) 관련 */
 
     init {
