@@ -4,15 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.data.model.dto.CategoryItem
 
-class TravellerCategoryRecyclerViewAdapter(val context: Context?):
+class TravellerCategoryRecyclerViewAdapter(private val viewModel: TravellerWriteViewModel, val context: Context?):
     RecyclerView.Adapter<TravellerCategoryRecyclerViewAdapter.RecyclerViewViewHolder>() {
 
     private var list : ArrayList<CategoryItem>? = arrayListOf()
+    private var checkedPosition = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.traveller_category_item_view, parent, false)
@@ -31,6 +33,7 @@ class TravellerCategoryRecyclerViewAdapter(val context: Context?):
     inner class RecyclerViewViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val categoryTitle: TextView = itemView.findViewById(R.id.tv_category_title)
         private val categoryWriteCount: TextView = itemView.findViewById(R.id.tv_category_write_count)
+        private val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
 
         fun setContents(pos: Int) {
             // 세팅
@@ -40,6 +43,22 @@ class TravellerCategoryRecyclerViewAdapter(val context: Context?):
                     categoryWriteCount.text = list!![pos].travellerCount.toString()
                 }
             }
+
+            checkBox.setOnCheckedChangeListener(null)
+            checkBox.isChecked = pos == checkedPosition
+
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                if(isChecked) {
+                    checkedPosition = pos
+                    viewModel.categoryCheckBox.value = pos
+                } else {
+                    if (pos == checkedPosition) {
+                        viewModel.categoryCheckBox.value = null
+                        checkedPosition = -1
+                    }
+                }
+            }
+
         }
 
     }

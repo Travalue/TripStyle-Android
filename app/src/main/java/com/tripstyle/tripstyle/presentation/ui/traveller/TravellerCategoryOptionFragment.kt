@@ -2,6 +2,7 @@ package com.tripstyle.tripstyle.presentation.ui.traveller
 
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
@@ -15,13 +16,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOptionBinding>(R.layout.fragment_traveller_category_option) {
+
+    private val viewModel by activityViewModels<TravellerWriteViewModel>()
     lateinit var travellerCategoryAdapter : TravellerCategoryRecyclerViewAdapter
 
     override fun initStartView() {
         super.initStartView()
 
         //recyclerView adapter
-        travellerCategoryAdapter = TravellerCategoryRecyclerViewAdapter(context)
+        travellerCategoryAdapter = TravellerCategoryRecyclerViewAdapter(viewModel, context)
 
         binding.rvCategoryList.adapter = travellerCategoryAdapter
         binding.rvCategoryList.layoutManager = LinearLayoutManager(context)
@@ -38,6 +41,10 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
                 R.id.button_public -> changeOpenStatusTextView(true)
                 R.id.button_private -> changeOpenStatusTextView(false)
             }
+        }
+
+        viewModel.categoryCheckBox.observe(viewLifecycleOwner){
+            travellerCategoryAdapter.notifyDataSetChanged()
         }
     }
 
