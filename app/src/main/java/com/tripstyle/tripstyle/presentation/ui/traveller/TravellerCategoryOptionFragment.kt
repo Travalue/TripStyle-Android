@@ -2,8 +2,10 @@ package com.tripstyle.tripstyle.presentation.ui.traveller
 
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.data.model.dto.CategoryItem
 import com.tripstyle.tripstyle.data.model.dto.CategoryReadResponse
 import com.tripstyle.tripstyle.data.source.remote.TravelService
 import com.tripstyle.tripstyle.databinding.FragmentTravellerCategoryOptionBinding
@@ -13,9 +15,16 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOptionBinding>(R.layout.fragment_traveller_category_option) {
+    lateinit var travellerCategoryAdapter : TravellerCategoryRecyclerViewAdapter
 
     override fun initStartView() {
         super.initStartView()
+
+        //recyclerView adapter
+        travellerCategoryAdapter = TravellerCategoryRecyclerViewAdapter(context)
+
+        binding.rvCategoryList.adapter = travellerCategoryAdapter
+        binding.rvCategoryList.layoutManager = LinearLayoutManager(context)
     }
 
     override fun initDataBinding() {
@@ -60,7 +69,9 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
             ) {
                 if (response.isSuccessful) {
                     val categoryList = response.body()?.data
-                    Log.e("CategoryReadResponse", "categoryList: ${categoryList.toString()}")
+
+                    travellerCategoryAdapter.setData(categoryList as ArrayList<CategoryItem>)
+                    travellerCategoryAdapter.notifyDataSetChanged()
                 } else {
                     Log.e("CategoryReadResponse", "Server error, CODE: ${response.code()}")
                 }
