@@ -82,7 +82,7 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
                     binding.tvAllCount.text = categoryList.sumOf{it.travellerCount}.toString()
 
                     // 카테고리 목록(RecyclerView) 크기 재조정
-                    resizeCategoryList(categoryList)
+                    resizeCategoryList(categoryList.size)
 
                     travellerCategoryAdapter.setData(categoryList)
                     travellerCategoryAdapter.notifyDataSetChanged()
@@ -97,9 +97,9 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
         })
     }
 
-    private fun resizeCategoryList(list: ArrayList<CategoryItem>){
+    private fun resizeCategoryList(size: Int){
         val layoutParams = binding.rvCategoryList.layoutParams
-        when(list.size){
+        when(size){
             0 -> layoutParams.height = dpToPx(0)
             1 -> layoutParams.height = dpToPx(60)
             2 -> layoutParams.height = dpToPx(120)
