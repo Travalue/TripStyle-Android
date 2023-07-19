@@ -238,8 +238,9 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
                 menuTextView.setOnClickListener {
                     when (menuItem.itemId) {
                         R.id.menu_traveller_btn_add -> {
-                            requestAddCategory()
-                            navController.popBackStack()
+                            requestAddCategory{
+                                navController.popBackStack()
+                            }
                         }
                     }
                 }
@@ -256,7 +257,7 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
 
     /* API CALL */
 
-    private fun requestAddCategory() {
+    private fun requestAddCategory(onSuccess: () -> Unit) {
 
         val file : File
         if(viewModel.isCategoryCoverImageUploaded())
@@ -285,13 +286,16 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
                 ) {
                     if (response.isSuccessful) {
                         Log.e("AddCategoryResponse:", response.body().toString())
+                        onSuccess()
                     } else {
                         Log.e("AddCategoryResponse:", "응답 실패")
+                        // TODO: 다이얼로그 띄우기?
                     }
                 }
 
                 override fun onFailure(call: Call<CategoryAddResponse>, t: Throwable) {
                     Log.e("AddCategoryResponse:", "요청 실패", t)
+                    // TODO: 다이얼로그 띄우기?
                 }
             })
 

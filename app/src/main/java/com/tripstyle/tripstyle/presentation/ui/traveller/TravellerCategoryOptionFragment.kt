@@ -52,6 +52,11 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         requestCategoryList()
     }
 
