@@ -51,6 +51,12 @@ interface TravelService {
         @Part("userId") userId: RequestBody
     ): Call<CategoryAddResponse>
 
+    // 카테고리 조회
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
+    @GET("/category")
+    fun getCategoryList(@Query("userId") userId: Int): Call<CategoryReadResponse>
+
+
     // 트레블러 검색
     @GET("/post/traveller/search")
     fun searchTraveller(@Query("keyword") keyword: String): Call<TravellerSearchResponse>
