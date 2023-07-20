@@ -29,6 +29,8 @@ class TravellerWriteViewModel: ViewModel() {
     // 어떤 카테고리가 체크됐는지 확인하는 용도
     val categoryCheckBox = MutableLiveData<Int>()
 
+    val isBodyContentsExist = MutableLiveData<Boolean>()
+
 
     /* 제목, 부제목 관련 */
     fun updateTitleAndSubtitle(currentTitle: String, currentSubtitle: String){
@@ -41,7 +43,8 @@ class TravellerWriteViewModel: ViewModel() {
     /* 본문(사진-글, 사진-글 ...) 관련 */
 
     init {
-        addBodyItem()
+        addBodyItem() // 최초에 본문 1개 생성
+        isBodyContentsExist.value = false
     }
 
     fun addBodyItem() {
@@ -62,11 +65,14 @@ class TravellerWriteViewModel: ViewModel() {
         bodyItem[pos] = updatedItem
         bodyItemListData.value = bodyItem
 
+        updateBodyContentsStatus()
 //        printBodyItem()
     }
 
     fun updateBodyTextItem(id: Int, item: String) {
         editTextContents[id] = item
+
+        updateBodyContentsStatus()
     }
 
     // 본문 EditText 전체 저장
@@ -80,11 +86,20 @@ class TravellerWriteViewModel: ViewModel() {
         }
     }
 
-    fun isBodyTextExist() : Boolean{
+    private fun updateBodyContentsStatus(){
         editTextContents.forEach{
-            return it.value.isNotBlank() // 하나라도 있으면
+            if(it.value.isNotBlank()) { // 본문 텍스트 하나라도 있으면
+                isBodyContentsExist.value = true
+                return
+            }
         }
-        return false
+        bodyItem.forEach {
+            if(it.image.isNotBlank()){ // 본문 이미지 하나라도 있으면
+                isBodyContentsExist.value = true
+                return
+            }
+        }
+        isBodyContentsExist.value = false
     }
 
 
