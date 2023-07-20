@@ -136,14 +136,24 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
                 menuTextView.setOnClickListener {
                     when (menuItem.itemId) {
                         R.id.menu_traveller_btn_add -> {
-                            Log.e("","Schedule Add Button Clicked")
+//                            Log.e("","Schedule Add Button Clicked")
+                            navController.popBackStack()
                         }
                     }
                 }
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return false
+                return when (menuItem.itemId) {
+                    android.R.id.home -> {
+//                        Log.e("","back button clicked")
+                        // back button 클릭되면 Schedule 비우기
+                        viewModel.deleteScheduleItem()
+                        navController.popBackStack()
+                        true
+                    }
+                    else -> return false
+                }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
