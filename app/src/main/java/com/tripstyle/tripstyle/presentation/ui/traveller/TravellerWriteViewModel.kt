@@ -10,6 +10,9 @@ class TravellerWriteViewModel: ViewModel() {
     val bodyItemListData = MutableLiveData<ArrayList<TravellerWriteResult>>()
     private val editTextContents = mutableMapOf<Int, String>()
 
+    private var title = ""
+    private var subtitle = ""
+
     val scheduleItem = ArrayList<Schedule>()
     val scheduleItemListData = MutableLiveData<ArrayList<Schedule>>()
 
@@ -27,6 +30,14 @@ class TravellerWriteViewModel: ViewModel() {
     val categoryCheckBox = MutableLiveData<Int>()
 
 
+    /* 제목, 부제목 관련 */
+    fun updateTitleAndSubtitle(currentTitle: String, currentSubtitle: String){
+        title = currentTitle
+        subtitle = currentSubtitle
+    }
+
+
+
     /* 본문(사진-글, 사진-글 ...) 관련 */
 
     init {
@@ -35,13 +46,7 @@ class TravellerWriteViewModel: ViewModel() {
 
     fun addBodyItem() {
         // EditText 받아오기
-        for ((id, content) in editTextContents) {
-            if (id < bodyItem.size) {
-                bodyItem[id].text = content
-            } else {
-                // 에러
-            }
-        }
+        updateAllBodyText()
 
         // 빈 아이템 추가
         bodyItem.add(TravellerWriteResult("", ""))
@@ -50,13 +55,7 @@ class TravellerWriteViewModel: ViewModel() {
 
     fun updateBodyItem(pos: Int, item: TravellerWriteResult) {
         // EditText 받아오기
-        for ((id, content) in editTextContents) {
-            if (id < bodyItem.size) {
-                bodyItem[id].text = content
-            } else {
-                // 에러
-            }
-        }
+        updateAllBodyText()
 
         // 이미지 update
         val updatedItem = TravellerWriteResult(item.image, bodyItem[pos].text)
@@ -68,6 +67,17 @@ class TravellerWriteViewModel: ViewModel() {
 
     fun updateBodyTextItem(id: Int, item: String) {
         editTextContents[id] = item
+    }
+
+    // 본문 EditText 전체 저장
+    fun updateAllBodyText(){
+        for ((id, content) in editTextContents) {
+            if (id < bodyItem.size) {
+                bodyItem[id].text = content
+            } else {
+                // 에러
+            }
+        }
     }
 
     fun isBodyTextExist() : Boolean{
