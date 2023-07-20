@@ -3,11 +3,13 @@ package com.tripstyle.tripstyle.presentation.ui.traveller
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
@@ -17,6 +19,8 @@ import com.tripstyle.tripstyle.data.source.remote.MapService
 import com.tripstyle.tripstyle.data.model.dto.ItemData
 import com.tripstyle.tripstyle.data.model.dto.Schedule
 import com.tripstyle.tripstyle.data.model.dto.SearchResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -72,6 +76,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
                 override fun removeLocation(id: Int) {
                     selectedList.removeAt(id)
                     selectAdapter.notifyDataSetChanged()
+                    checkFields() // 툴바 메뉴 활성화/비활성화
                     if(selectedList.size == 0) binding.rvSelected.visibility = View.GONE
                 }
             })
@@ -84,6 +89,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
         selectAdapter.setData(selectedList)
         selectAdapter.notifyDataSetChanged()
 
+        checkFields() // 툴바 메뉴 활성화/비활성화
     }
     private fun getLocationList(query : String){
         val service = AppClient.locationRetrofit?.create(MapService::class.java)
@@ -109,6 +115,8 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
             }
         })
     }
+
+    /* 툴바 메뉴 관련 */
 
     private fun initMenu(){
         val menuHost: MenuHost = requireActivity()
@@ -139,4 +147,27 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
+
+    private fun checkFields() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            if(selectedList.isNotEmpty())
+                setMenuTextViewEnabled(true)
+            else
+                setMenuTextViewEnabled(false)
+        }
+    }
+
+    private fun setMenuTextViewEnabled(enabled: Boolean) {
+        if (enabled) {
+            // 메뉴(등록) 활성화
+            menuTextView.isEnabled = true
+            menuTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        } else {
+            // 비활성화
+            menuTextView.isEnabled = false
+            menuTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_959595))
+        }
+    }
+
+
 }
