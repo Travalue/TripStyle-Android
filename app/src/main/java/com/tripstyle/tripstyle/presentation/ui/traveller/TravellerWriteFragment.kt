@@ -7,15 +7,20 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import android.view.Gravity
-import android.view.MotionEvent
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
@@ -27,18 +32,20 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PolylineOverlay
-import com.tripstyle.tripstyle.MainActivity
 import com.tripstyle.tripstyle.util.ScheduleAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.layout.fragment_traveller_write) {
 
     private var list = ArrayList<String>() // post image 넘어오는 array
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
 
+    private lateinit var menuTextView: TextView
+
     companion object{
         const val REQ_GALLERY = 1
     }
-
 
     private val imageResultSingle = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result ->
@@ -55,11 +62,11 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
                     for (i in 0 until count) {
                         val imageUri = getRealPathFromURI(it.clipData!!.getItemAt(i).uri)
-                        refreshBackgroundImage(imageUri) // 배경이미지 새로고침
+                        viewModel.updateMainBackgroundImage(imageUri)
                     }
                 } else {    // 사진 1장 선택
                     val imageUri = getRealPathFromURI(it.data!!)
-                    refreshBackgroundImage(imageUri) // 배경이미지 새로고침
+                    viewModel.updateMainBackgroundImage(imageUri)
                 }
 
             }
@@ -68,12 +75,12 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
     override fun initStartView() {
         super.initStartView()
-//        (activity as MainActivity).setToolbarTitle("글 작성하기")
 
         val adapter = TravellerWriteBodyRecyclerViewAdapter(viewModel,context,this)
         binding.bodyRecyclerView.adapter = adapter
         binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        initMenu()
         initView()
         initMapView()
 
@@ -82,8 +89,29 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     override fun initDataBinding() {
         super.initDataBinding()
 
+        // 등록 버튼 활성화 관련
+        val textWatcher: TextWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                checkFields()
+            }
+        }
+
+        binding.editTextTitle.addTextChangedListener(textWatcher)
+        binding.editTextSubtitle.addTextChangedListener(textWatcher)
+
         viewModel.bodyItemListData.observe(viewLifecycleOwner){
             binding.bodyRecyclerView.adapter?.notifyDataSetChanged()
+        }
+
+        viewModel.mainBackgroundImageLiveData.observe(viewLifecycleOwner){
+            refreshBackgroundImage(it)
+            checkFields(true)
         }
 
         viewModel.scheduleItemListData.observe(viewLifecycleOwner){
@@ -95,9 +123,15 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         }
 
         binding.tvAddSchedule.setOnClickListener {
+            viewModel.updateAllBodyText()
+            viewModel.updateTitleAndSubtitle(binding.editTextTitle.text.toString(),binding.editTextSubtitle.text.toString())
+
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
         }
         binding.ivCalendar.setOnClickListener {
+            viewModel.updateAllBodyText()
+            viewModel.updateTitleAndSubtitle(binding.editTextTitle.text.toString(),binding.editTextSubtitle.text.toString())
+
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
         }
 
@@ -108,10 +142,11 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
         binding.buttonBodyAdd.setOnClickListener {
             viewModel.addBodyItem()
+            checkFields()
         }
 
-        binding.ivBackground.setOnClickListener {
-            navController.navigate(R.id.action_travellerWriteFragment_to_categoryOptionFragment)
+        viewModel.isBodyContentsExist.observe(viewLifecycleOwner){
+            checkFields()
         }
 
     }
@@ -134,6 +169,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     }
 
 
+    // 배경 이미지 세팅
     private fun refreshBackgroundImage(imageUri: String){
         context?.let {
             Glide.with(it).load(imageUri)
@@ -168,15 +204,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
 
 
-    /*
-
-
-
-    여기 아래부터 지도 및 일정 관련
-
-
-
-     */
+    /*  지도 및 일정 관련  */
 
 
 
@@ -265,6 +293,82 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         return makerList
     }
 
+
+
+    /* 툴바 메뉴 관련 */
+
+    private fun initMenu(){
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_traveller_register, menu)
+
+                // TextView 스타일 변경
+                val menuItem = menu.findItem(R.id.menu_traveller_btn_register)
+                val actionView = LayoutInflater.from(context).inflate(R.layout.traveller_menu_style, null)
+                menuTextView = actionView.findViewById<TextView>(R.id.tv_menu_text_style_false)
+
+                menuTextView.text = menuItem.title
+                menuItem.actionView = actionView
+
+                menuTextView.setOnClickListener {
+                    when (menuItem.itemId) {
+                        R.id.menu_traveller_btn_register -> {
+                            viewModel.updateAllBodyText()
+                            viewModel.updateTitleAndSubtitle(binding.editTextTitle.text.toString(),binding.editTextSubtitle.text.toString())
+
+                            navController.navigate(R.id.action_travellerWriteFragment_to_categoryOptionFragment)
+                        }
+                    }
+                }
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return false
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun setMenuTextViewEnabled(enabled: Boolean) {
+        if(::menuTextView.isInitialized) {
+            if (enabled) {
+                // 메뉴(등록) 활성화
+                menuTextView.isEnabled = true
+                menuTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            } else {
+                // 비활성화
+                menuTextView.isEnabled = false
+                menuTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_959595))
+            }
+        }
+    }
+
+    // 필요한 필드값들이 채워졌는지 확인하고 메뉴 활성화/비활성화
+    private fun checkFields(isBackgroundImageUploadedNow: Boolean = false) {
+        lifecycleScope.launch(Dispatchers.Main) {
+            if (isBackgroundImageUploadedNow) {
+                if (
+                    binding.editTextTitle.text.trim().isNotEmpty() &&
+                    binding.editTextSubtitle.text.trim().isNotEmpty() &&
+                    viewModel.isBodyContentsExist.value == true // 본문에 사진이든 글이든 컨텐츠 하나라도 있으면
+                )
+                    setMenuTextViewEnabled(true)
+                else
+                    setMenuTextViewEnabled(false)
+            } else {
+                if (
+                    binding.editTextTitle.text.trim().isNotEmpty() &&
+                    binding.editTextSubtitle.text.trim().isNotEmpty() &&
+                    viewModel.isBodyContentsExist.value == true &&
+                    viewModel.isMainBackgroundImageUploaded()
+                )
+                    setMenuTextViewEnabled(true)
+                else
+                    setMenuTextViewEnabled(false)
+            }
+        }
+    }
 
 
 }

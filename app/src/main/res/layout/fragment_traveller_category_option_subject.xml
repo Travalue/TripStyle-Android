@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:text="카테고리 이름"
             android:textSize="16sp"
             android:textColor="@color/gray_454545"
@@ -124,19 +124,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_category_cover_image"
-            app:srcCompat="@drawable/btn_category_cover2" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_category_cover_image_add"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="사진 등록하기"-->
-<!--            android:textSize="12sp"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:layout_marginBottom="30dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/iv_category_cover"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/iv_category_cover"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/iv_category_cover" />-->
+            android:background="@drawable/btn_category_cover2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

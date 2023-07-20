@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/travellerFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.traveller.TravellerFragment"
-        android:label="TravellerFragment" >
+        android:label="Explore" >
         <action
             android:id="@+id/action_travellerFragment_to_categoryDialogFragment"
             app:destination="@id/categoryDialogFragment" />
@@ -32,23 +32,23 @@
             app:argType="string"
             android:defaultValue=""/>
         <action
-            android:id="@+id/action_travellerFragment_to_TrailerSearchFragment"
-            app:destination="@+id/trailerSearchFragment"/> <!-- 임시 -->
+            android:id="@+id/action_travellerFragment_to_travellerSearchResultFragment"
+            app:destination="@+id/travellerSearchResultFragment"/>
         <action
             android:id="@+id/action_travellerFragment_to_TravellerWriteFragment"
             app:destination="@+id/travellerWriteFragment"/>
     </fragment>
 
     <fragment
-        android:id="@+id/trailerSearchFragment"
-        android:name="com.tripstyle.tripstyle.presentation.ui.traveller.TrailerSearchFragment"
-        android:label="TrailerSearchFragment">
+        android:id="@+id/travellerSearchResultFragment"
+        android:name="com.tripstyle.tripstyle.presentation.ui.traveller.TravellerSearchResultFragment"
+        android:label="트레블러 검색 결과">
     </fragment>
 
     <fragment
         android:id="@+id/travellerWriteFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.traveller.TravellerWriteFragment"
-        android:label="TravellerWriteFragment">
+        android:label="글 작성하기">
         <action
             android:id="@+id/action_travellerWriteFragment_to_TravellerLocationFragment"
             app:destination="@+id/travellerLocationFragment"/>
@@ -60,7 +60,7 @@
     <fragment
         android:id="@+id/categoryOptionFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.traveller.TravellerCategoryOptionFragment"
-        android:label="카테고리 옵션" >
+        android:label="옵션" >
         <action
             android:id="@+id/action_categoryOptionFragment_to_categoryOptionSubjectFragment"
             app:destination="@+id/categoryOptionSubjectFragment"/>
@@ -69,7 +69,7 @@
     <fragment
         android:id="@+id/categoryOptionSubjectFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.traveller.TravellerCategoryOptionSubjectFragment"
-        android:label="카테고리 옵션 주제" >
+        android:label="카테고리 추가" >
         <action
             android:id="@+id/action_categoryOptionSubjectFragment_to_categoryOptionSubjectSelectFragment"
             app:destination="@+id/categoryOptionSubjectSelectFragment"/>
@@ -78,13 +78,13 @@
     <fragment
         android:id="@+id/categoryOptionSubjectSelectFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.traveller.TravellerCategoryOptionSubjectSelectFragment"
-        android:label="카테고리 옵션 주제 선택" >
+        android:label="주제 분류" >
     </fragment>
 
     <fragment
         android:id="@+id/travellerLocationFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.traveller.TravellerLocationFragment"
-        android:label="TravellerLocationFragment">
+        android:label="여행 일정 추가">
     </fragment>
 
     <fragment

@@ -7,10 +7,10 @@
 
     <ImageView
         android:id="@+id/trailer_search_image"
-        android:layout_width="133.66dp"
-        android:layout_height="133.66dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/trailer_search_sample_image" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
