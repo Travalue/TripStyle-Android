@@ -183,14 +183,16 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
     /* 툴바 메뉴 관련 */
 
     private fun setMenuTextViewEnabled(enabled: Boolean) {
-        if (enabled) {
-            // 메뉴(등록) 활성화
-            menuTextView.isEnabled = true
-            menuTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-        } else {
-            // 비활성화
-            menuTextView.isEnabled = false
-            menuTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_959595))
+        if(::menuTextView.isInitialized) {
+            if (enabled) {
+                // 메뉴(등록) 활성화
+                menuTextView.isEnabled = true
+                menuTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            } else {
+                // 비활성화
+                menuTextView.isEnabled = false
+                menuTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_959595))
+            }
         }
     }
 
