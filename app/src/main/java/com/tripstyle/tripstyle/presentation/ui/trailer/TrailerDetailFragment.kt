@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -25,10 +26,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PolylineOverlay
 import com.tripstyle.tripstyle.MainActivity
-import com.tripstyle.tripstyle.data.model.dto.BaseResponseModel
-import com.tripstyle.tripstyle.data.model.dto.Data
-import com.tripstyle.tripstyle.data.model.dto.Schedule
-import com.tripstyle.tripstyle.data.model.dto.TravelDetailResponse
+import com.tripstyle.tripstyle.data.model.dto.*
 import com.tripstyle.tripstyle.di.AppClient
 import com.tripstyle.tripstyle.data.source.remote.TravelService
 import retrofit2.Call
@@ -120,7 +118,7 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         binding.tvWriter.text = detailResponse.writer.nickname
         binding.tvDescription.text = detailResponse.writer?.description?.toString()
         Glide.with(this).load(detailResponse.writer.profileImageURL).apply(RequestOptions().circleCrop()).into(binding.ivUserProfile)
-        binding.tvWriteCnt.text = "30"
+        binding.tvWriteCnt.text = "${detailResponse.statistics.postCount}"
 
         //좋아요
         if(detailResponse.statistics.liked){
@@ -240,39 +238,42 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
         var flag = false
         binding.btnFavorite.setOnClickListener {
             if(!flag){
-                service?.getLikePost(args.postId)?.enqueue(object : Callback<BaseResponseModel>{
+                service?.getLikePost(args.postId)?.enqueue(object : Callback<FavoriteResponse>{
                     override fun onResponse(
-                        call: Call<BaseResponseModel>,
-                        response: Response<BaseResponseModel>
+                        call: Call<FavoriteResponse>,
+                        response: Response<FavoriteResponse>
                     ) {
+
                         if(response.body()?.code == 201){
                             binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_selected)
+                            binding.tvFavoriteCnt.text = "${response.body()?.data?.likeCount}"
                             flag = true
                         }else{
                             Toast.makeText(context,response.body()?.message.toString(),Toast.LENGTH_SHORT).show()
                         }
                     }
 
-                    override fun onFailure(call: Call<BaseResponseModel>, t: Throwable) {
+                    override fun onFailure(call: Call<FavoriteResponse>, t: Throwable) {
                         Toast.makeText(context,t.message,Toast.LENGTH_SHORT).show()
                     }
 
                 })
             }else{
-                service?.getUnlikePost(args.postId)?.enqueue(object : Callback<BaseResponseModel>{
+                service?.getUnlikePost(args.postId)?.enqueue(object : Callback<FavoriteResponse>{
                     override fun onResponse(
-                        call: Call<BaseResponseModel>,
-                        response: Response<BaseResponseModel>
+                        call: Call<FavoriteResponse>,
+                        response: Response<FavoriteResponse>
                     ) {
-                        if(response.body()?.code == 200){
+                        if(response.body()?.code == 201){
                             binding.btnFavorite.setBackgroundResource(R.drawable.ic_heart_fill)
-                            flag = true
+                            binding.tvFavoriteCnt.text = "${response.body()?.data?.likeCount}"
+                            flag = false
                         }else{
                             Toast.makeText(context,response.body()?.message.toString(),Toast.LENGTH_SHORT).show()
                         }
                     }
 
-                    override fun onFailure(call: Call<BaseResponseModel>, t: Throwable) {
+                    override fun onFailure(call: Call<FavoriteResponse>, t: Throwable) {
                         Toast.makeText(context,t.message,Toast.LENGTH_SHORT).show()
                     }
 

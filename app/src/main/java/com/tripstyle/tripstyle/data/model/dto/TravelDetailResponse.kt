@@ -39,5 +39,6 @@ data class Schedule(
 data class Statistics(
     val likeCount: Int,
     val liked: Boolean,
-    val viewCount: Int
+    val viewCount: Int,
+    val postCount : Int,
 )
