@@ -145,9 +145,9 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             checkFields()
         }
 
-//        binding.ivBackground.setOnClickListener {
-//            navController.navigate(R.id.action_travellerWriteFragment_to_categoryOptionFragment)
-//        }
+        viewModel.isBodyContentsExist.observe(viewLifecycleOwner){
+            checkFields()
+        }
 
     }
 
@@ -349,7 +349,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                 if (
                     binding.editTextTitle.text.trim().isNotEmpty() &&
                     binding.editTextSubtitle.text.trim().isNotEmpty() &&
-                    viewModel.isBodyTextExist() // 본문에 글자 하나라도 있으면
+                    viewModel.isBodyContentsExist.value == true // 본문에 사진이든 글이든 컨텐츠 하나라도 있으면
                 )
                     setMenuTextViewEnabled(true)
                 else
@@ -358,7 +358,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                 if (
                     binding.editTextTitle.text.trim().isNotEmpty() &&
                     binding.editTextSubtitle.text.trim().isNotEmpty() &&
-                    viewModel.isBodyTextExist() &&
+                    viewModel.isBodyContentsExist.value == true &&
                     viewModel.isMainBackgroundImageUploaded()
                 )
                     setMenuTextViewEnabled(true)
