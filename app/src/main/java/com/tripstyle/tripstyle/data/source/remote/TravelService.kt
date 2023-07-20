@@ -2,6 +2,10 @@ package com.tripstyle.tripstyle.data.source.remote
 
 
 import com.tripstyle.tripstyle.BuildConfig
+import com.tripstyle.tripstyle.data.model.dto.BaseResponseModel
+import com.tripstyle.tripstyle.data.model.dto.FavoriteResponse
+import com.tripstyle.tripstyle.data.model.dto.TrailerResponse
+import com.tripstyle.tripstyle.data.model.dto.TravelDetailResponse
 import com.tripstyle.tripstyle.data.model.dto.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -22,12 +26,12 @@ interface TravelService {
     //게시물 좋아요
     @Headers("Authorization: ${BuildConfig.TOKEN}")
     @POST("/post/{postId}/like")
-    fun getLikePost(@Path("postId")id:Int) : Call<BaseResponseModel>
+    fun getLikePost(@Path("postId")id:Int) : Call<FavoriteResponse>
 
     //게시물 좋아요
     @Headers("Authorization: ${BuildConfig.TOKEN}")
     @DELETE("/post/{postId}/unlike")
-    fun getUnlikePost(@Path("postId")id:Int) : Call<BaseResponseModel>
+    fun getUnlikePost(@Path("postId")id:Int) : Call<FavoriteResponse>
 
     // 공유중인 traveller 전체조회
     @Headers("Authorization: ${BuildConfig.TOKEN}")
