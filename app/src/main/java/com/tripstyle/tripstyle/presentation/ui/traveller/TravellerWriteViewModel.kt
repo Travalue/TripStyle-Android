@@ -44,7 +44,7 @@ class TravellerWriteViewModel: ViewModel() {
         }
 
         // 빈 아이템 추가
-        bodyItem.add(TravellerWriteResult(ArrayList(), ""))
+        bodyItem.add(TravellerWriteResult("", ""))
         bodyItemListData.value = bodyItem
     }
 
@@ -59,7 +59,7 @@ class TravellerWriteViewModel: ViewModel() {
         }
 
         // 이미지 update
-        val updatedItem = TravellerWriteResult(ArrayList(item.images), bodyItem[pos].text)
+        val updatedItem = TravellerWriteResult(item.image, bodyItem[pos].text)
         bodyItem[pos] = updatedItem
         bodyItemListData.value = bodyItem
 
@@ -83,15 +83,15 @@ class TravellerWriteViewModel: ViewModel() {
         bodyItemListData.value = bodyItem
     }
 
-    // 테스트용
-    fun printBodyItem(){
-        var count = 0
-        bodyItem.forEach {
-            println("current index: ${count++}")
-            println("current image count: ${it.images.size}")
-            println("current text: ${it.text}")
-        }
-    }
+//    // 테스트용
+//    fun printBodyItem(){
+//        var count = 0
+//        bodyItem.forEach {
+//            println("current index: ${count++}")
+//            println("current image count: ${it.images.size}")
+//            println("current text: ${it.text}")
+//        }
+//    }
 
 
     /* 배경 사진(메인) 관련 */
