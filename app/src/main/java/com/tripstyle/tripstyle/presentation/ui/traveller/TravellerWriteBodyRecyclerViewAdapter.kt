@@ -97,8 +97,9 @@ class TravellerWriteBodyRecyclerViewAdapter(private val viewModel: TravellerWrit
             with(viewModel.bodyItem[pos]){
 
                 // 이미지 세팅
-                Glide.with(itemView).load(this.image).centerCrop().into(bodyImage)
+                Glide.with(itemView).load(image).centerCrop().into(bodyImage)
 
+                // 본문 텍스트 세팅
                 editText.setText(text)
 
                 editText.removeTextChangedListener(textWatcher)

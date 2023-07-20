@@ -123,9 +123,15 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         }
 
         binding.tvAddSchedule.setOnClickListener {
+            viewModel.updateAllBodyText()
+            viewModel.updateTitleAndSubtitle(binding.editTextTitle.text.toString(),binding.editTextSubtitle.text.toString())
+
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
         }
         binding.ivCalendar.setOnClickListener {
+            viewModel.updateAllBodyText()
+            viewModel.updateTitleAndSubtitle(binding.editTextTitle.text.toString(),binding.editTextSubtitle.text.toString())
+
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
         }
 
@@ -163,6 +169,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     }
 
 
+    // 배경 이미지 세팅
     private fun refreshBackgroundImage(imageUri: String){
         context?.let {
             Glide.with(it).load(imageUri)
@@ -308,6 +315,9 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                 menuTextView.setOnClickListener {
                     when (menuItem.itemId) {
                         R.id.menu_traveller_btn_register -> {
+                            viewModel.updateAllBodyText()
+                            viewModel.updateTitleAndSubtitle(binding.editTextTitle.text.toString(),binding.editTextSubtitle.text.toString())
+
                             navController.navigate(R.id.action_travellerWriteFragment_to_categoryOptionFragment)
                         }
                     }
