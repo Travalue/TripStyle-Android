@@ -68,7 +68,6 @@ class TrailerDetailFragment : BaseFragment<FragmentTrailerDetailBinding>(R.layou
                 response: Response<TravelDetailResponse>
             ) {
                 detailResponse = response.body()?.data!!
-
                 initView()
                 initMapView()
             }

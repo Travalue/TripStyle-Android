@@ -1,8 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="DialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/from_right</item>
-        <item name="android:windowExitAnimation">@anim/to_right</item>
-    </style>
-
 </resources>
