@@ -19,10 +19,6 @@ import kotlin.collections.ArrayList
 
 class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.fragment_mytravel_list) {
 
-    private var allPlace :ArrayList<String> = arrayListOf("미국")
-    private var placeIcon :ArrayList<String> = arrayListOf("🇺🇸")
-    private var addPlace :ArrayList<ArrayList<String>> =arrayListOf(arrayListOf("🇺🇸","미국"))
-
     private lateinit var userViewModel : UserViewModel
 
     override fun initStartView() {
@@ -63,24 +59,29 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val place = binding.etTravel.text.toString()
 
-                // 저장된 여행지를 입력했을때
-                if(allPlace.contains(place)){
-                    binding.btnAddTravel.isEnabled=true
-                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.white))
-                    binding.ivIcon.visibility = View.INVISIBLE
-                    binding.tvAddIcon.visibility=View.INVISIBLE
-                    binding.tvPlaceIcon.text = placeIcon[0]
-                    binding.tvPlaceIcon.visibility=View.VISIBLE
-                }else{
-                    binding.btnAddTravel.isEnabled=false
-                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
-                    binding.ivIcon.visibility = View.VISIBLE
-                    binding.tvAddIcon.visibility=View.VISIBLE
-                    binding.tvPlaceIcon.visibility=View.INVISIBLE
-                }
+//                // 저장된 여행지를 입력했을때
+//                if(allPlace.contains(place)){
+//                    binding.btnAddTravel.isEnabled=true
+//                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+//                    binding.ivIcon.visibility = View.INVISIBLE
+//                    binding.tvAddIcon.visibility=View.INVISIBLE
+//                    binding.tvPlaceIcon.text = placeIcon[0]
+//                    binding.tvPlaceIcon.visibility=View.VISIBLE
+//                }else{
+//                    binding.btnAddTravel.isEnabled=false
+//                    binding.btnAddTravel.setTextColor(ContextCompat.getColor(context!!, R.color.gray_959595))
+//                    binding.ivIcon.visibility = View.VISIBLE
+//                    binding.tvAddIcon.visibility=View.VISIBLE
+//                    binding.tvPlaceIcon.visibility=View.INVISIBLE
+//                }
 
             }
         })
+
+        // 이모지 추가 버튼
+        binding.ivIcon.setOnClickListener {
+
+        }
 
         // 여행지 추가 버튼 클릭시
         binding.btnAddTravel.setOnClickListener {

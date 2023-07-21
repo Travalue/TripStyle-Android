@@ -25,4 +25,9 @@ interface UserService {
     @Headers("Authorization: ${BuildConfig.TOKEN}","Content-Type: multipart/form-data")
     @PATCH("/user")
     fun updateMypage(@Body updateProfileRequest: UpdateUserProfileRequestModel) :Call<UpdateUserProfileResponseModel>
+
+    // 나의 여행지 리스트 삭제
+    @Headers("Authorization: ${BuildConfig.TOKEN}","Content-Type: multipart/form-data")
+    @DELETE("/mytrip/{myTripId}")
+    fun deleteMyTrip()
 }

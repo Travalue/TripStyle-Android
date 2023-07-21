@@ -41,5 +41,10 @@ class MyTravelListAdapter(var travelList: ArrayList<MyTripModel>, val delete: Bo
         if(delete){
             holder.deleteBtn.visibility=View.VISIBLE
         }
+
+        // 추가된 나의 여행지 삭제버튼 클릭시
+        holder.deleteBtn.setOnClickListener {
+
+        }
     }
 }
