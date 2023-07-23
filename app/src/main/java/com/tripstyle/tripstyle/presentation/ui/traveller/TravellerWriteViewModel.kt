@@ -32,20 +32,44 @@ class TravellerWriteViewModel: ViewModel() {
     val isBodyContentsExist = MutableLiveData<Boolean>()
 
 
-    /* 제목, 부제목 관련 */
-    fun updateTitleAndSubtitle(currentTitle: String, currentSubtitle: String){
-        title = currentTitle
-        subtitle = currentSubtitle
-    }
 
-
-
-    /* 본문(사진-글, 사진-글 ...) 관련 */
 
     init {
         addBodyItem() // 최초에 본문 1개 생성
         isBodyContentsExist.value = false
     }
+
+
+
+    // 데이터 전체 삭제(초기화)
+    fun deleteAllItem(){
+        deleteMainBackgroundImage()
+        deleteTitleAndSubtitle()
+        deleteScheduleItem()
+        deleteBodyItem()
+        deleteTempBodyTextItem()
+        deleteCategorySubject()
+        deleteCategoryCoverImage()
+        isBodyContentsExist.value = false
+    }
+
+
+
+    /* 제목, 부제목 관련 */
+
+    fun updateTitleAndSubtitle(currentTitle: String, currentSubtitle: String){
+        title = currentTitle
+        subtitle = currentSubtitle
+    }
+
+    private fun deleteTitleAndSubtitle(){
+        title = ""
+        subtitle = ""
+    }
+
+
+
+    /* 본문(사진-글, 사진-글 ...) 관련 */
 
     fun addBodyItem() {
         // EditText 받아오기
@@ -66,7 +90,6 @@ class TravellerWriteViewModel: ViewModel() {
         bodyItemListData.value = bodyItem
 
         updateBodyContentsStatus()
-//        printBodyItem()
     }
 
     fun updateBodyTextItem(id: Int, item: String) {
@@ -102,27 +125,26 @@ class TravellerWriteViewModel: ViewModel() {
         isBodyContentsExist.value = false
     }
 
+    private fun deleteTempBodyTextItem(){
+        editTextContents.clear()
+    }
 
-    fun deleteBodyItem(){
+
+    private fun deleteBodyItem(){
         bodyItem.clear()
         bodyItemListData.value = bodyItem
     }
-
-//    // 테스트용
-//    fun printBodyItem(){
-//        var count = 0
-//        bodyItem.forEach {
-//            println("current index: ${count++}")
-//            println("current image count: ${it.images.size}")
-//            println("current text: ${it.text}")
-//        }
-//    }
 
 
     /* 배경 사진(메인) 관련 */
 
     fun updateMainBackgroundImage(imageUri: String){
         mainBackgroundImage = imageUri
+        mainBackgroundImageLiveData.value = mainBackgroundImage
+    }
+
+    private fun deleteMainBackgroundImage(){
+        mainBackgroundImage = ""
         mainBackgroundImageLiveData.value = mainBackgroundImage
     }
 
@@ -138,9 +160,19 @@ class TravellerWriteViewModel: ViewModel() {
         categorySubjectLiveData.value = categorySubject
     }
 
+    private fun deleteCategorySubject(){
+        categorySubject = ""
+        categorySubjectLiveData.value = categorySubject
+    }
+
     // 카테고리 커버 사진 관련
     fun updateCategoryCoverImage(imageUri: String){
         categoryCoverImage = imageUri
+        categoryCoverImageLiveData.value = categoryCoverImage
+    }
+
+    private fun deleteCategoryCoverImage(){
+        categoryCoverImage = ""
         categoryCoverImageLiveData.value = categoryCoverImage
     }
 
