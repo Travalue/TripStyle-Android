@@ -32,6 +32,8 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PolylineOverlay
+import com.tripstyle.tripstyle.dialog.TravellerWriteDialog
+import com.tripstyle.tripstyle.dialog.onDialogListener
 import com.tripstyle.tripstyle.util.ScheduleAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -88,6 +90,10 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
     override fun initDataBinding() {
         super.initDataBinding()
+
+        // 본문 개수 최소 1개로 유지
+        if(viewModel.bodyItem.isEmpty())
+            viewModel.addBodyItem()
 
         // 등록 버튼 활성화 관련
         val textWatcher: TextWatcher = object : TextWatcher {
@@ -171,10 +177,12 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
     // 배경 이미지 세팅
     private fun refreshBackgroundImage(imageUri: String){
-        context?.let {
-            Glide.with(it).load(imageUri)
-                .centerCrop()
-                .into(binding.ivBackground)
+        if(imageUri.isNotBlank()) {
+            context?.let {
+                Glide.with(it).load(imageUri)
+                    .centerCrop()
+                    .into(binding.ivBackground)
+            }
         }
     }
 
@@ -325,7 +333,21 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return false
+                return when (menuItem.itemId) {
+                    android.R.id.home -> {
+                        val dialog = TravellerWriteDialog("뒤로가기 시, 작성중인 글은 저장되지 않습니다.")
+                        dialog.setActionListener(object : onDialogListener{
+                            override fun onConfirmAction() {
+                                // 데이터 비우기
+                                viewModel.deleteAllItem()
+                                navController.popBackStack()
+                            }
+                        })
+                        dialog.show(parentFragmentManager,"")
+                        true
+                    }
+                    else -> return false
+                }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }

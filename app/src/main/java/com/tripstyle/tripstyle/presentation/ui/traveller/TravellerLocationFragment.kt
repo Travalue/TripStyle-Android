@@ -19,6 +19,8 @@ import com.tripstyle.tripstyle.data.source.remote.MapService
 import com.tripstyle.tripstyle.data.model.dto.ItemData
 import com.tripstyle.tripstyle.data.model.dto.Schedule
 import com.tripstyle.tripstyle.data.model.dto.SearchResult
+import com.tripstyle.tripstyle.dialog.TravellerWriteDialog
+import com.tripstyle.tripstyle.dialog.onDialogListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -146,10 +148,15 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     android.R.id.home -> {
-//                        Log.e("","back button clicked")
-                        // back button 클릭되면 Schedule 비우기
-                        viewModel.deleteScheduleItem()
-                        navController.popBackStack()
+                        val dialog = TravellerWriteDialog("뒤로가기 시, 추가중인 여행 일정은 저장되지 않습니다.")
+                        dialog.setActionListener(object : onDialogListener {
+                            override fun onConfirmAction() {
+                                // 데이터 비우기
+                                viewModel.deleteScheduleItem()
+                                navController.popBackStack()
+                            }
+                        })
+                        dialog.show(parentFragmentManager,"")
                         true
                     }
                     else -> return false
