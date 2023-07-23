@@ -4,14 +4,19 @@ import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseDialogFragment
 import com.tripstyle.tripstyle.databinding.DialogTravellerWriteBinding
 
-class TravellerWriteDialog() : BaseDialogFragment<DialogTravellerWriteBinding>(R.layout.dialog_traveller_write) {
+class TravellerWriteDialog(val text: String) : BaseDialogFragment<DialogTravellerWriteBinding>(R.layout.dialog_traveller_write) {
 
     private lateinit var listener: onDialogListener
 
     override fun initStartView() {
         super.initStartView()
 
+        initView()
         clickDialogEvent()
+    }
+
+    private fun initView(){
+        binding.tvWarning2.text = text
     }
 
     fun setActionListener(listener: onDialogListener) {

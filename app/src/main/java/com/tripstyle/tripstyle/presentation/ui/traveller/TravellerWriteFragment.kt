@@ -335,7 +335,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     android.R.id.home -> {
-                        val dialog = TravellerWriteDialog()
+                        val dialog = TravellerWriteDialog("뒤로가기 시, 작성중인 글은 저장되지 않습니다.")
                         dialog.setActionListener(object : onDialogListener{
                             override fun onConfirmAction() {
                                 // 데이터 비우기
