@@ -25,8 +25,23 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
 
     override fun initStartView() {
         super.initStartView()
-//        (activity as MainActivity).setToolbarTitle("none")
 
+        initAdapter()
+    }
+
+    override fun initDataBinding() {
+        super.initDataBinding()
+
+        initFirstSetting()
+    }
+
+    override fun initAfterBinding() {
+        super.initAfterBinding()
+
+        requestHotTravellerList()
+    }
+
+    private fun initAdapter() {
         // 지금 핫한 트레블러 adapter
         hotTravellerAdapter = TravellerHotRecyclerViewAdapter(context)
 
@@ -66,13 +81,9 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
         // 지금 핫한 트레블러 adapter
         binding.rvHotTraveller.adapter = hotTravellerAdapter
         binding.rvHotTraveller.layoutManager = LinearLayoutManager(context)
-
     }
 
-    override fun initDataBinding() {
-        super.initDataBinding()
-
-
+    private fun initFirstSetting() {
         // search 테스트용 임시 데이터
         val domesticCityList = ArrayList<String>()
         domesticCityList.add("서울")
@@ -143,7 +154,6 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
                 }
                 else{
 
-
                     viewModel.deleteDomesticCities()
 //                    binding.tvDomesticSearch.visibility=View.GONE
                     binding.recyclerView.visibility= View.INVISIBLE
@@ -171,7 +181,6 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
 
             }
 
-
         })
 
 
@@ -179,13 +188,6 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
             navController.navigate(R.id.action_travellerFragment_to_TravellerWriteFragment)
         }
 
-
-    }
-
-    override fun initAfterBinding() {
-        super.initAfterBinding()
-
-        requestHotTravellerList()
     }
 
     private fun requestHotTravellerList(){
