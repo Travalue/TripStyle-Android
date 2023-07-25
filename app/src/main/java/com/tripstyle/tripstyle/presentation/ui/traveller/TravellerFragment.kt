@@ -46,12 +46,12 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
         hotTravellerAdapter = TravellerHotRecyclerViewAdapter(context)
 
         // 검색 adapter
-        val adapter1 = TravellerSearchRecyclerViewAdapter(viewModel, context)
-        val adapter2 = TravellerSearchRecyclerViewAdapter2(viewModel, context)
+        val searchDomesticAdapter = TravellerSearchDomesticAdapter(viewModel, context)
+        val searchOverseasAdapter = TravellerSearchOverseasAdapter(viewModel, context)
 
 
-        adapter1.setOnItemClickListener(object:
-            TravellerSearchRecyclerViewAdapter.OnItemClickListener {
+        searchDomesticAdapter.setOnItemClickListener(object:
+            TravellerSearchDomesticAdapter.OnItemClickListener {
             override fun onItemClick(pos: Int,city: String, searchText: String) {
                 //parameter에 있는 searchText는 활용 못함
                 //여기서 검색 결과 화면으로 검색어만 넘겨주고, 검색 결과 화면에서 검색 수행
@@ -61,8 +61,8 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
             }
         })
 
-        adapter2.setOnItemClickListener(object:
-            TravellerSearchRecyclerViewAdapter2.OnItemClickListener {
+        searchOverseasAdapter.setOnItemClickListener(object:
+            TravellerSearchOverseasAdapter.OnItemClickListener {
             override fun onItemClick(pos: Int,city: String, searchText: String) {
                 val bundle = Bundle()
                 bundle.putString("searchText",binding.etSearch.toString())
@@ -71,10 +71,10 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
         })
 
         // 검색쪽 recyclerView adapter
-        binding.recyclerView.adapter = adapter1
+        binding.recyclerView.adapter = searchDomesticAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
-        binding.recyclerView2.adapter = adapter2
+        binding.recyclerView2.adapter = searchOverseasAdapter
         binding.recyclerView2.layoutManager = LinearLayoutManager(context)
 
 
