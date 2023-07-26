@@ -78,10 +78,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     override fun initStartView() {
         super.initStartView()
 
-        val adapter = TravellerWriteBodyRecyclerViewAdapter(viewModel,context,this)
-        binding.bodyRecyclerView.adapter = adapter
-        binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
-
+        initAdapter()
         initMenu()
         initScheduleAdapter()
         initMapView()
@@ -91,6 +88,21 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     override fun initDataBinding() {
         super.initDataBinding()
 
+        initFirstSetting()
+    }
+
+    override fun initAfterBinding() {
+        super.initAfterBinding()
+
+    }
+
+    private fun initAdapter() {
+        val adapter = TravellerWriteBodyRecyclerViewAdapter(viewModel,context,this)
+        binding.bodyRecyclerView.adapter = adapter
+        binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun initFirstSetting() {
         // 본문 개수 최소 1개로 유지
         if(viewModel.bodyItem.isEmpty())
             viewModel.addBodyItem()
@@ -154,12 +166,6 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         viewModel.isBodyContentsExist.observe(viewLifecycleOwner){
             checkFields()
         }
-
-    }
-
-    override fun initAfterBinding() {
-        super.initAfterBinding()
-
     }
 
     private fun getRealPathFromURI(uri: Uri): String{
