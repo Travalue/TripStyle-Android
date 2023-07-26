@@ -83,7 +83,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
 
         initMenu()
-        initView()
+        initScheduleAdapter()
         initMapView()
 
     }
@@ -216,7 +216,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
 
 
-    private fun initView(){
+    private fun initScheduleAdapter(){
         // 일정 adapter
         val adapter = ScheduleAdapter(viewModel.scheduleItem)
 
