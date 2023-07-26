@@ -9,7 +9,6 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
@@ -133,9 +132,6 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         }
 
         viewModel.scheduleItemListData.observe(viewLifecycleOwner){
-            viewModel.scheduleItem.forEach {
-                Log.e("","viewModel Data: ${it}")
-            }
             initMapView()
             binding.rvSchedule.adapter?.notifyDataSetChanged()
         }
