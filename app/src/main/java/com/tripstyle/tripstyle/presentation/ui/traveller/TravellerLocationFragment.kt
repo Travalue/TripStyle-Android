@@ -1,6 +1,5 @@
 package com.tripstyle.tripstyle.presentation.ui.traveller
 
-import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -40,7 +39,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
 
     override fun initStartView() {
         super.initStartView()
-//        (activity as MainActivity).setToolbarTitle("일정/장소 첨부")
+
         viewModel.deleteScheduleItem()
         initMenu()
     }
@@ -48,15 +47,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
     override fun initDataBinding() {
         super.initDataBinding()
 
-        //장소 리스트 adapter
-        adapter = TravellerLocationRecyclerViewAdapter(context)
-        adapter.setListener(object : onSelectedLocationListener {
-            override fun selectLocation(itemData: ItemData) {
-                addRecyclerviewData(itemData)
-            }
-        })
-        binding.rvLocationList.adapter = adapter
-        binding.rvLocationList.layoutManager = LinearLayoutManager(context)
+        initAdapter()
     }
 
     override fun initAfterBinding() {
@@ -67,6 +58,18 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
             getLocationList(query)
         }
 
+    }
+
+    private fun initAdapter() {
+        //장소 리스트 adapter
+        adapter = TravellerLocationRecyclerViewAdapter(context)
+        adapter.setListener(object : onSelectedLocationListener {
+            override fun selectLocation(itemData: ItemData) {
+                addRecyclerviewData(itemData)
+            }
+        })
+        binding.rvLocationList.adapter = adapter
+        binding.rvLocationList.layoutManager = LinearLayoutManager(context)
     }
 
     fun addRecyclerviewData(itemData: ItemData){
