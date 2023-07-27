@@ -28,6 +28,7 @@ class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResult
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        // 검색 keyword 받아오기
         val bundle = arguments
         if (bundle != null) {
             val searchText = bundle.getString("searchText", "")
@@ -46,7 +47,7 @@ class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResult
     }
 
 
-
+    // API Call
     private fun searchTraveller(keyword: String) {
         val service = AppClient.retrofit?.create(TravelService::class.java)
 
