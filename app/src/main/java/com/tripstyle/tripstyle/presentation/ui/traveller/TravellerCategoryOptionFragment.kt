@@ -24,6 +24,27 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
     override fun initStartView() {
         super.initStartView()
 
+        initAdapter()
+    }
+
+    override fun initDataBinding() {
+        super.initDataBinding()
+
+        initFirstSetting()
+    }
+
+    override fun initAfterBinding() {
+        super.initAfterBinding()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        requestCategoryList()
+    }
+
+    private fun initAdapter() {
         //recyclerView adapter
         travellerCategoryAdapter = TravellerCategoryRecyclerViewAdapter(viewModel, context)
 
@@ -31,8 +52,7 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
         binding.rvCategoryList.layoutManager = LinearLayoutManager(context)
     }
 
-    override fun initDataBinding() {
-        super.initDataBinding()
+    private fun initFirstSetting() {
         binding.tvCategoryAdd.setOnClickListener {
             navController.navigate(R.id.action_categoryOptionFragment_to_categoryOptionSubjectFragment)
         }
@@ -47,17 +67,6 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
         viewModel.categoryCheckBox.observe(viewLifecycleOwner){
             travellerCategoryAdapter.notifyDataSetChanged()
         }
-    }
-
-    override fun initAfterBinding() {
-        super.initAfterBinding()
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        requestCategoryList()
     }
 
     private fun changeOpenStatusTextView(isPublic: Boolean){
