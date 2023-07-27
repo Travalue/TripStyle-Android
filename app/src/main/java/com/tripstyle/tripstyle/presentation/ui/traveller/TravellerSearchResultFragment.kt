@@ -17,13 +17,8 @@ class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResult
     lateinit var travellerSearchResultAdapter : TravellerSearchResultRecyclerViewAdapter
     override fun initStartView() {
         super.initStartView()
-//        (activity as MainActivity).setToolbarTitle("visible")
 
-        //recyclerView adapter
-        travellerSearchResultAdapter = TravellerSearchResultRecyclerViewAdapter(context)
-
-        binding.trailerSearchResult.adapter = travellerSearchResultAdapter
-        binding.trailerSearchResult.layoutManager = GridLayoutManager(context,3)
+        initAdapter()
     }
 
     override fun initDataBinding() {
@@ -40,6 +35,14 @@ class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResult
                 searchTraveller(searchText)
             }
         }
+    }
+
+    private fun initAdapter() {
+        //recyclerView adapter
+        travellerSearchResultAdapter = TravellerSearchResultRecyclerViewAdapter(context)
+
+        binding.trailerSearchResult.adapter = travellerSearchResultAdapter
+        binding.trailerSearchResult.layoutManager = GridLayoutManager(context,3)
     }
 
 
