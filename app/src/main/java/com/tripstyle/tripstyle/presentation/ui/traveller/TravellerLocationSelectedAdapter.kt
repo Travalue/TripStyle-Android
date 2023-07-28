@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.data.model.dto.ItemData
 
-class TravellerLocationSelectedRecyclerViewAdapter(val context: Context?,val listener: onRemovedLocationListener):
-    RecyclerView.Adapter<TravellerLocationSelectedRecyclerViewAdapter.RecyclerViewViewHolder>() {
+class TravellerLocationSelectedAdapter(val context: Context?, val listener: onRemovedLocationListener):
+    RecyclerView.Adapter<TravellerLocationSelectedAdapter.RecyclerViewViewHolder>() {
 
     private var list = arrayListOf<ItemData>()
 

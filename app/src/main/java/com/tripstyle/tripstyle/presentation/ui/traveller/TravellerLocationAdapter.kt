@@ -10,8 +10,8 @@ import com.tripstyle.tripstyle.R
 import com.naver.maps.geometry.Tm128
 import com.tripstyle.tripstyle.data.model.dto.ItemData
 
-class TravellerLocationRecyclerViewAdapter(val context: Context?):
-    RecyclerView.Adapter<TravellerLocationRecyclerViewAdapter.RecyclerViewViewHolder>() {
+class TravellerLocationAdapter(val context: Context?):
+    RecyclerView.Adapter<TravellerLocationAdapter.RecyclerViewViewHolder>() {
 
     private var list = arrayListOf<ItemData>() // TOOD : 추 후에 item type 변경
     private lateinit var listener : onSelectedLocationListener

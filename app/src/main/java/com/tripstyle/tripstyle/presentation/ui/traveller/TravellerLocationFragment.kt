@@ -28,8 +28,8 @@ import retrofit2.Response
 
 class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>(R.layout.fragment_traveller_location) {
 
-    lateinit var adapter : TravellerLocationRecyclerViewAdapter
-    lateinit var selectAdapter : TravellerLocationSelectedRecyclerViewAdapter
+    lateinit var adapter : TravellerLocationAdapter
+    lateinit var selectAdapter : TravellerLocationSelectedAdapter
 
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
 
@@ -62,7 +62,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
 
     private fun initAdapter() {
         //장소 리스트 adapter
-        adapter = TravellerLocationRecyclerViewAdapter(context)
+        adapter = TravellerLocationAdapter(context)
         adapter.setListener(object : onSelectedLocationListener {
             override fun selectLocation(itemData: ItemData) {
                 addRecyclerviewData(itemData)
@@ -76,7 +76,7 @@ class TravellerLocationFragment : BaseFragment<FragmentTravellerLocationBinding>
         //recyclerview
         if(!binding.rvSelected.isVisible){
             binding.rvSelected.visibility = View.VISIBLE
-            selectAdapter = TravellerLocationSelectedRecyclerViewAdapter(context,object :
+            selectAdapter = TravellerLocationSelectedAdapter(context,object :
                 onRemovedLocationListener {
                 override fun removeLocation(id: Int) {
                     selectedList.removeAt(id)
