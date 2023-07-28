@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.data.model.dto.CategoryItem
 
-class TravellerCategoryRecyclerViewAdapter(private val viewModel: TravellerWriteViewModel, val context: Context?):
-    RecyclerView.Adapter<TravellerCategoryRecyclerViewAdapter.RecyclerViewViewHolder>() {
+class TravellerCategoryAdapter(private val viewModel: TravellerWriteViewModel, val context: Context?):
+    RecyclerView.Adapter<TravellerCategoryAdapter.RecyclerViewViewHolder>() {
 
     private var list : ArrayList<CategoryItem>? = arrayListOf()
     private var checkedPosition = -1

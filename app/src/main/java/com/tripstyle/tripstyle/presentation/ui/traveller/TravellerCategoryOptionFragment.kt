@@ -19,7 +19,7 @@ import kotlin.math.roundToInt
 class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOptionBinding>(R.layout.fragment_traveller_category_option) {
 
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
-    lateinit var travellerCategoryAdapter : TravellerCategoryRecyclerViewAdapter
+    lateinit var travellerCategoryAdapter : TravellerCategoryAdapter
 
     override fun initStartView() {
         super.initStartView()
@@ -46,7 +46,7 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
 
     private fun initAdapter() {
         //recyclerView adapter
-        travellerCategoryAdapter = TravellerCategoryRecyclerViewAdapter(viewModel, context)
+        travellerCategoryAdapter = TravellerCategoryAdapter(viewModel, context)
 
         binding.rvCategoryList.adapter = travellerCategoryAdapter
         binding.rvCategoryList.layoutManager = LinearLayoutManager(context)
