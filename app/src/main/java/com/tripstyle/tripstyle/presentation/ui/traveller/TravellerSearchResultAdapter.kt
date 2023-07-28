@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.data.model.dto.TravellerSearchResult
 
-class TravellerSearchResultRecyclerViewAdapter(val context: Context?):
-    RecyclerView.Adapter<TravellerSearchResultRecyclerViewAdapter.RecyclerViewViewHolder>() {
+class TravellerSearchResultAdapter(val context: Context?):
+    RecyclerView.Adapter<TravellerSearchResultAdapter.RecyclerViewViewHolder>() {
 
     private var list : ArrayList<TravellerSearchResult>? = arrayListOf()
     private val screenWidth: Int = Resources.getSystem().displayMetrics.widthPixels

@@ -14,7 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResultBinding>(R.layout.fragment_traveller_search_result) {
-    lateinit var travellerSearchResultAdapter : TravellerSearchResultRecyclerViewAdapter
+    lateinit var travellerSearchResultAdapter : TravellerSearchResultAdapter
     override fun initStartView() {
         super.initStartView()
 
@@ -40,7 +40,7 @@ class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResult
 
     private fun initAdapter() {
         //recyclerView adapter
-        travellerSearchResultAdapter = TravellerSearchResultRecyclerViewAdapter(context)
+        travellerSearchResultAdapter = TravellerSearchResultAdapter(context)
 
         binding.trailerSearchResult.adapter = travellerSearchResultAdapter
         binding.trailerSearchResult.layoutManager = GridLayoutManager(context,3)
