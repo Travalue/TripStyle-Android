@@ -20,7 +20,7 @@ import retrofit2.Response
 
 class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragment_traveller) {
     private val viewModel by viewModels<TravellerSearchViewModel>()
-    lateinit var hotTravellerAdapter : TravellerHotRecyclerViewAdapter
+    lateinit var hotTravellerAdapter : TravellerHotAdapter
 
 
     override fun initStartView() {
@@ -43,7 +43,7 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
 
     private fun initAdapter() {
         // 지금 핫한 트레블러 adapter
-        hotTravellerAdapter = TravellerHotRecyclerViewAdapter(context)
+        hotTravellerAdapter = TravellerHotAdapter(context)
 
         // 검색 adapter
         val searchDomesticAdapter = TravellerSearchDomesticAdapter(viewModel, context)
