@@ -96,7 +96,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     }
 
     private fun initAdapter() {
-        val adapter = TravellerWriteBodyRecyclerViewAdapter(viewModel,context,this)
+        val adapter = TravellerWriteBodyAdapter(viewModel,context,this)
         binding.bodyRecyclerView.adapter = adapter
         binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
     }
