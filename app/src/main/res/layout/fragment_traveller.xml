@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,523 +11,451 @@
         android:orientation="vertical">
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="25dp"
-        android:src="@drawable/ic_edit2"
-        app:tint="@null"
-        app:backgroundTint="@color/primaryColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:scrollbars="none"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundColor"
-        android:orientation="vertical">
-
-
-
-
-
-
-
-<!--        <ImageView-->
-<!--            android:id="@+id/logo_white"-->
-<!--            android:layout_width="345dp"-->
-<!--            android:layout_height="75dp"-->
-<!--            android:layout_marginTop="40dp"-->
-<!--            android:src="@drawable/white_logo"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_traveller"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:text="\\ traveller"-->
-<!--            android:textColor="@color/primaryColor"-->
-<!--            android:textSize="24dp"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/logo_white"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/logo_white" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/hambugerbar"-->
-<!--            android:layout_width="25dp"-->
-<!--            android:layout_height="16dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/logo_white"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/tv_traveller"-->
-<!--            app:srcCompat="@drawable/ic_hambugerbar" />-->
-
-<!--        <View-->
-<!--            android:id="@+id/line"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="2dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:background="@color/white"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.212"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tv_traveller" />-->
-
-
-
-
-        <EditText
-            android:id="@+id/et_search"
-            android:layout_width="match_parent"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/edittext_rounded_corner_rectangle"
-            android:drawableEnd="@drawable/ic_search"
-            android:textSize="15sp"
-            android:hint="여행지 검색하기"
-            android:textColorHint="@color/gray04"
-            android:textColor="@color/black_161616"
-            android:inputType="text"
-            android:paddingLeft="15dp"
-            android:paddingRight="18.91dp"
-            android:paddingTop="14dp"
-            android:paddingBottom="15dp"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="25dp"
+            android:src="@drawable/ic_edit2"
+            app:backgroundTint="@color/primaryColor"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:tint="@null" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck">
 
-
-
-
-
-
-
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/et_search"
-            android:id="@+id/contraint2">
-
-
-
-
-
-        <TextView
-            android:id="@+id/tv_domestic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="국내 여행지 보기"
-            android:textColor="@color/black_100"
-            android:textSize="15sp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/tv_domestic"
-            app:layout_constraintStart_toStartOf="@+id/tv_domestic"
-            app:layout_constraintTop_toBottomOf="@+id/tv_domestic">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundColor"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/iv_seoul"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:background="@drawable/ic_seoul3"/>
+
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittext_rounded_corner_rectangle"
+                    android:drawableEnd="@drawable/ic_search"
+                    android:hint="여행지 검색하기"
+                    android:inputType="text"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="14dp"
+                    android:paddingRight="18.91dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="@color/black_161616"
+                    android:textColorHint="@color/gray04"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/contraint2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/et_search">
+
+
+                    <TextView
+                        android:id="@+id/tv_domestic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:text="국내 여행지 보기"
+                        android:textColor="@color/black_100"
+                        android:textSize="15sp"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_domestic"
+                        app:layout_constraintStart_toStartOf="@+id/tv_domestic"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_domestic">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_seoul"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_seoul3"
+                                android:textAlignment="center" />
+
+                            <TextView
+                                android:id="@+id/tv_seoul"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginVertical="10dp"
+                                android:layout_weight="1"
+                                android:text="서울"
+                                android:textAlignment="center"
+                                android:textColor="@color/black_100"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_busan"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ic_busan3" />
+
+                            <TextView
+                                android:id="@+id/tv_busan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginVertical="10dp"
+                                android:layout_weight="1"
+                                android:text="부산"
+                                android:textColor="@color/black_100"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_jeju"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ic_jeju3" />
+
+                            <TextView
+                                android:id="@+id/tv_jeju"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginVertical="10dp"
+                                android:layout_weight="1"
+                                android:text="제주"
+                                android:textColor="@color/black_100"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_etc"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ic_other3" />
+
+                            <TextView
+                                android:id="@+id/tv_etc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginVertical="10dp"
+                                android:layout_weight="1"
+                                android:text="그 외 지역"
+                                android:textColor="@color/black_100"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:id="@+id/line1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/gray_E9E9E9"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+                    <TextView
+                        android:id="@+id/tv_overseas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="해외 여행지 대륙별 보기"
+                        android:textColor="@color/black_100"
+                        android:textSize="15sp"
+                        app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_overseas">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_asia"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:textAlignment="center"
+                                app:srcCompat="@drawable/ic_asia3" />
+
+                            <TextView
+                                android:id="@+id/tv_aisa"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginVertical="10dp"
+                                android:layout_weight="1"
+                                android:text="아시아"
+                                android:textAlignment="center"
+                                android:textColor="@color/black_100"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_europe"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ic_europe3" />
+
+                            <TextView
+                                android:id="@+id/tv_europe"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginVertical="10dp"
+                                android:layout_weight="1"
+                                android:text="유럽"
+                                android:textColor="@color/black_100"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_america"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ic_america3" />
+
+                            <TextView
+                                android:id="@+id/tv_america"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginVertical="10dp"
+                                android:layout_weight="1"
+                                android:text="아메리카"
+                                android:textColor="@color/black_100"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_africa"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ic_africa3" />
+
+                            <TextView
+                                android:id="@+id/tv_africa"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginVertical="10dp"
+                                android:layout_weight="1"
+                                android:text="아프리카"
+                                android:textColor="@color/black_100"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <View
+                        android:id="@+id/line2"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/gray_EDEDED"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+                    <!-- 지금 핫한 트레블러 관련 -->
+
+
+                    <TextView
+                        android:id="@+id/tv_hot_traveller"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="35dp"
+                        android:layout_marginRight="20dp"
+                        android:text="지금 핫한 트레블러"
+                        android:textColor="@color/black_100"
+                        android:textSize="15sp"
+                        app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_hot_traveller"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_hot_traveller" />
+
+                    <View
+                        android:id="@+id/transparentLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/transparent"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_hot_traveller" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <!-- 트레블러 검색 관련 -->
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/gray_EDEDED"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toBottomOf="@+id/et_search" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginRight="20dp"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toBottomOf="@+id/line3" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginRight="20dp"
+                    android:visibility="invisible"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
                 <TextView
-                    android:id="@+id/tv_seoul"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_no_result"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="1"
-                    android:text="서울"
-                    android:textSize="13sp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="검색 결과가 없습니다."
                     android:textColor="@color/black_100"
-                    android:textAlignment="center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_busan"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_busan3" />
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/line3" />
 
                 <TextView
-                    android:id="@+id/tv_busan"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_no_result2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="1"
-                    android:text="부산"
-                    android:textSize="13sp"
-                    android:textColor="@color/black_100"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_jeju"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_jeju3" />
-
-                <TextView
-                    android:id="@+id/tv_jeju"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="1"
-                    android:text="제주"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="다른 검색어를 검색해 보세요!"
                     android:textColor="@color/black_100"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_etc"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_other3" />
-
-                <TextView
-                    android:id="@+id/tv_etc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="1"
-                    android:text="그 외 지역"
-                    android:textSize="13sp"
-                    android:textColor="@color/black_100"/>
-            </LinearLayout>
-
-        </LinearLayout>
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_no_result" />
 
 
-            <View
-                android:id="@+id/line1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_E9E9E9"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"/>
-
-            <TextView
-                android:id="@+id/tv_overseas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:text="해외 여행지 대륙별 보기"
-                android:textColor="@color/black_100"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/line1" />
-
-
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/tv_overseas">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_asia"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    app:srcCompat="@drawable/ic_asia3" />
-
-                <TextView
-                    android:id="@+id/tv_aisa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="1"
-                    android:text="아시아"
-                    android:textSize="13sp"
-                    android:textColor="@color/black_100"
-                    android:textAlignment="center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_europe"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_europe3" />
-
-                <TextView
-                    android:id="@+id/tv_europe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="1"
-                    android:text="유럽"
-                    android:textSize="13sp"
-                    android:textColor="@color/black_100"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_america"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_america3" />
-
-                <TextView
-                    android:id="@+id/tv_america"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="1"
-                    android:text="아메리카"
-                    android:textSize="13sp"
-                    android:textColor="@color/black_100"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_africa"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_africa3" />
-
-                <TextView
-                    android:id="@+id/tv_africa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="1"
-                    android:text="아프리카"
-                    android:textSize="13sp"
-                    android:textColor="@color/black_100"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <View
-            android:id="@+id/line2"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginTop="30dp"
-            android:background="@color/gray_EDEDED"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-
-
-
-            <!-- 지금 핫한 트레블러 관련 -->
-
-
-            <TextView
-                android:id="@+id/tv_hot_traveller"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="지금 핫한 트레블러"
-                android:textColor="@color/black_100"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/line2" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_hot_traveller"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/tv_hot_traveller" />
-
-            <View
-                android:id="@+id/transparentLine"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/transparent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_hot_traveller" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-        <!-- 트레블러 검색 관련 -->
-
-        <View
-            android:id="@+id/line3"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginTop="30dp"
-            android:background="@color/gray_EDEDED"
-            app:layout_constraintTop_toBottomOf="@+id/et_search"
-            android:visibility="invisible"/>
-
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/line3"
-            android:visibility="invisible"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-            android:visibility="invisible"/>
-
-        <TextView
-            android:id="@+id/tv_no_result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="검색 결과가 없습니다."
-            android:textColor="@color/black_100"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/line3"
-            android:gravity="center"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/tv_no_result2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="다른 검색어를 검색해 보세요!"
-            android:textColor="@color/black_100"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_no_result"
-            android:gravity="center"
-            android:visibility="gone"/>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

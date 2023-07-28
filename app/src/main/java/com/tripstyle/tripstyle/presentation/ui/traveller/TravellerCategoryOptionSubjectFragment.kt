@@ -85,6 +85,15 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
     override fun initDataBinding() {
         super.initDataBinding()
 
+        initFirstSetting()
+    }
+
+    override fun initAfterBinding() {
+        super.initAfterBinding()
+
+    }
+
+    private fun initFirstSetting() {
         // 등록 버튼 활성화 관련
         val textWatcher: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
@@ -125,12 +134,6 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
         binding.ivCategoryCover.setOnClickListener {
             selectGallery()
         }
-
-    }
-
-    override fun initAfterBinding() {
-        super.initAfterBinding()
-
     }
 
     private fun selectGallery() {

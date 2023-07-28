@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.R
 import com.bumptech.glide.Glide
 
-class TravellerSearchRecyclerViewAdapter(private val viewModel: TravellerSearchViewModel, val context: Context?):
-    RecyclerView.Adapter<TravellerSearchRecyclerViewAdapter.RecyclerViewViewHolder>() {
+class TravellerSearchOverseasAdapter(private val viewModel: TravellerSearchViewModel, val context: Context?):
+    RecyclerView.Adapter<TravellerSearchOverseasAdapter.RecyclerViewViewHolder>() {
 
 
     interface OnItemClickListener{
@@ -24,6 +24,7 @@ class TravellerSearchRecyclerViewAdapter(private val viewModel: TravellerSearchV
     fun setOnItemClickListener(listener: OnItemClickListener){
         this.onClickListener = listener
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.traveller_search_item_view, parent, false)
@@ -37,7 +38,7 @@ class TravellerSearchRecyclerViewAdapter(private val viewModel: TravellerSearchV
 
     override fun getItemCount(): Int {
         // 검색결과에 표시될 item 개수
-        return viewModel.domesticCities.size
+        return viewModel.overseasCities.size
     }
 
     inner class RecyclerViewViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -45,6 +46,7 @@ class TravellerSearchRecyclerViewAdapter(private val viewModel: TravellerSearchV
         private val QueryCityName: TextView = itemView.findViewById(R.id.city_name)
         private val QuerySpecificCityName: TextView = itemView.findViewById(R.id.specific_city_name)
         private val searchButton: ImageButton = itemView.findViewById(R.id.btn_search_result)
+
 
         init{
             itemView.setOnClickListener {
@@ -58,17 +60,20 @@ class TravellerSearchRecyclerViewAdapter(private val viewModel: TravellerSearchV
             }
         }
 
+
+
         fun setContents(pos: Int){
-            with(viewModel.domesticCities[pos]){
+            with(viewModel.overseasCities[pos]){
                 //세팅
                 when(cities) {
-                    "서울" -> Glide.with(itemView).load(R.drawable.ic_seoul3).into(cityImage)
-                    "부산" -> Glide.with(itemView).load(R.drawable.ic_busan3).into(cityImage)
-                    "제주" -> Glide.with(itemView).load(R.drawable.ic_jeju3).into(cityImage)
+                    "아시아" -> Glide.with(itemView).load(R.drawable.ic_asia3).into(cityImage)
+                    "유럽" -> Glide.with(itemView).load(R.drawable.ic_europe3).into(cityImage)
+                    "아메리카" -> Glide.with(itemView).load(R.drawable.ic_america3).into(cityImage)
+                    "아프리카" -> Glide.with(itemView).load(R.drawable.ic_africa3).into(cityImage)
                     else -> Glide.with(itemView).load(R.drawable.default_profile_img).into(cityImage)
                 }
                 QueryCityName.text = cities
-                QuerySpecificCityName.text = "국내 여행지"
+                QuerySpecificCityName.text = "해외 여행지"
             }
 
         }

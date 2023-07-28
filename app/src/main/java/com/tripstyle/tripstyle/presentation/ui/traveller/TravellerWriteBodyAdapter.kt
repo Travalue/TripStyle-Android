@@ -24,8 +24,8 @@ import com.bumptech.glide.Glide
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.data.model.dto.TravellerWriteResult
 
-class TravellerWriteBodyRecyclerViewAdapter(private val viewModel: TravellerWriteViewModel, val context: Context?, val fragment: Fragment):
-    RecyclerView.Adapter<TravellerWriteBodyRecyclerViewAdapter.RecyclerViewViewHolder>() {
+class TravellerWriteBodyAdapter(private val viewModel: TravellerWriteViewModel, val context: Context?, val fragment: Fragment):
+    RecyclerView.Adapter<TravellerWriteBodyAdapter.RecyclerViewViewHolder>() {
 
     private var currentPos: Int = -1
 

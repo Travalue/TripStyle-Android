@@ -9,7 +9,6 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
@@ -78,12 +77,9 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     override fun initStartView() {
         super.initStartView()
 
-        val adapter = TravellerWriteBodyRecyclerViewAdapter(viewModel,context,this)
-        binding.bodyRecyclerView.adapter = adapter
-        binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
-
+        initAdapter()
         initMenu()
-        initView()
+        initScheduleAdapter()
         initMapView()
 
     }
@@ -91,6 +87,21 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     override fun initDataBinding() {
         super.initDataBinding()
 
+        initFirstSetting()
+    }
+
+    override fun initAfterBinding() {
+        super.initAfterBinding()
+
+    }
+
+    private fun initAdapter() {
+        val adapter = TravellerWriteBodyAdapter(viewModel,context,this)
+        binding.bodyRecyclerView.adapter = adapter
+        binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun initFirstSetting() {
         // 본문 개수 최소 1개로 유지
         if(viewModel.bodyItem.isEmpty())
             viewModel.addBodyItem()
@@ -121,9 +132,6 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         }
 
         viewModel.scheduleItemListData.observe(viewLifecycleOwner){
-            viewModel.scheduleItem.forEach {
-                Log.e("","viewModel Data: ${it}")
-            }
             initMapView()
             binding.rvSchedule.adapter?.notifyDataSetChanged()
         }
@@ -154,12 +162,6 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         viewModel.isBodyContentsExist.observe(viewLifecycleOwner){
             checkFields()
         }
-
-    }
-
-    override fun initAfterBinding() {
-        super.initAfterBinding()
-
     }
 
     private fun getRealPathFromURI(uri: Uri): String{
@@ -216,7 +218,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
 
 
-    private fun initView(){
+    private fun initScheduleAdapter(){
         // 일정 adapter
         val adapter = ScheduleAdapter(viewModel.scheduleItem)
 

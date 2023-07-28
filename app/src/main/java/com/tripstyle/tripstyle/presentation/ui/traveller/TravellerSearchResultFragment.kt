@@ -14,16 +14,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResultBinding>(R.layout.fragment_traveller_search_result) {
-    lateinit var travellerSearchResultAdapter : TravellerSearchResultRecyclerViewAdapter
+    lateinit var travellerSearchResultAdapter : TravellerSearchResultAdapter
     override fun initStartView() {
         super.initStartView()
-//        (activity as MainActivity).setToolbarTitle("visible")
 
-        //recyclerView adapter
-        travellerSearchResultAdapter = TravellerSearchResultRecyclerViewAdapter(context)
-
-        binding.trailerSearchResult.adapter = travellerSearchResultAdapter
-        binding.trailerSearchResult.layoutManager = GridLayoutManager(context,3)
+        initAdapter()
     }
 
     override fun initDataBinding() {
@@ -33,6 +28,7 @@ class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResult
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        // 검색 keyword 받아오기
         val bundle = arguments
         if (bundle != null) {
             val searchText = bundle.getString("searchText", "")
@@ -42,8 +38,16 @@ class TravellerSearchResultFragment : BaseFragment<FragmentTravellerSearchResult
         }
     }
 
+    private fun initAdapter() {
+        //recyclerView adapter
+        travellerSearchResultAdapter = TravellerSearchResultAdapter(context)
+
+        binding.trailerSearchResult.adapter = travellerSearchResultAdapter
+        binding.trailerSearchResult.layoutManager = GridLayoutManager(context,3)
+    }
 
 
+    // API Call
     private fun searchTraveller(keyword: String) {
         val service = AppClient.retrofit?.create(TravelService::class.java)
 

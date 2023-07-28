@@ -12,8 +12,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.data.model.dto.HotTravellerItem
 
-class TravellerHotRecyclerViewAdapter(val context: Context?):
-    RecyclerView.Adapter<TravellerHotRecyclerViewAdapter.RecyclerViewViewHolder>() {
+class TravellerHotAdapter(val context: Context?):
+    RecyclerView.Adapter<TravellerHotAdapter.RecyclerViewViewHolder>() {
 
     private var list : ArrayList<HotTravellerItem>? = arrayListOf()
 

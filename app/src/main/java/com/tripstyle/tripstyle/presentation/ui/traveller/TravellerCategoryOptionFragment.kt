@@ -19,20 +19,40 @@ import kotlin.math.roundToInt
 class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOptionBinding>(R.layout.fragment_traveller_category_option) {
 
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
-    lateinit var travellerCategoryAdapter : TravellerCategoryRecyclerViewAdapter
+    lateinit var travellerCategoryAdapter : TravellerCategoryAdapter
 
     override fun initStartView() {
         super.initStartView()
 
+        initAdapter()
+    }
+
+    override fun initDataBinding() {
+        super.initDataBinding()
+
+        initFirstSetting()
+    }
+
+    override fun initAfterBinding() {
+        super.initAfterBinding()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        requestCategoryList()
+    }
+
+    private fun initAdapter() {
         //recyclerView adapter
-        travellerCategoryAdapter = TravellerCategoryRecyclerViewAdapter(viewModel, context)
+        travellerCategoryAdapter = TravellerCategoryAdapter(viewModel, context)
 
         binding.rvCategoryList.adapter = travellerCategoryAdapter
         binding.rvCategoryList.layoutManager = LinearLayoutManager(context)
     }
 
-    override fun initDataBinding() {
-        super.initDataBinding()
+    private fun initFirstSetting() {
         binding.tvCategoryAdd.setOnClickListener {
             navController.navigate(R.id.action_categoryOptionFragment_to_categoryOptionSubjectFragment)
         }
@@ -47,17 +67,6 @@ class TravellerCategoryOptionFragment : BaseFragment<FragmentTravellerCategoryOp
         viewModel.categoryCheckBox.observe(viewLifecycleOwner){
             travellerCategoryAdapter.notifyDataSetChanged()
         }
-    }
-
-    override fun initAfterBinding() {
-        super.initAfterBinding()
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        requestCategoryList()
     }
 
     private fun changeOpenStatusTextView(isPublic: Boolean){
