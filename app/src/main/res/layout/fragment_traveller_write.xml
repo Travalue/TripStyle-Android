@@ -66,10 +66,11 @@
 
             <EditText
                 android:id="@+id/editTextTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:backgroundTint="@color/gray_E9E9E9"
                 android:hint="제목을 입력해 주세요."
@@ -77,14 +78,15 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray04"
                 android:textSize="25sp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_background" />
 
             <EditText
                 android:id="@+id/editTextSubtitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:backgroundTint="@color/gray_E9E9E9"
                 android:hint="부제목을 입력해 주세요."
@@ -92,7 +94,6 @@
                 android:textColor="@color/white"
                 android:textColorHint="@color/gray04"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/editTextTitle"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
 
             <ImageButton
