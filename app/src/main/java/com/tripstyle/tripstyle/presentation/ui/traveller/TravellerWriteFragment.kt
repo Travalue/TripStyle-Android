@@ -201,10 +201,15 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     // 배경 이미지 세팅
     private fun refreshBackgroundImage(imageUri: String){
         if(imageUri.isNotBlank()) {
+            /*
+            배경사진이 한번 들어오면 기본 사진으로 다시 돌아갈 일이 없으므로
+            사진 추가 아이콘, 배경사진 추가 버튼, 제목/부제목 미리보기 등에 대한 처리는 여기서 같이 함
+            */
             binding.layoutCoverAdd.visibility = View.INVISIBLE
             binding.buttonBackgroundImage.visibility = View.VISIBLE
             binding.tvPreviewTitle.visibility = View.VISIBLE
             binding.tvPreviewSubtitle.visibility = View.VISIBLE
+            binding.ivBackground.isEnabled = false
             context?.let {
                 Glide.with(it).load(imageUri)
                     .override(Resources.getSystem().displayMetrics.widthPixels,dpToPx(460))
