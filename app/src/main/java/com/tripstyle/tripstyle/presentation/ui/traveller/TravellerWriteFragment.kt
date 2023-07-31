@@ -109,7 +109,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             viewModel.addBodyItem()
 
         // 등록 버튼 활성화 관련
-        val textWatcher: TextWatcher = object : TextWatcher {
+        val textWatcherTitle: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
 
@@ -117,12 +117,26 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             }
 
             override fun afterTextChanged(s: Editable) {
+                binding.tvPreviewTitle.text = s.toString()
                 checkFields()
             }
         }
 
-        binding.editTextTitle.addTextChangedListener(textWatcher)
-        binding.editTextSubtitle.addTextChangedListener(textWatcher)
+        val textWatcherSubTitle: TextWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                binding.tvPreviewSubtitle.text = s.toString()
+                checkFields()
+            }
+        }
+
+        binding.editTextTitle.addTextChangedListener(textWatcherTitle)
+        binding.editTextSubtitle.addTextChangedListener(textWatcherSubTitle)
 
         viewModel.bodyItemListData.observe(viewLifecycleOwner){
             binding.bodyRecyclerView.adapter?.notifyDataSetChanged()
@@ -189,6 +203,8 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         if(imageUri.isNotBlank()) {
             binding.layoutCoverAdd.visibility = View.INVISIBLE
             binding.buttonBackgroundImage.visibility = View.VISIBLE
+            binding.tvPreviewTitle.visibility = View.VISIBLE
+            binding.tvPreviewSubtitle.visibility = View.VISIBLE
             context?.let {
                 Glide.with(it).load(imageUri)
                     .override(Resources.getSystem().displayMetrics.widthPixels,dpToPx(460))
