@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
@@ -36,6 +37,7 @@ import com.tripstyle.tripstyle.dialog.onDialogListener
 import com.tripstyle.tripstyle.util.ScheduleAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.layout.fragment_traveller_write) {
 
@@ -149,6 +151,11 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
         }
 
+        binding.ivBackground.setOnClickListener {
+            // 갤러리에서 배경사진 1장 선택하여 배경사진 칸에 넣음
+            selectGallery()
+        }
+
         binding.buttonBackgroundImage.setOnClickListener {
             // 갤러리에서 배경사진 1장 선택하여 배경사진 칸에 넣음
             selectGallery()
@@ -180,12 +187,20 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     // 배경 이미지 세팅
     private fun refreshBackgroundImage(imageUri: String){
         if(imageUri.isNotBlank()) {
+            binding.layoutCoverAdd.visibility = View.INVISIBLE
+            binding.buttonBackgroundImage.visibility = View.VISIBLE
             context?.let {
                 Glide.with(it).load(imageUri)
+                    .override(Resources.getSystem().displayMetrics.widthPixels,dpToPx(460))
                     .centerCrop()
                     .into(binding.ivBackground)
             }
         }
+    }
+
+    private fun dpToPx(dp: Int): Int {
+        val density = resources.displayMetrics.density
+        return (dp * density).roundToInt()
     }
 
 
