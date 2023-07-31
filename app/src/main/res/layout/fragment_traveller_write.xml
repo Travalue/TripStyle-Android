@@ -100,7 +100,7 @@
                 android:backgroundTint="@color/gray_E9E9E9"
                 android:hint="제목을 입력해 주세요."
                 android:inputType="textPersonName"
-                android:textColor="@color/white"
+                android:textColor="@color/black_161616"
                 android:textColorHint="@color/gray04"
                 android:textSize="25sp"
                 app:layout_constraintTop_toBottomOf="@id/iv_background" />
@@ -116,7 +116,7 @@
                 android:backgroundTint="@color/gray_E9E9E9"
                 android:hint="부제목을 입력해 주세요."
                 android:inputType="textPersonName"
-                android:textColor="@color/white"
+                android:textColor="@color/black_161616"
                 android:textColorHint="@color/gray04"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
