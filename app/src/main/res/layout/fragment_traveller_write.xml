@@ -29,6 +29,31 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/tv_preview_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="6dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@id/tv_preview_subtitle"/>
+
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/tv_preview_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_background"/>
+
             <LinearLayout
                 android:id="@+id/layout_cover_add"
                 android:layout_width="wrap_content"
