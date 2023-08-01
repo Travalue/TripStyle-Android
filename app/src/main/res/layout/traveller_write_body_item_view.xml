@@ -17,8 +17,6 @@
 
     <EditText
         android:id="@+id/editTextBody"
-        app:layout_constraintEnd_toEndOf="@+id/iv_body"
-        app:layout_constraintStart_toStartOf="@+id/iv_body"
         app:layout_constraintTop_toBottomOf="@+id/iv_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
