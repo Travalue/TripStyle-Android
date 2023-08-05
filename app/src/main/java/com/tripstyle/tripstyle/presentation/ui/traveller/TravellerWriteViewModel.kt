@@ -32,12 +32,16 @@ class TravellerWriteViewModel: ViewModel() {
     // 본문 아이템(사진 또는 글) 존재 여부
     val isBodyContentsExist = MutableLiveData<Boolean>()
 
+    // 현재 몇번째 본문 이미지가 선택됐는지 확인하는 용도
+    val currentCheckedBodyImageIndex = MutableLiveData<Int>()
+
 
 
 
     init {
         addBodyItem() // 최초에 본문 1개 생성
         isBodyContentsExist.value = false
+        currentCheckedBodyImageIndex.value = -1
     }
 
 
@@ -137,7 +141,11 @@ class TravellerWriteViewModel: ViewModel() {
 
     // 특정 위치에 본문 이미지가 존재하는지 확인
     fun checkBodyImageExist(index: Int) : Boolean {
-        return bodyItem[index].image.isNotBlank()
+        return if(bodyItem[index].image.isNotBlank()){ // index 위치에 본문 이미지 존재하면
+            currentCheckedBodyImageIndex.value = index // 이미지 선택이 가능하므로 현재 선택된 이미지 인덱스 저장
+            true
+        } else
+            false
     }
 
     // 본문 임시저장 텍스트 전체 삭제
