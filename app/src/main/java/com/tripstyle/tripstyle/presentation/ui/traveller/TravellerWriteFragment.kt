@@ -152,6 +152,9 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             binding.rvSchedule.adapter?.notifyDataSetChanged()
         }
 
+        // TODO: 선택된 카테고리가 있으면 상단 미리보기에 카테고리 주제를 표시하는 부분 추가해야함
+        // 이렇게 하려면 선택된 카테고리의 주제를 받아올 수 있어야 함
+
         binding.tvAddSchedule.setOnClickListener {
             viewModel.updateAllBodyText()
             viewModel.updateTitleAndSubtitle(binding.editTextTitle.text.toString(),binding.editTextSubtitle.text.toString())
@@ -182,6 +185,15 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
         viewModel.isBodyContentsExist.observe(viewLifecycleOwner){
             checkFields()
+        }
+
+        viewModel.currentCheckedBodyImageIndex.observe(viewLifecycleOwner){
+            if(viewModel.currentCheckedBodyImageIndex.value != -1) {
+                binding.bottomMenu.visibility = View.VISIBLE
+                binding.bottomMenu.bringToFront()
+            }
+            else
+                binding.bottomMenu.visibility = View.GONE
         }
     }
 
