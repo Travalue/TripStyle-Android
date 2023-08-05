@@ -6,14 +6,14 @@
 
     <ImageView
         android:id="@+id/iv_body"
-        android:layout_width="340dp"
-        android:layout_height="340dp"
+        android:padding="2dp"
+        android:layout_width="342dp"
+        android:layout_height="342dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/btn_add_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/btn_add_image"/>
 
     <EditText
         android:id="@+id/editTextBody"
