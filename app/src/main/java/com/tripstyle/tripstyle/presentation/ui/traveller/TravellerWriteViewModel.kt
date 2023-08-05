@@ -135,12 +135,17 @@ class TravellerWriteViewModel: ViewModel() {
         isBodyContentsExist.value = false
     }
 
-    // 본문 임시저장 텍스트 삭제
+    // 특정 위치에 본문 이미지가 존재하는지 확인
+    fun checkBodyImageExist(index: Int) : Boolean {
+        return bodyItem[index].image.isNotBlank()
+    }
+
+    // 본문 임시저장 텍스트 전체 삭제
     private fun deleteTempBodyTextItem(){
         editTextContents.clear()
     }
 
-    // 본문 아이템 삭제
+    // 본문 아이템 전체 삭제
     private fun deleteBodyItem(){
         bodyItem.clear()
         bodyItemListData.value = bodyItem
