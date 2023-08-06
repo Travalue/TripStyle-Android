@@ -41,6 +41,7 @@ class TravellerWriteViewModel: ViewModel() {
     init {
         addBodyItem() // 최초에 본문 1개 생성
         isBodyContentsExist.value = false
+        categoryCheckBox.value = -1
         currentCheckedBodyImageIndex.value = -1
     }
 
@@ -56,6 +57,8 @@ class TravellerWriteViewModel: ViewModel() {
         deleteCategorySubject()
         deleteCategoryCoverImage()
         isBodyContentsExist.value = false
+        categoryCheckBox.value = -1
+        currentCheckedBodyImageIndex.value = -1
     }
 
 

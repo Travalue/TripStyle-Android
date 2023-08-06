@@ -53,7 +53,7 @@ class TravellerCategoryAdapter(private val viewModel: TravellerWriteViewModel, v
                     viewModel.categoryCheckBox.value = pos
                 } else {
                     if (pos == checkedPosition) {
-                        viewModel.categoryCheckBox.value = null
+                        viewModel.categoryCheckBox.value = -1
                         checkedPosition = -1
                     }
                 }
