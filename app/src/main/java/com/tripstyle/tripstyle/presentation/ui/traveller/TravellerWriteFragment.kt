@@ -309,6 +309,8 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         viewModel.currentCheckedBodyImageIndex.value = -1
     }
 
+    // 특정 위치의 본문 이미지 삭제
+
     private fun deleteBodyImageWithIndex(index: Int){
         viewModel.updateBodyItem(index, TravellerWriteResult("",""))
         adapter.notifyItemChanged(index)
