@@ -234,32 +234,41 @@
 
                 <!-- 여기부터 map 추가 -->
 
-
-                <fragment
-                    android:id="@+id/map_fragment"
-                    android:name="com.naver.maps.map.MapFragment"
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/mapFragmentLinearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_marginTop="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_add_schedule"
-                    tools:layout="@layout/fragment_login">
+                    app:layout_constraintTop_toBottomOf="@+id/tv_add_schedule">
 
-                    <View
-                        android:id="@+id/ivMapTransparent"
+                    <fragment
+                        android:id="@+id/map_fragment"
+                        android:name="com.naver.maps.map.MapFragment"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@android:color/transparent" />
+                        android:layout_height="180dp"
+                        tools:layout="@layout/fragment_login">
 
-                </fragment>
+                        <View
+                            android:id="@+id/ivMapTransparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@android:color/transparent" />
+
+                    </fragment>
+
+                </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/mapLinearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/map_fragment">
+                    app:layout_constraintTop_toBottomOf="@+id/mapFragmentLinearLayout">
 
                     <LinearLayout
                         android:id="@+id/layout_schedule_title"
