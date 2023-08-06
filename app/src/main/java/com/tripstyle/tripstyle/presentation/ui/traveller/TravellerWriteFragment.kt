@@ -230,11 +230,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         }
 
         binding.layoutBottomDelete.setOnClickListener {
-            if(viewModel.currentCheckedBodyImageIndex.value != null){
-                viewModel.updateBodyItem(viewModel.currentCheckedBodyImageIndex.value!!, TravellerWriteResult("",""))
-                adapter.notifyItemChanged(viewModel.currentCheckedBodyImageIndex.value!!)
-                viewModel.currentCheckedBodyImageIndex.value = -1
-            }
+            deleteBodyImageWithIndex(viewModel.currentCheckedBodyImageIndex.value!!)
         }
     }
 
@@ -309,6 +305,12 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
     private fun editBodyImageWithIndex(index: Int, imageUri: String){
         viewModel.updateBodyItem(index, TravellerWriteResult(imageUri,""))
+        adapter.notifyItemChanged(index)
+        viewModel.currentCheckedBodyImageIndex.value = -1
+    }
+
+    private fun deleteBodyImageWithIndex(index: Int){
+        viewModel.updateBodyItem(index, TravellerWriteResult("",""))
         adapter.notifyItemChanged(index)
         viewModel.currentCheckedBodyImageIndex.value = -1
     }
