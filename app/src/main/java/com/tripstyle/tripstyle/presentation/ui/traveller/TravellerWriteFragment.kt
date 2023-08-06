@@ -32,6 +32,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PolylineOverlay
+import com.tripstyle.tripstyle.data.model.dto.TravellerWriteResult
 import com.tripstyle.tripstyle.dialog.TravellerWriteDialog
 import com.tripstyle.tripstyle.dialog.onDialogListener
 import com.tripstyle.tripstyle.util.ScheduleAdapter
@@ -43,6 +44,8 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
     private var list = ArrayList<String>() // post image 넘어오는 array
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
+
+    private lateinit var adapter: TravellerWriteBodyAdapter
 
     private lateinit var menuTextView: TextView
 
@@ -98,7 +101,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     }
 
     private fun initAdapter() {
-        val adapter = TravellerWriteBodyAdapter(viewModel,context,this)
+        adapter = TravellerWriteBodyAdapter(viewModel,context,this)
         binding.bodyRecyclerView.adapter = adapter
         binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
     }
@@ -194,6 +197,20 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             }
             else
                 binding.bottomMenu.visibility = View.GONE
+        }
+
+        binding.layoutBottomEdit.setOnClickListener {
+            // TODO: index 위치의 본문 이미지 수정
+            println("Bottom Edit Button Clicked, index=${viewModel.currentCheckedBodyImageIndex.value}")
+
+        }
+
+        binding.layoutBottomDelete.setOnClickListener {
+            if(viewModel.currentCheckedBodyImageIndex.value != null){
+                viewModel.updateBodyItem(viewModel.currentCheckedBodyImageIndex.value!!, TravellerWriteResult("",""))
+                adapter.notifyItemChanged(viewModel.currentCheckedBodyImageIndex.value!!)
+                viewModel.currentCheckedBodyImageIndex.value = -1
+            }
         }
     }
 

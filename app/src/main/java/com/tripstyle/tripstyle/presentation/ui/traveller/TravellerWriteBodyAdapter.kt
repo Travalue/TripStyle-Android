@@ -99,6 +99,10 @@ class TravellerWriteBodyAdapter(private val viewModel: TravellerWriteViewModel, 
                 // 이미지 세팅
                 if (image.isNotBlank())
                     Glide.with(itemView).load(image).centerCrop().into(bodyImage)
+                else {
+                    Glide.with(itemView).load(R.drawable.btn_add_image).centerCrop().into(bodyImage)
+                    bodyImage.setBackgroundResource(0)
+                }
 
                 // 본문 텍스트 세팅
                 editText.setText(text)
