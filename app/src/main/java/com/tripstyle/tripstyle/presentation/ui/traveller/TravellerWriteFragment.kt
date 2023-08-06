@@ -228,12 +228,12 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         viewModel.scheduleItemListData.observe(viewLifecycleOwner){
             // 사용자가 추가한 일정이 존재할 때만 화면에 지도와 일정이 나타나고, 존재하지 않으면 지도와 일정이 나타나지 않음
             if(viewModel.scheduleItemListData.value.isNullOrEmpty()){
-                binding.mapFragmentLinearLayout.visibility = View.GONE
-                binding.mapLinearLayout.visibility = View.GONE
+                binding.mapLayout.visibility = View.GONE
+                binding.scheduleLayout.visibility = View.GONE
             }
             else{
-                binding.mapFragmentLinearLayout.visibility = View.VISIBLE
-                binding.mapLinearLayout.visibility = View.VISIBLE
+                binding.mapLayout.visibility = View.VISIBLE
+                binding.scheduleLayout.visibility = View.VISIBLE
             }
         }
 
