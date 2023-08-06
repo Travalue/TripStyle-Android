@@ -97,7 +97,13 @@ class TravellerWriteBodyAdapter(private val viewModel: TravellerWriteViewModel, 
             with(viewModel.bodyItem[pos]){
 
                 // 이미지 세팅
-                Glide.with(itemView).load(image).centerCrop().into(bodyImage)
+                if (image.isNotBlank())
+                    Glide.with(itemView).load(image).centerCrop().into(bodyImage)
+                else
+                    Glide.with(itemView).load(R.drawable.btn_add_image).centerCrop().into(bodyImage)
+
+                if (viewModel.currentCheckedBodyImageIndex.value == -1)
+                    bodyImage.setBackgroundResource(0)
 
                 // 본문 텍스트 세팅
                 editText.setText(text)
@@ -120,7 +126,18 @@ class TravellerWriteBodyAdapter(private val viewModel: TravellerWriteViewModel, 
             }
 
             bodyImage.setOnClickListener {
-                selectFromGallery(pos)
+                if (viewModel.currentCheckedBodyImageIndex.value == pos) { // 이미지가 이미 선택된 상태인데 다시 선택하려고 클릭한 경우
+                    viewModel.currentCheckedBodyImageIndex.value = -1
+                    bodyImage.setBackgroundResource(0) // 파란 테두리 비활성화
+                } else if (viewModel.currentCheckedBodyImageIndex.value == -1) {
+                    // 이미지 들어있는지 확인하고, 안 들어있으면 바로 갤러리 열고 들어있으면 파란색 테두리 표시하고 하단 메뉴 띄우기
+                    if (!viewModel.checkBodyImageExist(pos))
+                        selectFromGallery(pos)
+                    else {
+                        bodyImage.setBackgroundResource(R.drawable.traveller_write_border) // 파란색 테두리 활성화
+                        // 하단 메뉴 띄우기 -> Fragment에서 수행
+                    }
+                }
             }
 
         }

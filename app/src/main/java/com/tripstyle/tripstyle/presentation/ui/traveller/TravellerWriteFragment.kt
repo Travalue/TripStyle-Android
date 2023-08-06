@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Color
 import android.net.Uri
 import android.provider.MediaStore
@@ -31,16 +32,20 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PolylineOverlay
+import com.tripstyle.tripstyle.data.model.dto.TravellerWriteResult
 import com.tripstyle.tripstyle.dialog.TravellerWriteDialog
 import com.tripstyle.tripstyle.dialog.onDialogListener
 import com.tripstyle.tripstyle.util.ScheduleAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.layout.fragment_traveller_write) {
 
     private var list = ArrayList<String>() // post image 넘어오는 array
     private val viewModel by activityViewModels<TravellerWriteViewModel>()
+
+    private lateinit var adapter: TravellerWriteBodyAdapter
 
     private lateinit var menuTextView: TextView
 
@@ -74,6 +79,32 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         }
     }
 
+    private val bodyImageResultSingle = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result ->
+        if(result.resultCode == Activity.RESULT_OK){
+            result?.data?.let { it ->
+                if (it.clipData != null) {   // 사진 여러장 선택
+                    val count = it.clipData!!.itemCount
+                    if (count > 1) {
+                        // 아래 toast를 다른 표시 방법으로 변경할 것
+                        Toast.makeText(context, "사진은 1장만 선택 가능합니다.", Toast.LENGTH_SHORT)
+                            .show()
+                        return@registerForActivityResult
+                    }
+
+                    for (i in 0 until count) {
+                        val imageUri = getRealPathFromURI(it.clipData!!.getItemAt(i).uri)
+                        editBodyImageWithIndex(viewModel.currentCheckedBodyImageIndex.value!!,imageUri)
+                    }
+                } else {    // 사진 1장 선택
+                    val imageUri = getRealPathFromURI(it.data!!)
+                    editBodyImageWithIndex(viewModel.currentCheckedBodyImageIndex.value!!,imageUri)
+                }
+
+            }
+        }
+    }
+
     override fun initStartView() {
         super.initStartView()
 
@@ -96,7 +127,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     }
 
     private fun initAdapter() {
-        val adapter = TravellerWriteBodyAdapter(viewModel,context,this)
+        adapter = TravellerWriteBodyAdapter(viewModel,context,this)
         binding.bodyRecyclerView.adapter = adapter
         binding.bodyRecyclerView.layoutManager = LinearLayoutManager(context)
     }
@@ -107,7 +138,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             viewModel.addBodyItem()
 
         // 등록 버튼 활성화 관련
-        val textWatcher: TextWatcher = object : TextWatcher {
+        val textWatcherTitle: TextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
 
@@ -115,12 +146,26 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             }
 
             override fun afterTextChanged(s: Editable) {
+                binding.tvPreviewTitle.text = s.toString()
                 checkFields()
             }
         }
 
-        binding.editTextTitle.addTextChangedListener(textWatcher)
-        binding.editTextSubtitle.addTextChangedListener(textWatcher)
+        val textWatcherSubTitle: TextWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                binding.tvPreviewSubtitle.text = s.toString()
+                checkFields()
+            }
+        }
+
+        binding.editTextTitle.addTextChangedListener(textWatcherTitle)
+        binding.editTextSubtitle.addTextChangedListener(textWatcherSubTitle)
 
         viewModel.bodyItemListData.observe(viewLifecycleOwner){
             binding.bodyRecyclerView.adapter?.notifyDataSetChanged()
@@ -136,6 +181,9 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             binding.rvSchedule.adapter?.notifyDataSetChanged()
         }
 
+        // TODO: 선택된 카테고리가 있으면 상단 미리보기에 카테고리 주제를 표시하는 부분 추가해야함
+        // 이렇게 하려면 선택된 카테고리의 주제를 받아올 수 있어야 함
+
         binding.tvAddSchedule.setOnClickListener {
             viewModel.updateAllBodyText()
             viewModel.updateTitleAndSubtitle(binding.editTextTitle.text.toString(),binding.editTextSubtitle.text.toString())
@@ -149,9 +197,21 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
         }
 
+        binding.tvScheduleEdit.setOnClickListener {
+            viewModel.updateAllBodyText()
+            viewModel.updateTitleAndSubtitle(binding.editTextTitle.text.toString(),binding.editTextSubtitle.text.toString())
+
+            navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
+        }
+
+        binding.ivBackground.setOnClickListener {
+            // 갤러리에서 배경사진 1장 선택하여 배경사진 칸에 넣음
+            selectGallery(true)
+        }
+
         binding.buttonBackgroundImage.setOnClickListener {
             // 갤러리에서 배경사진 1장 선택하여 배경사진 칸에 넣음
-            selectGallery()
+            selectGallery(true)
         }
 
         binding.buttonBodyAdd.setOnClickListener {
@@ -160,6 +220,36 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         }
 
         viewModel.isBodyContentsExist.observe(viewLifecycleOwner){
+            checkFields()
+        }
+
+        viewModel.currentCheckedBodyImageIndex.observe(viewLifecycleOwner){
+            if(viewModel.currentCheckedBodyImageIndex.value != -1) {
+                binding.bottomMenu.visibility = View.VISIBLE
+                binding.bottomMenu.bringToFront()
+            }
+            else
+                binding.bottomMenu.visibility = View.GONE
+        }
+
+        viewModel.scheduleItemListData.observe(viewLifecycleOwner){
+            // 사용자가 추가한 일정이 존재할 때만 화면에 지도와 일정이 나타나고, 존재하지 않으면 지도와 일정이 나타나지 않음
+            if(viewModel.scheduleItemListData.value.isNullOrEmpty()){
+                binding.mapLayout.visibility = View.GONE
+                binding.scheduleLayout.visibility = View.GONE
+            }
+            else{
+                binding.mapLayout.visibility = View.VISIBLE
+                binding.scheduleLayout.visibility = View.VISIBLE
+            }
+        }
+
+        binding.layoutBottomEdit.setOnClickListener {
+            selectGallery(false)
+        }
+
+        binding.layoutBottomDelete.setOnClickListener {
+            deleteBodyImageWithIndex(viewModel.currentCheckedBodyImageIndex.value!!)
             checkFields()
         }
     }
@@ -180,16 +270,31 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     // 배경 이미지 세팅
     private fun refreshBackgroundImage(imageUri: String){
         if(imageUri.isNotBlank()) {
+            /*
+            배경사진이 한번 들어오면 기본 사진으로 다시 돌아갈 일이 없으므로
+            사진 추가 아이콘, 배경사진 추가 버튼, 제목/부제목 미리보기 등에 대한 처리는 여기서 같이 함
+            */
+            binding.layoutCoverAdd.visibility = View.INVISIBLE
+            binding.buttonBackgroundImage.visibility = View.VISIBLE
+            binding.tvPreviewTitle.visibility = View.VISIBLE
+            binding.tvPreviewSubtitle.visibility = View.VISIBLE
+            binding.ivBackground.isEnabled = false
             context?.let {
                 Glide.with(it).load(imageUri)
+                    .override(Resources.getSystem().displayMetrics.widthPixels,dpToPx(460))
                     .centerCrop()
                     .into(binding.ivBackground)
             }
         }
     }
 
+    private fun dpToPx(dp: Int): Int {
+        val density = resources.displayMetrics.density
+        return (dp * density).roundToInt()
+    }
 
-    private fun selectGallery(){
+
+    private fun selectGallery(isBackgroundImage: Boolean){
         list.clear()
 
         val readPermission = ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -203,10 +308,33 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                 REQ_GALLERY
             )
         }else{
-            var intent = Intent(Intent.ACTION_PICK)
-            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*")
-            imageResultSingle.launch(intent)
+            if(isBackgroundImage) {
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+                imageResultSingle.launch(intent)
+            }
+            else{
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+                bodyImageResultSingle.launch(intent)
+            }
         }
+    }
+
+    // 특정 위치의 본문 이미지 변경
+
+    private fun editBodyImageWithIndex(index: Int, imageUri: String){
+        viewModel.updateBodyItem(index, TravellerWriteResult(imageUri,""))
+        adapter.notifyItemChanged(index)
+        viewModel.currentCheckedBodyImageIndex.value = -1
+    }
+
+    // 특정 위치의 본문 이미지 삭제
+
+    private fun deleteBodyImageWithIndex(index: Int){
+        viewModel.updateBodyItem(index, TravellerWriteResult("",""))
+        adapter.notifyItemChanged(index)
+        viewModel.currentCheckedBodyImageIndex.value = -1
     }
 
 
