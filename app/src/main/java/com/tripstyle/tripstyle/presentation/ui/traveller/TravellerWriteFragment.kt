@@ -79,6 +79,32 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         }
     }
 
+    private val bodyImageResultSingle = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result ->
+        if(result.resultCode == Activity.RESULT_OK){
+            result?.data?.let { it ->
+                if (it.clipData != null) {   // 사진 여러장 선택
+                    val count = it.clipData!!.itemCount
+                    if (count > 1) {
+                        // 아래 toast를 다른 표시 방법으로 변경할 것
+                        Toast.makeText(context, "사진은 1장만 선택 가능합니다.", Toast.LENGTH_SHORT)
+                            .show()
+                        return@registerForActivityResult
+                    }
+
+                    for (i in 0 until count) {
+                        val imageUri = getRealPathFromURI(it.clipData!!.getItemAt(i).uri)
+                        editBodyImageWithIndex(viewModel.currentCheckedBodyImageIndex.value!!,imageUri)
+                    }
+                } else {    // 사진 1장 선택
+                    val imageUri = getRealPathFromURI(it.data!!)
+                    editBodyImageWithIndex(viewModel.currentCheckedBodyImageIndex.value!!,imageUri)
+                }
+
+            }
+        }
+    }
+
     override fun initStartView() {
         super.initStartView()
 
@@ -173,12 +199,12 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
         binding.ivBackground.setOnClickListener {
             // 갤러리에서 배경사진 1장 선택하여 배경사진 칸에 넣음
-            selectGallery()
+            selectGallery(true)
         }
 
         binding.buttonBackgroundImage.setOnClickListener {
             // 갤러리에서 배경사진 1장 선택하여 배경사진 칸에 넣음
-            selectGallery()
+            selectGallery(true)
         }
 
         binding.buttonBodyAdd.setOnClickListener {
@@ -200,9 +226,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
         }
 
         binding.layoutBottomEdit.setOnClickListener {
-            // TODO: index 위치의 본문 이미지 수정
-            println("Bottom Edit Button Clicked, index=${viewModel.currentCheckedBodyImageIndex.value}")
-
+            selectGallery(false)
         }
 
         binding.layoutBottomDelete.setOnClickListener {
@@ -254,7 +278,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
     }
 
 
-    private fun selectGallery(){
+    private fun selectGallery(isBackgroundImage: Boolean){
         list.clear()
 
         val readPermission = ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -268,10 +292,25 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
                 REQ_GALLERY
             )
         }else{
-            var intent = Intent(Intent.ACTION_PICK)
-            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*")
-            imageResultSingle.launch(intent)
+            if(isBackgroundImage) {
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+                imageResultSingle.launch(intent)
+            }
+            else{
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+                bodyImageResultSingle.launch(intent)
+            }
         }
+    }
+
+    // 특정 위치의 본문 이미지 변경
+
+    private fun editBodyImageWithIndex(index: Int, imageUri: String){
+        viewModel.updateBodyItem(index, TravellerWriteResult(imageUri,""))
+        adapter.notifyItemChanged(index)
+        viewModel.currentCheckedBodyImageIndex.value = -1
     }
 
 
