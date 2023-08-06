@@ -231,6 +231,7 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
 
         binding.layoutBottomDelete.setOnClickListener {
             deleteBodyImageWithIndex(viewModel.currentCheckedBodyImageIndex.value!!)
+            checkFields()
         }
     }
 
