@@ -197,6 +197,13 @@ class TravellerWriteFragment : BaseFragment<FragmentTravellerWriteBinding>(R.lay
             navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
         }
 
+        binding.tvScheduleEdit.setOnClickListener {
+            viewModel.updateAllBodyText()
+            viewModel.updateTitleAndSubtitle(binding.editTextTitle.text.toString(),binding.editTextSubtitle.text.toString())
+
+            navController.navigate(R.id.action_travellerWriteFragment_to_TravellerLocationFragment)
+        }
+
         binding.ivBackground.setOnClickListener {
             // 갤러리에서 배경사진 1장 선택하여 배경사진 칸에 넣음
             selectGallery(true)
