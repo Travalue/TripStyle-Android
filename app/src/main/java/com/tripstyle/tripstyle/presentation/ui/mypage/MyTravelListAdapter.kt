@@ -51,24 +51,24 @@ class MyTravelListAdapter(var travelList: ArrayList<MyTripModel>, val delete: Bo
         // 추가된 나의 여행지 삭제버튼 클릭시
         holder.deleteBtn.setOnClickListener {
             Log.d("[delete mytrip id]",travelList[position].id.toString())
-//            val resultData: Call<MyTripDeleteResponse> = AppClient.userService.deleteMyTrip()
-//            resultData.enqueue(object : Callback<MyTripDeleteResponse> {
-//                override fun onResponse(
-//                    call: Call<MyTripDeleteResponse>,
-//                    response: Response<MyTripDeleteResponse>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        Log.d("[updateProfile]", response.message())
-//
-//                    } else {
-//                        Log.d("[updateProfile]", "실패코드_${response.code()}")
-//                    }
-//                }
-//                override fun onFailure(call: Call<MyTripDeleteResponse>, t: Throwable) {
-//                    t.printStackTrace()
-//                    Log.d("[updateProfile]","통신 실패")
-//                }
-//            })
+            val resultData: Call<MyTripDeleteResponse> = AppClient.userService.deleteMyTrip(travelList[position].id)
+            resultData.enqueue(object : Callback<MyTripDeleteResponse> {
+                override fun onResponse(
+                    call: Call<MyTripDeleteResponse>,
+                    response: Response<MyTripDeleteResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.d("[updateProfile]", response.message())
+
+                    } else {
+                        Log.d("[updateProfile]", "실패코드_${response.code()}")
+                    }
+                }
+                override fun onFailure(call: Call<MyTripDeleteResponse>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.d("[updateProfile]","통신 실패")
+                }
+            })
         }
     }
 }
