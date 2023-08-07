@@ -51,10 +51,12 @@ class TravellerCategoryAdapter(private val viewModel: TravellerWriteViewModel, v
                 if(isChecked) {
                     checkedPosition = pos
                     viewModel.categoryCheckBox.value = pos
+                    viewModel.currentCheckedCategoryId.value = list!![pos].id // 현재 체크된 카테고리의 카테고리 id 저장
                 } else {
                     if (pos == checkedPosition) {
                         viewModel.categoryCheckBox.value = -1
                         checkedPosition = -1
+                        viewModel.currentCheckedCategoryId.value = -1 // 현재 체크된 카테고리의 카테고리 id 초기화
                     }
                 }
             }

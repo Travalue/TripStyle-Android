@@ -26,8 +26,11 @@ class TravellerWriteViewModel: ViewModel() {
     var categoryCoverImageLiveData = MutableLiveData<String>()
 
 
-    // 어떤 카테고리가 체크됐는지 확인하는 용도
+    // 화면에서 보이는 카테고리 리스트에서 몇번째 카테고리가 체크됐는지 확인하는 용도
     val categoryCheckBox = MutableLiveData<Int>()
+
+    // 현재 체크된 카테고리의 카테고리 id
+    val currentCheckedCategoryId = MutableLiveData<Int>()
 
     // 본문 아이템(사진 또는 글) 존재 여부
     val isBodyContentsExist = MutableLiveData<Boolean>()
@@ -43,6 +46,7 @@ class TravellerWriteViewModel: ViewModel() {
         isBodyContentsExist.value = false
         categoryCheckBox.value = -1
         currentCheckedBodyImageIndex.value = -1
+        currentCheckedCategoryId.value = -1
     }
 
 
@@ -59,6 +63,7 @@ class TravellerWriteViewModel: ViewModel() {
         isBodyContentsExist.value = false
         categoryCheckBox.value = -1
         currentCheckedBodyImageIndex.value = -1
+        currentCheckedCategoryId.value = -1
     }
 
 
