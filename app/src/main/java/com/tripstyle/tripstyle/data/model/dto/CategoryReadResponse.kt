@@ -7,6 +7,7 @@ data class CategoryReadResponse(
 )
 
 data class CategoryItem(
+    val id: Int, // 카테고리 id
     val title: String,
     val travellerCount: Int
 )
