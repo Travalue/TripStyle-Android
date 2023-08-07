@@ -25,13 +25,14 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
         super.initStartView()
 
         userViewModel = (context as MainActivity).getUserViewModel()
+
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
 
 
-        binding.placeList.adapter = MyTravelListAdapter(userViewModel.getTravelList(),true) // 어댑터 생성
+        binding.placeList.adapter = MyTravelListAdapter(userViewModel.myTripList.value!!,true) // 어댑터 생성
         val gridLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context,3)
         binding.placeList.layoutManager = gridLayoutManager
 
@@ -41,7 +42,7 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
     override fun initAfterBinding() {
         super.initAfterBinding()
 
-        if (userViewModel.getTravelList().isEmpty())
+        if (userViewModel.myTripList.value!!.isEmpty())
             binding.tvNoList.visibility = View.VISIBLE
 
         // editText 입력 감지

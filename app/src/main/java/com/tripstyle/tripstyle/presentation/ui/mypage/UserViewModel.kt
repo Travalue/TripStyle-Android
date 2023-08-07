@@ -14,9 +14,13 @@ import retrofit2.Response
 
 class UserViewModel : ViewModel() {
     private var _userInfo = MutableLiveData<UserInfoModel>()
+    private var _myTripList = MutableLiveData<ArrayList<MyTripModel>>()
 
     val userInfo : LiveData<UserInfoModel>
             get() = _userInfo
+
+    val myTripList : LiveData<ArrayList<MyTripModel>>
+        get() = _myTripList
 
     fun setUserInfo(userViewModel:UserInfoModel) {
             _userInfo = MutableLiveData(userViewModel)
@@ -30,8 +34,8 @@ class UserViewModel : ViewModel() {
         return userInfo.value!!.nickname
     }
 
-    fun getTravelList():ArrayList<MyTripModel>{
-        return userInfo.value!!.travelList
+    fun setMyTripList(mytripList : ArrayList<MyTripModel>){
+        _myTripList = MutableLiveData(mytripList)
     }
 
     fun getDescription() : String{

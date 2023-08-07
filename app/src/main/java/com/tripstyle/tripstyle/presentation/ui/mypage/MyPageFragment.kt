@@ -19,10 +19,7 @@ import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentMyPageMainBinding
 import com.tripstyle.tripstyle.MainActivity
-import com.tripstyle.tripstyle.data.model.dto.LoginResponseModel
-import com.tripstyle.tripstyle.data.model.dto.TravelDetailResponse
-import com.tripstyle.tripstyle.data.model.dto.UserInfoModel
-import com.tripstyle.tripstyle.data.model.dto.UserPageResponse
+import com.tripstyle.tripstyle.data.model.dto.*
 import com.tripstyle.tripstyle.data.source.remote.UserService
 import com.tripstyle.tripstyle.di.AppClient
 import retrofit2.Call
@@ -70,10 +67,6 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
                     binding.tvNickname.text = result.data.nickname
                     if(userViewModel.getDescription() != null)
                         binding.tvIntro.text = result.data.description
-                    binding.placeList.adapter = MyTravelListAdapter(result.data.travelList,false) // 어댑터 생성
-                    if(result.data.travelList.isEmpty()){
-                        binding.tvNoDestination.visibility = View.VISIBLE
-                    }
                 } else {
                     Log.d("[getUserInfo]", "실패코드_${response.code()}")
                 }
@@ -82,6 +75,32 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             override fun onFailure(call: Call<UserPageResponse>, t: Throwable) {
                 t.printStackTrace()
                 Log.d("[getUserInfo]","통신 실패")
+            }
+        })
+
+        val resultData2: Call<MyTripModelResponse> = AppClient.userService.getMyTrip()
+        resultData2.enqueue(object : Callback<MyTripModelResponse> {
+            override fun onResponse(
+                call: Call<MyTripModelResponse>,
+                response: Response<MyTripModelResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val result: MyTripModelResponse = response.body()!!
+
+                    userViewModel.setMyTripList(result.data)
+                    binding.placeList.adapter = MyTravelListAdapter(result.data,false) // 어댑터 생성
+                    if(result.data.isEmpty()){
+                        binding.tvNoDestination.visibility = View.VISIBLE
+                    }
+
+                } else {
+                    Log.d("[getMyTrip]", "실패코드_${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<MyTripModelResponse>, t: Throwable) {
+                t.printStackTrace()
+                Log.d("[getMyTrip]","통신 실패")
             }
         })
 

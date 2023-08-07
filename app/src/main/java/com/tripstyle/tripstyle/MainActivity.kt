@@ -16,13 +16,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tripstyle.tripstyle.databinding.ActivityMainBinding
 import com.kakao.sdk.common.util.Utility
+import com.tripstyle.tripstyle.data.model.dto.MyTripModel
 import com.tripstyle.tripstyle.presentation.ui.mypage.EditProfileFragment
 import com.tripstyle.tripstyle.presentation.ui.mypage.UserViewModel
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var userViewModel: UserViewModel
-
     lateinit var binding: ActivityMainBinding
 
     lateinit var navController : NavController
@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         migrateToolbarNavigation()
 
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-
     }
 
     fun setToolbarTitle(tag: String){
