@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -52,8 +53,6 @@ class TravellerHotAdapter(val context: Context?):
 
             Glide.with(itemView)
                 .load(list!![pos].thumbnail)
-                .centerCrop()
-                .transform(RoundedCorners(20))
                 .into(thumbnailImage)
             Glide.with(itemView).load(list!![pos].profileImage).into(profileImage)
             when (list!![pos].subject) {
