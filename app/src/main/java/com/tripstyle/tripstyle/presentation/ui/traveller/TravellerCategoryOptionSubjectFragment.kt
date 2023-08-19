@@ -165,7 +165,6 @@ class TravellerCategoryOptionSubjectFragment : BaseFragment<FragmentTravellerCat
     private fun refreshCategoryCoverImage(imageUri: String) {
         context?.let {
             Glide.with(it).load(imageUri)
-                .centerCrop()
                 .into(binding.ivCategoryCover)
         }
     }
