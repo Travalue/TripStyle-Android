@@ -26,6 +26,11 @@ interface UserService {
     @PATCH("/user")
     fun updateMypage(@Body updateProfileRequest: UpdateUserProfileRequestModel) :Call<UpdateUserProfileResponseModel>
 
+    // 나의 여행지 추가
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
+    @POST("/mytrip")
+    fun addMyTrip(@Body trip: TripModel): Call<Void>
+
     // 나의 여행지 조회
     @Headers("Authorization: ${BuildConfig.TOKEN}")
     @GET("/mytrip")

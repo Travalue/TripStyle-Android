@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.data.model.dto.MyTripDeleteResponse
 import com.tripstyle.tripstyle.data.model.dto.MyTripModel
+import com.tripstyle.tripstyle.data.model.dto.TripModel
 import com.tripstyle.tripstyle.data.model.dto.UpdateUserProfileResponseModel
 import com.tripstyle.tripstyle.databinding.PlaceItemViewBinding
 import com.tripstyle.tripstyle.di.AppClient

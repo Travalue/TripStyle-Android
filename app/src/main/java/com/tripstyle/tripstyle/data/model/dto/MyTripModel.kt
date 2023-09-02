@@ -16,3 +16,8 @@ data class MyTripDeleteResponse(
     val message: String,
     val data: String
 )
+
+data class TripModel(
+    val emoji: String,
+    val travelTitle: String
+)
