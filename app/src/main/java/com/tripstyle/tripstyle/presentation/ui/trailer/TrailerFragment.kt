@@ -63,7 +63,7 @@ class TrailerFragment : BaseFragment<FragmentTrailerBinding>(R.layout.fragment_t
     }
 
     private fun initVerticalCardView(){
-        adapter = TrailerViewPagerAdapter(requireContext(),Constant.TYPE_PAGER)
+        adapter = TrailerViewPagerAdapter(requireContext(),Constant.TYPE_PAGER, false)
         adapter.setListener(object : onActionListener {
             override fun onMoveDetailPage(id:Int): NavDirections {
                 return TrailerFragmentDirections.actionTrailerFragmentToTrailerDetailFragment(id)

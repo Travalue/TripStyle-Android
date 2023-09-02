@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,7 +13,7 @@ import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.data.model.dto.TrailerItem
 import com.tripstyle.tripstyle.util.Constant
 
-class TrailerViewPagerAdapter(private val context: Context,val type:Int) :
+class TrailerViewPagerAdapter(private val context: Context,val type:Int, val like: Boolean) :
     RecyclerView.Adapter<TrailerViewPagerAdapter.PagerViewHolder>() {
 
     private var listener : onActionListener? = null
@@ -24,6 +25,7 @@ class TrailerViewPagerAdapter(private val context: Context,val type:Int) :
         val trailerTitle = itemView.findViewById<TextView>(R.id.tv_main_title)
         val trailerSubtitle = itemView.findViewById<TextView>(R.id.tv_subtitle)
         val trailerBadge = itemView.findViewById<ImageView>(R.id.iv_category)
+        val likeHeart = itemView.findViewById<ImageView>(R.id.iv_heart)
 
     }
 //
@@ -78,6 +80,10 @@ class TrailerViewPagerAdapter(private val context: Context,val type:Int) :
             }
         }
         //holder.trailerCard.clipToOutline = true
+
+        if (like){
+            holder.likeHeart.isVisible = true
+        }
     }
 
     fun setListener(listener: onActionListener){
