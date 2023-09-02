@@ -25,4 +25,19 @@ interface UserService {
     @Headers("Authorization: ${BuildConfig.TOKEN}","Content-Type: multipart/form-data")
     @PATCH("/user")
     fun updateMypage(@Body updateProfileRequest: UpdateUserProfileRequestModel) :Call<UpdateUserProfileResponseModel>
+
+    // 나의 여행지 추가
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
+    @POST("/mytrip")
+    fun addMyTrip(@Body trip: TripModel): Call<Void>
+
+    // 나의 여행지 조회
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
+    @GET("/mytrip")
+    fun getMyTrip() : Call<MyTripModelResponse>
+
+    // 나의 여행지 리스트 삭제
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
+    @DELETE("/mytrip/{myTripId}")
+    fun deleteMyTrip(@Path("myTripId") myTripId:Int): Call<MyTripDeleteResponse>
 }

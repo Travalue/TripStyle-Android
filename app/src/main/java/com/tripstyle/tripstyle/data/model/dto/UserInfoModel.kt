@@ -15,7 +15,7 @@ data class UserInfoModel(
     val profileImage : String,
     val description: String,
     val travelCount: Int,
-    val travelList : ArrayList<Data>,
+    val travelList : ArrayList<MyTripModel>,
     val sharedTravelCount: Int,
     val sharedTravel : ArrayList<SharedTravelData>,
     val travelLikeCount: Int

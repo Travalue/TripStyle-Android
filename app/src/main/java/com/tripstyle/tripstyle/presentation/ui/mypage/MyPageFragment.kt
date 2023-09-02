@@ -1,10 +1,10 @@
 package com.tripstyle.tripstyle.presentation.ui.mypage
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
-import android.os.AsyncTask
 import android.util.Log
+import android.view.View
+import androidx.lifecycle.Observer
 import com.bumptech.glide.request.transition.Transition
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,26 +14,21 @@ import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentMyPageMainBinding
 import com.tripstyle.tripstyle.MainActivity
-import com.tripstyle.tripstyle.data.model.dto.LoginResponseModel
-import com.tripstyle.tripstyle.data.model.dto.TravelDetailResponse
-import com.tripstyle.tripstyle.data.model.dto.UserInfoModel
-import com.tripstyle.tripstyle.data.model.dto.UserPageResponse
-import com.tripstyle.tripstyle.data.source.remote.UserService
+import com.tripstyle.tripstyle.data.model.dto.*
 import com.tripstyle.tripstyle.di.AppClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragment_my_page_main) {
 
-    private var addPlace :ArrayList<String> =arrayListOf("미국")
+    private lateinit var userViewModel : UserViewModel
 
     override fun initStartView() {
         super.initStartView()
+
+        userViewModel = (context as MainActivity).getUserViewModel()
 
         val resultData: Call<UserPageResponse> = AppClient.userService.getUserInfo(1,1,1)
         resultData.enqueue(object : Callback<UserPageResponse> {
@@ -43,12 +38,12 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             ) {
                 if (response.isSuccessful) {
                     val result: UserPageResponse = response.body()!!
-                    val user = result.data
+                    userViewModel.setUserInfo(result.data)
 
                     context?.let {
                         Glide.with(this@MyPageFragment)
                             .asBitmap()
-                            .load(user.profileImage)
+                            .load(result.data.profileImage)
                             .into(object : CustomTarget<Bitmap>() {
                                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                                     binding.ivProfile.setImageBitmap(resource) // 다운로드한 이미지를 ImageView에 설정합니다.
@@ -60,11 +55,9 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
                             })
                     }
 
-                    binding.tvNickname.text = user.nickname
-                    if (user.description != null) {
-                        binding.tvIntro.text = user.description
-                    }
-
+                    binding.tvNickname.text = result.data.nickname
+                    if(userViewModel.getDescription() != null)
+                        binding.tvIntro.text = result.data.description
                 } else {
                     Log.d("[getUserInfo]", "실패코드_${response.code()}")
                 }
@@ -76,20 +69,41 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             }
         })
 
+        val resultData2: Call<MyTripModelResponse> = AppClient.userService.getMyTrip()
+        resultData2.enqueue(object : Callback<MyTripModelResponse> {
+            override fun onResponse(
+                call: Call<MyTripModelResponse>,
+                response: Response<MyTripModelResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val result: MyTripModelResponse = response.body()!!
+
+                    userViewModel.setMyTripList(result.data)
+                    binding.placeList.adapter = MyTravelListAdapter(result.data,false) // 어댑터 생성
+                    if(result.data.isEmpty()){
+                        binding.tvNoDestination.visibility = View.VISIBLE
+                    }
+
+                } else {
+                    Log.d("[getMyTrip]", "실패코드_${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<MyTripModelResponse>, t: Throwable) {
+                t.printStackTrace()
+                Log.d("[getMyTrip]","통신 실패")
+            }
+        })
+
+
+
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
 
-        if(addPlace.size > 0){
-            binding.tvNoDestination.text=""
-        }else{
-            binding.tvNoDestination.text="나의 여행지를 추가해보세요."
-        }
-
 
         // 나의 여행지 리스트 어댑터
-        binding.placeList.adapter = MyTravelListAdapter(addPlace,false) // 어댑터 생성
         val gridLayoutManager1: RecyclerView.LayoutManager = GridLayoutManager(context,4)
         binding.placeList.layoutManager = gridLayoutManager1
 
@@ -123,6 +137,7 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
 
 
     }
+
 
     private fun getCategoryImg(): ArrayList<Int> {
         return arrayListOf<Int>(

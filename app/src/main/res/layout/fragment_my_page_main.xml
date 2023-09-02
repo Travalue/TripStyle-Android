@@ -51,7 +51,7 @@
                 android:id="@+id/line7"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:background="@color/gray_EDEDED"
                 app:layout_constraintEnd_toEndOf="@+id/btn_edit_profile"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -282,9 +282,11 @@
                 android:id="@+id/tv_no_destination"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/suit_regular"
-                android:text="나의 여행지를 추가해보세요."
+                android:text="아직 추가된 여행지 리스트가 없어요"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/btn_to_travel_list"
                 app:layout_constraintStart_toStartOf="@+id/tv_destination_list"
                 app:layout_constraintTop_toBottomOf="@+id/tv_destination_list" />
 
