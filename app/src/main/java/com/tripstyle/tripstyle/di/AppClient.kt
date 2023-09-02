@@ -41,4 +41,5 @@ object AppClient {
 
     val loginService: LoginService = retrofit.create(LoginService::class.java)
     val userService: UserService = retrofit.create(UserService::class.java)
+    val travelService: TravelService = retrofit.create(TravelService::class.java)
 }

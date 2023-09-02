@@ -118,6 +118,7 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
     override fun initAfterBinding() {
         super.initAfterBinding()
 
+        // 프로필 편집
         binding.btnEditProfile.setOnClickListener {
             navController.navigate(R.id.action_myPageFragment_to_editProfileFragment)
         }
@@ -127,12 +128,14 @@ class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragmen
             navController.navigate(R.id.action_myPageFragment_to_shareTravelFragment)
         }
 
+        // 나의 여행지 리스트
         binding.btnToTravelList.setOnClickListener{
             navController.navigate(R.id.action_myPageFragment_to_myTravelListFragment)
         }
 
-        binding.btnToLikeList.setOnClickListener{
-            navController.navigate(R.id.action_myPageFragment_to_likeListFragment)
+        // 게시물 좋아용 목록
+        binding.btnToLikePostList.setOnClickListener{
+            navController.navigate(R.id.action_myPageFragment_to_likePostListFragment)
         }
 
 

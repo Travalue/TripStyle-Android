@@ -48,7 +48,7 @@ class ShareTravelDetailFragment : BaseFragment<FragmentShareTravelDetailBinding>
     }
 
     private fun initRecyclerView(){
-        adapter = TrailerViewPagerAdapter(requireContext(),Constant.TYPE_RECYCLER)
+        adapter = TrailerViewPagerAdapter(requireContext(),Constant.TYPE_RECYCLER,false)
         binding.rvCategoryList.adapter = adapter // 어댑터 생성
         binding.rvCategoryList.layoutManager = LinearLayoutManager(context)
         binding.rvCategoryList.setHasFixedSize(true)
