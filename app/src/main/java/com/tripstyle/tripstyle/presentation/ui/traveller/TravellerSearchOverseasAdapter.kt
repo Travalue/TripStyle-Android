@@ -4,14 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.R
 import com.bumptech.glide.Glide
 
-class TravellerSearchRecyclerViewAdapter2(private val viewModel: TravellerSearchViewModel, val context: Context?):
-    RecyclerView.Adapter<TravellerSearchRecyclerViewAdapter2.RecyclerViewViewHolder>() {
+class TravellerSearchOverseasAdapter(private val viewModel: TravellerSearchViewModel, val context: Context?):
+    RecyclerView.Adapter<TravellerSearchOverseasAdapter.RecyclerViewViewHolder>() {
 
 
     interface OnItemClickListener{
@@ -27,8 +28,7 @@ class TravellerSearchRecyclerViewAdapter2(private val viewModel: TravellerSearch
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.traveller_search_item_view, parent, false)
-//        val inflater = LayoutInflater.from(parent.context)
-//        val binding = ItemViewBinding.inflate(inflater,parent,false)
+
         return RecyclerViewViewHolder(itemView)
     }
 
@@ -45,6 +45,7 @@ class TravellerSearchRecyclerViewAdapter2(private val viewModel: TravellerSearch
         private val cityImage: ImageView = itemView.findViewById(R.id.city_image)
         private val QueryCityName: TextView = itemView.findViewById(R.id.city_name)
         private val QuerySpecificCityName: TextView = itemView.findViewById(R.id.specific_city_name)
+        private val searchButton: ImageButton = itemView.findViewById(R.id.btn_search_result)
 
 
         init{
@@ -52,12 +53,8 @@ class TravellerSearchRecyclerViewAdapter2(private val viewModel: TravellerSearch
                 val pos = adapterPosition
 
                 if(pos != RecyclerView.NO_POSITION){
-                    if(onClickListener != null){
-                        cityImage.setOnClickListener {
-                            onClickListener.onItemClick(pos,"","")
-                            println("adapterposition: ${pos}")
-                            println("${QueryCityName.text}")
-                        }
+                    searchButton.setOnClickListener {
+                        onClickListener.onItemClick(pos,QueryCityName.text.toString(),"")
                     }
                 }
             }

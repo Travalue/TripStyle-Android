@@ -1,5 +1,6 @@
 package com.tripstyle.tripstyle.presentation.ui.traveller
 
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -8,49 +9,81 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
+import com.tripstyle.tripstyle.data.model.dto.HotTravellerItem
 import com.tripstyle.tripstyle.databinding.FragmentTravellerBinding
-import com.tripstyle.tripstyle.MainActivity
+import com.tripstyle.tripstyle.data.model.dto.HotTravellerResponse
+import com.tripstyle.tripstyle.data.source.remote.TravelService
+import com.tripstyle.tripstyle.di.AppClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragment_traveller) {
     private val viewModel by viewModels<TravellerSearchViewModel>()
+    lateinit var hotTravellerAdapter : TravellerHotAdapter
 
 
     override fun initStartView() {
         super.initStartView()
-//        (activity as MainActivity).setToolbarTitle("none")
 
-
-        val adapter1 = TravellerSearchRecyclerViewAdapter(viewModel, context)
-        val adapter2 = TravellerSearchRecyclerViewAdapter2(viewModel, context)
-
-
-        adapter1.setOnItemClickListener(object:
-            TravellerSearchRecyclerViewAdapter.OnItemClickListener {
-            override fun onItemClick(pos: Int,city: String, searchText: String) {
-                navController.navigate(R.id.action_travellerFragment_to_TrailerSearchFragment)
-            }
-        })
-
-        adapter2.setOnItemClickListener(object:
-            TravellerSearchRecyclerViewAdapter2.OnItemClickListener {
-            override fun onItemClick(pos: Int,city: String, searchText: String) {
-                navController.navigate(R.id.action_travellerFragment_to_TrailerSearchFragment)
-            }
-        })
-
-        //recyclerView adapter
-        binding.recyclerView.adapter = adapter1
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
-
-        binding.recyclerView2.adapter = adapter2
-        binding.recyclerView2.layoutManager = LinearLayoutManager(context)
-
+        initAdapter()
     }
 
     override fun initDataBinding() {
         super.initDataBinding()
 
+        initFirstSetting()
+    }
 
+    override fun initAfterBinding() {
+        super.initAfterBinding()
+
+        requestHotTravellerList()
+    }
+
+    private fun initAdapter() {
+        // 지금 핫한 트레블러 adapter
+        hotTravellerAdapter = TravellerHotAdapter(context)
+
+        // 검색 adapter
+        val searchDomesticAdapter = TravellerSearchDomesticAdapter(viewModel, context)
+        val searchOverseasAdapter = TravellerSearchOverseasAdapter(viewModel, context)
+
+
+        searchDomesticAdapter.setOnItemClickListener(object:
+            TravellerSearchDomesticAdapter.OnItemClickListener {
+            override fun onItemClick(pos: Int,city: String, searchText: String) {
+                //parameter에 있는 searchText는 활용 못함
+                //여기서 검색 결과 화면으로 검색어만 넘겨주고, 검색 결과 화면에서 검색 수행
+                val bundle = Bundle()
+                bundle.putString("searchText",binding.etSearch.toString())
+                navController.navigate(R.id.action_travellerFragment_to_travellerSearchResultFragment,bundle)
+            }
+        })
+
+        searchOverseasAdapter.setOnItemClickListener(object:
+            TravellerSearchOverseasAdapter.OnItemClickListener {
+            override fun onItemClick(pos: Int,city: String, searchText: String) {
+                val bundle = Bundle()
+                bundle.putString("searchText",binding.etSearch.toString())
+                navController.navigate(R.id.action_travellerFragment_to_travellerSearchResultFragment,bundle)
+            }
+        })
+
+        // 검색쪽 recyclerView adapter
+        binding.recyclerView.adapter = searchDomesticAdapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+
+        binding.recyclerView2.adapter = searchOverseasAdapter
+        binding.recyclerView2.layoutManager = LinearLayoutManager(context)
+
+
+        // 지금 핫한 트레블러 adapter
+        binding.rvHotTraveller.adapter = hotTravellerAdapter
+        binding.rvHotTraveller.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun initFirstSetting() {
         // search 테스트용 임시 데이터
         val domesticCityList = ArrayList<String>()
         domesticCityList.add("서울")
@@ -82,7 +115,6 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
             }
 
             override fun afterTextChanged(s: Editable?) {
-                Log.e("t","afterTextChanged called")
                 val text = binding.etSearch.text
 
                 binding.tvNoResult.visibility=View.GONE
@@ -122,7 +154,6 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
                 }
                 else{
 
-
                     viewModel.deleteDomesticCities()
 //                    binding.tvDomesticSearch.visibility=View.GONE
                     binding.recyclerView.visibility= View.INVISIBLE
@@ -150,46 +181,33 @@ class TravellerFragment : BaseFragment<FragmentTravellerBinding>(R.layout.fragme
 
             }
 
-
         })
 
-
-
-
-
-
-//        // category 이동
-//        binding.hambugerbar.setOnClickListener{
-////            navController.navigate(R.id.action_travellerFragment_to_categoryDialogFragment)
-//            val action = TravellerFragmentDirections.actionTravellerFragmentToCategoryDialogFragment(binding.tvTraveller.text.toString())
-//            navController.navigate(action)
-//        }
-
-
-        /*
-
-        // 임시
-        binding.ivJeju.setOnClickListener {
-            navController.navigate(R.id.action_travellerFragment_to_TrailerSearchFragment)
-        }
-
-         */
 
         binding.fab.setOnClickListener {
             navController.navigate(R.id.action_travellerFragment_to_TravellerWriteFragment)
         }
 
-
-
-
-
-
     }
 
-    override fun initAfterBinding() {
-        super.initAfterBinding()
+    private fun requestHotTravellerList(){
+        val service = AppClient.retrofit?.create(TravelService::class.java)
 
+        service?.getHotTravellerList()?.enqueue(object : Callback<HotTravellerResponse> {
+            override fun onResponse(
+                call: Call<HotTravellerResponse>,
+                response: Response<HotTravellerResponse>
+            ) {
+                val hotTravellerList = response.body()?.data
+//                Log.e("HotTravellerData","Hot Traveller Data: ${hotTravellerList.toString()}")
+                hotTravellerAdapter.setData(hotTravellerList as ArrayList<HotTravellerItem>)
+                hotTravellerAdapter.notifyDataSetChanged()
+            }
 
+            override fun onFailure(call: Call<HotTravellerResponse>, t: Throwable) {
+                Log.e("HotTravellerResponse","requestHotTravellerList API CALL FAILED")
+            }
+        })
     }
 
 }

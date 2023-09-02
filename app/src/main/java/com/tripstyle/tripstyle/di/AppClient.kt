@@ -1,5 +1,6 @@
 package com.tripstyle.tripstyle.di
 
+import android.util.Log
 import com.google.gson.GsonBuilder
 import com.tripstyle.tripstyle.BuildConfig
 import com.tripstyle.tripstyle.data.source.remote.LoginService
@@ -28,12 +29,14 @@ object AppClient {
     val locationRetrofit = Retrofit.Builder()
         .baseUrl(LOCATION_API)
         .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(client)
         .build()
 
     val retrofit = Retrofit.Builder()
         .baseUrl("${BuildConfig.SERVER_API}")
         .client(client)
         .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(client)
         .build()
 
     val loginService: LoginService = retrofit.create(LoginService::class.java)

@@ -19,18 +19,18 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginStart="15dp"
-        app:layout_constraintTop_toTopOf="@+id/city_image"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/city_image"
-        app:layout_constraintStart_toEndOf="@+id/city_image">
+        app:layout_constraintStart_toEndOf="@+id/city_image"
+        app:layout_constraintTop_toTopOf="@+id/city_image">
 
         <TextView
             android:id="@+id/city_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="City"
             android:layout_marginBottom="3dp"
+            android:text="City"
             android:textColor="@color/gray_454545"
             android:textSize="15sp" />
 
@@ -49,10 +49,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toTopOf="@id/city_image"
+        android:background="@drawable/btn_search_result"
         app:layout_constraintBottom_toBottomOf="@id/city_image"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/btn_search_result" />
+        app:layout_constraintTop_toTopOf="@id/city_image" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

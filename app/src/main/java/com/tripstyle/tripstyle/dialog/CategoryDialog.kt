@@ -1,22 +1,31 @@
 package com.tripstyle.tripstyle.dialog
 
 import android.widget.Toast
+import androidx.core.content.contentValuesOf
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseDialogFragment
 import com.tripstyle.tripstyle.databinding.DialogCategoryEditBinding
 
-class CategoryDeleteDialog : BaseDialogFragment<DialogCategoryEditBinding>(R.layout.dialog_category_edit) {
+class CategoryDialog(val title:String,val content:String) : BaseDialogFragment<DialogCategoryEditBinding>(R.layout.dialog_category_edit) {
+
+    private lateinit var listener: onDialogListener
+
     override fun initStartView() {
         super.initStartView()
+
+        initView()
         clickDialogEvent()
     }
 
-    override fun initDataBinding() {
-        super.initDataBinding()
+    // title, content 설정
+    private fun initView(){
+        binding.tvTitle.text = title
+        binding.tvContent.text = content
     }
 
-    override fun initAfterBinding() {
-        super.initAfterBinding()
+    // 리스너 설정
+    fun setActionListener(listener: onDialogListener) {
+        this.listener = listener
     }
 
     // 다이얼로그 이벤트
@@ -26,9 +35,8 @@ class CategoryDeleteDialog : BaseDialogFragment<DialogCategoryEditBinding>(R.lay
             dismiss()
         }
         binding.btnConfirm.setOnClickListener {
-            Toast.makeText(requireContext(),"삭제 되었습니다",Toast.LENGTH_SHORT).show()
+            listener.onConfirmAction()
             dismiss()
         }
     }
-
 }

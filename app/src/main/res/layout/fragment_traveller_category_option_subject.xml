@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:text="카테고리 이름"
             android:textSize="16sp"
             android:textColor="@color/gray_454545"
@@ -116,27 +116,26 @@
             app:layout_constraintStart_toStartOf="@+id/tv_region_category"
             app:layout_constraintTop_toBottomOf="@+id/editTextRegion" />
 
-        <ImageView
-            android:id="@+id/iv_category_cover"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_category_cover"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:backgroundTint="@color/backgroundColor"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="7dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_category_cover_image"
-            app:srcCompat="@drawable/btn_category_cover2" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_category_cover_image">
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_category_cover_image_add"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="사진 등록하기"-->
-<!--            android:textSize="12sp"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:layout_marginBottom="30dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/iv_category_cover"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/iv_category_cover"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/iv_category_cover" />-->
+            <ImageView
+                android:id="@+id/iv_category_cover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/btn_category_cover3" />
+
+        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

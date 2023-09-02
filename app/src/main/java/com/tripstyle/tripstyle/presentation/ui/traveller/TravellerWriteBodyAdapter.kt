@@ -13,67 +13,57 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.data.model.dto.TravellerWriteResult
 
-class TravellerWriteBodyRecyclerViewAdapter(private val viewModel: TravellerWriteViewModel, val context: Context?, val fragment: Fragment):
-    RecyclerView.Adapter<TravellerWriteBodyRecyclerViewAdapter.RecyclerViewViewHolder>() {
+class TravellerWriteBodyAdapter(private val viewModel: TravellerWriteViewModel, val context: Context?, val fragment: Fragment):
+    RecyclerView.Adapter<TravellerWriteBodyAdapter.RecyclerViewViewHolder>() {
 
-    private var list = ArrayList<String>() // post image 넘어오는
     private var currentPos: Int = -1
 
     // 갤러리 열때 필요한거
     companion object{
-        const val PHOTO_MAX_LENGTH = 10
         const val REQ_GALLERY = 1
     }
 
-    private val imageResultMultiple = fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+    private val imageResultSingle = fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result ->
         if(result.resultCode == Activity.RESULT_OK){
             result?.data?.let { it ->
-
-                list.clear()
 
                 if(currentPos == -1)
                     return@let
 
                 if (it.clipData != null) {   // 사진 여러장 선택
                     val count = it.clipData!!.itemCount
-                    if (count > PHOTO_MAX_LENGTH) {
+                    if (count > 1) {
                         // 아래 toast를 다른 표시 방법으로 변경할 것
-                        Toast.makeText(context, "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_SHORT)
+                        Toast.makeText(context, "사진은 1장만 선택 가능합니다.", Toast.LENGTH_SHORT)
                             .show()
                         return@registerForActivityResult
                     }
 
                     for (i in 0 until count) {
                         val imageUri = getRealPathFromURI(it.clipData!!.getItemAt(i).uri)
-                        list.add(imageUri)
+                        updateViewModelAndRefresh(imageUri)
                     }
-
-                    updateViewModelAndViewPager()
-
                 } else {    // 사진 1장 선택
                     val imageUri = getRealPathFromURI(it.data!!)
-                    list.add(imageUri)
-
-                    updateViewModelAndViewPager()
+                    updateViewModelAndRefresh(imageUri)
                 }
 
             }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.traveller_write_body_item_view, parent, false)
@@ -97,22 +87,25 @@ class TravellerWriteBodyRecyclerViewAdapter(private val viewModel: TravellerWrit
     }
 
     inner class RecyclerViewViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val viewPager: ViewPager2 = itemView.findViewById(R.id.bodyImageViewPager)
+
+        private val bodyImage: ImageView = itemView.findViewById(R.id.iv_body)
         val editText: EditText = itemView.findViewById(R.id.editTextBody)
-        private val buttonBodyImageUnselected: ImageButton = itemView.findViewById(R.id.buttonBodyImageUnselected)
-        private val ivPhotoUnselected: ImageView = itemView.findViewById(R.id.iv_photo_unselected)
-        private val tvPhotoUnselected1: TextView = itemView.findViewById(R.id.tv_photo_unselected1)
-        private val tvPhotoUnselected2: TextView = itemView.findViewById(R.id.tv_photo_unselected2)
 
         var textWatcher: TextWatcher? = null
 
         fun setContents(pos: Int){
             with(viewModel.bodyItem[pos]){
-                // viewpager adapter
-                val adapter = ViewPagerAdapter(images as ArrayList<String>,context)
-                viewPager.adapter = adapter
-                viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
+                // 이미지 세팅
+                if (image.isNotBlank())
+                    Glide.with(itemView).load(image).centerCrop().into(bodyImage)
+                else
+                    Glide.with(itemView).load(R.drawable.btn_add_image).centerCrop().into(bodyImage)
+
+                if (viewModel.currentCheckedBodyImageIndex.value == -1)
+                    bodyImage.setBackgroundResource(0)
+
+                // 본문 텍스트 세팅
                 editText.setText(text)
 
                 editText.removeTextChangedListener(textWatcher)
@@ -132,14 +125,19 @@ class TravellerWriteBodyRecyclerViewAdapter(private val viewModel: TravellerWrit
 
             }
 
-            buttonBodyImageUnselected.setOnClickListener {
-                // 갤러리 열기
-                selectFromGallery(pos)
-
-                // 현재 밑 방법으로는 갤러리만 열고 사진을 추가하지 않더라도 사진추가 문구는 사라짐. 변경이 필요하면 변경할 것.
-                ivPhotoUnselected.visibility = View.INVISIBLE
-                tvPhotoUnselected1.visibility = View.INVISIBLE
-                tvPhotoUnselected2.visibility = View.INVISIBLE
+            bodyImage.setOnClickListener {
+                if (viewModel.currentCheckedBodyImageIndex.value == pos) { // 이미지가 이미 선택된 상태인데 다시 선택하려고 클릭한 경우
+                    viewModel.currentCheckedBodyImageIndex.value = -1
+                    bodyImage.setBackgroundResource(0) // 파란 테두리 비활성화
+                } else if (viewModel.currentCheckedBodyImageIndex.value == -1) {
+                    // 이미지 들어있는지 확인하고, 안 들어있으면 바로 갤러리 열고 들어있으면 파란색 테두리 표시하고 하단 메뉴 띄우기
+                    if (!viewModel.checkBodyImageExist(pos))
+                        selectFromGallery(pos)
+                    else {
+                        bodyImage.setBackgroundResource(R.drawable.traveller_write_border) // 파란색 테두리 활성화
+                        // 하단 메뉴 띄우기 -> Fragment에서 수행
+                    }
+                }
             }
 
         }
@@ -173,17 +171,15 @@ class TravellerWriteBodyRecyclerViewAdapter(private val viewModel: TravellerWrit
             )
         }else{
             var intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true)
-            imageResultMultiple.launch(intent)
+            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*")
+            imageResultSingle.launch(intent)
         }
     }
 
-    private fun updateViewModelAndViewPager() {
-        viewModel.updateBodyItem(currentPos, TravellerWriteResult(list,""))
+    private fun updateViewModelAndRefresh(imageUri: String) {
+        viewModel.updateBodyItem(currentPos, TravellerWriteResult(imageUri,""))
         notifyItemChanged(currentPos)
     }
-
 
 
 

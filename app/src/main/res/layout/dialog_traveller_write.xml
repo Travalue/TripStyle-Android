@@ -34,7 +34,7 @@
             android:id="@+id/tv_warning2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="12dp"
             android:text="뒤로가기 시, 작성중인 글은 저장되지 않습니다."
             android:textColor="@color/gray_959595"
             android:textSize="13sp"
