@@ -179,8 +179,8 @@
             android:id="@+id/action_myPageFragment_to_myTravelListFragment"
             app:destination="@id/myTravelListFragment" />
         <action
-            android:id="@+id/action_myPageFragment_to_likeListFragment"
-            app:destination="@id/likeListFragment" />
+            android:id="@+id/action_myPageFragment_to_likePostListFragment"
+            app:destination="@id/likePostListFragment" />
     </fragment>
     <fragment
         android:id="@+id/myTravelListFragment"
@@ -188,14 +188,6 @@
         android:label="나의 여행지 리스트" >
         <action
             android:id="@+id/action_myTravelListFragment_to_myPageFragment"
-            app:destination="@id/myPageFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/likeListFragment"
-        android:name="com.tripstyle.tripstyle.presentation.ui.mypage.LikeListFragment"
-        android:label="장소 좋아용 목록" >
-        <action
-            android:id="@+id/action_likeListFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
     </fragment>
     <fragment
@@ -222,5 +214,13 @@
         android:id="@+id/categoryEditFragment"
         android:name="com.tripstyle.tripstyle.presentation.ui.mypage.CategoryEditFragment"
         android:label="카테고리 수정" />
+    <fragment
+        android:id="@+id/likePostListFragment"
+        android:name="com.tripstyle.tripstyle.presentation.ui.mypage.LikePostListFragment"
+        android:label="게시물 좋아용 목록" >
+        <action
+            android:id="@+id/action_likePostListFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+    </fragment>
 
 </navigation>

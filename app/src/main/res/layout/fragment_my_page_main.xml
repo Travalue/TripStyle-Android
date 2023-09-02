@@ -124,7 +124,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_terms_of_use"
-                app:layout_constraintEnd_toEndOf="@+id/btn_destination_detail4"
+                app:layout_constraintEnd_toEndOf="@+id/btn_to_like_post_list"
                 app:layout_constraintTop_toTopOf="@+id/tv_terms_of_use"
                 app:srcCompat="@drawable/ic_back" />
 
@@ -158,7 +158,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_service_center"
-                app:layout_constraintEnd_toEndOf="@+id/btn_destination_detail4"
+                app:layout_constraintEnd_toEndOf="@+id/btn_to_like_post_list"
                 app:layout_constraintTop_toTopOf="@+id/tv_service_center"
                 app:srcCompat="@drawable/ic_back" />
 
@@ -256,7 +256,7 @@
                 app:srcCompat="@drawable/ic_back" />
 
             <ImageView
-                android:id="@+id/btn_destination_detail4"
+                android:id="@+id/btn_to_like_post_list"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView3"
@@ -274,7 +274,7 @@
                 android:textColor="@color/gray_959595"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_tra_like_list"
-                app:layout_constraintEnd_toStartOf="@+id/btn_destination_detail4"
+                app:layout_constraintEnd_toStartOf="@+id/btn_to_like_post_list"
                 app:layout_constraintTop_toTopOf="@+id/tv_tra_like_list" />
 
             <TextView
