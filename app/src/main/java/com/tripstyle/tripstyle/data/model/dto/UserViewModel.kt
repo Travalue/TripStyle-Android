@@ -1,4 +1,4 @@
-package com.tripstyle.tripstyle.presentation.ui.mypage
+package com.tripstyle.tripstyle.data.model.dto
 
 import android.util.Log
 import androidx.lifecycle.LiveData

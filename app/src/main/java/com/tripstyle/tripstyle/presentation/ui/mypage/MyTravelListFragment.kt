@@ -5,17 +5,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentMytravelListBinding
 import com.tripstyle.tripstyle.MainActivity
-import com.tripstyle.tripstyle.data.model.dto.UserInfoModel
+import com.tripstyle.tripstyle.data.model.dto.UserViewModel
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.fragment_mytravel_list) {
 
@@ -31,10 +28,14 @@ class MyTravelListFragment : BaseFragment<FragmentMytravelListBinding>(R.layout.
     override fun initDataBinding() {
         super.initDataBinding()
 
+        val myTravelListAdapter = MyTravelListAdapter(userViewModel.myTripList.value!!,true) // 어댑터 생성
+        binding.placeList.adapter = myTravelListAdapter
 
-        binding.placeList.adapter = MyTravelListAdapter(userViewModel.myTripList.value!!,true) // 어댑터 생성
         val gridLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context,3)
         binding.placeList.layoutManager = gridLayoutManager
+        userViewModel.myTripList.observe(viewLifecycleOwner) { newList ->
+            myTravelListAdapter.travelList = newList
+        }
 
     }
 

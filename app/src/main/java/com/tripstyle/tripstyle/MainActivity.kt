@@ -1,12 +1,8 @@
 package com.tripstyle.tripstyle
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -15,10 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.tripstyle.tripstyle.databinding.ActivityMainBinding
-import com.kakao.sdk.common.util.Utility
-import com.tripstyle.tripstyle.data.model.dto.MyTripModel
-import com.tripstyle.tripstyle.presentation.ui.mypage.EditProfileFragment
-import com.tripstyle.tripstyle.presentation.ui.mypage.UserViewModel
+import com.tripstyle.tripstyle.data.model.dto.UserViewModel
 
 
 class MainActivity : AppCompatActivity() {

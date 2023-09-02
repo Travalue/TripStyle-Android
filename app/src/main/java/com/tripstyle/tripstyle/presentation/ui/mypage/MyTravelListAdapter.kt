@@ -1,5 +1,6 @@
 package com.tripstyle.tripstyle.presentation.ui.mypage
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MyTravelListAdapter(var travelList: ArrayList<MyTripModel>, val delete: Boolean) :
+class MyTravelListAdapter(itemList: ArrayList<MyTripModel>, val delete: Boolean) :
     RecyclerView.Adapter<MyTravelListAdapter.ViewHolder>() {
 
+    var travelList: ArrayList<MyTripModel> = itemList
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     inner class ViewHolder(itemViewBinding: PlaceItemViewBinding)
         : RecyclerView.ViewHolder(itemViewBinding.root){
@@ -40,7 +46,7 @@ class MyTravelListAdapter(var travelList: ArrayList<MyTripModel>, val delete: Bo
 
     override fun getItemCount(): Int = travelList.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.placeName.text = travelList[position].travelTitle
         holder.icon.text = travelList[position].emoji
 
@@ -59,7 +65,8 @@ class MyTravelListAdapter(var travelList: ArrayList<MyTripModel>, val delete: Bo
                 ) {
                     if (response.isSuccessful) {
                         Log.d("[updateProfile]", response.message())
-
+                        travelList.removeAt(position)
+                        notifyDataSetChanged()
                     } else {
                         Log.d("[updateProfile]", "실패코드_${response.code()}")
                     }
@@ -69,6 +76,8 @@ class MyTravelListAdapter(var travelList: ArrayList<MyTripModel>, val delete: Bo
                     Log.d("[updateProfile]","통신 실패")
                 }
             })
+
         }
     }
+
 }

@@ -1,33 +1,24 @@
 package com.tripstyle.tripstyle.presentation.ui.mypage
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
-import android.os.AsyncTask
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import com.bumptech.glide.request.transition.Transition
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
-import com.kakao.sdk.user.model.User
 import com.tripstyle.tripstyle.R
 import com.tripstyle.tripstyle.base.BaseFragment
 import com.tripstyle.tripstyle.databinding.FragmentMyPageMainBinding
 import com.tripstyle.tripstyle.MainActivity
 import com.tripstyle.tripstyle.data.model.dto.*
-import com.tripstyle.tripstyle.data.source.remote.UserService
 import com.tripstyle.tripstyle.di.AppClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class MyPageFragment  : BaseFragment<FragmentMyPageMainBinding>(R.layout.fragment_my_page_main) {
