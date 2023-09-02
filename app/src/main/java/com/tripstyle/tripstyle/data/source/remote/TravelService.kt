@@ -3,6 +3,7 @@ package com.tripstyle.tripstyle.data.source.remote
 
 import com.tripstyle.tripstyle.BuildConfig
 import com.tripstyle.tripstyle.data.model.dto.BaseResponseModel
+import com.tripstyle.tripstyle.data.model.dto.LikePostResponseModel
 import com.tripstyle.tripstyle.data.model.dto.TrailerResponse
 import com.tripstyle.tripstyle.data.model.dto.TravelDetailResponse
 import retrofit2.Call
@@ -39,4 +40,8 @@ interface TravelService {
     fun getTravellerShare(@Path("userId")id:Int) : Call<TrailerResponse>
 
 
+    //좋아요한 게시물 전체 조회
+    @Headers("Authorization: ${BuildConfig.TOKEN}")
+    @GET("/post/liked")
+    fun getLikePostList() : Call<LikePostResponseModel>
 }
